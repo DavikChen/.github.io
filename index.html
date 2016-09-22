@@ -137,6 +137,59 @@
       <div class="body-wrap">
         
   
+    <article id="post-JavaScript事件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/22/JavaScript事件/">JavaScript事件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="JavaScript-事件处理"><a href="#JavaScript-事件处理" class="headerlink" title="JavaScript 事件处理"></a>JavaScript 事件处理</h3><p>HTML 事件可以是浏览器行为，也可以是用户行为。<br>以下是 HTML 事件的实例：<br>HTML 页面完成加载<br>HTML input 字段改变时<br>HTML 按钮被点击<br>通常，当事件发生时，你可以做些事情。<br>在事件触发时 JavaScript 可以执行一些代码。<br>HTML 元素中可以添加事件属性，使用 JavaScript 代码来添加 HTML 元素。</p>
+<h3 id="三种不同实现方式"><a href="#三种不同实现方式" class="headerlink" title="三种不同实现方式"></a>三种不同实现方式</h3><p>1.HTML 元素中可以添加事件属性，使用 JavaScript 代码来添加 HTML 元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;button type=&quot;button&quot; onclick=&quot;getElementById(&apos;demo&apos;).innerHTML=Date()&quot;&gt;现在的时间&lt;/button&gt;</div><div class="line">&lt;p id=&quot;demo&quot; &gt;&lt;/p&gt;</div></pre></td></tr></table></figure>
+<p>2.代码将修改自身元素的内容 (使用 this.innerHTML):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;button type=&quot;button&quot; onclick=&quot;this.innerHTML = Date()&quot;&gt;自身替换为当前时间&lt;/button&gt;</div></pre></td></tr></table></figure>
+<p>3.js脚本处理事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;button type=&quot;button&quot; onclick=&quot;displayTimeNow()&quot;&gt;通过调用js方法来更新时间&lt;/button&gt;</div><div class="line"></div><div class="line">&lt;p id=&quot;demo2&quot; &gt;&lt;/p&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">    function displayTimeNow() &#123;</div><div class="line">        document.getElementById(&apos;demo2&apos;).innerHTML = Date();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/09/22/JavaScript事件/" class="archive-article-date">
+  	<time datetime="2016-09-22T03:56:37.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-22</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+
+  
     <article id="javascript-JavaScript对象" class="article article-type-javascript" itemscope itemprop="blogPost">
   <div class="article-inner">
     

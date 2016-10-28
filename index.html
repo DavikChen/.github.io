@@ -1,21 +1,87 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
 <head>
-
-    <!--[if lt IE 9]>
-        <style>body {display: none; background: none !important} </style>
-        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
-    <![endif]-->
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="DavikChen" />
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
     
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
 
 
 <meta name="description" content="记录在工作中遇到的各种技术问题">
@@ -28,334 +94,306 @@
 <meta name="twitter:title" content="带刀大哥">
 <meta name="twitter:description" content="记录在工作中遇到的各种技术问题">
 
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
 
-    <link rel="alternate" href="/atom.xml" title="带刀大哥" type="application/atom+xml">
-
-
-
-    <link rel="shortcut icon" href="/favicon.png">
-
-
-
-    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
-
-
-
-    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
-
-
-
-    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
-
-
-<link rel="stylesheet" href="/css/style.css">
-
-
-    <style> .article { opacity: 0;} </style>
-
-
-<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-
-
-<title>带刀大哥</title>
-
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-
-<script>
-    var yiliaConfig = {
-        fancybox: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
     }
+  };
 </script>
 
 
-    <script> yiliaConfig.jquery_ui = [false]; </script>
 
 
-
-    <script> yiliaConfig.rootUrl = "\/";</script>
-
+  <link rel="canonical" href="http://yoursite.com/"/>
 
 
-
-
-
+  <title> 带刀大哥 </title>
 </head>
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            <img src="/img/avatar.png" class="animated zoomIn">
-        </a>
-        <hgroup>
-          <h1 class="header-author"><a href="/">DavikChen</a></h1>
-        </hgroup>
 
-        
-        <p class="header-subtitle">DavikChen的技术博客</p>
-        
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-CN">
 
-        
-
-
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
-
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/">主页</a></li>
-                        
-                            <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/tags/">标签云</a></li>
-                        
-                            <li><a href="/about/">关于我</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
-                            
-                                <a class="fa GitHub" href="#" title="GitHub"></a>
-                            
-                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-函数/">JavaScript 函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-输出/">JavaScript 输出</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript对象/">JavaScript对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift函数/">Swift函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift创建导航控制器/">Swift创建导航控制器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS视图控制对象的生命周期/">iOS视图控制对象的生命周期</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift3-0-UITableView使用/">swift3.0 UITableView使用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重新开始/">重新开始</a></li></ul>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
-                    
-                    </div>
-                </section>
-                
-
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">专注于前端</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">DavikChen</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                <img src="/img/avatar.png" class="animated zoomIn">
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">DavikChen</a></h1>
-            </hgroup>
-            
-            <p class="header-subtitle">DavikChen的技术博客</p>
-            
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="/">主页</a></li>
-                
-                    <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/tags/">标签云</a></li>
-                
-                    <li><a href="/about/">关于我</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
-                            
-                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
-                            
-                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
-                            
-                        </ul>
-            </nav>
-        </header>                
-    </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
-</nav>
-      <div class="body-wrap">
-  
-    <article id="post-Swift创建导航控制器" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/25/Swift创建导航控制器/" class="article-date">
-      <time datetime="2016-10-25T03:41:51.000Z" itemprop="datePublished">2016-10-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/25/Swift创建导航控制器/">Swift创建导航控制器</a>
-    </h1>
   
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="Swift创建导航控制器"><a href="#Swift创建导航控制器" class="headerlink" title="Swift创建导航控制器"></a>Swift创建导航控制器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 导航按钮文字颜色 字体大小</div><div class="line">let attributes =  [NSForegroundColorAttributeName: UIColor.gray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line">let attributesPressed =  [NSForegroundColorAttributeName: UIColor.darkGray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line"></div><div class="line">// 首页</div><div class="line">// 第一步 获取ViewController 控制器，并且创建一个 导航控制器用来承载ViewController</div><div class="line">let mHomeViewController = UIStoryboard(name: &quot;HomePage&quot;, bundle: nil).instantiateViewController(withIdentifier: &quot;HomePage&quot;) as! HomePageViewController</div><div class="line">let mHomeNavController = UINavigationController(rootViewController: mHomeViewController)</div><div class="line">// 第二步 创建一个导航item 并且设置导航按钮的点击icon切换 设置字体颜色 和大小</div><div class="line">let mHomeNormalImage = UIImage(named: &quot;main_bottom_category_normal&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeSelectedImage = UIImage(named: &quot;main_bottom_category_hover&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeTabBarItem = UITabBarItem(title: &quot;精选&quot;, image: mHomeNormalImage, selectedImage: mHomeSelectedImage)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributes, for: .normal)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributesPressed, for: .focused)</div><div class="line">// 第三步:将导航item 对象 赋值给导航控制器</div><div class="line">mHomeNavController.tabBarItem = mHomeTabBarItem</div></pre></td></tr></table></figure>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
 
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift创建导航控制器/">Swift创建导航控制器</a></li></ul>
-    </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
+
+
+
+
+
+
+  
+  
     
+  
+
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">带刀大哥</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
   </div>
+  <p class="site-subtitle">DavikChen的技术博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
   
-</article>
-
-
-
-
-
-
-
-
 
   
-    <article id="post-swift3-0UITableView使用" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/24/swift3-0UITableView使用/" class="article-date">
-      <time datetime="2016-10-24T10:00:34.000Z" itemprop="datePublished">2016-10-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <ul id="menu" class="menu">
+      
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/swift3-0UITableView使用/">swift3.0UITableView使用</a>
-    </h1>
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+    </ul>
   
 
-      </header>
-      
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
     
-    <div class="article-entry" itemprop="articleBody">
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/25/Swift创建导航控制器/" itemprop="url">
+                  Swift创建导航控制器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-10-25T11:41:51+08:00" content="2016-10-25">
+              2016-10-25
+            </time>
+          </span>
+
           
-        <h3 id="swift3-0UITableView使用"><a href="#swift3-0UITableView使用" class="headerlink" title="swift3.0UITableView使用"></a>swift3.0UITableView使用</h3><p>这里将采用Sotryboard来实现tableview的使用。代码地址:<a href="https://github.com/DavikChen/Swift3.0_tabBarController" target="_blank" rel="external"></a></p>
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/25/Swift创建导航控制器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/25/Swift创建导航控制器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Swift创建导航控制器"><a href="#Swift创建导航控制器" class="headerlink" title="Swift创建导航控制器"></a>Swift创建导航控制器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 导航按钮文字颜色 字体大小</div><div class="line">let attributes =  [NSForegroundColorAttributeName: UIColor.gray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line">let attributesPressed =  [NSForegroundColorAttributeName: UIColor.darkGray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line"></div><div class="line">// 首页</div><div class="line">// 第一步 获取ViewController 控制器，并且创建一个 导航控制器用来承载ViewController</div><div class="line">let mHomeViewController = UIStoryboard(name: &quot;HomePage&quot;, bundle: nil).instantiateViewController(withIdentifier: &quot;HomePage&quot;) as! HomePageViewController</div><div class="line">let mHomeNavController = UINavigationController(rootViewController: mHomeViewController)</div><div class="line">// 第二步 创建一个导航item 并且设置导航按钮的点击icon切换 设置字体颜色 和大小</div><div class="line">let mHomeNormalImage = UIImage(named: &quot;main_bottom_category_normal&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeSelectedImage = UIImage(named: &quot;main_bottom_category_hover&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeTabBarItem = UITabBarItem(title: &quot;精选&quot;, image: mHomeNormalImage, selectedImage: mHomeSelectedImage)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributes, for: .normal)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributesPressed, for: .focused)</div><div class="line">// 第三步:将导航item 对象 赋值给导航控制器</div><div class="line">mHomeNavController.tabBarItem = mHomeTabBarItem</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/24/swift3-0UITableView使用/" itemprop="url">
+                  swift3.0UITableView使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-10-24T18:00:34+08:00" content="2016-10-24">
+              2016-10-24
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/24/swift3-0UITableView使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/24/swift3-0UITableView使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="swift3-0UITableView使用"><a href="#swift3-0UITableView使用" class="headerlink" title="swift3.0UITableView使用"></a>swift3.0UITableView使用</h3><p>这里将采用Sotryboard来实现tableview的使用。代码地址:<a href="https://github.com/DavikChen/Swift3.0_tabBarController" target="_blank" rel="external"></a></p>
 <p>这里是在之前tabBarController demo 的基础上继续开发。我们将往首页的ViewController 里面添加一个tableView，</p>
 <p>第一步: Storyboard 拖拽一个TableView 控件进入，并且准备假数据</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@IBOutlet weak var mTableList: UITableView!</div><div class="line">var items: [String] = [&quot;We&quot;, &quot;Heart&quot;, &quot;Swift&quot;]</div></pre></td></tr></table></figure>
@@ -365,65 +403,106 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">override func viewDidLoad() &#123;</div><div class="line">    mTableList.register(UITableViewCell.self, forCellReuseIdentifier: &quot;cell&quot;)</div><div class="line">    mTableList.dataSource = self</div><div class="line">    mTableList.delegate = self;</div><div class="line">        </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>效果图:<br><img src="https://github.com/DavikChen/DavikChen.github.io/blob/master/img/homepage.png?raw=true" alt=""></p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift3-0-UITableView使用/">swift3.0 UITableView使用</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS视图控制对象的生命周期" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/21/iOS视图控制对象的生命周期/" class="article-date">
-      <time datetime="2016-10-21T07:23:41.000Z" itemprop="datePublished">2016-10-21</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/21/iOS视图控制对象的生命周期/">iOS视图控制对象的生命周期</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
           
-        <h3 id="iOS视图控制对象的生命周期"><a href="#iOS视图控制对象的生命周期" class="headerlink" title="iOS视图控制对象的生命周期"></a>iOS视图控制对象的生命周期</h3><p>init－初始化程序</p>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/21/iOS视图控制对象的生命周期/" itemprop="url">
+                  iOS视图控制对象的生命周期
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-10-21T15:23:41+08:00" content="2016-10-21">
+              2016-10-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/21/iOS视图控制对象的生命周期/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/iOS视图控制对象的生命周期/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="iOS视图控制对象的生命周期"><a href="#iOS视图控制对象的生命周期" class="headerlink" title="iOS视图控制对象的生命周期"></a>iOS视图控制对象的生命周期</h3><p>init－初始化程序</p>
 <p>viewDidLoad－加载视图</p>
 <p>viewWillAppear－UIViewController对象的视图即将加入窗口时调用；</p>
 <p>viewDidApper－UIViewController对象的视图已经加入到窗口时调用；</p>
@@ -432,175 +511,306 @@
 <p>viewVillUnload－当内存过低时，需要释放一些不需要使用的视图时，即将释放时调用；</p>
 <p>viewDidUnload－当内存过低，释放一些不需要的视图时调用。</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS视图控制对象的生命周期/">iOS视图控制对象的生命周期</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-xcode8使用Github提交代码" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/21/xcode8使用Github提交代码/" class="article-date">
-      <time datetime="2016-10-21T06:45:07.000Z" itemprop="datePublished">2016-10-21</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/21/xcode8使用Github提交代码/">xcode8使用Github提交代码</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
           
-        <h3 id="xcode8使用Github提交代码"><a href="#xcode8使用Github提交代码" class="headerlink" title="xcode8使用Github提交代码"></a>xcode8使用Github提交代码</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="swift3.0-通过协议完成页面之间代理传值" class="article article-type-swift3.0" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/21/通过协议完成页面之间代理传值/" class="article-date">
-      <time datetime="2016-10-21T04:48:53.000Z" itemprop="datePublished">2016-10-21</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/21/通过协议完成页面之间代理传值/">通过协议完成页面之间代理传值</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="通过协议完成页面之间代理传值"><a href="#通过协议完成页面之间代理传值" class="headerlink" title="通过协议完成页面之间代理传值"></a>通过协议完成页面之间代理传值</h3>
       
     </div>
-    
-    <div class="article-info article-info-index">
-      
-      
 
+    <div>
       
-      
-      <div class="clearfix"></div>
     </div>
-    
-  </div>
-  
-</article>
 
-
-
-
-
-
-
-
-
-  
-    <article id="swift3.0-Storyboard和UIViewController的结合" class="article article-type-swift3.0" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/10/21/Storyboard和UIViewController的结合/" class="article-date">
-      <time datetime="2016-10-21T03:45:08.000Z" itemprop="datePublished">2016-10-21</time>
-</a>
-
-
+    <div>
+      
     </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
-  <div class="article-inner">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/21/xcode8使用Github提交代码/" itemprop="url">
+                  xcode8使用Github提交代码
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-10-21T14:45:07+08:00" content="2016-10-21">
+              2016-10-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/21/xcode8使用Github提交代码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/xcode8使用Github提交代码/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="xcode8使用Github提交代码"><a href="#xcode8使用Github提交代码" class="headerlink" title="xcode8使用Github提交代码"></a>xcode8使用Github提交代码</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/21/Storyboard和UIViewController的结合/">Storyboard和UIViewController的结合</a>
-    </h1>
   
 
-      </header>
-      
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/21/通过协议完成页面之间代理传值/" itemprop="url">
+                  通过协议完成页面之间代理传值
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-10-21T12:48:53+08:00" content="2016-10-21">
+              2016-10-21
+            </time>
+          </span>
+
           
-        <h3 id="Storyboard和UIViewController的结合"><a href="#Storyboard和UIViewController的结合" class="headerlink" title="Storyboard和UIViewController的结合"></a>Storyboard和UIViewController的结合</h3><h4 id="StoryBoard-的本质"><a href="#StoryBoard-的本质" class="headerlink" title="StoryBoard 的本质"></a>StoryBoard 的本质</h4><p>StoryBoard 是苹果在 iOS 5 中引入的新技术方案，目的是给纷繁复杂的 nib、xib 们一个温暖的家，让他们之间的关系更直观地展示出来，并提供了一种新的页面间跳转方式 segue。</p>
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/21/通过协议完成页面之间代理传值/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/通过协议完成页面之间代理传值/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="通过协议完成页面之间代理传值"><a href="#通过协议完成页面之间代理传值" class="headerlink" title="通过协议完成页面之间代理传值"></a>通过协议完成页面之间代理传值</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/21/Storyboard和UIViewController的结合/" itemprop="url">
+                  Storyboard和UIViewController的结合
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-10-21T11:45:08+08:00" content="2016-10-21">
+              2016-10-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/21/Storyboard和UIViewController的结合/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/Storyboard和UIViewController的结合/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Storyboard和UIViewController的结合"><a href="#Storyboard和UIViewController的结合" class="headerlink" title="Storyboard和UIViewController的结合"></a>Storyboard和UIViewController的结合</h3><h4 id="StoryBoard-的本质"><a href="#StoryBoard-的本质" class="headerlink" title="StoryBoard 的本质"></a>StoryBoard 的本质</h4><p>StoryBoard 是苹果在 iOS 5 中引入的新技术方案，目的是给纷繁复杂的 nib、xib 们一个温暖的家，让他们之间的关系更直观地展示出来，并提供了一种新的页面间跳转方式 segue。</p>
 <p>StoryBoard 的本质是一个 XML 文件，描述了若干窗体、组件、Auto Layout 约束等关键信息</p>
 <p>使用 StoryBoard 的 iOS 项目均以初始化 StoryBoard 文件作为整个程序的初始化入口，UIViewController 类是由于被 StoryBoard 绑定而初始化，从而开始运行的</p>
 <p>相比较Android而言 StoryBoard好比就是页面的layout xml 布局文件。</p>
@@ -611,181 +821,312 @@
 <p>设置了 StoryBoard ID:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let mSearchPage = UIStoryboard(name: &quot;SearchPage&quot;, bundle: </div><div class="line">nil).instantiateViewController(withIdentifier: &quot;SearchPage&quot;) as! </div><div class="line">SearchPageController</div><div class="line">self.navigationController?.pushViewController(mSearchPage, animated: true)</div></pre></td></tr></table></figure>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Swift函数" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/23/Swift函数/" class="article-date">
-      <time datetime="2016-09-23T07:27:54.000Z" itemprop="datePublished">2016-09-23</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/23/Swift函数/">Swift函数</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
           
-        <h3 id="Swift函数的定义"><a href="#Swift函数的定义" class="headerlink" title="Swift函数的定义"></a>Swift函数的定义</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift函数/">Swift函数</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-JavaScript标记" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/23/JavaScript标记/" class="article-date">
-      <time datetime="2016-09-23T06:24:36.000Z" itemprop="datePublished">2016-09-23</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/23/JavaScript标记/">JavaScript标签标记</a>
-    </h1>
   
 
-      </header>
-      
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/23/Swift函数/" itemprop="url">
+                  Swift函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-09-23T15:27:54+08:00" content="2016-09-23">
+              2016-09-23
+            </time>
+          </span>
+
           
-        <p>可以对 JavaScript 语句进行标记。<br>如需标记 JavaScript 语句，请在语句之前加上冒号：</p>
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/23/Swift函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/23/Swift函数/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Swift函数的定义"><a href="#Swift函数的定义" class="headerlink" title="Swift函数的定义"></a>Swift函数的定义</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/23/JavaScript标记/" itemprop="url">
+                  JavaScript标签标记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-09-23T14:24:36+08:00" content="2016-09-23">
+              2016-09-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/23/JavaScript标记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/23/JavaScript标记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>可以对 JavaScript 语句进行标记。<br>如需标记 JavaScript 语句，请在语句之前加上冒号：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">label:</div><div class="line">statements</div></pre></td></tr></table></figure>
 <p>break 和 continue 语句仅仅是能够跳出代码块的语句。<br>语法:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">break labelname; </div><div class="line">continue labelname;</div></pre></td></tr></table></figure>
 <p>continue 语句（带有或不带标签引用）只能用在循环中。<br>break 语句（不带标签引用），只能用在循环或 switch 中。<br>通过标签引用，break 语句可用于跳出任何 JavaScript 代码块：<br>实例</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">cars=[&quot;BMW&quot;,&quot;Volvo&quot;,&quot;Saab&quot;,&quot;Ford&quot;];</div><div class="line">list: </div><div class="line">&#123;</div><div class="line">document.write(cars[0] + &quot;&lt;br&gt;&quot;); </div><div class="line">document.write(cars[1] + &quot;&lt;br&gt;&quot;); </div><div class="line">document.write(cars[2] + &quot;&lt;br&gt;&quot;); </div><div class="line">break list;</div><div class="line">document.write(cars[3] + &quot;&lt;br&gt;&quot;); </div><div class="line">document.write(cars[4] + &quot;&lt;br&gt;&quot;); </div><div class="line">document.write(cars[5] + &quot;&lt;br&gt;&quot;); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-JavaScript事件" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/22/JavaScript事件/" class="article-date">
-      <time datetime="2016-09-22T03:56:37.000Z" itemprop="datePublished">2016-09-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/22/JavaScript事件/">JavaScript事件</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
           
-        <h3 id="JavaScript-事件处理"><a href="#JavaScript-事件处理" class="headerlink" title="JavaScript 事件处理"></a>JavaScript 事件处理</h3><p>HTML 事件可以是浏览器行为，也可以是用户行为。<br>以下是 HTML 事件的实例：<br>HTML 页面完成加载<br>HTML input 字段改变时<br>HTML 按钮被点击<br>通常，当事件发生时，你可以做些事情。<br>在事件触发时 JavaScript 可以执行一些代码。<br>HTML 元素中可以添加事件属性，使用 JavaScript 代码来添加 HTML 元素。</p>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/22/JavaScript事件/" itemprop="url">
+                  JavaScript事件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-09-22T11:56:37+08:00" content="2016-09-22">
+              2016-09-22
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/22/JavaScript事件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/22/JavaScript事件/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="JavaScript-事件处理"><a href="#JavaScript-事件处理" class="headerlink" title="JavaScript 事件处理"></a>JavaScript 事件处理</h3><p>HTML 事件可以是浏览器行为，也可以是用户行为。<br>以下是 HTML 事件的实例：<br>HTML 页面完成加载<br>HTML input 字段改变时<br>HTML 按钮被点击<br>通常，当事件发生时，你可以做些事情。<br>在事件触发时 JavaScript 可以执行一些代码。<br>HTML 元素中可以添加事件属性，使用 JavaScript 代码来添加 HTML 元素。</p>
 <h3 id="三种不同实现方式"><a href="#三种不同实现方式" class="headerlink" title="三种不同实现方式"></a>三种不同实现方式</h3><p>1.HTML 元素中可以添加事件属性，使用 JavaScript 代码来添加 HTML 元素。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;button type=&quot;button&quot; onclick=&quot;getElementById(&apos;demo&apos;).innerHTML=Date()&quot;&gt;现在的时间&lt;/button&gt;</div><div class="line">&lt;p id=&quot;demo&quot; &gt;&lt;/p&gt;</div></pre></td></tr></table></figure>
 <p>2.代码将修改自身元素的内容 (使用 this.innerHTML):</p>
@@ -793,61 +1134,106 @@
 <p>3.js脚本处理事件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;button type=&quot;button&quot; onclick=&quot;displayTimeNow()&quot;&gt;通过调用js方法来更新时间&lt;/button&gt;</div><div class="line"></div><div class="line">&lt;p id=&quot;demo2&quot; &gt;&lt;/p&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">    function displayTimeNow() &#123;</div><div class="line">        document.getElementById(&apos;demo2&apos;).innerHTML = Date();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="javascript-JavaScript对象" class="article article-type-javascript" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/20/JavaScript对象/" class="article-date">
-      <time datetime="2016-09-20T09:37:49.000Z" itemprop="datePublished">2016-09-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/20/JavaScript对象/">JavaScript对象</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
           
-        <h1 id="JavaScript对象"><a href="#JavaScript对象" class="headerlink" title="JavaScript对象"></a>JavaScript对象</h1><p>在 JavaScript中，几乎所有的事物都是对象。<br>在 JavaScript 中，对象是非常重要的，当你理解了对象，就可以了解 JavaScript 。<br>你已经学习了 JavaScript 变量的赋值。<br>以下代码为变量 car 设置值为 “Fiat” :<br>var car = “Fiat”;<br>对象也是一个变量，但对象可以包含多个值（多个变量）。<br>var car = {type:”Fiat”, model:500, color:”white”};<br>在以上实例中，3 个值 (“Fiat”, 500, “white”) 赋予变量 car。<br>在以上实例中，3 个变量 (type, model, color) 赋予变量 car。</p>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/20/JavaScript对象/" itemprop="url">
+                  JavaScript对象
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-09-20T17:37:49+08:00" content="2016-09-20">
+              2016-09-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/20/JavaScript对象/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/20/JavaScript对象/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="JavaScript对象"><a href="#JavaScript对象" class="headerlink" title="JavaScript对象"></a>JavaScript对象</h1><p>在 JavaScript中，几乎所有的事物都是对象。<br>在 JavaScript 中，对象是非常重要的，当你理解了对象，就可以了解 JavaScript 。<br>你已经学习了 JavaScript 变量的赋值。<br>以下代码为变量 car 设置值为 “Fiat” :<br>var car = “Fiat”;<br>对象也是一个变量，但对象可以包含多个值（多个变量）。<br>var car = {type:”Fiat”, model:500, color:”white”};<br>在以上实例中，3 个值 (“Fiat”, 500, “white”) 赋予变量 car。<br>在以上实例中，3 个变量 (type, model, color) 赋予变量 car。</p>
 <h2 id="对象定义"><a href="#对象定义" class="headerlink" title="对象定义"></a>对象定义</h2><p>你可以使用字符来定义和创建 JavaScript 对象:<br>实例</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var person = &#123;firstName:&quot;John&quot;, lastName:&quot;Doe&quot;, age:50, eyeColor:&quot;blue&quot;&#125;;</div></pre></td></tr></table></figure>
 <p>定义 JavaScript 对象可以跨越多行，空格跟换行不是必须的：</p>
@@ -861,126 +1247,262 @@
 <p>如果你要访问 person 对象的 fullName 属性，它将作为一个定义函数的字符串返回：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">name = person.fullName;</div></pre></td></tr></table></figure>
 
+          
+        
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript对象/">JavaScript对象</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
+  </section>
 
   
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
-</div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                <i class="fa fa-copyright"></i> 
-                2016 DavikChen
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
-            </div>
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
         </div>
         
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>| </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
-</footer>
-    </div>
-    
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            var iPad = window.navigator.userAgent.indexOf('iPad');
-            if (iPad > -1 || $(".left-col").css("display") === "none") {
-                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
-                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
-                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
-            }
-            else {
-                var backgroundnum = 5;
-                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
-            }
-        })
-    </script>
-
-
-
-
-
-<div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
-</div>
-<script>
-    // Open in New Window
-    
-        var oOpenInNew = {
-            
-            
-            
-            
-            
-            
-             archives: ".archive-article-title", 
-             miniArchives: "a.post-list-link", 
-            
-             friends: "#js-friends a", 
-             socail: ".social a" 
-        }
-        for (var x in oOpenInNew) {
-            $(oOpenInNew[x]).attr("target", "_blank");
-        }
-    
-</script>
-
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
   </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/davikchen_pic.jpg"
+               alt="DavikChen" />
+          <p class="site-author-name" itemprop="name">DavikChen</p>
+          <p class="site-description motion-element" itemprop="description">记录在工作中遇到的各种技术问题</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DavikChen</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"davikchen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
 </body>
 </html>

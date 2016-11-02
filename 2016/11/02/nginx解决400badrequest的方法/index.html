@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="nginx解决400badrequest的方法," />
 
 
 
@@ -84,28 +84,22 @@
 
 
 
-<meta name="description" content="可以对 JavaScript 语句进行标记。如需标记 JavaScript 语句，请在语句之前加上冒号：
-12label:statements
-break 和 continue 语句仅仅是能够跳出代码块的语句。语法:
-12break labelname; continue labelname;
-continue 语句（带有或不带标签引用）只能用在循环中。break 语句（不带标签引用），只能用在循">
+<meta name="description" content="400 错误今天早上发现APP主会场反复切换页面10次 出现400错误。经过排查是请求链接后面反复追加了很多遍参数问题 导致header 过大 造成400 错误 。下面是一些常见可能造成400错误的情况。
+nginx的400错误比较难查找原因，因为此错误并不是每次都会出现的，另外，出现错误的时候，通常在浏览器和日志里看不到任何有关提示。
+经长时间观察和大量试验查明，此乃request header">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript标签标记">
-<meta property="og:url" content="http://yoursite.com/2016/09/23/JavaScript标记/index.html">
+<meta property="og:title" content="nginx解决400badrequest的方法">
+<meta property="og:url" content="http://yoursite.com/2016/11/02/nginx解决400badrequest的方法/index.html">
 <meta property="og:site_name" content="带刀大哥">
-<meta property="og:description" content="可以对 JavaScript 语句进行标记。如需标记 JavaScript 语句，请在语句之前加上冒号：
-12label:statements
-break 和 continue 语句仅仅是能够跳出代码块的语句。语法:
-12break labelname; continue labelname;
-continue 语句（带有或不带标签引用）只能用在循环中。break 语句（不带标签引用），只能用在循">
-<meta property="og:updated_time" content="2016-09-23T07:20:49.000Z">
+<meta property="og:description" content="400 错误今天早上发现APP主会场反复切换页面10次 出现400错误。经过排查是请求链接后面反复追加了很多遍参数问题 导致header 过大 造成400 错误 。下面是一些常见可能造成400错误的情况。
+nginx的400错误比较难查找原因，因为此错误并不是每次都会出现的，另外，出现错误的时候，通常在浏览器和日志里看不到任何有关提示。
+经长时间观察和大量试验查明，此乃request header">
+<meta property="og:updated_time" content="2016-11-02T02:39:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript标签标记">
-<meta name="twitter:description" content="可以对 JavaScript 语句进行标记。如需标记 JavaScript 语句，请在语句之前加上冒号：
-12label:statements
-break 和 continue 语句仅仅是能够跳出代码块的语句。语法:
-12break labelname; continue labelname;
-continue 语句（带有或不带标签引用）只能用在循环中。break 语句（不带标签引用），只能用在循">
+<meta name="twitter:title" content="nginx解决400badrequest的方法">
+<meta name="twitter:description" content="400 错误今天早上发现APP主会场反复切换页面10次 出现400错误。经过排查是请求链接后面反复追加了很多遍参数问题 导致header 过大 造成400 错误 。下面是一些常见可能造成400错误的情况。
+nginx的400错误比较难查找原因，因为此错误并不是每次都会出现的，另外，出现错误的时候，通常在浏览器和日志里看不到任何有关提示。
+经长时间观察和大量试验查明，此乃request header">
 
 
 
@@ -126,10 +120,10 @@ continue 语句（带有或不带标签引用）只能用在循环中。break �
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/09/23/JavaScript标记/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/02/nginx解决400badrequest的方法/"/>
 
 
-  <title> JavaScript标签标记 | 带刀大哥 </title>
+  <title> nginx解决400badrequest的方法 | 带刀大哥 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-CN">
@@ -251,7 +245,7 @@ continue 语句（带有或不带标签引用）只能用在循环中。break �
             
             
               
-                JavaScript标签标记
+                nginx解决400badrequest的方法
               
             
           </h1>
@@ -263,8 +257,8 @@ continue 语句（带有或不带标签引用）只能用在循环中。break �
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-09-23T14:24:36+08:00" content="2016-09-23">
-              2016-09-23
+            <time itemprop="dateCreated" datetime="2016-11-02T10:36:24+08:00" content="2016-11-02">
+              2016-11-02
             </time>
           </span>
 
@@ -274,8 +268,8 @@ continue 语句（带有或不带标签引用）只能用在循环中。break �
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/23/JavaScript标记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/23/JavaScript标记/" itemprop="commentsCount"></span>
+                <a href="/2016/11/02/nginx解决400badrequest的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/02/nginx解决400badrequest的方法/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -298,12 +292,29 @@ continue 语句（带有或不带标签引用）只能用在循环中。break �
       
 
       
-        <p>可以对 JavaScript 语句进行标记。<br>如需标记 JavaScript 语句，请在语句之前加上冒号：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">label:</div><div class="line">statements</div></pre></td></tr></table></figure>
-<p>break 和 continue 语句仅仅是能够跳出代码块的语句。<br>语法:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">break labelname; </div><div class="line">continue labelname;</div></pre></td></tr></table></figure>
-<p>continue 语句（带有或不带标签引用）只能用在循环中。<br>break 语句（不带标签引用），只能用在循环或 switch 中。<br>通过标签引用，break 语句可用于跳出任何 JavaScript 代码块：<br>实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">cars=[&quot;BMW&quot;,&quot;Volvo&quot;,&quot;Saab&quot;,&quot;Ford&quot;];</div><div class="line">list: </div><div class="line">&#123;</div><div class="line">document.write(cars[0] + &quot;&lt;br&gt;&quot;); </div><div class="line">document.write(cars[1] + &quot;&lt;br&gt;&quot;); </div><div class="line">document.write(cars[2] + &quot;&lt;br&gt;&quot;); </div><div class="line">break list;</div><div class="line">document.write(cars[3] + &quot;&lt;br&gt;&quot;); </div><div class="line">document.write(cars[4] + &quot;&lt;br&gt;&quot;); </div><div class="line">document.write(cars[5] + &quot;&lt;br&gt;&quot;); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h3 id="400-错误"><a href="#400-错误" class="headerlink" title="400 错误"></a>400 错误</h3><p>今天早上发现APP主会场反复切换页面10次 出现400错误。经过排查是请求链接后面反复追加了很多遍参数问题 导致header 过大 造成400 错误 。下面是一些常见可能造成400错误的情况。</p>
+<p>nginx的400错误比较难查找原因，因为此错误并不是每次都会出现的，另外，出现错误的时候，通常在浏览器和日志里看不到任何有关提示。</p>
+<p>经长时间观察和大量试验查明，此乃request header过大所引起，request过大，通常是由于cookie中写入了较大的值所引起。</p>
+<p>所幸在nginx中是有办法解决这个问题：</p>
+<p>在nginx.conf中，将client_header_buffer_size和large_client_header_buffers都调大，可缓解此问题。</p>
+<p>其中主要配置是client_header_buffer_size这一项，默认是1k，所以header小于1k的话是不会出现问题的。</p>
+<p>按我现在配置是：</p>
+<p>client_header_buffer_size 16k;<br>large_client_header_buffers 4 64k;</p>
+<p>这个配置可接收16k以下的header，在浏览器中cookie的字节数上限会非常大，所以实在是不好去使用那最大值。</p>
+<p>最好的解决办法当然是不要往cookie里写入太多的东西，不过如果是一个很大的网站，那么在一个二级域名写入了顶级域名下的cookie似乎是不好控制的，这需要制定一个规范来控制顶级域名的cookie写入量才可以解决得了。</p>
+<p>这个可能也是nginx的一个bug，因为buffer这个词义上说为缓冲，也就是说，如果没取完的话，是会循环取直至取完的，但是nginx并没有进行循环的动作直接返回了400错误。nginx的下一个版本可能会修正这个问题。</p>
+<hr>
+<p>最近发现16k的buffer居然还是不够用，改成128k了，变态一点对nginx来说也不是很大问题，重要是人不能因为这种事情搞疯了</p>
+<hr>
+<p>有朋友发现nginx在后台接收到很大的header时也会出现400错误，如：</p>
+<p>2008/08/02 22:51:14 [error] 16613#0: *105 upstream sent too big header while reading response header from upstream, client: 。。。。。。。。。。。。。</p>
+<p>在nginx的wiki里找了一遍，没有找到合适的语句，wiki更新过慢？于是查了一遍源码，在ngx_http_proxy_module.c也没有找到合适的语句。</p>
+<p>不过在nginx 0.3.12版的更新里有这么一句话：</p>
+<p>*) Change: the “proxy_header_buffer_size” and</p>
+<p>   “fastcgi_header_buffer_size” directives was renamed to the</p>
+<p>   “proxy_buffer_size” and “fastcgi_buffer_size” directives.</p>
+<p>不清楚作者改名用意何在，不过，proxy_buffer_size之前的名字proxy_header_buffer_size倒是有点合适，如果有朋友老遇到后台接收时抛出400错误，可以增大这个参数一试。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>问题大致就是出现在header过大 。需要进来规避此种情况</p>
 
       
     </div>
@@ -324,22 +335,24 @@ continue 语句（带有或不带标签引用）只能用在循环中。break �
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/nginx解决400badrequest的方法/" rel="tag">#nginx解决400badrequest的方法</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/22/JavaScript事件/" rel="next" title="JavaScript事件">
-                <i class="fa fa-chevron-left"></i> JavaScript事件
+              <a href="/2016/10/31/gem出错/" rel="next" title="gem出错">
+                <i class="fa fa-chevron-left"></i> gem出错
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/23/Swift函数/" rel="prev" title="Swift函数">
-                Swift函数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -365,8 +378,8 @@ continue 语句（带有或不带标签引用）只能用在循环中。break �
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/23/JavaScript标记/"
-           data-title="JavaScript标签标记" data-url="http://yoursite.com/2016/09/23/JavaScript标记/">
+      <div class="ds-thread" data-thread-key="2016/11/02/nginx解决400badrequest的方法/"
+           data-title="nginx解决400badrequest的方法" data-url="http://yoursite.com/2016/11/02/nginx解决400badrequest的方法/">
       </div>
     
   </div>
@@ -450,7 +463,7 @@ continue 语句（带有或不带标签引用）只能用在循环中。break �
               
             
             
-              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#400-错误"><span class="nav-number">1.</span> <span class="nav-text">400 错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>

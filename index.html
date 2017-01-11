@@ -334,7 +334,7 @@
       
         
           
-            <h1 id="Android-WebView-js失效问题"><a href="#Android-WebView-js失效问题" class="headerlink" title="Android WebView js失效问题"></a>Android WebView js失效问题</h1><p>最近遇到一个很诡异的webview问题,当网页出现一次错误后 后面不管是回复网络还是其他ok的页面 js都会加载不了<br>查了很多资料 没什么结果。<br>最后仔细思考后 看了下代码 在网页错误回调函数中发现调用了 mWebView.resumeTimers(); 方法。</p>
+            <h1 id="Android-WebView-js失效问题"><a href="#Android-WebView-js失效问题" class="headerlink" title="Android WebView js失效问题"></a>Android WebView js失效问题</h1><p>最近遇到一个很诡异的webview问题,当网页出现一次错误后 后面不管是恢复网络还是其他ok的页面 js都会加载不了<br>查了很多资料 没什么结果。<br>最后仔细思考后 看了下代码 在网页错误回调函数中发现调用了 mWebView.resumeTimers(); 方法。</p>
 <p>然后看下API说明</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public void pauseTimers ()</div><div class="line"></div><div class="line">Added in API level 1</div><div class="line">Pauses all layout, parsing, and JavaScript timers for all WebViews. This is a global requests, not restricted to just this WebView. This can be useful if the application has been paused.</div></pre></td></tr></table></figure>
 <p>原来这个方法是全局生效的，会导致所有webview的js失效 终于解释了为什么一旦出现一次错误后 后续页面都加载不出来的问题了。</p>

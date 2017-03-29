@@ -249,7 +249,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/23/JavaScript标记/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/11/AndroidWebViewjs失效问题/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -274,8 +274,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/23/JavaScript标记/" itemprop="url">
-                  JavaScript标签标记
+                <a class="post-title-link" href="/2017/01/11/AndroidWebViewjs失效问题/" itemprop="url">
+                  AndroidWebViewjs失效问题
                 </a>
               
             
@@ -289,8 +289,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-23T14:24:36+08:00">
-                2016-09-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T19:09:22+08:00">
+                2017-01-11
               </time>
             
 
@@ -305,8 +305,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/09/23/JavaScript标记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/23/JavaScript标记/" itemprop="commentCount"></span>
+                <a href="/2017/01/11/AndroidWebViewjs失效问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/AndroidWebViewjs失效问题/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -334,12 +334,10 @@
       
         
           
-            <p>可以对 JavaScript 语句进行标记。<br>如需标记 JavaScript 语句，请在语句之前加上冒号：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">label:</div><div class="line">statements</div></pre></td></tr></table></figure>
-<p>break 和 continue 语句仅仅是能够跳出代码块的语句。<br>语法:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">break labelname; </div><div class="line">continue labelname;</div></pre></td></tr></table></figure>
-<p>continue 语句（带有或不带标签引用）只能用在循环中。<br>break 语句（不带标签引用），只能用在循环或 switch 中。<br>通过标签引用，break 语句可用于跳出任何 JavaScript 代码块：<br>实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">cars=[&quot;BMW&quot;,&quot;Volvo&quot;,&quot;Saab&quot;,&quot;Ford&quot;];</div><div class="line">list: </div><div class="line">&#123;</div><div class="line">document.write(cars[0] + &quot;&lt;br&gt;&quot;); </div><div class="line">document.write(cars[1] + &quot;&lt;br&gt;&quot;); </div><div class="line">document.write(cars[2] + &quot;&lt;br&gt;&quot;); </div><div class="line">break list;</div><div class="line">document.write(cars[3] + &quot;&lt;br&gt;&quot;); </div><div class="line">document.write(cars[4] + &quot;&lt;br&gt;&quot;); </div><div class="line">document.write(cars[5] + &quot;&lt;br&gt;&quot;); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+            <h1 id="Android-WebView-js失效问题"><a href="#Android-WebView-js失效问题" class="headerlink" title="Android WebView js失效问题"></a>Android WebView js失效问题</h1><p>最近遇到一个很诡异的webview问题,当网页出现一次错误后 后面不管是恢复网络还是其他ok的页面 js都会加载不了<br>查了很多资料 没什么结果。<br>最后仔细思考后 看了下代码 在网页错误回调函数中发现调用了 mWebView.resumeTimers(); 方法。</p>
+<p>然后看下API说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public void pauseTimers ()</div><div class="line"></div><div class="line">Added in API level 1</div><div class="line">Pauses all layout, parsing, and JavaScript timers for all WebViews. This is a global requests, not restricted to just this WebView. This can be useful if the application has been paused.</div></pre></td></tr></table></figure>
+<p>原来这个方法是全局生效的，会导致所有webview的js失效 终于解释了为什么一旦出现一次错误后 后续页面都加载不出来的问题了。</p>
 
           
         
@@ -378,7 +376,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/22/JavaScript事件/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/11/swift约束之SnapKit的使用一/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -403,8 +401,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/22/JavaScript事件/" itemprop="url">
-                  JavaScript事件
+                <a class="post-title-link" href="/2017/01/11/swift约束之SnapKit的使用一/" itemprop="url">
+                  swift约束之SnapKit的使用一
                 </a>
               
             
@@ -418,8 +416,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-22T11:56:37+08:00">
-                2016-09-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T16:10:01+08:00">
+                2017-01-11
               </time>
             
 
@@ -434,8 +432,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/09/22/JavaScript事件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/22/JavaScript事件/" itemprop="commentCount"></span>
+                <a href="/2017/01/11/swift约束之SnapKit的使用一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/swift约束之SnapKit的使用一/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -463,13 +461,11 @@
       
         
           
-            <h3 id="JavaScript-事件处理"><a href="#JavaScript-事件处理" class="headerlink" title="JavaScript 事件处理"></a>JavaScript 事件处理</h3><p>HTML 事件可以是浏览器行为，也可以是用户行为。<br>以下是 HTML 事件的实例：<br>HTML 页面完成加载<br>HTML input 字段改变时<br>HTML 按钮被点击<br>通常，当事件发生时，你可以做些事情。<br>在事件触发时 JavaScript 可以执行一些代码。<br>HTML 元素中可以添加事件属性，使用 JavaScript 代码来添加 HTML 元素。</p>
-<h3 id="三种不同实现方式"><a href="#三种不同实现方式" class="headerlink" title="三种不同实现方式"></a>三种不同实现方式</h3><p>1.HTML 元素中可以添加事件属性，使用 JavaScript 代码来添加 HTML 元素。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;button type=&quot;button&quot; onclick=&quot;getElementById(&apos;demo&apos;).innerHTML=Date()&quot;&gt;现在的时间&lt;/button&gt;</div><div class="line">&lt;p id=&quot;demo&quot; &gt;&lt;/p&gt;</div></pre></td></tr></table></figure>
-<p>2.代码将修改自身元素的内容 (使用 this.innerHTML):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;button type=&quot;button&quot; onclick=&quot;this.innerHTML = Date()&quot;&gt;自身替换为当前时间&lt;/button&gt;</div></pre></td></tr></table></figure>
-<p>3.js脚本处理事件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;button type=&quot;button&quot; onclick=&quot;displayTimeNow()&quot;&gt;通过调用js方法来更新时间&lt;/button&gt;</div><div class="line"></div><div class="line">&lt;p id=&quot;demo2&quot; &gt;&lt;/p&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">    function displayTimeNow() &#123;</div><div class="line">        document.getElementById(&apos;demo2&apos;).innerHTML = Date();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+            <h1 id="swift约束之SnapKit的使用一"><a href="#swift约束之SnapKit的使用一" class="headerlink" title="swift约束之SnapKit的使用一"></a>swift约束之SnapKit的使用一</h1><p>SnapKit中的常用属性有：<br>top(上)、left(左)、right(右)、bottom(下)、width(长)、height(宽)、centerX(横向中点)、centerY(纵向中点)</p>
+<h3 id="举个🌰"><a href="#举个🌰" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">view1.snp.makeConstraints &#123; (make) in</div><div class="line">            </div><div class="line">            //距self.view的上边20</div><div class="line">            make.top.equalTo(self.view).offset(20)</div><div class="line">            //距self.view的左边30</div><div class="line">            make.left.equalTo(self.view).offset(30)</div><div class="line">            //距self.view的右边30（右边数字前要加减号,不然会变成超出右边30）</div><div class="line">            make.right.equalTo(self.view).offset(-30)</div><div class="line">            //距self.view的下边50（下边数字前要加减号,不然会变成超出下边50）</div><div class="line">            make.bottom.equalTo(self.view).offset(-50)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<h3 id="举个🌰-1"><a href="#举个🌰-1" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">view2.snp.makeConstraints &#123; (make) in</div><div class="line">            </div><div class="line">            //距view1的上边50</div><div class="line">            make.top.equalTo(view1).offset(50)</div><div class="line">            //距view1的左边50</div><div class="line">            make.left.equalTo(view1).offset(50)</div><div class="line">            //设置长为100</div><div class="line">            make.width.equalTo(100)</div><div class="line">            //设置高为60</div><div class="line">            make.height.equalTo(60)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<h3 id="举个🌰-2"><a href="#举个🌰-2" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">view3.snp.makeConstraints &#123; (make) in</div><div class="line">            </div><div class="line">            //横向坐标等于view1</div><div class="line">            make.centerX.equalTo(view1)</div><div class="line">            //纵向坐标等于view1(横和纵都相等就等于对view1居中)</div><div class="line">            make.centerY.equalTo(view1)</div><div class="line">            //长等于view2的2倍</div><div class="line">            make.width.equalTo(view2).multipliedBy(2)</div><div class="line">            //高等于view2的3分之一</div><div class="line">            make.height.equalTo(view2).dividedBy(3)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>以上就是基本的 Snapkit的使用，后续再更新….</p>
 
           
         
@@ -508,7 +504,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/20/JavaScript对象/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/10/重写UITableViewCell遇到的错误/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -533,8 +529,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/20/JavaScript对象/" itemprop="url">
-                  JavaScript对象
+                <a class="post-title-link" href="/2017/01/10/重写UITableViewCell遇到的错误/" itemprop="url">
+                  重写UITableViewCell遇到的错误
                 </a>
               
             
@@ -548,8 +544,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-20T17:37:49+08:00">
-                2016-09-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-10T17:56:52+08:00">
+                2017-01-10
               </time>
             
 
@@ -564,8 +560,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/09/20/JavaScript对象/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/20/JavaScript对象/" itemprop="commentCount"></span>
+                <a href="/2017/01/10/重写UITableViewCell遇到的错误/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/10/重写UITableViewCell遇到的错误/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -593,19 +589,15 @@
       
         
           
-            <h1 id="JavaScript对象"><a href="#JavaScript对象" class="headerlink" title="JavaScript对象"></a>JavaScript对象</h1><p>在 JavaScript中，几乎所有的事物都是对象。<br>在 JavaScript 中，对象是非常重要的，当你理解了对象，就可以了解 JavaScript 。<br>你已经学习了 JavaScript 变量的赋值。<br>以下代码为变量 car 设置值为 “Fiat” :<br>var car = “Fiat”;<br>对象也是一个变量，但对象可以包含多个值（多个变量）。<br>var car = {type:”Fiat”, model:500, color:”white”};<br>在以上实例中，3 个值 (“Fiat”, 500, “white”) 赋予变量 car。<br>在以上实例中，3 个变量 (type, model, color) 赋予变量 car。</p>
-<h2 id="对象定义"><a href="#对象定义" class="headerlink" title="对象定义"></a>对象定义</h2><p>你可以使用字符来定义和创建 JavaScript 对象:<br>实例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var person = &#123;firstName:&quot;John&quot;, lastName:&quot;Doe&quot;, age:50, eyeColor:&quot;blue&quot;&#125;;</div></pre></td></tr></table></figure>
-<p>定义 JavaScript 对象可以跨越多行，空格跟换行不是必须的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var person = &#123;</div><div class="line">    firstName:&quot;John&quot;,</div><div class="line">    lastName:&quot;Doe&quot;,</div><div class="line">    age:50,</div><div class="line">    eyeColor:&quot;blue&quot;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h2 id="对象属性"><a href="#对象属性" class="headerlink" title="对象属性"></a>对象属性</h2><p>可以说 “JavaScript 对象是变量的容器”。<br>但是，我们通常认为 “JavaScript 对象是键值对的容器”。<br>键值对通常写法为 name : value (键与值以冒号分割)。<br>键值对在 JavaScript 对象通常称为 对象属性。</p>
-<h2 id="访问对象属性"><a href="#访问对象属性" class="headerlink" title="访问对象属性"></a>访问对象属性</h2><p>你可以通过两种方式访问对象属性:<br>实例 1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">person.lastName;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">person[&quot;lastName&quot;];</div></pre></td></tr></table></figure>
-<h2 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h2><p>对象的方法定义了一个函数，并作为对象的属性存储。<br>对象方法通过添加 () 调用 (作为一个函数)。<br>该实例访问了 person 对象的 fullName() 方法:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">name = person.fullName();</div></pre></td></tr></table></figure>
-<p>如果你要访问 person 对象的 fullName 属性，它将作为一个定义函数的字符串返回：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">name = person.fullName;</div></pre></td></tr></table></figure>
+            <h1 id="重写UITableViewCell遇到的错误-fatal-error-init-coder-has-not-been-implemented"><a href="#重写UITableViewCell遇到的错误-fatal-error-init-coder-has-not-been-implemented" class="headerlink" title="重写UITableViewCell遇到的错误 fatal error: init(coder:) has not been implemented"></a>重写UITableViewCell遇到的错误 fatal error: init(coder:) has not been implemented</h1><p>在swift中继承UIView的子类时候，会要求写required init这个方法，一般我就如上写，并没有出过什么问题。<br>今天实现分类列表页面时 采用的是storyboard + xib 来实现自定义cell。</p>
+<p>照例继承 UITableViewCell，出现必实现下面的方法 ，那就实现呗。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">required init?(coder aDecoder: NSCoder) &#123;</div><div class="line">        fatalError(&quot;init(coder:) has not been implemented&quot;)</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>完成其他代码…..<br>运行 出现下面错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fatal error: init(coder:) has not been implemented</div></pre></td></tr></table></figure>
+<p>为什么 查了下 网上已经有明确答案<br><a href="http://stackoverflow.com/questions/29152553/fatal-error-initcoder-has-not-been-implemented" target="_blank" rel="external">链接</a></p>
+<p>This is caused by the absence of the initializer init(coder aDecoder: NSCoder!)<br>on the target UIViewController</p>
+<p>That method is required because instantiating a UIViewController from a UIStoryboard calls it.</p>
+<p>To see how do we initialize UIViewController<br>from a UIStoryboard<br>please take a look here<br>Why is this not a problem on Objective-C?<br>Because Objective-C automatically inherits all the required UIViewController<br>initializers.<br>Why does not Swift automatically inherit the initializers?<br>Swift by default does not inherit the initializers due to safety. But it will inherit all the initializers from the superclass if all the properties have a value (or optional) and the subclass has not defined any designated initializers.<br>Solution</p>
+<p>First method<br>Manually implementing init(coder aDecoder: NSCoder!)<br>on the target UIViewController<br>init(coder aDecoder: NSCoder!) { super.init(coder: aDecoder)}<br>Second method<br>Removing init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)<br>on your target UIViewController<br>will inherit all of the required initializers from the superclass asDave Wood pointed on his answer below</p>
 
           
         
@@ -644,7 +636,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/20/JavaScripy输出/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/24/Swift基础部分/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -669,8 +661,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/20/JavaScripy输出/" itemprop="url">
-                  JavaScript 输出
+                <a class="post-title-link" href="/2016/11/24/Swift基础部分/" itemprop="url">
+                  Swift基础部分
                 </a>
               
             
@@ -684,8 +676,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-20T17:37:49+08:00">
-                2016-09-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-24T17:49:05+08:00">
+                2016-11-24
               </time>
             
 
@@ -700,8 +692,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/09/20/JavaScripy输出/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/20/JavaScripy输出/" itemprop="commentCount"></span>
+                <a href="/2016/11/24/Swift基础部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/24/Swift基础部分/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -729,18 +721,155 @@
       
         
           
-            <h1 id="JavaScript-输出"><a href="#JavaScript-输出" class="headerlink" title="JavaScript 输出"></a>JavaScript 输出</h1><h3 id="JavaScript-显示数据"><a href="#JavaScript-显示数据" class="headerlink" title="JavaScript 显示数据"></a>JavaScript 显示数据</h3><ul>
-<li>JavaScript 可以通过不同的方式来输出数据：</li>
-<li>使用 window.alert() 弹出警告框。</li>
-<li>使用 document.write() 方法将内容写到 HTML 文档中。</li>
-<li>使用 innerHTML 写入到 HTML 元素。</li>
-<li>使用 console.log() 写入到浏览器的控制台。</li>
-</ul>
-<h3 id="使用-window-alert"><a href="#使用-window-alert" class="headerlink" title="使用 window.alert()"></a>使用 window.alert()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;h1&gt;我的第一个页面&lt;/h1&gt;</div><div class="line">&lt;p&gt;我的第一个段落。&lt;/p&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">window.alert(5 + 6);</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<h3 id="操作-HTML-元素"><a href="#操作-HTML-元素" class="headerlink" title="操作 HTML 元素"></a>操作 HTML 元素</h3><p>如需从 JavaScript 访问某个 HTML 元素，您可以使用 document.getElementById(id) 方法。<br>请使用 “id” 属性来标识 HTML 元素，并 innerHTML 来获取或插入元素内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;h1&gt;我的第一个 Web 页面&lt;/h1&gt;</div><div class="line"></div><div class="line">&lt;p id=&quot;demo&quot;&gt;我的第一个段落&lt;/p&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">document.getElementById(&quot;demo&quot;).innerHTML = &quot;段落已修改。&quot;;</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<h3 id="写到-HTML-文档"><a href="#写到-HTML-文档" class="headerlink" title="写到 HTML 文档"></a>写到 HTML 文档</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;h1&gt;我的第一个 Web 页面&lt;/h1&gt;</div><div class="line"></div><div class="line">&lt;p&gt;我的第一个段落。&lt;/p&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">document.write(Date());</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>在实际使用中,还需要仔细观察相关API的说明,这里只做部分说明。</p>
+            <h3 id="Swift3-0基础部分"><a href="#Swift3-0基础部分" class="headerlink" title="Swift3.0基础部分"></a>Swift3.0基础部分</h3><p>Swift 是一门开发 iOS, macOS, watchOS 和 tvOS 应用的新语言。然而，如果你有 C 或者 Objective-C 开发经验的话，你会发现 Swift 的很多内容都是你熟悉的。</p>
+<p>Swift 包含了 C 和 Objective-C 上所有基础数据类型，Int表示整型值； Double 和 Float 表示浮点型值； Bool 是布尔型值；String 是文本型数据。 Swift 还提供了三个基本的集合类型，Array ，Set 和 Dictionary ，详见集合类型。</p>
+<p>就像 C 语言一样，Swift 使用变量来进行存储并通过变量名来关联值。在 Swift 中，广泛的使用着值不可变的变量，它们就是常量，而且比 C 语言的常量更强大。在 Swift 中，如果你要处理的值不需要改变，那使用常量可以让你的代码更加安全并且更清晰地表达你的意图。</p>
+<p>除了我们熟悉的类型，Swift 还增加了 Objective-C 中没有的高阶数据类型比如元组（Tuple）。元组可以让你创建或者传递一组数据，比如作为函数的返回值时，你可以用一个元组可以返回多个值。</p>
+<p>Swift 还增加了可选（Optional）类型，用于处理值缺失的情况。可选表示 “那儿有一个值，并且它等于 x ” 或者 “那儿没有值” 。可选有点像在 Objective-C 中使用 nil ，但是它可以用在任何类型上，不仅仅是类。可选类型比 Objective-C 中的 nil 指针更加安全也更具表现力，它是 Swift 许多强大特性的重要组成部分。</p>
+<p>Swift 是一门类型安全的语言，这意味着 Swift 可以让你清楚地知道值的类型。如果你的代码期望得到一个 String ，类型安全会阻止你不小心传入一个 Int 。同样的，如果你的代码期望得到一个 String，类型安全会阻止你意外传入一个可选的 String 。类型安全可以帮助你在开发阶段尽早发现并修正错误。</p>
+<p>常量和变量<br>常量和变量把一个名字（比如 maximumNumberOfLoginAttempts 或者 welcomeMessage ）和一个指定类型的值（比如数字 10 或者字符串 “Hello” ）关联起来。常量的值一旦设定就不能改变，而变量的值可以随意更改。</p>
+<p>声明常量和变量</p>
+<p>常量和变量必须在使用前声明，用 let 来声明常量，用 var 来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let maximumNumberOfLoginAttempts = 10</div><div class="line">var currentLoginAttempt = 0</div></pre></td></tr></table></figure>
+<p>这两行代码可以被理解为：</p>
+<p>“声明一个名字是 maximumNumberOfLoginAttempts 的新常量，并给它一个值 10 。然后，声明一个名字是 currentLoginAttempt 的变量并将它的值初始化为 0 。”</p>
+<p>在这个例子中，允许的最大尝试登录次数被声明为一个常量，因为这个值不会改变。当前尝试登录次数被声明为一个变量，因为每次尝试登录失败的时候都需要增加这个值。</p>
+<p>你可以在一行中声明多个常量或者多个变量，用逗号隔开：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var x = 0.0, y = 0.0, z = 0.0</div></pre></td></tr></table></figure>
+<p>注意：<br>如果你的代码中有不需要改变的值，请使用 let 关键字将它声明为常量。只将需要改变的值声明为变量。</p>
+<p>类型标注</p>
+<p>当你声明常量或者变量的时候可以加上类型标注（type annotation），说明常量或者变量中要存储的值的类型。如果要添加类型标注，需要在常量或者变量名后面加上一个冒号和空格，然后加上类型名称。</p>
+<p>这个例子给 welcomeMessage 变量添加了类型标注，表示这个变量可以存储 String 类型的值：</p>
+<p>var welcomeMessage: String<br>声明中的冒号代表着“是…类型”，所以这行代码可以被理解为：</p>
+<p>“声明一个类型为 String ，名字为 welcomeMessage 的变量。”</p>
+<p>“类型为 String ”的意思是“可以存储任意 String 类型的值。”</p>
+<p>welcomeMessage 变量现在可以被设置成任意字符串：</p>
+<p>welcomeMessage = “Hello”<br>你可以在一行中定义多个同样类型的变量，用逗号分割，并在最后一个变量名之后添加类型标注：</p>
+<p>var red, green, blue: Double<br>注意：<br>一般来说你很少需要写类型标注。如果你在声明常量或者变量的时候赋了一个初始值，Swift可以推断出这个常量或者变量的类型，请参考类型安全和类型推断。在上面的例子中，没有给 welcomeMessage 赋初始值，所以变量 welcomeMessage 的类型是通过一个类型标注指定的，而不是通过初始值推断的。</p>
+<p>常量和变量的命名</p>
+<p>你可以用任何你喜欢的字符作为常量和变量名，包括 Unicode 字符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let π = 3.14159</div><div class="line">let 你好 = &quot;你好世界&quot;</div><div class="line">let 🐶🐮 = &quot;dogcow&quot;</div></pre></td></tr></table></figure>
+<p>常量与变量名不能包含数学符号，箭头，保留的（或者非法的）Unicode 码位，连线与制表符。也不能以数字开头，但是可以在常量与变量名的其他地方包含数字。</p>
+<p>一旦你将常量或者变量声明为确定的类型，你就不能使用相同的名字再次进行声明，或者改变其存储的值的类型。同时，你也不能将常量与变量进行互转。</p>
+<p>注意：<br>如果你需要使用与Swift保留关键字相同的名称作为常量或者变量名，你可以使用反引号（`）将关键字包围的方式将其作为名字使用。无论如何，你应当避免使用关键字作为常量或变量名，除非你别无选择。<br>你可以更改现有的变量值为其他同类型的值，在下面的例子中，friendlyWelcome的值从”Hello!”改为了”Bonjour!”:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var friendlyWelcome = &quot;Hello!&quot;</div><div class="line">friendlyWelcome = &quot;Bonjour!&quot;</div><div class="line">// friendlyWelcome 现在是 &quot;Bonjour!&quot;</div></pre></td></tr></table></figure>
+<p>与变量不同，常量的值一旦被确定就不能更改了。尝试这样做会导致编译时报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let languageName = &quot;Swift&quot;</div><div class="line">languageName = &quot;Swift++&quot;</div><div class="line">// 这会报编译时错误 - languageName 不可改变</div></pre></td></tr></table></figure>
+<p>输出常量和变量</p>
+<p>你可以用print(_:separator:terminator:)函数来输出当前常量或变量的值:</p>
+<p>print(friendlyWelcome)<br>// 输出 “Bonjour!”<br>print(<em>:separator:terminator:) 是一个用来输出一个或多个值到适当输出区的全局函数。如果你用 Xcode，print(</em>:separator:terminator:) 将会输出内容到“console”面板上。separator 和 terminator 参数具有默认值，因此你调用这个函数的时候可以忽略它们。默认情况下，该函数通过添加换行符来结束当前行。如果不想换行，可以传递一个空字符串给 terminator 参数–例如，print(someValue, terminator:””) 。关于参数默认值的更多信息，请参考默认参数值。</p>
+<p>Swift 用字符串插值（string interpolation）的方式把常量名或者变量名当做占位符加入到长字符串中，Swift 会用当前常量或变量的值替换这些占位符。将常量或变量名放入圆括号中，并在开括号前使用反斜杠将其转义：</p>
+<p>print(“The current value of friendlyWelcome is (friendlyWelcome)”)<br>// 输出 “The current value of friendlyWelcome is Bonjour!<br>注意：<br>字符串插值所有可用的选项，请参考字符串插值。</p>
+<p>注释<br>请将你的代码中的非执行文本注释成提示或者笔记以方便你将来阅读。Swift 的编译器将会在编译代码时自动忽略掉注释部分。</p>
+<p>Swift 中的注释与 C 语言的注释非常相似。单行注释以双正斜杠（//）作为起始标记:</p>
+<p>// 这是一个注释<br>你也可以进行多行注释，其起始标记为单个正斜杠后跟随一个星号（/<em>），终止标记为一个星号后跟随单个正斜杠（</em>/）:</p>
+<p>/<em> 这是一个,<br>多行注释 </em>/<br>与 C 语言多行注释不同，Swift 的多行注释可以嵌套在其它的多行注释之中。你可以先生成一个多行注释块，然后在这个注释块之中再嵌套成第二个多行注释。终止注释时先插入第二个注释块的终止标记，然后再插入第一个注释块的终止标记：</p>
+<p>/<em> 这是第一个多行注释的开头<br>/</em> 这是第二个被嵌套的多行注释 <em>/<br>这是第一个多行注释的结尾 </em>/<br>通过运用嵌套多行注释，你可以快速方便的注释掉一大段代码，即使这段代码之中已经含有了多行注释块。</p>
+<p>分号<br>与其他大部分编程语言不同，Swift 并不强制要求你在每条语句的结尾处使用分号（;），当然，你也可以按照你自己的习惯添加分号。有一种情况下必须要用分号，即你打算在同一行内写多条独立的语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let cat = &quot;🐱&quot;; print(cat)</div><div class="line">// 输出 &quot;🐱&quot;</div></pre></td></tr></table></figure>
+<p>整数<br>整数就是没有小数部分的数字，比如 42 和 -23 。整数可以是 有符号（正、负、零）或者 无符号（正、零）。</p>
+<p>Swift 提供了8，16，32和64位的有符号和无符号整数类型。这些整数类型和 C 语言的命名方式很像，比如8位无符号整数类型是UInt8，32位有符号整数类型是 Int32 。就像 Swift 的其他类型一样，整数类型采用大写命名法。</p>
+<p>整数范围</p>
+<p>你可以访问不同整数类型的 min 和 max 属性来获取对应类型的最小值和最大值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let minValue = UInt8.min  // minValue 为 0，是 UInt8 类型</div><div class="line">let maxValue = UInt8.max  // maxValue 为 255，是 UInt8 类型</div></pre></td></tr></table></figure>
+<p>min 和 max 所传回值的类型，正是其所对的整数类型(如上例UInt8, 所传回的类型是UInt8)，可用在表达式中相同类型值旁。</p>
+<p>Int</p>
+<p>一般来说，你不需要专门指定整数的长度。Swift 提供了一个特殊的整数类型Int，长度与当前平台的原生字长相同：</p>
+<p>在32位平台上，Int 和 Int32 长度相同。<br>在64位平台上，Int 和 Int64 长度相同。<br>除非你需要特定长度的整数，一般来说使用 Int 就够了。这可以提高代码一致性和可复用性。即使是在32位平台上，Int 可以存储的整数范围也可以达到 -2,147,483,648 ~ 2,147,483,647 ，大多数时候这已经足够大了。</p>
+<p>UInt</p>
+<p>Swift 也提供了一个特殊的无符号类型 UInt，长度与当前平台的原生字长相同：</p>
+<p>在32位平台上，UInt 和 UInt32 长度相同。<br>在64位平台上，UInt 和 UInt64 长度相同。<br>注意：<br>尽量不要使用UInt，除非你真的需要存储一个和当前平台原生字长相同的无符号整数。除了这种情况，最好使用Int，即使你要存储的值已知是非负的。统一使用Int可以提高代码的可复用性，避免不同类型数字之间的转换，并且匹配数字的类型推断，请参考类型安全和类型推断。</p>
+<p>浮点数<br>浮点数是有小数部分的数字，比如 3.14159 ，0.1 和 -273.15。</p>
+<p>浮点类型比整数类型表示的范围更大，可以存储比 Int 类型更大或者更小的数字。Swift 提供了两种有符号浮点数类型：</p>
+<p>Double表示64位浮点数。当你需要存储很大或者很高精度的浮点数时请使用此类型。<br>Float表示32位浮点数。精度要求不高的话可以使用此类型。<br>注意：<br>Double精确度很高，至少有15位数字，而Float只有6位数字。选择哪个类型取决于你的代码需要处理的值的范围，在两种类型都匹配的情况下，将优先选择 Double。</p>
+<p>类型安全和类型推断<br>Swift 是一个类型安全（type safe）的语言。类型安全的语言可以让你清楚地知道代码要处理的值的类型。如果你的代码需要一个String，你绝对不可能不小心传进去一个Int。</p>
+<p>由于 Swift 是类型安全的，所以它会在编译你的代码时进行类型检查（type checks），并把不匹配的类型标记为错误。这可以让你在开发的时候尽早发现并修复错误。</p>
+<p>当你要处理不同类型的值时，类型检查可以帮你避免错误。然而，这并不是说你每次声明常量和变量的时候都需要显式指定类型。如果你没有显式指定类型，Swift 会使用类型推断（type inference）来选择合适的类型。有了类型推断，编译器可以在编译代码的时候自动推断出表达式的类型。原理很简单，只要检查你赋的值即可。</p>
+<p>因为有类型推断，和 C 或者 Objective-C 比起来 Swift 很少需要声明类型。常量和变量虽然需要明确类型，但是大部分工作并不需要你自己来完成。</p>
+<p>当你声明常量或者变量并赋初值的时候类型推断非常有用。当你在声明常量或者变量的时候赋给它们一个字面量（literal value 或 literal）即可触发类型推断。（字面量就是会直接出现在你代码中的值，比如 42 和 3.14159 。）</p>
+<p>例如，如果你给一个新常量赋值 42 并且没有标明类型，Swift 可以推断出常量类型是 Int ，因为你给它赋的初始值看起来像一个整数：</p>
+<p>let meaningOfLife = 42<br>// meaningOfLife 会被推测为 Int 类型<br>同理，如果你没有给浮点字面量标明类型，Swift 会推断你想要的是 Double：</p>
+<p>let pi = 3.14159<br>// pi 会被推测为 Double 类型<br>当推断浮点数的类型时，Swift 总是会选择 Double 而不是Float。</p>
+<p>如果表达式中同时出现了整数和浮点数，会被推断为 Double 类型：</p>
+<p>let anotherPi = 3 + 0.14159<br>// anotherPi 会被推测为 Double 类型<br>原始值 3 没有显式声明类型，而表达式中出现了一个浮点字面量，所以表达式会被推断为 Double 类型。</p>
+<p>数值型字面量<br>整数字面量可以被写作：</p>
+<p>一个十进制数，没有前缀<br>一个二进制数，前缀是0b<br>一个八进制数，前缀是0o<br>一个十六进制数，前缀是0x<br>下面的所有整数字面量的十进制值都是17:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let decimalInteger = 17</div><div class="line">let binaryInteger = 0b10001       // 二进制的17</div><div class="line">let octalInteger = 0o21           // 八进制的17</div><div class="line">let hexadecimalInteger = 0x11     // 十六进制的17</div></pre></td></tr></table></figure>
+<p>浮点字面量可以是十进制（没有前缀）或者是十六进制（前缀是 0x ）。小数点两边必须有至少一个十进制数字（或者是十六进制的数字）。十进制浮点数也可以有一个可选的指数（exponent)，通过大写或者小写的 e 来指定；十六进制浮点数必须有一个指数，通过大写或者小写的 p 来指定。</p>
+<p>如果一个十进制数的指数为 exp，那这个数相当于基数和10^exp的乘积：</p>
+<p>1.25e2 表示 1.25 × 10^2，等于 125.0。<br>1.25e-2 表示 1.25 × 10^-2，等于 0.0125。<br>如果一个十六进制数的指数为exp，那这个数相当于基数和2^exp的乘积：</p>
+<p>0xFp2 表示 15 × 2^2，等于 60.0。<br>0xFp-2 表示 15 × 2^-2，等于 3.75。<br>下面的这些浮点字面量都等于十进制的12.1875：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let decimalDouble = 12.1875</div><div class="line">let exponentDouble = 1.21875e1</div><div class="line">let hexadecimalDouble = 0xC.3p0</div></pre></td></tr></table></figure>
+<p>数值类字面量可以包括额外的格式来增强可读性。整数和浮点数都可以添加额外的零并且包含下划线，并不会影响字面量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let paddedDouble = 000123.456</div><div class="line">let oneMillion = 1_000_000</div><div class="line">let justOverOneMillion = 1_000_000.000_000_1</div></pre></td></tr></table></figure>
+<p>数值型类型转换<br>通常来讲，即使代码中的整数常量和变量已知非负，也请使用Int类型。总是使用默认的整数类型可以保证你的整数常量和变量可以直接被复用并且可以匹配整数类字面量的类型推断。</p>
+<p>只有在必要的时候才使用其他整数类型，比如要处理外部的长度明确的数据或者为了优化性能、内存占用等等。使用显式指定长度的类型可以及时发现值溢出并且可以暗示正在处理特殊数据。</p>
+<p>整数转换</p>
+<p>不同整数类型的变量和常量可以存储不同范围的数字。Int8类型的常量或者变量可以存储的数字范围是-128~127，而UInt8类型的常量或者变量能存储的数字范围是0~255。如果数字超出了常量或者变量可存储的范围，编译的时候会报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let cannotBeNegative: UInt8 = -1</div><div class="line">// UInt8 类型不能存储负数，所以会报错</div><div class="line">let tooBig: Int8 = Int8.max + 1</div><div class="line">// Int8 类型不能存储超过最大值的数，所以会报错</div></pre></td></tr></table></figure>
+<p>由于每种整数类型都可以存储不同范围的值，所以你必须根据不同情况选择性使用数值型类型转换。这种选择性使用的方式，可以预防隐式转换的错误并让你的代码中的类型转换意图变得清晰。</p>
+<p>要将一种数字类型转换成另一种，你要用当前值来初始化一个期望类型的新数字，这个数字的类型就是你的目标类型。在下面的例子中，常量twoThousand是UInt16类型，然而常量one是UInt8类型。它们不能直接相加，因为它们类型不同。所以要调用UInt16(one)来创建一个新的UInt16数字并用one的值来初始化，然后使用这个新数字来计算：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let twoThousand: UInt16 = 2_000</div><div class="line">let one: UInt8 = 1</div><div class="line">let twoThousandAndOne = twoThousand + UInt16(one)</div></pre></td></tr></table></figure>
+<p>现在两个数字的类型都是 UInt16，可以进行相加。目标常量 twoThousandAndOne 的类型被推断为 UInt16，因为它是两个 UInt16 值的和。</p>
+<p>SomeType(ofInitialValue) 是调用 Swift 构造器并传入一个初始值的默认方法。在语言内部，UInt16 有一个构造器，可以接受一个UInt8类型的值，所以这个构造器可以用现有的 UInt8 来创建一个新的 UInt16。注意，你并不能传入任意类型的值，只能传入 UInt16 内部有对应构造器的值。不过你可以扩展现有的类型来让它可以接收其他类型的值（包括自定义类型），请参考扩展。</p>
+<p>整数和浮点数转换</p>
+<p>整数和浮点数的转换必须显式指定类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let three = 3</div><div class="line">let pointOneFourOneFiveNine = 0.14159</div><div class="line">let pi = Double(three) + pointOneFourOneFiveNine</div><div class="line">// pi 等于 3.14159，所以被推测为 Double 类型</div><div class="line"></div><div class="line">```这个例子中，常量 three 的值被用来创建一个 Double 类型的值，所以加号两边的数类型须相同。如果不进行转换，两者无法相加。</div><div class="line"></div><div class="line">浮点数到整数的反向转换同样行，整数类型可以用 Double 或者 Float 类型来初始化：</div></pre></td></tr></table></figure>
+<p>let integerPi = Int(pi)<br>// integerPi 等于 3，所以被推测为 Int 类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">当用这种方式来初始化一个新的整数值时，浮点值会被截断。也就是说 4.75 会变成 4，-3.9 会变成 -3。</div><div class="line"></div><div class="line">注意：</div><div class="line">结合数字类常量和变量不同于结合数字类字面量。字面量3可以直接和字面量0.14159相加，因为数字字面量本身没有明确的类型。它们的类型只在编译器需要求值的时候被推测。</div><div class="line"></div><div class="line">类型别名</div><div class="line">类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。</div><div class="line"></div><div class="line">当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：</div><div class="line"></div><div class="line">typealias AudioSample = UInt16</div><div class="line">定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：</div></pre></td></tr></table></figure>
+<p>var maxAmplitudeFound = AudioSample.min<br>// maxAmplitudeFound 现在是 0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">本例中，AudioSample被定义为UInt16的一个别名。因为它是别名，AudioSample.min实际上是UInt16.min，所以会给maxAmplitudeFound赋一个初值0。</div><div class="line"></div><div class="line"></div><div class="line">布尔值</div><div class="line">Swift 有一个基本的布尔（Boolean）类型，叫做Bool。布尔值指逻辑上的值，因为它们只能是真或者假。Swift 有两个布尔常量，true 和 false：</div></pre></td></tr></table></figure>
+<p>let orangesAreOrange = true<br>let turnipsAreDelicious = false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">orangesAreOrange 和 turnipsAreDelicious 的类型会被推断为 Bool，因为它们的初值是布尔字面量。就像之前提到的 Int 和 Double 一样，如果你创建变量的时候给它们赋值 true 或者 false，那你不需要将常量或者变量声明为 Bool 类型。初始化常量或者变量的时候如果所赋的值类型已知，就可以触发类型推断，这让 Swift 代码更加简洁并且可读性更高。</div><div class="line"></div><div class="line">当你编写条件语句比如 if 语句的时候，布尔值非常有用：</div></pre></td></tr></table></figure>
+<p>if turnipsAreDelicious {<br>    print(“Mmm, tasty turnips!”)<br>} else {<br>    print(“Eww, turnips are horrible.”)<br>}<br>// 输出 “Eww, turnips are horrible.”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">条件语句，例如if，请参考控制流。</div><div class="line"></div><div class="line">如果你在需要使用 Bool 类型的地方使用了非布尔值，Swift 的类型安全机制会报错。下面的例子会报告一个编译时错误：</div></pre></td></tr></table></figure></p>
+<p>let i = 1<br>if i {<br>    // 这个例子不会通过编译，会报错<br>}<br>然而，下面的例子是合法的：</p>
+<p>let i = 1<br>if i == 1 {<br>    // 这个例子会编译成功<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">i == 1 的比较结果是 Bool 类型，所以第二个例子可以通过类型检查。类似 i == 1 这样的比较，请参考基本操作符。</div><div class="line"></div><div class="line">和 Swift 中的其他类型安全的例子一样，这个方法可以避免错误并保证这块代码的意图总是清晰的。</div><div class="line"></div><div class="line"></div><div class="line">元组</div><div class="line">元组（tuples）把多个值组合成一个复合值。元组内的值可以是任意类型，并不要求是相同类型。</div><div class="line"></div><div class="line">下面这个例子中，(404, &quot;Not Found&quot;) 是一个描述 HTTP 状态码（HTTP status code）的元组。HTTP 状态码是当你请求网页的时候 web 服务器返回的一个特殊值。如果你请求的网页不存在就会返回一个 404 Not Found 状态码。</div></pre></td></tr></table></figure>
+<p>let http404Error = (404, “Not Found”)<br>// http404Error 的类型是 (Int, String)，值是 (404, “Not Found”)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(404, &quot;Not Found&quot;) 元组把一个 Int 值和一个 String 值组合起来表示 HTTP 状态码的两个部分：一个数字和一个人类可读的描述。这个元组可以被描述为“一个类型为 (Int, String) 的元组”。</div><div class="line"></div><div class="line">你可以把任意顺序的类型组合成一个元组，这个元组可以包含所有类型。只要你想，你可以创建一个类型为 (Int, Int, Int) 或者 (String, Bool) 或者其他任何你想要的组合的元组。</div><div class="line"></div><div class="line">你可以将一个元组的内容分解（decompose）成单独的常量和变量，然后你就可以正常使用它们了：</div></pre></td></tr></table></figure>
+<p>let (statusCode, statusMessage) = http404Error<br>print(“The status code is (statusCode)”)<br>// 输出 “The status code is 404”<br>print(“The status message is (statusMessage)”)<br>// 输出 “The status message is Not Found”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果你只需要一部分元组值，分解的时候可以把要忽略的部分用下划线（_）标记：</div></pre></td></tr></table></figure>
+<p>let (justTheStatusCode, _) = http404Error<br>print(“The status code is (justTheStatusCode)”)<br>// 输出 “The status code is 404”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">此外，你还可以通过下标来访问元组中的单个元素，下标从零开始：</div></pre></td></tr></table></figure>
+<p>print(“The status code is (http404Error.0)”)<br>// 输出 “The status code is 404”<br>print(“The status message is (http404Error.1)”)<br>// 输出 “The status message is Not Found”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">你可以在定义元组的时候给单个元素命名：</div></pre></td></tr></table></figure></p>
+<p>let http200Status = (statusCode: 200, description: “OK”)<br>给元组中的元素命名后，你可以通过名字来获取这些元素的值：</p>
+<p>print(“The status code is (http200Status.statusCode)”)<br>// 输出 “The status code is 200”<br>print(“The status message is (http200Status.description)”)<br>// 输出 “The status message is OK”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">作为函数返回值时，元组非常有用。一个用来获取网页的函数可能会返回一个 (Int, String) 元组来描述是否获取成功。和只能返回一个类型的值比较起来，一个包含两个不同类型值的元组可以让函数的返回信息更有用。请参考函数参数与返回值。</div><div class="line"></div><div class="line">注意：</div><div class="line">元组在临时组织值的时候很有用，但是并不适合创建复杂的数据结构。如果你的数据结构并不是临时使用，请使用类或者结构体而不是元组。请参考类和结构体。</div><div class="line"></div><div class="line">可选类型</div><div class="line">使用可选类型（optionals）来处理值可能缺失的情况。可选类型表示：</div><div class="line"></div><div class="line">有值，等于 x</div><div class="line">或者</div><div class="line"></div><div class="line">没有值</div><div class="line">注意：</div><div class="line">C 和 Objective-C 中并没有可选类型这个概念。最接近的是 Objective-C 中的一个特性，一个方法要不返回一个对象要不返回nil，nil表示“缺少一个合法的对象”。然而，这只对对象起作用——对于结构体，基本的 C 类型或者枚举类型不起作用。对于这些类型，Objective-C 方法一般会返回一个特殊值（比如NSNotFound）来暗示值缺失。这种方法假设方法的调用者知道并记得对特殊值进行判断。然而，Swift 的可选类型可以让你暗示任意类型的值缺失，并不需要一个特殊值。</div><div class="line">来看一个例子。Swift 的 Int 类型有一种构造器，作用是将一个 String 值转换成一个 Int 值。然而，并不是所有的字符串都可以转换成一个整数。字符串 &quot;123&quot; 可以被转换成数字 123 ，但是字符串 &quot;hello, world&quot; 不行。</div><div class="line"></div><div class="line">下面的例子使用这种构造器来尝试将一个 String 转换成 Int：</div></pre></td></tr></table></figure>
+<p>let possibleNumber = “123”<br>let convertedNumber = Int(possibleNumber)<br>// convertedNumber 被推测为类型 “Int?”， 或者类型 “optional Int”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">因为该构造器可能会失败，所以它返回一个可选类型（optional）Int，而不是一个 Int。一个可选的 Int 被写作 Int? 而不是 Int。问号暗示包含的值是可选类型，也就是说可能包含 Int 值也可能不包含值。（不能包含其他任何值比如 Bool 值或者 String 值。只能是 Int 或者什么都没有。）</div><div class="line"></div><div class="line"></div><div class="line">nil</div><div class="line"></div><div class="line">你可以给可选变量赋值为nil来表示它没有值：</div></pre></td></tr></table></figure>
+<p>var serverResponseCode: Int? = 404<br>// serverResponseCode 包含一个可选的 Int 值 404<br>serverResponseCode = nil<br>// serverResponseCode 现在不包含值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">注意：</div><div class="line">nil不能用于非可选的常量和变量。如果你的代码中有常量或者变量需要处理值缺失的情况，请把它们声明成对应的可选类型。</div><div class="line">如果你声明一个可选常量或者变量但是没有赋值，它们会自动被设置为 nil：</div></pre></td></tr></table></figure></p>
+<p>var surveyAnswer: String?<br>// surveyAnswer 被自动设置为 nil<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">注意：</div><div class="line">Swift 的 nil 和 Objective-C 中的 nil 并不一样。在 Objective-C 中，nil 是一个指向不存在对象的指针。在 Swift 中，nil 不是指针——它是一个确定的值，用来表示值缺失。任何类型的可选状态都可以被设置为 nil，不只是对象类型。</div><div class="line"></div><div class="line">if 语句以及强制解析</div><div class="line"></div><div class="line">你可以使用 if 语句和 nil 比较来判断一个可选值是否包含值。你可以使用“相等”(==)或“不等”(!=)来执行比较。</div><div class="line"></div><div class="line">如果可选类型有值，它将不等于 nil：</div></pre></td></tr></table></figure></p>
+<p>if convertedNumber != nil {<br>    print(“convertedNumber contains some integer value.”)<br>}<br>// 输出 “convertedNumber contains some integer value.”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">当你确定可选类型确实包含值之后，你可以在可选的名字后面加一个感叹号（!）来获取值。这个惊叹号表示“我知道这个可选有值，请使用它。”这被称为可选值的强制解析（forced unwrapping）：</div></pre></td></tr></table></figure>
+<p>if convertedNumber != nil {<br>    print(“convertedNumber has an integer value of (convertedNumber!).”)<br>}<br>// 输出 “convertedNumber has an integer value of 123.”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">更多关于 if 语句的内容，请参考控制流。</div><div class="line"></div><div class="line">注意：</div><div class="line">使用 ! 来获取一个不存在的可选值会导致运行时错误。使用 ! 来强制解析值之前，一定要确定可选包含一个非 nil 的值。</div><div class="line"></div><div class="line">可选绑定</div><div class="line"></div><div class="line">使用可选绑定（optional binding）来判断可选类型是否包含值，如果包含就把值赋给一个临时常量或者变量。可选绑定可以用在 if 和 while 语句中，这条语句不仅可以用来判断可选类型中是否有值，同时可以将可选类型中的值赋给一个常量或者变量。if 和 while 语句，请参考控制流。</div><div class="line"></div><div class="line">像下面这样在 if 语句中写一个可选绑定：</div></pre></td></tr></table></figure></p>
+<p>if let constantName = someOptional {<br>    statements<br>}<br>你可以像上面这样使用可选绑定来重写 possibleNumber 这个例子：</p>
+<p>if let actualNumber = Int(possibleNumber) {<br>    print(“\’(possibleNumber)\’ has an integer value of (actualNumber)”)<br>} else {<br>    print(“\’(possibleNumber)\’ could not be converted to an integer”)<br>}<br>// 输出 “‘123’ has an integer value of 123”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">这段代码可以被理解为：</div><div class="line"></div><div class="line">“如果 Int(possibleNumber) 返回的可选 Int 包含一个值，创建一个叫做 actualNumber 的新常量并将可选包含的值赋给它。”</div><div class="line"></div><div class="line">如果转换成功，actualNumber 常量可以在 if 语句的第一个分支中使用。它已经被可选类型 包含的 值初始化过，所以不需要再使用 ! 后缀来获取它的值。在这个例子中，actualNumber 只被用来输出转换结果。</div><div class="line"></div><div class="line">你可以在可选绑定中使用常量和变量。如果你想在if语句的第一个分支中操作 actualNumber 的值，你可以改成 if var actualNumber，这样可选类型包含的值就会被赋给一个变量而非常量。</div><div class="line"></div><div class="line">你可以包含多个可选绑定或多个布尔条件在一个 if 语句中，只要使用逗号分开就行。只要有任意一个可选绑定的值为nil，或者任意一个布尔条件为false，则整个if条件判断为false，这时你就需要使用嵌套 if 条件语句来处理，如下所示：</div></pre></td></tr></table></figure>
+<p>if let firstNumber = Int(“4”), let secondNumber = Int(“42”), firstNumber &lt; secondNumber &amp;&amp; secondNumber &lt; 100 {<br>    print(“(firstNumber) &lt; (secondNumber) &lt; 100”)<br>}<br>// 输出 “4 &lt; 42 &lt; 100”</p>
+<p>if let firstNumber = Int(“4”) {<br>    if let secondNumber = Int(“42”) {<br>        if firstNumber &lt; secondNumber &amp;&amp; secondNumber &lt; 100 {<br>            print(“(firstNumber) &lt; (secondNumber) &lt; 100”)<br>        }<br>    }<br>}<br>// 输出 “4 &lt; 42 &lt; 100”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">注意： 在 if 条件语句中使用常量和变量来创建一个可选绑定，仅在 if 语句的句中(body)中才能获取到值。相反，在 guard 语句中使用常量和变量来创建一个可选绑定，仅在 guard 语句外且在语句后才能获取到值，请参考提前退出。</div><div class="line"></div><div class="line">隐式解析可选类型</div><div class="line"></div><div class="line">如上所述，可选类型暗示了常量或者变量可以“没有值”。可选可以通过 if 语句来判断是否有值，如果有值的话可以通过可选绑定来解析值。</div><div class="line"></div><div class="line">有时候在程序架构中，第一次被赋值之后，可以确定一个可选类型_总会_有值。在这种情况下，每次都要判断和解析可选值是非常低效的，因为可以确定它总会有值。</div><div class="line"></div><div class="line">这种类型的可选状态被定义为隐式解析可选类型（implicitly unwrapped optionals）。把想要用作可选的类型的后面的问号（String?）改成感叹号（String!）来声明一个隐式解析可选类型。</div><div class="line"></div><div class="line">当可选类型被第一次赋值之后就可以确定之后一直有值的时候，隐式解析可选类型非常有用。隐式解析可选类型主要被用在 Swift 中类的构造过程中，请参考无主引用以及隐式解析可选属性。</div><div class="line"></div><div class="line">一个隐式解析可选类型其实就是一个普通的可选类型，但是可以被当做非可选类型来使用，并不需要每次都使用解析来获取可选值。下面的例子展示了可选类型 String 和隐式解析可选类型 String 之间的区别：</div></pre></td></tr></table></figure>
+<p>let possibleString: String? = “An optional string.”<br>let forcedString: String = possibleString! // 需要感叹号来获取值</p>
+<p>let assumedString: String! = “An implicitly unwrapped optional string.”<br>let implicitString: String = assumedString  // 不需要感叹号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">你可以把隐式解析可选类型当做一个可以自动解析的可选类型。你要做的只是声明的时候把感叹号放到类型的结尾，而不是每次取值的可选名字的结尾。</div><div class="line"></div><div class="line">注意：</div><div class="line">如果你在隐式解析可选类型没有值的时候尝试取值，会触发运行时错误。和你在没有值的普通可选类型后面加一个惊叹号一样。</div><div class="line">你仍然可以把隐式解析可选类型当做普通可选类型来判断它是否包含值：</div></pre></td></tr></table></figure>
+<p>if assumedString != nil {<br>    print(assumedString)<br>}<br>// 输出 “An implicitly unwrapped optional string.”<br>你也可以在可选绑定中使用隐式解析可选类型来检查并解析它的值：</p>
+<p>if let definiteString = assumedString {<br>    print(definiteString)<br>}<br>// 输出 “An implicitly unwrapped optional string.”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">注意：</div><div class="line">如果一个变量之后可能变成nil的话请不要使用隐式解析可选类型。如果你需要在变量的生命周期中判断是否是nil的话，请使用普通可选类型。</div><div class="line"></div><div class="line">错误处理</div><div class="line">你可以使用 错误处理（error handling） 来应对程序执行中可能会遇到的错误条件。</div><div class="line"></div><div class="line">相对于可选中运用值的存在与缺失来表达函数的成功与失败，错误处理可以推断失败的原因，并传播至程序的其他部分。</div><div class="line"></div><div class="line">当一个函数遇到错误条件，它能报错。调用函数的地方能抛出错误消息并合理处理。</div></pre></td></tr></table></figure></p>
+<p>func canThrowAnError() throws {<br>    // 这个函数有可能抛出错误<br>}<br>一个函数可以通过在声明中添加throws关键词来抛出错误消息。当你的函数能抛出错误消息时, 你应该在表达式中前置try关键词。</p>
+<p>do {<br>    try canThrowAnError()<br>    // 没有错误消息抛出<br>} catch {<br>    // 有一个错误消息抛出<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">一个do语句创建了一个新的包含作用域,使得错误能被传播到一个或多个catch从句。</div><div class="line"></div><div class="line">这里有一个错误处理如何用来应对不同错误条件的例子。</div></pre></td></tr></table></figure>
+<p>func makeASandwich() throws {<br>    // …<br>}</p>
+<p>do {<br>    try makeASandwich()<br>    eatASandwich()<br>} catch SandwichError.outOfCleanDishes {<br>    washDishes()<br>} catch SandwichError.missingIngredients(let ingredients) {<br>    buyGroceries(ingredients)<br>}<br>```<br>在此例中，makeASandwich()（做一个三明治）函数会抛出一个错误消息如果没有干净的盘子或者某个原料缺失。因为 makeASandwich() 抛出错误，函数调用被包裹在 try 表达式中。将函数包裹在一个 do 语句中，任何被抛出的错误会被传播到提供的 catch 从句中。</p>
+<p>如果没有错误被抛出，eatASandwich() 函数会被调用。如果一个匹配 SandwichError.outOfCleanDishes 的错误被抛出，washDishes() 函数会被调用。如果一个匹配 SandwichError.missingIngredients 的错误被抛出，buyGroceries(_:) 函数会被调用，并且使用 catch 所捕捉到的关联值 [String] 作为参数。</p>
+<p>抛出，捕捉，以及传播错误会在错误处理章节详细说明。</p>
+<p>断言<br>可选类型可以让你判断值是否存在，你可以在代码中优雅地处理值缺失的情况。然而，在某些情况下，如果值缺失或者值并不满足特定的条件，你的代码可能没办法继续执行。这时，你可以在你的代码中触发一个 断言（assertion） 来结束代码运行并通过调试来找到值缺失的原因。</p>
+<p>使用断言进行调试</p>
+<p>断言会在运行时判断一个逻辑条件是否为 true。从字面意思来说，断言“断言”一个条件是否为真。你可以使用断言来保证在运行其他代码之前，某些重要的条件已经被满足。如果条件判断为 true，代码运行会继续进行；如果条件判断为 false，代码执行结束，你的应用被终止。</p>
+<p>如果你的代码在调试环境下触发了一个断言，比如你在 Xcode 中构建并运行一个应用，你可以清楚地看到不合法的状态发生在哪里并检查断言被触发时你的应用的状态。此外，断言允许你附加一条调试信息。</p>
+<p>你可以使用全局 assert(<em>:</em>:file:line:) 函数来写一个断言。向这个函数传入一个结果为 true 或者 false 的表达式以及一条信息，当表达式的结果为 false 的时候这条信息会被显示：</p>
+<p>let age = -3<br>assert(age &gt;= 0, “A person’s age cannot be less than zero”)<br>// 因为 age &lt; 0，所以断言会触发<br>在这个例子中，只有 age &gt;= 0 为 true 的时候，即 age 的值非负的时候，代码才会继续执行。如果 age 的值是负数，就像代码中那样，age &gt;= 0 为 false，断言被触发，终止应用。</p>
+<p>如果不需要断言信息，可以省略，就像这样：</p>
+<p>assert(age &gt;= 0)<br>注意：<br>当代码使用优化编译的时候，断言将会被禁用，例如在 Xcode 中，使用默认的 target Release 配置选项来 build 时，断言会被禁用。<br>何时使用断言</p>
+<p>当条件可能为假时使用断言，但是最终一定要<em>保证</em>条件为真，这样你的代码才能继续运行。断言的适用情景：</p>
+<p>整数类型的下标索引被传入一个自定义下标实现，但是下标索引值可能太小或者太大。<br>需要给函数传入一个值，但是非法的值可能导致函数不能正常执行。<br>一个可选值现在是 nil，但是后面的代码运行需要一个非 nil 值。    </p>
 
           
         
@@ -779,7 +908,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/20/函数/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/24/Swift可选绑定/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -804,8 +933,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/20/函数/" itemprop="url">
-                  函数
+                <a class="post-title-link" href="/2016/11/24/Swift可选绑定/" itemprop="url">
+                  Swift可选绑定
                 </a>
               
             
@@ -819,8 +948,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-20T17:37:49+08:00">
-                2016-09-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-24T16:42:39+08:00">
+                2016-11-24
               </time>
             
 
@@ -835,8 +964,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/09/20/函数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/20/函数/" itemprop="commentCount"></span>
+                <a href="/2016/11/24/Swift可选绑定/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/24/Swift可选绑定/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -864,10 +993,18 @@
       
         
           
-            <h1 id="JavaScript-函数"><a href="#JavaScript-函数" class="headerlink" title="JavaScript 函数"></a>JavaScript 函数</h1><h4 id="局部-JavaScript-变量"><a href="#局部-JavaScript-变量" class="headerlink" title="局部 JavaScript 变量"></a>局部 JavaScript 变量</h4><p>在 JavaScript 函数内部声明的变量（使用 var）是局部变量，所以只能在函数内部访问它。（该变量的作用域是局部的）。<br>您可以在不同的函数中使用名称相同的局部变量，因为只有声明过该变量的函数才能识别出该变量。<br>只要函数运行完毕，本地变量就会被删除。</p>
-<h4 id="全局-JavaScript-变量"><a href="#全局-JavaScript-变量" class="headerlink" title="全局 JavaScript 变量"></a>全局 JavaScript 变量</h4><p>在函数外声明的变量是全局变量，网页上的所有脚本和函数都能访问它。</p>
-<h4 id="JavaScript-变量的生存期"><a href="#JavaScript-变量的生存期" class="headerlink" title="JavaScript 变量的生存期"></a>JavaScript 变量的生存期</h4><p>JavaScript 变量的生命期从它们被声明的时间开始。<br>局部变量会在函数运行以后被删除。<br>全局变量会在页面关闭后被删除。</p>
-<h4 id="向未声明的-JavaScript-变量分配值"><a href="#向未声明的-JavaScript-变量分配值" class="headerlink" title="向未声明的 JavaScript 变量分配值"></a>向未声明的 JavaScript 变量分配值</h4><p>如果您把值赋给尚未声明的变量，该变量将被自动作为全局变量声明。<br>这条语句：<br>carname=”Volvo”;<br>将声明一个全局变量 carname，即使它在函数内执行。</p>
+            <h3 id="Swift3-0可选绑定"><a href="#Swift3-0可选绑定" class="headerlink" title="Swift3.0可选绑定"></a>Swift3.0可选绑定</h3><p>使用可选绑定（optional binding）来判断可选类型是否包含值，如果包含就把值赋给一个临时常量或者变量。可选绑定可以用在 if 和 while 语句中，这条语句不仅可以用来判断可选类型中是否有值，同时可以将可选类型中的值赋给一个常量或者变量。if 和 while 语句，请参考控制流。</p>
+<p>像下面这样在 if 语句中写一个可选绑定：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if let constantName = someOptional &#123;</div><div class="line">    statements</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>你可以像上面这样使用可选绑定来重写 possibleNumber 这个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if let actualNumber = Int(possibleNumber) &#123;</div><div class="line">    print(&quot;\&apos;\(possibleNumber)\&apos; has an integer value of \(actualNumber)&quot;)</div><div class="line">&#125; else &#123;</div><div class="line">    print(&quot;\&apos;\(possibleNumber)\&apos; could not be converted to an integer&quot;)</div><div class="line">&#125;</div><div class="line">// 输出 &quot;&apos;123&apos; has an integer value of 123&quot;</div></pre></td></tr></table></figure>
+<p>这段代码可以被理解为：</p>
+<p>“如果 Int(possibleNumber) 返回的可选 Int 包含一个值，创建一个叫做 actualNumber 的新常量并将可选包含的值赋给它。”</p>
+<p>如果转换成功，actualNumber 常量可以在 if 语句的第一个分支中使用。它已经被可选类型 包含的 值初始化过，所以不需要再使用 ! 后缀来获取它的值。在这个例子中，actualNumber 只被用来输出转换结果。</p>
+<p>你可以在可选绑定中使用常量和变量。如果你想在if语句的第一个分支中操作 actualNumber 的值，你可以改成 if var actualNumber，这样可选类型包含的值就会被赋给一个变量而非常量。</p>
+<p>你可以包含多个可选绑定或多个布尔条件在一个 if 语句中，只要使用逗号分开就行。只要有任意一个可选绑定的值为nil，或者任意一个布尔条件为false，则整个if条件判断为false，这时你就需要使用嵌套 if 条件语句来处理，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">if let firstNumber = Int(&quot;4&quot;), let secondNumber = Int(&quot;42&quot;), firstNumber &lt; secondNumber &amp;&amp; secondNumber &lt; 100 &#123;</div><div class="line">    print(&quot;\(firstNumber) &lt; \(secondNumber) &lt; 100&quot;)</div><div class="line">&#125;</div><div class="line">// 输出 &quot;4 &lt; 42 &lt; 100&quot;</div><div class="line"></div><div class="line">if let firstNumber = Int(&quot;4&quot;) &#123;</div><div class="line">    if let secondNumber = Int(&quot;42&quot;) &#123;</div><div class="line">        if firstNumber &lt; secondNumber &amp;&amp; secondNumber &lt; 100 &#123;</div><div class="line">            print(&quot;\(firstNumber) &lt; \(secondNumber) &lt; 100&quot;)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">// 输出 &quot;4 &lt; 42 &lt; 100&quot;</div></pre></td></tr></table></figure>
+<p>注意： 在 if 条件语句中使用常量和变量来创建一个可选绑定，仅在 if 语句的句中(body)中才能获取到值。相反，在 guard 语句中使用常量和变量来创建一个可选绑定，仅在 guard 语句外且在语句后才能获取到值，</p>
 
           
         
@@ -906,7 +1043,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/20/重新开始/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/24/Swift元组/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -931,8 +1068,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/20/重新开始/" itemprop="url">
-                  重新开始
+                <a class="post-title-link" href="/2016/11/24/Swift元组/" itemprop="url">
+                  Swift元组
                 </a>
               
             
@@ -946,8 +1083,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-20T17:37:49+08:00">
-                2016-09-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-24T16:27:45+08:00">
+                2016-11-24
               </time>
             
 
@@ -962,8 +1099,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/09/20/重新开始/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/20/重新开始/" itemprop="commentCount"></span>
+                <a href="/2016/11/24/Swift元组/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/24/Swift元组/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -991,9 +1128,554 @@
       
         
           
-            <h2 id="重新开始"><a href="#重新开始" class="headerlink" title="重新开始"></a>重新开始</h2><h4 id="归0"><a href="#归0" class="headerlink" title="归0"></a>归0</h4><p>距离网站被空间提供商在未通知的情况下删除已经过去近1个月的时间。一个月未更新博客的感觉很无聊。经过一番调研,决定重新开始。一切归零也不妨是一种新的开始。</p>
-<h4 id="一眼就看中md"><a href="#一眼就看中md" class="headerlink" title="一眼就看中md"></a>一眼就看中md</h4><p>逛了一圈 发现md写的博客非常nice,配合hexo 可以搭建一个不错的博客系统,然后托管到github上面,也省去了买空间的麻烦。</p>
-<h4 id="终于开始更新了"><a href="#终于开始更新了" class="headerlink" title="终于开始更新了"></a>终于开始更新了</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2016-09-05</div></pre></td></tr></table></figure>
+            <h3 id="Swift3-0元组"><a href="#Swift3-0元组" class="headerlink" title="Swift3.0元组"></a>Swift3.0元组</h3><p>元组（tuples）把多个值组合成一个复合值。元组内的值可以是任意类型，并不要求是相同类型。</p>
+<p>下面这个例子中，(404, “Not Found”) 是一个描述 HTTP 状态码（HTTP status code）的元组。HTTP 状态码是当你请求网页的时候 web 服务器返回的一个特殊值。如果你请求的网页不存在就会返回一个 404 Not Found 状态码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let http404Error = (404, &quot;Not Found&quot;)</div><div class="line">// http404Error 的类型是 (Int, String)，值是 (404, &quot;Not Found&quot;)</div></pre></td></tr></table></figure>
+<p>(404, “Not Found”) 元组把一个 Int 值和一个 String 值组合起来表示 HTTP 状态码的两个部分：一个数字和一个人类可读的描述。这个元组可以被描述为“一个类型为 (Int, String) 的元组”。</p>
+<p>你可以把任意顺序的类型组合成一个元组，这个元组可以包含所有类型。只要你想，你可以创建一个类型为 (Int, Int, Int) 或者 (String, Bool) 或者其他任何你想要的组合的元组。</p>
+<p>你可以将一个元组的内容分解（decompose）成单独的常量和变量，然后你就可以正常使用它们了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let (statusCode, statusMessage) = http404Error</div><div class="line">print(&quot;The status code is \(statusCode)&quot;)</div><div class="line">// 输出 &quot;The status code is 404&quot;</div><div class="line">print(&quot;The status message is \(statusMessage)&quot;)</div><div class="line">// 输出 &quot;The status message is Not Found&quot;</div></pre></td></tr></table></figure>
+<p>如果你只需要一部分元组值，分解的时候可以把要忽略的部分用下划线（_）标记：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let (justTheStatusCode, _) = http404Error</div><div class="line">print(&quot;The status code is \(justTheStatusCode)&quot;)</div><div class="line">// 输出 &quot;The status code is 404&quot;</div></pre></td></tr></table></figure>
+<p>此外，你还可以通过下标来访问元组中的单个元素，下标从零开始：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">print(&quot;The status code is \(http404Error.0)&quot;)</div><div class="line">// 输出 &quot;The status code is 404&quot;</div><div class="line">print(&quot;The status message is \(http404Error.1)&quot;)</div><div class="line">// 输出 &quot;The status message is Not Found&quot;</div></pre></td></tr></table></figure>
+<p>你可以在定义元组的时候给单个元素命名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let http200Status = (statusCode: 200, description: &quot;OK&quot;)</div></pre></td></tr></table></figure>
+<p>给元组中的元素命名后，你可以通过名字来获取这些元素的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">print(&quot;The status code is \(http200Status.statusCode)&quot;)</div><div class="line">// 输出 &quot;The status code is 200&quot;</div><div class="line">print(&quot;The status message is \(http200Status.description)&quot;)</div><div class="line">// 输出 &quot;The status message is OK&quot;</div></pre></td></tr></table></figure>
+<p>作为函数返回值时，元组非常有用。一个用来获取网页的函数可能会返回一个 (Int, String) 元组来描述是否获取成功。和只能返回一个类型的值比较起来，一个包含两个不同类型值的元组可以让函数的返回信息更有用。请参考函数参数与返回值。</p>
+<p>注意：<br>元组在临时组织值的时候很有用，但是并不适合创建复杂的数据结构。如果你的数据结构并不是临时使用，请使用类或者结构体而不是元组</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/16/Android多模块并存布局重复问题/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/16/Android多模块并存布局重复问题/" itemprop="url">
+                  Android多模块并存布局重复问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-16T15:35:05+08:00">
+                2016-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/11/16/Android多模块并存布局重复问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/16/Android多模块并存布局重复问题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天在集成一个使用相对比较普通的第三方库是,出现了莫名其妙的一个错误。如下：<br>NoSuchFieldError: No static field toolBar of type I in class Lcom/disdemo/R$id; or its superclasses</p>
+<p>androidjava.lang.NoSuchFieldError: R$id.xxx </p>
+<p>等类似的错误,反复check了下 没啥错误啊。</p>
+<p>最后从stackoverflow 看到也有遇到过类似情况的。大致清楚问题原因在 重复布局上面。<br>因为是第三方库 里面有些布局文件在主包 或者其他的第三方库中也存在。问题就出现在这里</p>
+<p>我这边的情况是将之前的源码形式替换为引入模块。就没删除原来 导入的布局文件 。偷懒的结果啊</p>
+<p>删除对应重复的资源 ，编译通过。</p>
+<p>总结:当这种莫名其妙的问题出现了时，一定要思考这之前你都大致做了什么操作 才能更好的定位问题。<br>不是每次你的错误都能在网上找到类似的情况。其实我一开始check时 也发现进入是的源码的位置<br>而不是通过gradle 引入的。当我删除源码后 发现出现了布局错误。此时我光看错误信息 而没有仔细分析为什么会出现这种情况 也没有想到时布局资源等没有删除。最后通过stackoverflow上面找到相关问题 才明确知道是资源重复 导致打包时出现的问题。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/02/nginx解决400badrequest的方法/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/02/nginx解决400badrequest的方法/" itemprop="url">
+                  nginx解决400badrequest的方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-02T10:36:24+08:00">
+                2016-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/11/02/nginx解决400badrequest的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/02/nginx解决400badrequest的方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="400-错误"><a href="#400-错误" class="headerlink" title="400 错误"></a>400 错误</h3><p>今天早上发现APP主会场反复切换页面10次 出现400错误。经过排查是请求链接后面反复追加了很多遍参数问题 导致header 过大 造成400 错误 。下面是一些常见可能造成400错误的情况。</p>
+<p>nginx的400错误比较难查找原因，因为此错误并不是每次都会出现的，另外，出现错误的时候，通常在浏览器和日志里看不到任何有关提示。</p>
+<p>经长时间观察和大量试验查明，此乃request header过大所引起，request过大，通常是由于cookie中写入了较大的值所引起。</p>
+<p>所幸在nginx中是有办法解决这个问题：</p>
+<p>在nginx.conf中，将client_header_buffer_size和large_client_header_buffers都调大，可缓解此问题。</p>
+<p>其中主要配置是client_header_buffer_size这一项，默认是1k，所以header小于1k的话是不会出现问题的。</p>
+<p>按我现在配置是：</p>
+<p>client_header_buffer_size 16k;<br>large_client_header_buffers 4 64k;</p>
+<p>这个配置可接收16k以下的header，在浏览器中cookie的字节数上限会非常大，所以实在是不好去使用那最大值。</p>
+<p>最好的解决办法当然是不要往cookie里写入太多的东西，不过如果是一个很大的网站，那么在一个二级域名写入了顶级域名下的cookie似乎是不好控制的，这需要制定一个规范来控制顶级域名的cookie写入量才可以解决得了。</p>
+<p>这个可能也是nginx的一个bug，因为buffer这个词义上说为缓冲，也就是说，如果没取完的话，是会循环取直至取完的，但是nginx并没有进行循环的动作直接返回了400错误。nginx的下一个版本可能会修正这个问题。</p>
+<hr>
+<p>最近发现16k的buffer居然还是不够用，改成128k了，变态一点对nginx来说也不是很大问题，重要是人不能因为这种事情搞疯了</p>
+<hr>
+<p>有朋友发现nginx在后台接收到很大的header时也会出现400错误，如：</p>
+<p>2008/08/02 22:51:14 [error] 16613#0: *105 upstream sent too big header while reading response header from upstream, client: 。。。。。。。。。。。。。</p>
+<p>在nginx的wiki里找了一遍，没有找到合适的语句，wiki更新过慢？于是查了一遍源码，在ngx_http_proxy_module.c也没有找到合适的语句。</p>
+<p>不过在nginx 0.3.12版的更新里有这么一句话：</p>
+<p>*) Change: the “proxy_header_buffer_size” and</p>
+<p>   “fastcgi_header_buffer_size” directives was renamed to the</p>
+<p>   “proxy_buffer_size” and “fastcgi_buffer_size” directives.</p>
+<p>不清楚作者改名用意何在，不过，proxy_buffer_size之前的名字proxy_header_buffer_size倒是有点合适，如果有朋友老遇到后台接收时抛出400错误，可以增大这个参数一试。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>问题大致就是出现在header过大 。需要进来规避此种情况</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/31/gem出错/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/31/gem出错/" itemprop="url">
+                  gem出错
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-31T18:11:00+08:00">
+                2016-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/10/31/gem出错/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/31/gem出错/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="mac安装cocoapods"><a href="#mac安装cocoapods" class="headerlink" title="mac安装cocoapods"></a>mac安装cocoapods</h3><p>先把本机ruby 环境进行了系统升级 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem update —system</div></pre></td></tr></table></figure>
+<p>顺利完成升级后<br>再安装cocoapods</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install cocoapods</div></pre></td></tr></table></figure>
+<p>出现错误：<br>ERROR:  While executing gem … (Errno::EPERM)<br>    Operation not permitted - /usr/bin/xcodeproj</p>
+<p>大致搜索了下 。都说是ruby版本低之类的，可以查看ruby版本 确认已经更新完成。<br>最后在 cocoapods github主页找到了相关问题 ：<br><a href="">https://github.com/CocoaPods/CocoaPods/issues/3680</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install -n /usr/local/bin cocoapods</div></pre></td></tr></table></figure>
+<p>解决问题！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/Swift创建导航控制器/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/25/Swift创建导航控制器/" itemprop="url">
+                  Swift创建导航控制器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-25T11:41:51+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/10/25/Swift创建导航控制器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/25/Swift创建导航控制器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Swift创建导航控制器"><a href="#Swift创建导航控制器" class="headerlink" title="Swift创建导航控制器"></a>Swift创建导航控制器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 导航按钮文字颜色 字体大小</div><div class="line">let attributes =  [NSForegroundColorAttributeName: UIColor.gray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line">let attributesPressed =  [NSForegroundColorAttributeName: UIColor.darkGray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line"></div><div class="line">// 首页</div><div class="line">// 第一步 获取ViewController 控制器，并且创建一个 导航控制器用来承载ViewController</div><div class="line">let mHomeViewController = UIStoryboard(name: &quot;HomePage&quot;, bundle: nil).instantiateViewController(withIdentifier: &quot;HomePage&quot;) as! HomePageViewController</div><div class="line">let mHomeNavController = UINavigationController(rootViewController: mHomeViewController)</div><div class="line">// 第二步 创建一个导航item 并且设置导航按钮的点击icon切换 设置字体颜色 和大小</div><div class="line">let mHomeNormalImage = UIImage(named: &quot;main_bottom_category_normal&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeSelectedImage = UIImage(named: &quot;main_bottom_category_hover&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeTabBarItem = UITabBarItem(title: &quot;精选&quot;, image: mHomeNormalImage, selectedImage: mHomeSelectedImage)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributes, for: .normal)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributesPressed, for: .focused)</div><div class="line">// 第三步:将导航item 对象 赋值给导航控制器</div><div class="line">mHomeNavController.tabBarItem = mHomeTabBarItem</div></pre></td></tr></table></figure>
 
           
         
@@ -1027,7 +1709,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1068,7 +1750,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1078,7 +1760,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

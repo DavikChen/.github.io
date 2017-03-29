@@ -249,7 +249,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/16/Android多模块并存布局重复问题/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/23/RN组件之ListView的shiyong/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -274,8 +274,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/16/Android多模块并存布局重复问题/" itemprop="url">
-                  Android多模块并存布局重复问题
+                <a class="post-title-link" href="/2017/03/23/RN组件之ListView的shiyong/" itemprop="url">
+                  RN组件之ListView的使用
                 </a>
               
             
@@ -289,8 +289,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-16T15:35:05+08:00">
-                2016-11-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T16:08:16+08:00">
+                2017-03-23
               </time>
             
 
@@ -305,8 +305,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/16/Android多模块并存布局重复问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/16/Android多模块并存布局重复问题/" itemprop="commentCount"></span>
+                <a href="/2017/03/23/RN组件之ListView的shiyong/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/23/RN组件之ListView的shiyong/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -334,13 +334,39 @@
       
         
           
-            <p>今天在集成一个使用相对比较普通的第三方库是,出现了莫名其妙的一个错误。如下：<br>NoSuchFieldError: No static field toolBar of type I in class Lcom/disdemo/R$id; or its superclasses</p>
-<p>androidjava.lang.NoSuchFieldError: R$id.xxx </p>
-<p>等类似的错误,反复check了下 没啥错误啊。</p>
-<p>最后从stackoverflow 看到也有遇到过类似情况的。大致清楚问题原因在 重复布局上面。<br>因为是第三方库 里面有些布局文件在主包 或者其他的第三方库中也存在。问题就出现在这里</p>
-<p>我这边的情况是将之前的源码形式替换为引入模块。就没删除原来 导入的布局文件 。偷懒的结果啊</p>
-<p>删除对应重复的资源 ，编译通过。</p>
-<p>总结:当这种莫名其妙的问题出现了时，一定要思考这之前你都大致做了什么操作 才能更好的定位问题。<br>不是每次你的错误都能在网上找到类似的情况。其实我一开始check时 也发现进入是的源码的位置<br>而不是通过gradle 引入的。当我删除源码后 发现出现了布局错误。此时我光看错误信息 而没有仔细分析为什么会出现这种情况 也没有想到时布局资源等没有删除。最后通过stackoverflow上面找到相关问题 才明确知道是资源重复 导致打包时出现的问题。</p>
+            <h2 id="RN组件之ListView的使用"><a href="#RN组件之ListView的使用" class="headerlink" title="RN组件之ListView的使用"></a>RN组件之ListView的使用</h2><p>ReactNative提供的ListView组件，ListView是我们最常用的组件。<br>还是先来看看官网怎么说的。<br>ListView - 一个核心组件，用于高效地显示一个可以垂直滚动的变化的数据列表。最基本的使用方式就是创建一个ListView.DataSource数据源，然后给它传递一个普通的数据数组，再使用数据源来实例化一个ListView组件，并且定义它的renderRow回调函数，这个函数会接受数组中的每个数据作为参数，返回一个可渲染的组件（作为listview的每一行）。</p>
+<p>ListView还支持一些高级特性，譬如给每段/组(section)数据添加一个带有粘性的头部（类似iPhone的通讯录，其首字母会在滑动过程中吸附在屏幕上方）；在列表头部和尾部增加单独的内容；在到达列表尾部的时候调用回调函数(onEndReached)，还有在视野内可见的数据变化时调用回调函数(onChangeVisibleRows)，以及一些性能方面的优化。</p>
+<p>有一些性能优化使得ListView可以滚动的更加平滑，尤其是在动态加载可能很大（或者概念上无限长的）数据集的时候：<br>只更新变化的行 - 提供给数据源的rowHasChanged函数可以告诉ListView它是否需要重绘一行数据（即：数据是否发生了变化）参见ListViewDataSource<br>限制频率的行渲染 - 默认情况下，每次消息循环只有一行会被渲染（可以用pageSize属性配置）。这把较大的工作分散成小的碎片，以降低因为渲染而导致丢帧的可能性。</p>
+<p>属性<br>ScrollView props…<br>译注：这意味着ListView可以使用所有ScrollView的属性。</p>
+<p>dataSource ListViewDataSource<br>ListView.DataSource实例（列表依赖的数据源）</p>
+<p>initialListSize number<br>指定在组件刚挂载的时候渲染多少行数据。用这个属性来确保首屏显示合适数量的数据，而不是花费太多帧逐步显示出来。</p>
+<p>onChangeVisibleRows function<br>(visibleRows, changedRows) =&gt; void<br>当可见的行的集合变化的时候调用此回调函数。visibleRows 以 { sectionID: { rowID: true }}的格式包含了所有可见行，而changedRows 以{ sectionID: { rowID: true | false }}的格式包含了所有刚刚改变了可见性的行，其中如果值为true表示一个行变得可见，而为false表示行刚刚离开可视区域而变得不可见。</p>
+<p>onEndReached function<br>当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用。原生的滚动事件会被作为参数传递。译注：当第一次渲染时，如果数据不足一屏（比如初始值是空的），这个事件也会被触发。</p>
+<p>onEndReachedThreshold number<br>调用onEndReached之前的临界值，单位是像素。</p>
+<p>pageSize number<br>每次事件循环（每帧）渲染的行数。</p>
+<p>removeClippedSubviews bool<br>用于提升大列表的滚动性能。需要给行容器添加样式overflow:’hidden’。（Android已默认添加此样式）。此属性默认开启。</p>
+<p>renderFooter function<br>() =&gt; renderable<br>页头与页脚会在每次渲染过程中都重新渲染（如果提供了这些属性）。如果它们重绘的性能开销很大，把他们包装到一个StaticContainer或者其它恰当的结构中。页脚会永远在列表的最底部，而页头会在最顶部。</p>
+<p>renderHeader function </p>
+<p>renderRow function<br>(rowData, sectionID, rowID, highlightRow) =&gt; renderable<br>从数据源(Data source)中接受一条数据，以及它和它所在section的ID。返回一个可渲染的组件来为这行数据进行渲染。默认情况下参数中的数据就是放进数据源中的数据本身，不过也可以提供一些转换器。<br>如果某一行正在被高亮（通过调用highlightRow函数），ListView会得到相应的通知。当一行被高亮时，其两侧的分割线会被隐藏。行的高亮状态可以通过调用highlightRow(null)来重置。</p>
+<p>renderScrollComponent function<br>(props) =&gt; renderable<br>指定一个函数，在其中返回一个可以滚动的组件。ListView将会在该组件内部进行渲染。默认情况下会返回一个包含指定属性的ScrollView。</p>
+<p>renderSectionHeader function<br>(sectionData, sectionID) =&gt; renderable<br>如果提供了此函数，会为每个小节(section)渲染一个粘性的标题。<br>粘性是指当它刚出现时，会处在对应小节的内容顶部；继续下滑当它到达屏幕顶端的时候，它会停留在屏幕顶端，一直到对应的位置被下一个小节的标题占据为止。</p>
+<p>renderSeparator function<br>(sectionID, rowID, adjacentRowHighlighted) =&gt; renderable<br>如果提供了此属性，一个可渲染的组件会被渲染在每一行下面，除了小节标题的前面的最后一行。在其上方的小节ID和行ID，以及邻近的行是否被高亮会作为参数传递进来。</p>
+<p>scrollRenderAheadDistance number<br>当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行。</p>
+<p>iOS stickyHeaderIndices [number]<br>一个子视图下标的数组，用于决定哪些成员会在滚动之后固定在屏幕顶端。举个例子，传递stickyHeaderIndices={[0]}会让第一个成员固定在滚动视图顶端。这个属性不能和horizontal={true}一起使用。</p>
+<p>示例：<br>1、在构造函数中我们定义dataSource的rowHasChanged函数，告诉ListView它是否需要重绘一行数据。这个写法很固定！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">constructor(props) &#123;  </div><div class="line">    super(props);  </div><div class="line">    this.state = &#123;  </div><div class="line">        dataSource: new ListView.DataSource(&#123;  </div><div class="line">            rowHasChanged: (r1, r2) =&gt; r1 !== r2,  </div><div class="line">        &#125;),  </div><div class="line">    &#125;;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2、在componentWillMount方法中加载数据（fetch用法可以参照我之前写的文章）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">componentWillMount() &#123;  </div><div class="line">   this._fetchListData(params);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3、在_fetchListData方法获取数据后设置dataSource</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">this.setState(&#123;  </div><div class="line">   dataSource: this.state.dataSource.cloneWithRows(list),  </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>4、在render方法中定义ListView</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;ListView  </div><div class="line">    enableEmptySections=&#123;true&#125;  </div><div class="line">    dataSource=&#123;this.state.dataSource&#125;  </div><div class="line">    renderRow=&#123;this.renderRow.bind(this)&#125;  </div><div class="line">    renderFooter=&#123;this.renderFooter.bind(this)&#125;  </div><div class="line">    renderHeader=&#123;this.rendHeader.bind(this)&#125;  </div><div class="line">    onEndReached=&#123;()=&gt;&#123;console.log(&apos;---&apos;);&#125;&#125;  </div><div class="line">/&gt;</div></pre></td></tr></table></figure>
+<p>5、实现renderRow方法<br>从数据源(Data source)中接受一条数据，以及它和它所在section的ID。返回一个可渲染的组件来为这行数据进行渲染</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> renderRow(rowData, sectionid, rowid) &#123;  </div><div class="line">    return (&lt;View&gt;xxxxx&lt;/View&gt;);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>6、实现_rendHeader方法和_renderFooter方法<br>页头与页脚会在每次渲染过程中都重新渲染。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">rendHeader() &#123;  </div><div class="line">    return (&lt;View&gt;header&lt;/View&gt;);  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"> renderFooter() &#123;  </div><div class="line">    return (&lt;View&gt;footer&lt;/View&gt;);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>综上 基本掌握listview 的使用 。还需要配合RefreshControl 来实现下拉刷新和加载更多<br>如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;ListView</div><div class="line">       dataSource=&#123;this.state.dataSource&#125;</div><div class="line">       renderRow=&#123;this.getItemView.bind(this)&#125;</div><div class="line">       renderHeader=&#123;this.renderHeader.bind(this)&#125;</div><div class="line">       initialListSize=&#123;10&#125;</div><div class="line">       enableEmptySections = &#123;true&#125;</div><div class="line">       style=&#123;&#123;backgroundColor:&apos;#F0F0F0&apos;&#125;&#125;</div><div class="line">       onEndReached=&#123;this.onLoadMore.bind(this)&#125;</div><div class="line">       onEndReachedThreshold=&#123;10&#125;</div><div class="line">       renderFooter=&#123;this.renderLoadingMoreView.bind(this)&#125;</div><div class="line">       refreshControl=&#123;</div><div class="line">             &lt;RefreshControl</div><div class="line">               refreshing=&#123; this.state.isRefreshing &#125;</div><div class="line">               onRefresh=&#123; this.onRefresh.bind(this) &#125;</div><div class="line">               tintColor=&quot;gray&quot;</div><div class="line">               colors=&#123;[&apos;#00af8b&apos;]&#125;</div><div class="line">               progressBackgroundColor=&quot;#FFFFFF&quot;/&gt;</div><div class="line">    &#125;/&gt;</div></pre></td></tr></table></figure>
 
           
         
@@ -379,7 +405,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/02/nginx解决400badrequest的方法/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/23/RN之组件点击事件处理/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -404,8 +430,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/02/nginx解决400badrequest的方法/" itemprop="url">
-                  nginx解决400badrequest的方法
+                <a class="post-title-link" href="/2017/03/23/RN之组件点击事件处理/" itemprop="url">
+                  RN之组件点击事件处理
                 </a>
               
             
@@ -419,8 +445,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-02T10:36:24+08:00">
-                2016-11-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T13:34:23+08:00">
+                2017-03-23
               </time>
             
 
@@ -435,8 +461,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/02/nginx解决400badrequest的方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/02/nginx解决400badrequest的方法/" itemprop="commentCount"></span>
+                <a href="/2017/03/23/RN之组件点击事件处理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/23/RN之组件点击事件处理/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -464,29 +490,36 @@
       
         
           
-            <h3 id="400-错误"><a href="#400-错误" class="headerlink" title="400 错误"></a>400 错误</h3><p>今天早上发现APP主会场反复切换页面10次 出现400错误。经过排查是请求链接后面反复追加了很多遍参数问题 导致header 过大 造成400 错误 。下面是一些常见可能造成400错误的情况。</p>
-<p>nginx的400错误比较难查找原因，因为此错误并不是每次都会出现的，另外，出现错误的时候，通常在浏览器和日志里看不到任何有关提示。</p>
-<p>经长时间观察和大量试验查明，此乃request header过大所引起，request过大，通常是由于cookie中写入了较大的值所引起。</p>
-<p>所幸在nginx中是有办法解决这个问题：</p>
-<p>在nginx.conf中，将client_header_buffer_size和large_client_header_buffers都调大，可缓解此问题。</p>
-<p>其中主要配置是client_header_buffer_size这一项，默认是1k，所以header小于1k的话是不会出现问题的。</p>
-<p>按我现在配置是：</p>
-<p>client_header_buffer_size 16k;<br>large_client_header_buffers 4 64k;</p>
-<p>这个配置可接收16k以下的header，在浏览器中cookie的字节数上限会非常大，所以实在是不好去使用那最大值。</p>
-<p>最好的解决办法当然是不要往cookie里写入太多的东西，不过如果是一个很大的网站，那么在一个二级域名写入了顶级域名下的cookie似乎是不好控制的，这需要制定一个规范来控制顶级域名的cookie写入量才可以解决得了。</p>
-<p>这个可能也是nginx的一个bug，因为buffer这个词义上说为缓冲，也就是说，如果没取完的话，是会循环取直至取完的，但是nginx并没有进行循环的动作直接返回了400错误。nginx的下一个版本可能会修正这个问题。</p>
-<hr>
-<p>最近发现16k的buffer居然还是不够用，改成128k了，变态一点对nginx来说也不是很大问题，重要是人不能因为这种事情搞疯了</p>
-<hr>
-<p>有朋友发现nginx在后台接收到很大的header时也会出现400错误，如：</p>
-<p>2008/08/02 22:51:14 [error] 16613#0: *105 upstream sent too big header while reading response header from upstream, client: 。。。。。。。。。。。。。</p>
-<p>在nginx的wiki里找了一遍，没有找到合适的语句，wiki更新过慢？于是查了一遍源码，在ngx_http_proxy_module.c也没有找到合适的语句。</p>
-<p>不过在nginx 0.3.12版的更新里有这么一句话：</p>
-<p>*) Change: the “proxy_header_buffer_size” and</p>
-<p>   “fastcgi_header_buffer_size” directives was renamed to the</p>
-<p>   “proxy_buffer_size” and “fastcgi_buffer_size” directives.</p>
-<p>不清楚作者改名用意何在，不过，proxy_buffer_size之前的名字proxy_header_buffer_size倒是有点合适，如果有朋友老遇到后台接收时抛出400错误，可以增大这个参数一试。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>问题大致就是出现在header过大 。需要进来规避此种情况</p>
+            <h2 id="RN之组件点击事件处理"><a href="#RN之组件点击事件处理" class="headerlink" title="RN之组件点击事件处理"></a>RN之组件点击事件处理</h2><p>我们来看下ReactNative提供的可触摸组件。<br>分别为:TouchableHighlight、TouchableNativeFeedback、TouchableOpacity、TouchableWithoutFeedback。<br>TouchableWithoutFeedback控件是触摸点击不带反馈效果的，另外三个都是有反馈效果。这三个组件都继承了所有TouchableWithoutFeedback的属性。</p>
+<p>1、TouchableWithoutFeedback<br>官网解释：<br>除非你有一个很好的理由，否则不要用这个组件。所有能够响应触屏操作的元素在触屏后都应该有一个视觉上的反馈（然而本组件没有任何视觉反馈）。这也是为什么一个”web”应用总是显得不够”原生”的主要原因之一。<br>注意：TouchableWithoutFeedback只支持一个子节点，如果你希望包含多个子组件，用一个View来包装它们。</p>
+<p>属性<br>accessible bool </p>
+<p>delayLongPress number<br>单位是毫秒，从onPressIn开始，到onLongPress被调用的延迟。</p>
+<p>delayPressIn number<br>单位是毫秒，从触摸操作开始到onPressIn被调用的延迟。</p>
+<p>delayPressOut number<br>单位是毫秒，从触摸操作结束开始到onPressOut被调用的延迟。</p>
+<p>disabled bool<br>如果设为true，则禁止此组件的一切交互。</p>
+<p>hitSlop {top: number, left: number, bottom: number, right: number}<br>这一属性定义了按钮的外延范围。这一范围也会使pressRetentionOffset（见下文）变得更大。 注意：触摸范围不会超过父视图的边界，也不会影响原先和本组件层叠的视图（保留原先的触摸优先级）。</p>
+<p>onLayout function<br>当加载或者布局改变的时候被调用，参数为：{nativeEvent: {layout: {x, y, width, height}}}</p>
+<p>onLongPress function </p>
+<p>onPress function<br>当触摸操作结束时调用，但如果被取消了则不调用（譬如响应者被一个滚动操作取代）</p>
+<p>onPressIn function </p>
+<p>onPressOut function </p>
+<p>pressRetentionOffset {top: number, left: number, bottom: number, right: number}<br>在当前视图不能滚动的前提下指定这个属性，可以决定当手指移开多远距离之后，会不再激活按钮。但如果手指再次移回范围内，按钮会被再次激活。只要视图不能滚动，你可以来回多次这样的操作。确保你传入一个常量来减少内存分配</p>
+<p>2、TouchableHighlight<br>官网的解释：<br>本组件用于封装视图，使其可以正确响应触摸操作。当按下的时候，封装的视图的不透明度会降低，同时会有一个底层的颜色透过而被用户看到，使得视图变暗或变亮。在底层实现上，实际会创建一个新的视图到视图层级中，如果使用的方法不正确，有时候会导致一些不希望出现的视觉效果。譬如没有给视图的backgroundColor显式声明一个不透明的颜色。<br>注意：TouchableHighlight只支持一个子节点，如果你希望包含多个子组件，用一个View来包装它们。</p>
+<p>属性<br>TouchableWithoutFeedback props…<br>译注：这意味着本组件继承了所有TouchableWithoutFeedback的属性。</p>
+<p>activeOpacity number<br>指定封装的视图在被触摸操作激活时以多少不透明度显示（通常在0到1之间）。</p>
+<p>onHideUnderlay function<br>当底层的颜色被隐藏的时候调用。</p>
+<p>onShowUnderlay function<br>当底层的颜色被显示的时候调用。</p>
+<p>style View#style </p>
+<p>underlayColor string<br>有触摸操作时显示出来的底层的颜色。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;TouchableHighlight underlayColor=&apos;#f0f0f0&apos; onPress=&#123;this.openIM.bind(this)&#125; style=&#123;styles.userIMImageView&#125;&gt;  </div><div class="line">      &lt;Image source=&#123;&#123;uri:&apos;im&apos;&#125;&#125; style=&#123;styles.userIMImage&#125;/&gt;  </div><div class="line">&lt;/TouchableHighlight&gt;</div></pre></td></tr></table></figure>
+<p>这个很简单的例子，就是一个图片，点击后背景色变为：#f0f0f0</p>
+<p>3、TouchableOpacity<br>官网解释：<br>本组件用于封装视图，使其可以正确响应触摸操作。当按下的时候，封装的视图的不透明度会降低。这个过程并不会真正改变视图层级，大部分情况下很容易添加到应用中而不会带来一些奇怪的副作用。（译注：此组件与TouchableHighlight的区别在于并没有额外的颜色变化，更适于一般场景）。<br>属性<br>TouchableWithoutFeedback props…<br>译注：这意味着本组件继承了所有TouchableWithoutFeedback的属性。</p>
+<p>activeOpacity number<br>指定封装的视图在被触摸操作激活时以多少不透明度显示（通常在0到1之间）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;TouchableOpacity  </div><div class="line">    style=&#123;styles.saveView&#125;  </div><div class="line">    onPress=&#123;this.refuse.bind(this)&#125;  </div><div class="line">    activeOpacity=&#123;0.7&#125;  &gt;  </div><div class="line">    &lt;Text style=&#123;styles.saveText&#125;&gt;  </div><div class="line">       拒单  </div><div class="line">    &lt;/Text&gt;  </div><div class="line">&lt;/TouchableOpacity&gt;</div></pre></td></tr></table></figure>
+<p>上面这边代码实现的效果是：按钮点击后，不透明度为0.7<br>1、将TouchableOpacity组件当成一个View组件，子组件为Text，封装成一个Button<br>2、当按钮被点击时，不透明度activeOpacity设置为0.7</p>
+<p>需要注意的是TouchableHighlight和TouchableHighlight只有设置onPress方法后，对应的背景色和透明度才有效。</p>
+<p>4、TouchableNativeFeedback<br>官网解释：<br>本组件用于封装视图，使其可以正确响应触摸操作（仅限Android平台）</p>
 
           
         
@@ -525,7 +558,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/31/gem出错/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/RN父组件与子组件之间通信/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -550,8 +583,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/31/gem出错/" itemprop="url">
-                  gem出错
+                <a class="post-title-link" href="/2017/03/22/RN父组件与子组件之间通信/" itemprop="url">
+                  RN父组件与子组件之间通信
                 </a>
               
             
@@ -565,8 +598,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-31T18:11:00+08:00">
-                2016-10-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T18:22:01+08:00">
+                2017-03-22
               </time>
             
 
@@ -581,8 +614,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/10/31/gem出错/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/31/gem出错/" itemprop="commentCount"></span>
+                <a href="/2017/03/22/RN父组件与子组件之间通信/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/RN父组件与子组件之间通信/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -610,14 +643,11 @@
       
         
           
-            <h3 id="mac安装cocoapods"><a href="#mac安装cocoapods" class="headerlink" title="mac安装cocoapods"></a>mac安装cocoapods</h3><p>先把本机ruby 环境进行了系统升级 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem update —system</div></pre></td></tr></table></figure>
-<p>顺利完成升级后<br>再安装cocoapods</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install cocoapods</div></pre></td></tr></table></figure>
-<p>出现错误：<br>ERROR:  While executing gem … (Errno::EPERM)<br>    Operation not permitted - /usr/bin/xcodeproj</p>
-<p>大致搜索了下 。都说是ruby版本低之类的，可以查看ruby版本 确认已经更新完成。<br>最后在 cocoapods github主页找到了相关问题 ：<br><a href="">https://github.com/CocoaPods/CocoaPods/issues/3680</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install -n /usr/local/bin cocoapods</div></pre></td></tr></table></figure>
-<p>解决问题！</p>
+            <h2 id="RN父组件与子组件之间通信"><a href="#RN父组件与子组件之间通信" class="headerlink" title="RN父组件与子组件之间通信"></a>RN父组件与子组件之间通信</h2><p>在开发中 我们经常会用到组件的复用。这样我们势必要用到如何在父组件中更新或者调用子组件的状态。</p>
+<p>以一个dialog 组件例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Dialog ref=&quot;dialog&quot; callback=&#123;this.callback.bind(this)&#125;/&gt;</div></pre></td></tr></table></figure>
+<p>自定义回调方法callback，处理选中逻辑<br>注意了 这里有一个ref参数 参数值将决定你后面如何在父组件中怎么调用Dialog 里面的方法<br>调用dialog 的 show方法 显示组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">this.refs.dialog.show(&quot;确定要取消订单吗&quot;);</div></pre></td></tr></table></figure>
 
           
         
@@ -656,7 +686,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/Swift创建导航控制器/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/RN布局之FlexBox/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -681,8 +711,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/25/Swift创建导航控制器/" itemprop="url">
-                  Swift创建导航控制器
+                <a class="post-title-link" href="/2017/03/22/RN布局之FlexBox/" itemprop="url">
+                  RN布局之FlexBox
                 </a>
               
             
@@ -696,8 +726,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-25T11:41:51+08:00">
-                2016-10-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T17:59:48+08:00">
+                2017-03-22
               </time>
             
 
@@ -712,8 +742,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/10/25/Swift创建导航控制器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/25/Swift创建导航控制器/" itemprop="commentCount"></span>
+                <a href="/2017/03/22/RN布局之FlexBox/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/RN布局之FlexBox/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -741,7 +771,9 @@
       
         
           
-            <h3 id="Swift创建导航控制器"><a href="#Swift创建导航控制器" class="headerlink" title="Swift创建导航控制器"></a>Swift创建导航控制器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 导航按钮文字颜色 字体大小</div><div class="line">let attributes =  [NSForegroundColorAttributeName: UIColor.gray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line">let attributesPressed =  [NSForegroundColorAttributeName: UIColor.darkGray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line"></div><div class="line">// 首页</div><div class="line">// 第一步 获取ViewController 控制器，并且创建一个 导航控制器用来承载ViewController</div><div class="line">let mHomeViewController = UIStoryboard(name: &quot;HomePage&quot;, bundle: nil).instantiateViewController(withIdentifier: &quot;HomePage&quot;) as! HomePageViewController</div><div class="line">let mHomeNavController = UINavigationController(rootViewController: mHomeViewController)</div><div class="line">// 第二步 创建一个导航item 并且设置导航按钮的点击icon切换 设置字体颜色 和大小</div><div class="line">let mHomeNormalImage = UIImage(named: &quot;main_bottom_category_normal&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeSelectedImage = UIImage(named: &quot;main_bottom_category_hover&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeTabBarItem = UITabBarItem(title: &quot;精选&quot;, image: mHomeNormalImage, selectedImage: mHomeSelectedImage)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributes, for: .normal)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributesPressed, for: .focused)</div><div class="line">// 第三步:将导航item 对象 赋值给导航控制器</div><div class="line">mHomeNavController.tabBarItem = mHomeTabBarItem</div></pre></td></tr></table></figure>
+            <h2 id="RN布局之FlexBox"><a href="#RN布局之FlexBox" class="headerlink" title="RN布局之FlexBox"></a>RN布局之FlexBox</h2><p><a href="http://blog.csdn.net/codetomylaw/article/details/52190636" target="_blank" rel="external">链接地址</a></p>
+<p>综述<br>flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。采用flex布局的元素，称为flex容器（flex Container），简称”容器”。它的所有子元素自动成为容器成员，称为flex项目（flex item），简称”项目”。</p>
+<p><strong>图解非常清楚 适合快速入门 &amp;&amp; 复习总结</strong></p>
 
           
         
@@ -780,7 +812,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/24/swift3-0UITableView使用/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/RN组件之Text和TextInput常用点/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -805,8 +837,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/24/swift3-0UITableView使用/" itemprop="url">
-                  swift3.0UITableView使用
+                <a class="post-title-link" href="/2017/03/22/RN组件之Text和TextInput常用点/" itemprop="url">
+                  RN组件之Text和TextInput常用点
                 </a>
               
             
@@ -820,8 +852,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-24T18:00:34+08:00">
-                2016-10-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T17:40:33+08:00">
+                2017-03-22
               </time>
             
 
@@ -836,8 +868,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/10/24/swift3-0UITableView使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/24/swift3-0UITableView使用/" itemprop="commentCount"></span>
+                <a href="/2017/03/22/RN组件之Text和TextInput常用点/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/RN组件之Text和TextInput常用点/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -865,15 +897,45 @@
       
         
           
-            <h3 id="swift3-0UITableView使用"><a href="#swift3-0UITableView使用" class="headerlink" title="swift3.0UITableView使用"></a>swift3.0UITableView使用</h3><p>这里将采用Sotryboard来实现tableview的使用。代码地址:<a href="https://github.com/DavikChen/Swift3.0_tabBarController" target="_blank" rel="external"></a></p>
-<p>这里是在之前tabBarController demo 的基础上继续开发。我们将往首页的ViewController 里面添加一个tableView，</p>
-<p>第一步: Storyboard 拖拽一个TableView 控件进入，并且准备假数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@IBOutlet weak var mTableList: UITableView!</div><div class="line">var items: [String] = [&quot;We&quot;, &quot;Heart&quot;, &quot;Swift&quot;]</div></pre></td></tr></table></figure>
-<p>第二步: 实现 UITableViewDelegate, UITableViewDataSource。Swift3.0版本较之前相关代理函数有些变化.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int&#123;</div><div class="line">        return self.items.count;</div><div class="line">    &#125;</div><div class="line">func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell &#123;</div><div class="line">let cell:UITableViewCell = mTableList.dequeueReusableCell(withIdentifier: &quot;cell&quot;)! as UITableViewCell</div><div class="line">        </div><div class="line">        cell.textLabel?.text = self.items[indexPath.row]</div><div class="line">        </div><div class="line">        return cell</div><div class="line">    &#125;</div><div class="line">   </div><div class="line">    </div><div class="line">func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) &#123;</div><div class="line">        mTableList?.deselectRow(at: indexPath, animated: true)</div><div class="line">        print(&quot;点击了item=\(indexPath.row)&quot;)</div><div class="line">      </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>第三步: TableView 加载数据实现协议</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">override func viewDidLoad() &#123;</div><div class="line">    mTableList.register(UITableViewCell.self, forCellReuseIdentifier: &quot;cell&quot;)</div><div class="line">    mTableList.dataSource = self</div><div class="line">    mTableList.delegate = self;</div><div class="line">        </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>效果图:<br><img src="https://github.com/DavikChen/DavikChen.github.io/blob/master/img/homepage.png?raw=true" alt=""></p>
+            <h2 id="Text组件"><a href="#Text组件" class="headerlink" title="Text组件"></a>Text组件</h2><p>1、在使用Text的过程中，实现文本垂直居中、水平居中的效果（iOS和Android通用）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;View  style=&#123;styles.textView&#125;&gt;  </div><div class="line">    &lt;Text style=&#123;styles.text&#125;&gt; 水平垂直居中&lt;/Text&gt;  </div><div class="line">&lt;/View&gt;  </div><div class="line">  </div><div class="line">textView:&#123;  </div><div class="line">  flexDirection:&apos;column&apos;,  </div><div class="line">  justifyContent:&apos;center&apos;,  </div><div class="line">  alignItems:&apos;center&apos;,  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">text:&#123;  </div><div class="line">    fontSize:12,  </div><div class="line">    color:&apos;#f2f2f2&apos;,  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>尽量用view去包裹一层Text组件，text组件只负责基础的文字样式，View组件负责对齐方式等。</p>
+<p>2、在Android平台上，Text组件里使用paddingLeft 属性，不好使，直接顶着View了。<br>      解决方式：1）将paddingLeft放在View属性上<br>                        2）将paddingLeft修改为marginLeft<br>      建议使用第一种方案修改，把对齐方式交给view去处理，Text只负责文本属性的显示。</p>
+<h2 id="TextInput组件"><a href="#TextInput组件" class="headerlink" title="TextInput组件"></a>TextInput组件</h2><p>####TextInput属性：</p>
+<p>autoCapitalize enum(‘none’, ‘sentences’, ‘words’, ‘characters’)<br>控制TextInput是否要自动将特定字符切换为大写：<br>characters: 所有的字符。<br>words: 每个单词的第一个字符。<br>sentences: 每句话的第一个字符（默认）。<br>none: 不自动切换任何字符为大写。</p>
+<p>autoCorrect bool<br>如果为false，会关闭拼写自动修正。默认值是true。</p>
+<p>autoFocus bool<br>如果为true，在componentDidMount后会获得焦点。默认值为false。</p>
+<p>blurOnSubmit bool<br>如果为true，文本框会在提交的时候失焦。对于单行输入框默认值为true，多行则为false。注意：对于多行输入框来说，如果将blurOnSubmit设为true，则在按下回车键时就会失去焦点同时触发onSubmitEditing事件，而不会换行。</p>
+<p>defaultValue string<br>提供一个文本框中的初始值。当用户开始输入的时候，值就可以改变。在一些简单的使用情形下，如果你不想用监听消息然后更新value属性的方法来保持属性和状态同步的时候，就可以用defaultValue来代替。</p>
+<p>editable bool<br>如果为false，文本框是不可编辑的。默认值为true。</p>
+<p>keyboardType enum(“default”, ‘numeric’, ‘email-address’, “ascii-capable”, ‘numbers-and-punctuation’, ‘url’, ‘number-pad’, ‘phone-pad’, ‘name-phone-pad’, ‘decimal-pad’, ‘twitter’, ‘web-search’)<br>决定弹出的何种软键盘的，譬如numeric（纯数字键盘）。这些值在所有平台都可用：<br>default<br>numeric<br>email-address</p>
+<p>maxLength number<br>限制文本框中最多的字符数。使用这个属性而不用JS逻辑去实现，可以避免闪烁的现象。</p>
+<p>multiline bool<br>如果为true，文本框中可以输入多行文字。默认值为false。</p>
+<p>onBlur function<br>当文本框失去焦点的时候调用此回调函数。</p>
+<p>onChange function<br>当文本框内容变化时调用此回调函数。</p>
+<p>onChangeText function<br>当文本框内容变化时调用此回调函数。改变后的文字内容会作为参数传递。</p>
+<p>onEndEditing function<br>当文本输入结束后调用此回调函数。</p>
+<p>onFocus function<br>当文本框获得焦点的时候调用此回调函数。</p>
+<p>onLayout function<br>当组件挂载或者布局变化的时候调用，参数为{x, y, width, height}。</p>
+<p>onSubmitEditing function<br>此回调函数当软键盘的确定/提交按钮被按下的时候调用此函数。如果multiline={true}，此属性不可用。</p>
+<p>placeholder string<br>如果没有任何文字输入，会显示此字符串。</p>
+<p>placeholderTextColor string<br>占位字符串显示的文字颜色。</p>
+<p>secureTextEntry bool<br>如果为true，文本框会遮住之前输入的文字，这样类似密码之类的敏感文字可以更加安全。默认值为false。</p>
+<p>selectTextOnFocus bool<br>如果为true，当获得焦点的时候，所有的文字都会被选中。</p>
+<p>selectionColor string<br>设置输入框高亮时的颜色（在iOS上还包括光标）</p>
+<p>style Text#style<br>译注：这意味着本组件继承了所有Text的样式。</p>
+<p>value string<br>文本框中的文字内容。<br>TextInput是一个受约束的(Controlled)的组件，意味着如果提供了value属性，原生值会被强制与value属性保持一致。在大部分情况下这都工作的很好，不过有些情况下会导致一些闪烁现象——一个常见的原因就是通过不改变value来阻止用户进行编辑。如果你希望阻止用户输入，可以考虑设置editable={false}；如果你是希望限制输入的长度，可以考虑设置maxLength属性，这两个属性都不会导致闪烁。</p>
+<p>ios   clearButtonMode enum(‘never’, ‘while-editing’, ‘unless-editing’, ‘always’)<br>是否要在文本框右侧显示“清除”按钮。</p>
+<p>ios    clearTextOnFocus bool<br>如果为true，每次开始输入的时候都会清除文本框的内容。</p>
+<p>ios    enablesReturnKeyAutomatically bool<br>如果为true，键盘会在文本框内没有文字的时候禁用确认按钮。默认值为false。</p>
+<p>ios    keyboardAppearance enum(‘default’, ‘light’, ‘dark’)<br>指定键盘的颜色。</p>
+<p>ios   onKeyPress function<br>当一个键被按下的时候调用此回调。被按下的键会作为参数传递给回调函数。会在onChange之前调用。</p>
+<p>ios    returnKeyType enum(‘default’, ‘go’, ‘google’, ‘join’, ‘next’, ‘route’, ‘search’, ‘send’, ‘yahoo’, ‘done’, ‘emergency-call’)<br>决定“确定”按钮显示的内容。</p>
+<p>ios    selectionState DocumentSelectionState<br>参见DocumentSelectionState.js，可以控制一个文档中哪段文字被选中的状态。</p>
+<p>android  numberOfLines number<br>设置输入框的行数。当multiline设置为true时使用它，可以占据对应的行数。</p>
+<p>android  underlineColorAndroid string<br>文本框的下划线颜色(译注：如果要去掉文本框的边框，请将此属性设为透明transparent)。</p>
+<p>注意点：<br>1、在使用TextInput的过程中，在Android平台下，输入框下有个横线，此时需要将属性underlineColorAndroid  设置为transparent来解决。</p>
+<p>2、常用的TextInput是作为文本域，譬如最多输入50个字符。<br>      此时需要设置   multiline ={true}<br>                   maxLength ={50}</p>
 
           
         
@@ -912,7 +974,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/21/iOS视图控制对象的生命周期/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/Navigator语法介绍及经典应用/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -937,8 +999,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/21/iOS视图控制对象的生命周期/" itemprop="url">
-                  iOS视图控制对象的生命周期
+                <a class="post-title-link" href="/2017/03/22/Navigator语法介绍及经典应用/" itemprop="url">
+                  Navigator语法介绍及经典应用
                 </a>
               
             
@@ -952,8 +1014,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-21T15:23:41+08:00">
-                2016-10-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T16:22:01+08:00">
+                2017-03-22
               </time>
             
 
@@ -968,8 +1030,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/10/21/iOS视图控制对象的生命周期/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/iOS视图控制对象的生命周期/" itemprop="commentCount"></span>
+                <a href="/2017/03/22/Navigator语法介绍及经典应用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/Navigator语法介绍及经典应用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -997,14 +1059,23 @@
       
         
           
-            <h3 id="iOS视图控制对象的生命周期"><a href="#iOS视图控制对象的生命周期" class="headerlink" title="iOS视图控制对象的生命周期"></a>iOS视图控制对象的生命周期</h3><p>init－初始化程序</p>
-<p>viewDidLoad－加载视图</p>
-<p>viewWillAppear－UIViewController对象的视图即将加入窗口时调用；</p>
-<p>viewDidApper－UIViewController对象的视图已经加入到窗口时调用；</p>
-<p>viewWillDisappear－UIViewController对象的视图即将消失、被覆盖或是隐藏时调用；</p>
-<p>viewDidDisappear－UIViewController对象的视图已经消失、被覆盖或是隐藏时调用；</p>
-<p>viewVillUnload－当内存过低时，需要释放一些不需要使用的视图时，即将释放时调用；</p>
-<p>viewDidUnload－当内存过低，释放一些不需要的视图时调用。</p>
+            <h2 id="Navigator语法介绍及经典应用"><a href="#Navigator语法介绍及经典应用" class="headerlink" title="Navigator语法介绍及经典应用"></a>Navigator语法介绍及经典应用</h2><p>官网说明:<br>使用导航器可以让你在应用的不同场景（页面）间进行切换。导航器通过路由对象来分辨不同的场景。利用renderScene方法，导航栏可以根据指定的路由来渲染场景。  </p>
+<p>可以通过configureScene属性获取指定路由对象的配置信息，从而改变场景的动画或者手势。查看Navigator.SceneConfigs来获取默认的动画和更多的场景配置选项。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>getCurrentRoutes() - 获取当前栈里的路由，也就是push进来，没有pop掉的那些。<br>jumpBack() - 跳回之前的路由，当然前提是保留现在的，还可以再跳回来，会给你保留原样。<br>jumpForward() - 上一个方法不是调到之前的路由了么，用这个跳回来就好了。<br>jumpTo(route) - 跳转到已有的场景并且不卸载。<br>push(route) - 跳转到新的场景，并且将场景入栈，你可以稍后跳转过去<br>pop() - 跳转回去并且卸载掉当前场景<br>replace(route) - 用一个新的路由替换掉当前场景<br>replaceAtIndex(route, index) - 替换掉指定序列的路由场景<br>replacePrevious(route) - 替换掉之前的场景<br>resetTo(route) - 跳转到新的场景，并且重置整个路由栈<br>immediatelyResetRouteStack(routeStack) - 用新的路由数组来重置路由栈<br>popToRoute(route) - pop到路由指定的场景，在整个路由栈中，处于指定场景之后的场景将会被卸载。<br>popToTop() - pop到栈中的第一个场景，卸载掉所有的其他场景。</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>1、configureScene<br>function 可选的函数，用来配置场景动画和手势。会带有两个参数调用，一个是当前的路由，一个是当前的路由栈。然后它应当返回一个场景配置对象<br>(route, routeStack) =&gt; Navigator.SceneConfigs.FloatFromRight</p>
+<p>Navigator.SceneConfigs.PushFromRight (默认)<br>Navigator.SceneConfigs.FloatFromRight<br>Navigator.SceneConfigs.FloatFromLeft<br>Navigator.SceneConfigs.FloatFromBottom<br>Navigator.SceneConfigs.FloatFromBottomAndroid<br>Navigator.SceneConfigs.FadeAndroid<br>Navigator.SceneConfigs.HorizontalSwipeJump<br>Navigator.SceneConfigs.HorizontalSwipeJumpFromRight<br>Navigator.SceneConfigs.VerticalUpSwipeJump<br>Navigator.SceneConfigs.VerticalDownSwipeJump</p>
+<p>2、renderScene<br>function 必要参数。用来渲染指定路由的场景。调用的参数是路由和导航器。</p>
+<p>(route, navigator) =&gt; <myscenecomponent title="{route.title}" navigator="{navigator}"></myscenecomponent></p>
+<p>3、initialRoute<br>object </p>
+<p>定义启动时加载的路由。路由是导航栏用来识别渲染场景的一个对象。</p>
+<p>其实，做过Android开发的是不是很熟悉，startActivityForResult    </p>
+<p>那么我们看看RN怎么实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">render() &#123;  </div><div class="line">  let defaultName = &apos;FormManager&apos;;  </div><div class="line">  let defaultComponent = FormManager;  </div><div class="line">  return (  </div><div class="line">    &lt;Navigator  </div><div class="line">      initialRoute=&#123;&#123; name: defaultName, component: defaultComponent &#125;&#125;  </div><div class="line">      configureScene=&#123;(route) =&gt; &#123;  </div><div class="line">        if (route.sceneConfig) &#123;  </div><div class="line">          return route.sceneConfig;  </div><div class="line">        &#125;  </div><div class="line">        return Navigator.SceneConfigs.HorizontalSwipeJump;  </div><div class="line">      &#125;&#125;  </div><div class="line">      renderScene=&#123;(route, navigator) =&gt; &#123;  </div><div class="line">        let Component = route.component;  </div><div class="line">        return &lt;Component &#123;...route.params&#125; navigator=&#123;navigator&#125; /&gt;  </div><div class="line">      &#125;&#125;  </div><div class="line">    /&gt;  </div><div class="line">  );  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的代码：<br>我们通过initialRoute初始化了一个Route，定义了初始化的Component。<br>设置了切换的动画效果：Navigator.SceneConfigs.HorizontalSwipeJump<br>指定路由和导航器，注意一定要有navigator={navigator} ，将导航器传递。</p>
+<h3 id="跳转页面"><a href="#跳转页面" class="headerlink" title="跳转页面"></a>跳转页面</h3><p>在FormManager这个Component中，譬如我们点击字段1，调用onPress方法，跳转到选项页面，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">choose()&#123;  </div><div class="line">  const self=this;  </div><div class="line">  const &#123; navigator &#125; = this.props;  </div><div class="line">  if(navigator) &#123;  </div><div class="line">      var route =&#123;  </div><div class="line">          name: &apos;ChooseItemComponent&apos;,  </div><div class="line">          component: ChooseItemComponent,  </div><div class="line">          params:&#123;  </div><div class="line">              title:&quot;选择页面&quot;,  </div><div class="line">              selectedItem:self.state.city,  </div><div class="line">              originList:cityList,  </div><div class="line">              getSelectedItem: function(selectedItem) &#123;  </div><div class="line">                InteractionManager.runAfterInteractions(() =&gt; &#123;  </div><div class="line">                  self.setState(&#123;  </div><div class="line">                      city: cityList[selectedItem],  </div><div class="line">                  &#125;)  </div><div class="line">                &#125;);  </div><div class="line">              &#125;  </div><div class="line">          &#125;,  </div><div class="line">          sceneConfig:Navigator.SceneConfigs.VerticalUpSwipeJump,  </div><div class="line">      &#125;;  </div><div class="line">      navigator.push(route);  </div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="返回-并传值给上个页面"><a href="#返回-并传值给上个页面" class="headerlink" title="返回 并传值给上个页面"></a>返回 并传值给上个页面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">chooseItem(i)&#123;  </div><div class="line">  var  self = this ;  </div><div class="line">  InteractionManager.runAfterInteractions(() =&gt; &#123;  </div><div class="line">    self.setState(&#123;  </div><div class="line">        selectedItem:i,  </div><div class="line">    &#125;)  </div><div class="line">  &#125;);  </div><div class="line">  const &#123; navigator &#125; = this.props;  </div><div class="line">  // 这里通过判断props 中对应的方法是否存在 如果存在调用上个页面传过来的方法 实现回传值的功能</div><div class="line">  if(this.props.getSelectedItem)&#123;  </div><div class="line">    this.props.getSelectedItem(i);  </div><div class="line">  &#125;  </div><div class="line">  setTimeout(function()&#123;  </div><div class="line">    if(navigator) &#123;  </div><div class="line">        navigator.pop();  </div><div class="line">    &#125;  </div><div class="line">  &#125; ,500);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里我们做了以下几件事：<br>1、修改本页面的状态机变量，通常表现为，选中某项后，显示一个对勾图片。（用户体验）<br>2、从props中获取Navigator，调用回调方法getSelectedItem，将值回传给parent。<br>3、pop掉本页面</p>
 
           
         
@@ -1043,7 +1114,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/21/xcode8使用Github提交代码/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/RN与native交互之Callback、Promise/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -1068,8 +1139,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/21/xcode8使用Github提交代码/" itemprop="url">
-                  xcode8使用Github提交代码
+                <a class="post-title-link" href="/2017/03/22/RN与native交互之Callback、Promise/" itemprop="url">
+                  RN与native交互之Callback、Promise
                 </a>
               
             
@@ -1083,8 +1154,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-21T14:45:07+08:00">
-                2016-10-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T14:56:34+08:00">
+                2017-03-22
               </time>
             
 
@@ -1099,8 +1170,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/10/21/xcode8使用Github提交代码/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/xcode8使用Github提交代码/" itemprop="commentCount"></span>
+                <a href="/2017/03/22/RN与native交互之Callback、Promise/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/RN与native交互之Callback、Promise/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1128,262 +1199,18 @@
       
         
           
-            <h3 id="xcode8使用Github提交代码"><a href="#xcode8使用Github提交代码" class="headerlink" title="xcode8使用Github提交代码"></a>xcode8使用Github提交代码</h3>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/21/通过协议完成页面之间代理传值/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/21/通过协议完成页面之间代理传值/" itemprop="url">
-                  通过协议完成页面之间代理传值
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-21T12:48:53+08:00">
-                2016-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/10/21/通过协议完成页面之间代理传值/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/通过协议完成页面之间代理传值/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="通过协议完成页面之间代理传值"><a href="#通过协议完成页面之间代理传值" class="headerlink" title="通过协议完成页面之间代理传值"></a>通过协议完成页面之间代理传值</h3>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/21/Storyboard和UIViewController的结合/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/21/Storyboard和UIViewController的结合/" itemprop="url">
-                  Storyboard和UIViewController的结合
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-21T11:45:08+08:00">
-                2016-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/10/21/Storyboard和UIViewController的结合/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/Storyboard和UIViewController的结合/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Storyboard和UIViewController的结合"><a href="#Storyboard和UIViewController的结合" class="headerlink" title="Storyboard和UIViewController的结合"></a>Storyboard和UIViewController的结合</h3><h4 id="StoryBoard-的本质"><a href="#StoryBoard-的本质" class="headerlink" title="StoryBoard 的本质"></a>StoryBoard 的本质</h4><p>StoryBoard 是苹果在 iOS 5 中引入的新技术方案，目的是给纷繁复杂的 nib、xib 们一个温暖的家，让他们之间的关系更直观地展示出来，并提供了一种新的页面间跳转方式 segue。</p>
-<p>StoryBoard 的本质是一个 XML 文件，描述了若干窗体、组件、Auto Layout 约束等关键信息</p>
-<p>使用 StoryBoard 的 iOS 项目均以初始化 StoryBoard 文件作为整个程序的初始化入口，UIViewController 类是由于被 StoryBoard 绑定而初始化，从而开始运行的</p>
-<p>相比较Android而言 StoryBoard好比就是页面的layout xml 布局文件。</p>
-<p>应用主StoryBoard入口：<br><img src="https://github.com/DavikChen/DavikChen.github.io/blob/master/img/应用主入口.png?raw=true" alt=""></p>
-<h4 id="多-StoryBoard-如何使用呢？"><a href="#多-StoryBoard-如何使用呢？" class="headerlink" title="多 StoryBoard 如何使用呢？"></a>多 StoryBoard 如何使用呢？</h4><p>如果我们每个页面 都对应一个StoryBoard文件,此时存在2种方法来进行处理<br>首先创建一个StoryBoard 文件：<br><img src="https://github.com/DavikChen/DavikChen.github.io/blob/master/img/创建sb.png?raw=true" alt=""><br>给 刚才创建的 storyboard 拖入一个 View Controller:<br><img src="https://github.com/DavikChen/DavikChen.github.io/blob/master/img/ViewControll拖拽.png?raw=true" alt=""><br>此时我们的storyboard 还没有和View Controller 进行关联处理,有2种操作可以进行关联<br>1.设置为该 StoryBoard 的初始窗体<br>  <img src="https://github.com/DavikChen/DavikChen.github.io/blob/master/img/init_窗体.png?raw=true" alt=""><br>2.给该窗体设置一个 StoryBoard ID:<br>  <img src="https://github.com/DavikChen/DavikChen.github.io/blob/master/img/swift_sb_id.png?raw=true" alt=""><br>接下来 我们就可以通过StoryBoard拖拽UI控件 进行UI开发 。</p>
-<p>针对弹出页面 对应不同的设置 有不同的操作方法：<br>作为初始窗体:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let mSearchPage UIStoryboard(name: &quot;SearchPage&quot;, bundle: nil).instantiateInitialViewController() as ! SearchPageController</div></pre></td></tr></table></figure>
-<p>设置了 StoryBoard ID:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let mSearchPage = UIStoryboard(name: &quot;SearchPage&quot;, bundle: </div><div class="line">nil).instantiateViewController(withIdentifier: &quot;SearchPage&quot;) as! </div><div class="line">SearchPageController</div><div class="line">self.navigationController?.pushViewController(mSearchPage, animated: true)</div></pre></td></tr></table></figure>
+            <h2 id="RN与native交互之Callback、Promise"><a href="#RN与native交互之Callback、Promise" class="headerlink" title="RN与native交互之Callback、Promise"></a>RN与native交互之Callback、Promise</h2><p>一、Callback机制<br>首先Calllback是异步的，RN端调用Native端，Native会callback，但是时机是不确定的，如果多次调用的话，会存在问题。<br>Naive端是无法主动通过回调函数向RN端发送消息的。<br>具体实现代码如下：<br>Native端暴露好接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@ReactMethod  </div><div class="line">public void measureLayout(Callback errorCallback,Callback successCallback)&#123;  </div><div class="line">    try &#123;  </div><div class="line">        successCallback.invoke(100, 100, 200, 200);//调用回调函数，返回结果  </div><div class="line">    &#125; catch (IllegalViewOperationException e) &#123;  </div><div class="line">        errorCallback.invoke(e.getMessage());  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在RN端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;Text style=&#123;&#123; fontSize: 25 &#125;&#125; onPress=&#123;this.CallAndroid_callback&#125; &gt;调用原生方法_使用_回调函数</div><div class="line">&lt;/Text&gt;  </div><div class="line">  CallAndroid_callback = () =&gt; &#123;  </div><div class="line">    NativeModules.MyNativeModule.measureLayout((msg) =&gt; &#123;  </div><div class="line">        console.log(msg);  </div><div class="line">      &#125;,(x, y, width, height) =&gt; &#123;  </div><div class="line">        console.log(x + &apos;坐标,&apos; + y + &apos;坐标,&apos; + width + &apos;宽,&apos; + height + &apos;高&apos;);  </div><div class="line">      &#125;  </div><div class="line">    );  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>二、promise机制<br>Promise 的状态<br>一个 Promise 的当前状态必须为以下三种状态中的一种：等待态（Pending）、完成态（Fulfilled）和拒绝态（Rejected）。<br>等待态（Pending）<br>处于等待态时，promise 需满足以下条件：</p>
+<p>可以迁移至完成态或拒绝态</p>
+<p>完成态（Fulfilled）<br>处于完成态时，promise 需满足以下条件：<br>不能迁移至其他任何状态<br>必须拥有一个不可变的终值<br>拒绝态（Rejected）<br>处于拒绝态时，promise 需满足以下条件：</p>
+<p>不能迁移至其他任何状态<br>必须拥有一个不可变的据因</p>
+<p>在Native侧，暴露接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@ReactMethod  </div><div class="line">public void rnCallNative_promise(String msg, Promise promise) &#123;  </div><div class="line">  </div><div class="line">    try &#123;  </div><div class="line">        //业务逻辑处理  </div><div class="line">        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();  </div><div class="line">        String componentName = getCurrentActivity().getComponentName().toString();  </div><div class="line">        promise.resolve(componentName);  </div><div class="line">    &#125;catch (Exception e)&#123;  </div><div class="line">        promise.reject(&quot;100&quot;,e.getMessage());//promise 失败  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在RN侧：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;Text style=&#123;&#123; fontSize: 25 &#125;&#125; onPress=&#123;this.CallAndroid_promise&#125; &gt;调用原生方法_使用_Promise</div><div class="line">&lt;/Text&gt;  </div><div class="line">  </div><div class="line">  CallAndroid_promise = () =&gt; &#123;  </div><div class="line">    NativeModules.MyNativeModule.rnCallNative_promise(&apos;参数1&apos;,&apos;参数2&apos;).then(  </div><div class="line">      (msg) =&gt; &#123;  </div><div class="line">        console.log(&apos;promise成功：&apos;+msg);  </div><div class="line">      &#125;  </div><div class="line">    ).catch(  </div><div class="line">      (err) =&gt; &#123;  </div><div class="line">        console.log(err);  </div><div class="line">      &#125;  </div><div class="line">      );  </div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
           
         
@@ -1422,7 +1249,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/23/Swift函数/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/08/ReactNative-Text的属性和样式/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -1447,8 +1274,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/23/Swift函数/" itemprop="url">
-                  Swift函数
+                <a class="post-title-link" href="/2017/03/08/ReactNative-Text的属性和样式/" itemprop="url">
+                  ReactNative_Text的属性和样式
                 </a>
               
             
@@ -1462,8 +1289,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-23T15:27:54+08:00">
-                2016-09-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T22:06:27+08:00">
+                2017-03-08
               </time>
             
 
@@ -1478,8 +1305,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/09/23/Swift函数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/23/Swift函数/" itemprop="commentCount"></span>
+                <a href="/2017/03/08/ReactNative-Text的属性和样式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/08/ReactNative-Text的属性和样式/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1507,7 +1334,296 @@
       
         
           
-            <h3 id="Swift函数的定义"><a href="#Swift函数的定义" class="headerlink" title="Swift函数的定义"></a>Swift函数的定义</h3>
+            <h2 id="RN-Text-基础属性-amp-样式"><a href="#RN-Text-基础属性-amp-样式" class="headerlink" title="RN Text 基础属性&amp;样式"></a>RN Text 基础属性&amp;样式</h2><h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li>numberOfLines 文本行数限制，添加后超过限制行数文本会在末尾默认以…的形式省略。</li>
+<li>ellipsizeMode 设置文本缩略格式，配合numberOfLines使用，values：<br>tail：在末尾…省略（默认值）<br>clip：在末尾切割，直接切割字符无省略符<br>head：在前面…省略<br>middle：在中间…省略</li>
+<li>onPress 点击事件</li>
+<li>style 样式</li>
+</ul>
+<h3 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h3><ul>
+<li>color 字体颜色</li>
+<li>fontSize 字体大小</li>
+<li>fontFamily 字体</li>
+<li>fontStyle 字的样式  （normal：正常italic：斜体）</li>
+<li>fontWeight 设置粗体（normal：正常bold：粗体100，200，300， 400， 500， 600， 700， 800， 900）</li>
+<li>lineHeight 行高</li>
+<li>textAlign 文字对其方式（auto：自动对齐left：左对齐right：右对齐center：居中对齐）</li>
+<li>textDecorationLine 下划线和删除线样式（none：无线 underline：下划线line-through：删除线</li>
+<li>underline line-through：下划线和删除线）</li>
+</ul>
+<h2 id="RN-View的属性和样式"><a href="#RN-View的属性和样式" class="headerlink" title="RN View的属性和样式"></a>RN View的属性和样式</h2><h3 id="样式-1"><a href="#样式-1" class="headerlink" title="样式"></a>样式</h3><ul>
+<li>width：宽度</li>
+<li>height：高度</li>
+<li>backgroundColor：背景颜色</li>
+<li>backfaceVisibility：是否显示翻转’visible’，’hidden’</li>
+<li>borderColor：边框颜色</li>
+<li>borderWidth：边框宽度</li>
+<li>borderRadius：边框圆角半径</li>
+<li>borderStyle：边框样式’solid’实线，’dotted’点， ‘dashed’虚线</li>
+<li>borderTopColor：上边框颜色</li>
+<li>borderTopWidth：上边框宽度</li>
+<li>borderTopLeftRadius：左上角边框圆角的半径</li>
+<li>borderTopRightRadius：右上角边框圆角的半径</li>
+<li>overflow：内容超过容器时超出显示还是隐藏’visible’， ‘hidden’</li>
+<li>opacity：透明度</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/03/AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/03/AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法/" itemprop="url">
+                  AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-03T09:56:53+08:00">
+                2017-03-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/03/AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/03/AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法"><a href="#AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法" class="headerlink" title="AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法"></a>AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法</h2><p>AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法</p>
+<p>原来在Eclipse中获取SHA1或者MD5，在IDE界面上就可以查找到。<br>切换到Android Studio后，如何查看呢？找了半天没找到。那就老办法命令行。<br>第一步、打开Android Studio的Tools-&gt;Open Terminal…（新版本已经调整了位置，如下图所示）</p>
+<p>第二步、输入命令：keytool -v -list -keystore <strong><em>.keystore<br>【一定要记得加上 -v 参数，不然只能看到SHA1，没有MD5】【</em></strong>.keystore，需要替换为你自己的密钥所在路径和文件名，也可以直接拷贝到.android目录】</p>
+<p>备注:密钥文件一定要在当前目录，不在的话 自行cd 到指定目录即可</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/02/React-Native延迟加载数据/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/02/React-Native延迟加载数据/" itemprop="url">
+                  React-Native延迟加载数据
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-02T22:01:17+08:00">
+                2017-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/02/React-Native延迟加载数据/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/02/React-Native延迟加载数据/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="React-Native延迟加载数据"><a href="#React-Native延迟加载数据" class="headerlink" title="React-Native延迟加载数据"></a>React-Native延迟加载数据</h2><p>发现在componentDidMount 方法里面执行网络请求，获取数据成功后 更新UI，现象是从A页面跳转到B页面 跳转会存在明显的卡顿现象。</p>
+<p>按照React-Native的生命周期调用规则，在setState之后，RN会依次调用shouldComponentUpdate -&gt; componentWillUpdate -&gt; render -&gt; componentDidUpdate生命周期方法。然而问题就出在state更新后调用render方法时，会停止当前Component进入屏幕时的滚动动画。造成新Component进入画面一半时停住，甚至新Component还没开始进入画面时就停住，等到componentDidUpdate执行完成后才继续向前滚动。严重影响使用体验。</p>
+<p>这个时候我们就需要让这个state更新操作延迟进行。为了实现这个目的，可以使用RN提供的一个工具：InteractionManager<br> 从名称上可以看出，这是一个管理互动操作的工具。其中有一个方法runAfterInteraction（func）。这个方法用来标记参数中传入的方法在所有当前进行的交互和动画完成后再执行。可以理解为将func加入到一个等待队列。</p>
+<p> 我们可以使用这个方法来避免在Component进入画面的动画完成前打断动画的问题。类似于这样：</p>
+<p> componentDidMount() {<br>   InteractionManager.runAfterInteractions(()=&gt;{<br>      this._fetchData();<br>   });<br>}</p>
+<p>这样，在Component进入画面的动画结束后，才会执行拉取数据的操作，这个逻辑才符合我们的预期。</p>
+
           
         
       
@@ -1540,7 +1656,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1581,7 +1697,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1591,7 +1707,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

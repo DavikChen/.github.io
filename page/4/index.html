@@ -249,7 +249,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/11/AndroidWebViewjs失效问题/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/ReactNative实现图片上传功能/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -274,8 +274,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/11/AndroidWebViewjs失效问题/" itemprop="url">
-                  AndroidWebViewjs失效问题
+                <a class="post-title-link" href="/2017/03/24/ReactNative实现图片上传功能/" itemprop="url">
+                  ReactNative实现图片上传功能
                 </a>
               
             
@@ -289,8 +289,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T19:09:22+08:00">
-                2017-01-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-24T17:26:26+08:00">
+                2017-03-24
               </time>
             
 
@@ -305,8 +305,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/01/11/AndroidWebViewjs失效问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/AndroidWebViewjs失效问题/" itemprop="commentCount"></span>
+                <a href="/2017/03/24/ReactNative实现图片上传功能/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/24/ReactNative实现图片上传功能/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -334,10 +334,12 @@
       
         
           
-            <h1 id="Android-WebView-js失效问题"><a href="#Android-WebView-js失效问题" class="headerlink" title="Android WebView js失效问题"></a>Android WebView js失效问题</h1><p>最近遇到一个很诡异的webview问题,当网页出现一次错误后 后面不管是恢复网络还是其他ok的页面 js都会加载不了<br>查了很多资料 没什么结果。<br>最后仔细思考后 看了下代码 在网页错误回调函数中发现调用了 mWebView.resumeTimers(); 方法。</p>
-<p>然后看下API说明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public void pauseTimers ()</div><div class="line"></div><div class="line">Added in API level 1</div><div class="line">Pauses all layout, parsing, and JavaScript timers for all WebViews. This is a global requests, not restricted to just this WebView. This can be useful if the application has been paused.</div></pre></td></tr></table></figure>
-<p>原来这个方法是全局生效的，会导致所有webview的js失效 终于解释了为什么一旦出现一次错误后 后续页面都加载不出来的问题了。</p>
+            <h2 id="ReactNative实现图片上传功能"><a href="#ReactNative实现图片上传功能" class="headerlink" title="ReactNative实现图片上传功能"></a>ReactNative实现图片上传功能</h2><p>我们的项目里需要使用图片上传（用JS 实现图片上传），那我们有没有什么办法呢？<br>通过搜索React-native的github， 会发现里面有这么一篇文章：<a href="https://github.com/facebook/react-native/issues/5308" target="_blank" rel="external">https://github.com/facebook/react-native/issues/5308</a></p>
+<p>解决方案：<br>采用FormData来实现，FormData 的API参考：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FormData" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/API/FormData</a><br>利用FormData对象,你可以使用一系列的键值对来模拟一个完整的表单,然后使用XMLHttpRequest发送这个”表单”.</p>
+<p>那么我们就来看看在RN里怎么做，贴代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">uploadImage()&#123;  </div><div class="line">  let formData = new FormData();  </div><div class="line">  let file = &#123;uri: uri, type: &apos;multipart/form-data&apos;, name: &apos;a.jpg&apos;&#125;;  </div><div class="line">  </div><div class="line">  formData.append(&quot;images&quot;,file);  </div><div class="line">  </div><div class="line">  fetch(url,&#123;  </div><div class="line">    method:&apos;POST&apos;,  </div><div class="line">    headers:&#123;  </div><div class="line">        &apos;Content-Type&apos;:&apos;multipart/form-data&apos;,  </div><div class="line">    &#125;,  </div><div class="line">    body:formData,  </div><div class="line">  &#125;)  </div><div class="line">  .then((response) =&gt; response.text() )  </div><div class="line">  .then((responseData)=&gt;&#123;  </div><div class="line">  </div><div class="line">    console.log(&apos;responseData&apos;,responseData);  </div><div class="line">  &#125;)  </div><div class="line">  .catch((error)=&gt;&#123;console.error(&apos;error&apos;,error)&#125;);  </div><div class="line">  </div><div class="line">&#125; </div><div class="line">``` </div><div class="line"></div><div class="line">1、首先我们new了一个FormData</div><div class="line">2、创建一个file对象，uri是什么？如下示例：</div><div class="line">Android:  file:///storage/emulated/0/Pictures/eb645893-4c00-44a3-a9b4-a2116e955f7c.jpg</div><div class="line">ios:         /Users/ashleydw/Library/Developer/CoreSimulator/Devices/23EE88D0-6E91-43AD-A3B6-06F87698C5A8/data/Containers/Data/Application/A73E68D3-7424-4301-9934-AD0F8251C1EB/tmp/7803DA8A-0E40-4FCB-A593-884805878172.jpg</div><div class="line">3、设置header</div></pre></td></tr></table></figure>
+<p>‘Content-Type’:’multipart/form-data’,<br>```<br>4、将创建好的FormData赋值给body</p>
+<p>这样我们就完成了图片上传的功能。</p>
 
           
         
@@ -376,7 +378,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/11/swift约束之SnapKit的使用一/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/23/RN组件之ListView的shiyong/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -401,8 +403,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/11/swift约束之SnapKit的使用一/" itemprop="url">
-                  swift约束之SnapKit的使用一
+                <a class="post-title-link" href="/2017/03/23/RN组件之ListView的shiyong/" itemprop="url">
+                  RN组件之ListView的使用
                 </a>
               
             
@@ -416,8 +418,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T16:10:01+08:00">
-                2017-01-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T16:08:16+08:00">
+                2017-03-23
               </time>
             
 
@@ -432,8 +434,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/01/11/swift约束之SnapKit的使用一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/swift约束之SnapKit的使用一/" itemprop="commentCount"></span>
+                <a href="/2017/03/23/RN组件之ListView的shiyong/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/23/RN组件之ListView的shiyong/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -461,11 +463,39 @@
       
         
           
-            <h1 id="swift约束之SnapKit的使用一"><a href="#swift约束之SnapKit的使用一" class="headerlink" title="swift约束之SnapKit的使用一"></a>swift约束之SnapKit的使用一</h1><p>SnapKit中的常用属性有：<br>top(上)、left(左)、right(右)、bottom(下)、width(长)、height(宽)、centerX(横向中点)、centerY(纵向中点)</p>
-<h3 id="举个🌰"><a href="#举个🌰" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">view1.snp.makeConstraints &#123; (make) in</div><div class="line">            </div><div class="line">            //距self.view的上边20</div><div class="line">            make.top.equalTo(self.view).offset(20)</div><div class="line">            //距self.view的左边30</div><div class="line">            make.left.equalTo(self.view).offset(30)</div><div class="line">            //距self.view的右边30（右边数字前要加减号,不然会变成超出右边30）</div><div class="line">            make.right.equalTo(self.view).offset(-30)</div><div class="line">            //距self.view的下边50（下边数字前要加减号,不然会变成超出下边50）</div><div class="line">            make.bottom.equalTo(self.view).offset(-50)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-<h3 id="举个🌰-1"><a href="#举个🌰-1" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">view2.snp.makeConstraints &#123; (make) in</div><div class="line">            </div><div class="line">            //距view1的上边50</div><div class="line">            make.top.equalTo(view1).offset(50)</div><div class="line">            //距view1的左边50</div><div class="line">            make.left.equalTo(view1).offset(50)</div><div class="line">            //设置长为100</div><div class="line">            make.width.equalTo(100)</div><div class="line">            //设置高为60</div><div class="line">            make.height.equalTo(60)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-<h3 id="举个🌰-2"><a href="#举个🌰-2" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">view3.snp.makeConstraints &#123; (make) in</div><div class="line">            </div><div class="line">            //横向坐标等于view1</div><div class="line">            make.centerX.equalTo(view1)</div><div class="line">            //纵向坐标等于view1(横和纵都相等就等于对view1居中)</div><div class="line">            make.centerY.equalTo(view1)</div><div class="line">            //长等于view2的2倍</div><div class="line">            make.width.equalTo(view2).multipliedBy(2)</div><div class="line">            //高等于view2的3分之一</div><div class="line">            make.height.equalTo(view2).dividedBy(3)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-<p>以上就是基本的 Snapkit的使用，后续再更新….</p>
+            <h2 id="RN组件之ListView的使用"><a href="#RN组件之ListView的使用" class="headerlink" title="RN组件之ListView的使用"></a>RN组件之ListView的使用</h2><p>ReactNative提供的ListView组件，ListView是我们最常用的组件。<br>还是先来看看官网怎么说的。<br>ListView - 一个核心组件，用于高效地显示一个可以垂直滚动的变化的数据列表。最基本的使用方式就是创建一个ListView.DataSource数据源，然后给它传递一个普通的数据数组，再使用数据源来实例化一个ListView组件，并且定义它的renderRow回调函数，这个函数会接受数组中的每个数据作为参数，返回一个可渲染的组件（作为listview的每一行）。</p>
+<p>ListView还支持一些高级特性，譬如给每段/组(section)数据添加一个带有粘性的头部（类似iPhone的通讯录，其首字母会在滑动过程中吸附在屏幕上方）；在列表头部和尾部增加单独的内容；在到达列表尾部的时候调用回调函数(onEndReached)，还有在视野内可见的数据变化时调用回调函数(onChangeVisibleRows)，以及一些性能方面的优化。</p>
+<p>有一些性能优化使得ListView可以滚动的更加平滑，尤其是在动态加载可能很大（或者概念上无限长的）数据集的时候：<br>只更新变化的行 - 提供给数据源的rowHasChanged函数可以告诉ListView它是否需要重绘一行数据（即：数据是否发生了变化）参见ListViewDataSource<br>限制频率的行渲染 - 默认情况下，每次消息循环只有一行会被渲染（可以用pageSize属性配置）。这把较大的工作分散成小的碎片，以降低因为渲染而导致丢帧的可能性。</p>
+<p>属性<br>ScrollView props…<br>译注：这意味着ListView可以使用所有ScrollView的属性。</p>
+<p>dataSource ListViewDataSource<br>ListView.DataSource实例（列表依赖的数据源）</p>
+<p>initialListSize number<br>指定在组件刚挂载的时候渲染多少行数据。用这个属性来确保首屏显示合适数量的数据，而不是花费太多帧逐步显示出来。</p>
+<p>onChangeVisibleRows function<br>(visibleRows, changedRows) =&gt; void<br>当可见的行的集合变化的时候调用此回调函数。visibleRows 以 { sectionID: { rowID: true }}的格式包含了所有可见行，而changedRows 以{ sectionID: { rowID: true | false }}的格式包含了所有刚刚改变了可见性的行，其中如果值为true表示一个行变得可见，而为false表示行刚刚离开可视区域而变得不可见。</p>
+<p>onEndReached function<br>当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用。原生的滚动事件会被作为参数传递。译注：当第一次渲染时，如果数据不足一屏（比如初始值是空的），这个事件也会被触发。</p>
+<p>onEndReachedThreshold number<br>调用onEndReached之前的临界值，单位是像素。</p>
+<p>pageSize number<br>每次事件循环（每帧）渲染的行数。</p>
+<p>removeClippedSubviews bool<br>用于提升大列表的滚动性能。需要给行容器添加样式overflow:’hidden’。（Android已默认添加此样式）。此属性默认开启。</p>
+<p>renderFooter function<br>() =&gt; renderable<br>页头与页脚会在每次渲染过程中都重新渲染（如果提供了这些属性）。如果它们重绘的性能开销很大，把他们包装到一个StaticContainer或者其它恰当的结构中。页脚会永远在列表的最底部，而页头会在最顶部。</p>
+<p>renderHeader function </p>
+<p>renderRow function<br>(rowData, sectionID, rowID, highlightRow) =&gt; renderable<br>从数据源(Data source)中接受一条数据，以及它和它所在section的ID。返回一个可渲染的组件来为这行数据进行渲染。默认情况下参数中的数据就是放进数据源中的数据本身，不过也可以提供一些转换器。<br>如果某一行正在被高亮（通过调用highlightRow函数），ListView会得到相应的通知。当一行被高亮时，其两侧的分割线会被隐藏。行的高亮状态可以通过调用highlightRow(null)来重置。</p>
+<p>renderScrollComponent function<br>(props) =&gt; renderable<br>指定一个函数，在其中返回一个可以滚动的组件。ListView将会在该组件内部进行渲染。默认情况下会返回一个包含指定属性的ScrollView。</p>
+<p>renderSectionHeader function<br>(sectionData, sectionID) =&gt; renderable<br>如果提供了此函数，会为每个小节(section)渲染一个粘性的标题。<br>粘性是指当它刚出现时，会处在对应小节的内容顶部；继续下滑当它到达屏幕顶端的时候，它会停留在屏幕顶端，一直到对应的位置被下一个小节的标题占据为止。</p>
+<p>renderSeparator function<br>(sectionID, rowID, adjacentRowHighlighted) =&gt; renderable<br>如果提供了此属性，一个可渲染的组件会被渲染在每一行下面，除了小节标题的前面的最后一行。在其上方的小节ID和行ID，以及邻近的行是否被高亮会作为参数传递进来。</p>
+<p>scrollRenderAheadDistance number<br>当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行。</p>
+<p>iOS stickyHeaderIndices [number]<br>一个子视图下标的数组，用于决定哪些成员会在滚动之后固定在屏幕顶端。举个例子，传递stickyHeaderIndices={[0]}会让第一个成员固定在滚动视图顶端。这个属性不能和horizontal={true}一起使用。</p>
+<p>示例：<br>1、在构造函数中我们定义dataSource的rowHasChanged函数，告诉ListView它是否需要重绘一行数据。这个写法很固定！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">constructor(props) &#123;  </div><div class="line">    super(props);  </div><div class="line">    this.state = &#123;  </div><div class="line">        dataSource: new ListView.DataSource(&#123;  </div><div class="line">            rowHasChanged: (r1, r2) =&gt; r1 !== r2,  </div><div class="line">        &#125;),  </div><div class="line">    &#125;;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2、在componentWillMount方法中加载数据（fetch用法可以参照我之前写的文章）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">componentWillMount() &#123;  </div><div class="line">   this._fetchListData(params);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3、在_fetchListData方法获取数据后设置dataSource</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">this.setState(&#123;  </div><div class="line">   dataSource: this.state.dataSource.cloneWithRows(list),  </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>4、在render方法中定义ListView</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;ListView  </div><div class="line">    enableEmptySections=&#123;true&#125;  </div><div class="line">    dataSource=&#123;this.state.dataSource&#125;  </div><div class="line">    renderRow=&#123;this.renderRow.bind(this)&#125;  </div><div class="line">    renderFooter=&#123;this.renderFooter.bind(this)&#125;  </div><div class="line">    renderHeader=&#123;this.rendHeader.bind(this)&#125;  </div><div class="line">    onEndReached=&#123;()=&gt;&#123;console.log(&apos;---&apos;);&#125;&#125;  </div><div class="line">/&gt;</div></pre></td></tr></table></figure>
+<p>5、实现renderRow方法<br>从数据源(Data source)中接受一条数据，以及它和它所在section的ID。返回一个可渲染的组件来为这行数据进行渲染</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> renderRow(rowData, sectionid, rowid) &#123;  </div><div class="line">    return (&lt;View&gt;xxxxx&lt;/View&gt;);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>6、实现_rendHeader方法和_renderFooter方法<br>页头与页脚会在每次渲染过程中都重新渲染。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">rendHeader() &#123;  </div><div class="line">    return (&lt;View&gt;header&lt;/View&gt;);  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"> renderFooter() &#123;  </div><div class="line">    return (&lt;View&gt;footer&lt;/View&gt;);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>综上 基本掌握listview 的使用 。还需要配合RefreshControl 来实现下拉刷新和加载更多<br>如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;ListView</div><div class="line">       dataSource=&#123;this.state.dataSource&#125;</div><div class="line">       renderRow=&#123;this.getItemView.bind(this)&#125;</div><div class="line">       renderHeader=&#123;this.renderHeader.bind(this)&#125;</div><div class="line">       initialListSize=&#123;10&#125;</div><div class="line">       enableEmptySections = &#123;true&#125;</div><div class="line">       style=&#123;&#123;backgroundColor:&apos;#F0F0F0&apos;&#125;&#125;</div><div class="line">       onEndReached=&#123;this.onLoadMore.bind(this)&#125;</div><div class="line">       onEndReachedThreshold=&#123;10&#125;</div><div class="line">       renderFooter=&#123;this.renderLoadingMoreView.bind(this)&#125;</div><div class="line">       refreshControl=&#123;</div><div class="line">             &lt;RefreshControl</div><div class="line">               refreshing=&#123; this.state.isRefreshing &#125;</div><div class="line">               onRefresh=&#123; this.onRefresh.bind(this) &#125;</div><div class="line">               tintColor=&quot;gray&quot;</div><div class="line">               colors=&#123;[&apos;#00af8b&apos;]&#125;</div><div class="line">               progressBackgroundColor=&quot;#FFFFFF&quot;/&gt;</div><div class="line">    &#125;/&gt;</div></pre></td></tr></table></figure>
 
           
         
@@ -504,7 +534,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/10/重写UITableViewCell遇到的错误/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/23/RN之组件点击事件处理/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -529,8 +559,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/10/重写UITableViewCell遇到的错误/" itemprop="url">
-                  重写UITableViewCell遇到的错误
+                <a class="post-title-link" href="/2017/03/23/RN之组件点击事件处理/" itemprop="url">
+                  RN之组件点击事件处理
                 </a>
               
             
@@ -544,8 +574,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-10T17:56:52+08:00">
-                2017-01-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T13:34:23+08:00">
+                2017-03-23
               </time>
             
 
@@ -560,8 +590,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/01/10/重写UITableViewCell遇到的错误/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/10/重写UITableViewCell遇到的错误/" itemprop="commentCount"></span>
+                <a href="/2017/03/23/RN之组件点击事件处理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/23/RN之组件点击事件处理/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -589,15 +619,36 @@
       
         
           
-            <h1 id="重写UITableViewCell遇到的错误-fatal-error-init-coder-has-not-been-implemented"><a href="#重写UITableViewCell遇到的错误-fatal-error-init-coder-has-not-been-implemented" class="headerlink" title="重写UITableViewCell遇到的错误 fatal error: init(coder:) has not been implemented"></a>重写UITableViewCell遇到的错误 fatal error: init(coder:) has not been implemented</h1><p>在swift中继承UIView的子类时候，会要求写required init这个方法，一般我就如上写，并没有出过什么问题。<br>今天实现分类列表页面时 采用的是storyboard + xib 来实现自定义cell。</p>
-<p>照例继承 UITableViewCell，出现必实现下面的方法 ，那就实现呗。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">required init?(coder aDecoder: NSCoder) &#123;</div><div class="line">        fatalError(&quot;init(coder:) has not been implemented&quot;)</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>完成其他代码…..<br>运行 出现下面错误</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fatal error: init(coder:) has not been implemented</div></pre></td></tr></table></figure>
-<p>为什么 查了下 网上已经有明确答案<br><a href="http://stackoverflow.com/questions/29152553/fatal-error-initcoder-has-not-been-implemented" target="_blank" rel="external">链接</a></p>
-<p>This is caused by the absence of the initializer init(coder aDecoder: NSCoder!)<br>on the target UIViewController</p>
-<p>That method is required because instantiating a UIViewController from a UIStoryboard calls it.</p>
-<p>To see how do we initialize UIViewController<br>from a UIStoryboard<br>please take a look here<br>Why is this not a problem on Objective-C?<br>Because Objective-C automatically inherits all the required UIViewController<br>initializers.<br>Why does not Swift automatically inherit the initializers?<br>Swift by default does not inherit the initializers due to safety. But it will inherit all the initializers from the superclass if all the properties have a value (or optional) and the subclass has not defined any designated initializers.<br>Solution</p>
-<p>First method<br>Manually implementing init(coder aDecoder: NSCoder!)<br>on the target UIViewController<br>init(coder aDecoder: NSCoder!) { super.init(coder: aDecoder)}<br>Second method<br>Removing init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)<br>on your target UIViewController<br>will inherit all of the required initializers from the superclass asDave Wood pointed on his answer below</p>
+            <h2 id="RN之组件点击事件处理"><a href="#RN之组件点击事件处理" class="headerlink" title="RN之组件点击事件处理"></a>RN之组件点击事件处理</h2><p>我们来看下ReactNative提供的可触摸组件。<br>分别为:TouchableHighlight、TouchableNativeFeedback、TouchableOpacity、TouchableWithoutFeedback。<br>TouchableWithoutFeedback控件是触摸点击不带反馈效果的，另外三个都是有反馈效果。这三个组件都继承了所有TouchableWithoutFeedback的属性。</p>
+<p>1、TouchableWithoutFeedback<br>官网解释：<br>除非你有一个很好的理由，否则不要用这个组件。所有能够响应触屏操作的元素在触屏后都应该有一个视觉上的反馈（然而本组件没有任何视觉反馈）。这也是为什么一个”web”应用总是显得不够”原生”的主要原因之一。<br>注意：TouchableWithoutFeedback只支持一个子节点，如果你希望包含多个子组件，用一个View来包装它们。</p>
+<p>属性<br>accessible bool </p>
+<p>delayLongPress number<br>单位是毫秒，从onPressIn开始，到onLongPress被调用的延迟。</p>
+<p>delayPressIn number<br>单位是毫秒，从触摸操作开始到onPressIn被调用的延迟。</p>
+<p>delayPressOut number<br>单位是毫秒，从触摸操作结束开始到onPressOut被调用的延迟。</p>
+<p>disabled bool<br>如果设为true，则禁止此组件的一切交互。</p>
+<p>hitSlop {top: number, left: number, bottom: number, right: number}<br>这一属性定义了按钮的外延范围。这一范围也会使pressRetentionOffset（见下文）变得更大。 注意：触摸范围不会超过父视图的边界，也不会影响原先和本组件层叠的视图（保留原先的触摸优先级）。</p>
+<p>onLayout function<br>当加载或者布局改变的时候被调用，参数为：{nativeEvent: {layout: {x, y, width, height}}}</p>
+<p>onLongPress function </p>
+<p>onPress function<br>当触摸操作结束时调用，但如果被取消了则不调用（譬如响应者被一个滚动操作取代）</p>
+<p>onPressIn function </p>
+<p>onPressOut function </p>
+<p>pressRetentionOffset {top: number, left: number, bottom: number, right: number}<br>在当前视图不能滚动的前提下指定这个属性，可以决定当手指移开多远距离之后，会不再激活按钮。但如果手指再次移回范围内，按钮会被再次激活。只要视图不能滚动，你可以来回多次这样的操作。确保你传入一个常量来减少内存分配</p>
+<p>2、TouchableHighlight<br>官网的解释：<br>本组件用于封装视图，使其可以正确响应触摸操作。当按下的时候，封装的视图的不透明度会降低，同时会有一个底层的颜色透过而被用户看到，使得视图变暗或变亮。在底层实现上，实际会创建一个新的视图到视图层级中，如果使用的方法不正确，有时候会导致一些不希望出现的视觉效果。譬如没有给视图的backgroundColor显式声明一个不透明的颜色。<br>注意：TouchableHighlight只支持一个子节点，如果你希望包含多个子组件，用一个View来包装它们。</p>
+<p>属性<br>TouchableWithoutFeedback props…<br>译注：这意味着本组件继承了所有TouchableWithoutFeedback的属性。</p>
+<p>activeOpacity number<br>指定封装的视图在被触摸操作激活时以多少不透明度显示（通常在0到1之间）。</p>
+<p>onHideUnderlay function<br>当底层的颜色被隐藏的时候调用。</p>
+<p>onShowUnderlay function<br>当底层的颜色被显示的时候调用。</p>
+<p>style View#style </p>
+<p>underlayColor string<br>有触摸操作时显示出来的底层的颜色。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;TouchableHighlight underlayColor=&apos;#f0f0f0&apos; onPress=&#123;this.openIM.bind(this)&#125; style=&#123;styles.userIMImageView&#125;&gt;  </div><div class="line">      &lt;Image source=&#123;&#123;uri:&apos;im&apos;&#125;&#125; style=&#123;styles.userIMImage&#125;/&gt;  </div><div class="line">&lt;/TouchableHighlight&gt;</div></pre></td></tr></table></figure>
+<p>这个很简单的例子，就是一个图片，点击后背景色变为：#f0f0f0</p>
+<p>3、TouchableOpacity<br>官网解释：<br>本组件用于封装视图，使其可以正确响应触摸操作。当按下的时候，封装的视图的不透明度会降低。这个过程并不会真正改变视图层级，大部分情况下很容易添加到应用中而不会带来一些奇怪的副作用。（译注：此组件与TouchableHighlight的区别在于并没有额外的颜色变化，更适于一般场景）。<br>属性<br>TouchableWithoutFeedback props…<br>译注：这意味着本组件继承了所有TouchableWithoutFeedback的属性。</p>
+<p>activeOpacity number<br>指定封装的视图在被触摸操作激活时以多少不透明度显示（通常在0到1之间）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;TouchableOpacity  </div><div class="line">    style=&#123;styles.saveView&#125;  </div><div class="line">    onPress=&#123;this.refuse.bind(this)&#125;  </div><div class="line">    activeOpacity=&#123;0.7&#125;  &gt;  </div><div class="line">    &lt;Text style=&#123;styles.saveText&#125;&gt;  </div><div class="line">       拒单  </div><div class="line">    &lt;/Text&gt;  </div><div class="line">&lt;/TouchableOpacity&gt;</div></pre></td></tr></table></figure>
+<p>上面这边代码实现的效果是：按钮点击后，不透明度为0.7<br>1、将TouchableOpacity组件当成一个View组件，子组件为Text，封装成一个Button<br>2、当按钮被点击时，不透明度activeOpacity设置为0.7</p>
+<p>需要注意的是TouchableHighlight和TouchableHighlight只有设置onPress方法后，对应的背景色和透明度才有效。</p>
+<p>4、TouchableNativeFeedback<br>官网解释：<br>本组件用于封装视图，使其可以正确响应触摸操作（仅限Android平台）</p>
 
           
         
@@ -636,7 +687,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/24/Swift基础部分/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/RN父组件与子组件之间通信/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -661,8 +712,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/24/Swift基础部分/" itemprop="url">
-                  Swift基础部分
+                <a class="post-title-link" href="/2017/03/22/RN父组件与子组件之间通信/" itemprop="url">
+                  RN父组件与子组件之间通信
                 </a>
               
             
@@ -676,8 +727,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-24T17:49:05+08:00">
-                2016-11-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T18:22:01+08:00">
+                2017-03-22
               </time>
             
 
@@ -692,8 +743,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/24/Swift基础部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/24/Swift基础部分/" itemprop="commentCount"></span>
+                <a href="/2017/03/22/RN父组件与子组件之间通信/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/RN父组件与子组件之间通信/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -721,155 +772,11 @@
       
         
           
-            <h3 id="Swift3-0基础部分"><a href="#Swift3-0基础部分" class="headerlink" title="Swift3.0基础部分"></a>Swift3.0基础部分</h3><p>Swift 是一门开发 iOS, macOS, watchOS 和 tvOS 应用的新语言。然而，如果你有 C 或者 Objective-C 开发经验的话，你会发现 Swift 的很多内容都是你熟悉的。</p>
-<p>Swift 包含了 C 和 Objective-C 上所有基础数据类型，Int表示整型值； Double 和 Float 表示浮点型值； Bool 是布尔型值；String 是文本型数据。 Swift 还提供了三个基本的集合类型，Array ，Set 和 Dictionary ，详见集合类型。</p>
-<p>就像 C 语言一样，Swift 使用变量来进行存储并通过变量名来关联值。在 Swift 中，广泛的使用着值不可变的变量，它们就是常量，而且比 C 语言的常量更强大。在 Swift 中，如果你要处理的值不需要改变，那使用常量可以让你的代码更加安全并且更清晰地表达你的意图。</p>
-<p>除了我们熟悉的类型，Swift 还增加了 Objective-C 中没有的高阶数据类型比如元组（Tuple）。元组可以让你创建或者传递一组数据，比如作为函数的返回值时，你可以用一个元组可以返回多个值。</p>
-<p>Swift 还增加了可选（Optional）类型，用于处理值缺失的情况。可选表示 “那儿有一个值，并且它等于 x ” 或者 “那儿没有值” 。可选有点像在 Objective-C 中使用 nil ，但是它可以用在任何类型上，不仅仅是类。可选类型比 Objective-C 中的 nil 指针更加安全也更具表现力，它是 Swift 许多强大特性的重要组成部分。</p>
-<p>Swift 是一门类型安全的语言，这意味着 Swift 可以让你清楚地知道值的类型。如果你的代码期望得到一个 String ，类型安全会阻止你不小心传入一个 Int 。同样的，如果你的代码期望得到一个 String，类型安全会阻止你意外传入一个可选的 String 。类型安全可以帮助你在开发阶段尽早发现并修正错误。</p>
-<p>常量和变量<br>常量和变量把一个名字（比如 maximumNumberOfLoginAttempts 或者 welcomeMessage ）和一个指定类型的值（比如数字 10 或者字符串 “Hello” ）关联起来。常量的值一旦设定就不能改变，而变量的值可以随意更改。</p>
-<p>声明常量和变量</p>
-<p>常量和变量必须在使用前声明，用 let 来声明常量，用 var 来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let maximumNumberOfLoginAttempts = 10</div><div class="line">var currentLoginAttempt = 0</div></pre></td></tr></table></figure>
-<p>这两行代码可以被理解为：</p>
-<p>“声明一个名字是 maximumNumberOfLoginAttempts 的新常量，并给它一个值 10 。然后，声明一个名字是 currentLoginAttempt 的变量并将它的值初始化为 0 。”</p>
-<p>在这个例子中，允许的最大尝试登录次数被声明为一个常量，因为这个值不会改变。当前尝试登录次数被声明为一个变量，因为每次尝试登录失败的时候都需要增加这个值。</p>
-<p>你可以在一行中声明多个常量或者多个变量，用逗号隔开：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var x = 0.0, y = 0.0, z = 0.0</div></pre></td></tr></table></figure>
-<p>注意：<br>如果你的代码中有不需要改变的值，请使用 let 关键字将它声明为常量。只将需要改变的值声明为变量。</p>
-<p>类型标注</p>
-<p>当你声明常量或者变量的时候可以加上类型标注（type annotation），说明常量或者变量中要存储的值的类型。如果要添加类型标注，需要在常量或者变量名后面加上一个冒号和空格，然后加上类型名称。</p>
-<p>这个例子给 welcomeMessage 变量添加了类型标注，表示这个变量可以存储 String 类型的值：</p>
-<p>var welcomeMessage: String<br>声明中的冒号代表着“是…类型”，所以这行代码可以被理解为：</p>
-<p>“声明一个类型为 String ，名字为 welcomeMessage 的变量。”</p>
-<p>“类型为 String ”的意思是“可以存储任意 String 类型的值。”</p>
-<p>welcomeMessage 变量现在可以被设置成任意字符串：</p>
-<p>welcomeMessage = “Hello”<br>你可以在一行中定义多个同样类型的变量，用逗号分割，并在最后一个变量名之后添加类型标注：</p>
-<p>var red, green, blue: Double<br>注意：<br>一般来说你很少需要写类型标注。如果你在声明常量或者变量的时候赋了一个初始值，Swift可以推断出这个常量或者变量的类型，请参考类型安全和类型推断。在上面的例子中，没有给 welcomeMessage 赋初始值，所以变量 welcomeMessage 的类型是通过一个类型标注指定的，而不是通过初始值推断的。</p>
-<p>常量和变量的命名</p>
-<p>你可以用任何你喜欢的字符作为常量和变量名，包括 Unicode 字符：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let π = 3.14159</div><div class="line">let 你好 = &quot;你好世界&quot;</div><div class="line">let 🐶🐮 = &quot;dogcow&quot;</div></pre></td></tr></table></figure>
-<p>常量与变量名不能包含数学符号，箭头，保留的（或者非法的）Unicode 码位，连线与制表符。也不能以数字开头，但是可以在常量与变量名的其他地方包含数字。</p>
-<p>一旦你将常量或者变量声明为确定的类型，你就不能使用相同的名字再次进行声明，或者改变其存储的值的类型。同时，你也不能将常量与变量进行互转。</p>
-<p>注意：<br>如果你需要使用与Swift保留关键字相同的名称作为常量或者变量名，你可以使用反引号（`）将关键字包围的方式将其作为名字使用。无论如何，你应当避免使用关键字作为常量或变量名，除非你别无选择。<br>你可以更改现有的变量值为其他同类型的值，在下面的例子中，friendlyWelcome的值从”Hello!”改为了”Bonjour!”:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var friendlyWelcome = &quot;Hello!&quot;</div><div class="line">friendlyWelcome = &quot;Bonjour!&quot;</div><div class="line">// friendlyWelcome 现在是 &quot;Bonjour!&quot;</div></pre></td></tr></table></figure>
-<p>与变量不同，常量的值一旦被确定就不能更改了。尝试这样做会导致编译时报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let languageName = &quot;Swift&quot;</div><div class="line">languageName = &quot;Swift++&quot;</div><div class="line">// 这会报编译时错误 - languageName 不可改变</div></pre></td></tr></table></figure>
-<p>输出常量和变量</p>
-<p>你可以用print(_:separator:terminator:)函数来输出当前常量或变量的值:</p>
-<p>print(friendlyWelcome)<br>// 输出 “Bonjour!”<br>print(<em>:separator:terminator:) 是一个用来输出一个或多个值到适当输出区的全局函数。如果你用 Xcode，print(</em>:separator:terminator:) 将会输出内容到“console”面板上。separator 和 terminator 参数具有默认值，因此你调用这个函数的时候可以忽略它们。默认情况下，该函数通过添加换行符来结束当前行。如果不想换行，可以传递一个空字符串给 terminator 参数–例如，print(someValue, terminator:””) 。关于参数默认值的更多信息，请参考默认参数值。</p>
-<p>Swift 用字符串插值（string interpolation）的方式把常量名或者变量名当做占位符加入到长字符串中，Swift 会用当前常量或变量的值替换这些占位符。将常量或变量名放入圆括号中，并在开括号前使用反斜杠将其转义：</p>
-<p>print(“The current value of friendlyWelcome is (friendlyWelcome)”)<br>// 输出 “The current value of friendlyWelcome is Bonjour!<br>注意：<br>字符串插值所有可用的选项，请参考字符串插值。</p>
-<p>注释<br>请将你的代码中的非执行文本注释成提示或者笔记以方便你将来阅读。Swift 的编译器将会在编译代码时自动忽略掉注释部分。</p>
-<p>Swift 中的注释与 C 语言的注释非常相似。单行注释以双正斜杠（//）作为起始标记:</p>
-<p>// 这是一个注释<br>你也可以进行多行注释，其起始标记为单个正斜杠后跟随一个星号（/<em>），终止标记为一个星号后跟随单个正斜杠（</em>/）:</p>
-<p>/<em> 这是一个,<br>多行注释 </em>/<br>与 C 语言多行注释不同，Swift 的多行注释可以嵌套在其它的多行注释之中。你可以先生成一个多行注释块，然后在这个注释块之中再嵌套成第二个多行注释。终止注释时先插入第二个注释块的终止标记，然后再插入第一个注释块的终止标记：</p>
-<p>/<em> 这是第一个多行注释的开头<br>/</em> 这是第二个被嵌套的多行注释 <em>/<br>这是第一个多行注释的结尾 </em>/<br>通过运用嵌套多行注释，你可以快速方便的注释掉一大段代码，即使这段代码之中已经含有了多行注释块。</p>
-<p>分号<br>与其他大部分编程语言不同，Swift 并不强制要求你在每条语句的结尾处使用分号（;），当然，你也可以按照你自己的习惯添加分号。有一种情况下必须要用分号，即你打算在同一行内写多条独立的语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let cat = &quot;🐱&quot;; print(cat)</div><div class="line">// 输出 &quot;🐱&quot;</div></pre></td></tr></table></figure>
-<p>整数<br>整数就是没有小数部分的数字，比如 42 和 -23 。整数可以是 有符号（正、负、零）或者 无符号（正、零）。</p>
-<p>Swift 提供了8，16，32和64位的有符号和无符号整数类型。这些整数类型和 C 语言的命名方式很像，比如8位无符号整数类型是UInt8，32位有符号整数类型是 Int32 。就像 Swift 的其他类型一样，整数类型采用大写命名法。</p>
-<p>整数范围</p>
-<p>你可以访问不同整数类型的 min 和 max 属性来获取对应类型的最小值和最大值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let minValue = UInt8.min  // minValue 为 0，是 UInt8 类型</div><div class="line">let maxValue = UInt8.max  // maxValue 为 255，是 UInt8 类型</div></pre></td></tr></table></figure>
-<p>min 和 max 所传回值的类型，正是其所对的整数类型(如上例UInt8, 所传回的类型是UInt8)，可用在表达式中相同类型值旁。</p>
-<p>Int</p>
-<p>一般来说，你不需要专门指定整数的长度。Swift 提供了一个特殊的整数类型Int，长度与当前平台的原生字长相同：</p>
-<p>在32位平台上，Int 和 Int32 长度相同。<br>在64位平台上，Int 和 Int64 长度相同。<br>除非你需要特定长度的整数，一般来说使用 Int 就够了。这可以提高代码一致性和可复用性。即使是在32位平台上，Int 可以存储的整数范围也可以达到 -2,147,483,648 ~ 2,147,483,647 ，大多数时候这已经足够大了。</p>
-<p>UInt</p>
-<p>Swift 也提供了一个特殊的无符号类型 UInt，长度与当前平台的原生字长相同：</p>
-<p>在32位平台上，UInt 和 UInt32 长度相同。<br>在64位平台上，UInt 和 UInt64 长度相同。<br>注意：<br>尽量不要使用UInt，除非你真的需要存储一个和当前平台原生字长相同的无符号整数。除了这种情况，最好使用Int，即使你要存储的值已知是非负的。统一使用Int可以提高代码的可复用性，避免不同类型数字之间的转换，并且匹配数字的类型推断，请参考类型安全和类型推断。</p>
-<p>浮点数<br>浮点数是有小数部分的数字，比如 3.14159 ，0.1 和 -273.15。</p>
-<p>浮点类型比整数类型表示的范围更大，可以存储比 Int 类型更大或者更小的数字。Swift 提供了两种有符号浮点数类型：</p>
-<p>Double表示64位浮点数。当你需要存储很大或者很高精度的浮点数时请使用此类型。<br>Float表示32位浮点数。精度要求不高的话可以使用此类型。<br>注意：<br>Double精确度很高，至少有15位数字，而Float只有6位数字。选择哪个类型取决于你的代码需要处理的值的范围，在两种类型都匹配的情况下，将优先选择 Double。</p>
-<p>类型安全和类型推断<br>Swift 是一个类型安全（type safe）的语言。类型安全的语言可以让你清楚地知道代码要处理的值的类型。如果你的代码需要一个String，你绝对不可能不小心传进去一个Int。</p>
-<p>由于 Swift 是类型安全的，所以它会在编译你的代码时进行类型检查（type checks），并把不匹配的类型标记为错误。这可以让你在开发的时候尽早发现并修复错误。</p>
-<p>当你要处理不同类型的值时，类型检查可以帮你避免错误。然而，这并不是说你每次声明常量和变量的时候都需要显式指定类型。如果你没有显式指定类型，Swift 会使用类型推断（type inference）来选择合适的类型。有了类型推断，编译器可以在编译代码的时候自动推断出表达式的类型。原理很简单，只要检查你赋的值即可。</p>
-<p>因为有类型推断，和 C 或者 Objective-C 比起来 Swift 很少需要声明类型。常量和变量虽然需要明确类型，但是大部分工作并不需要你自己来完成。</p>
-<p>当你声明常量或者变量并赋初值的时候类型推断非常有用。当你在声明常量或者变量的时候赋给它们一个字面量（literal value 或 literal）即可触发类型推断。（字面量就是会直接出现在你代码中的值，比如 42 和 3.14159 。）</p>
-<p>例如，如果你给一个新常量赋值 42 并且没有标明类型，Swift 可以推断出常量类型是 Int ，因为你给它赋的初始值看起来像一个整数：</p>
-<p>let meaningOfLife = 42<br>// meaningOfLife 会被推测为 Int 类型<br>同理，如果你没有给浮点字面量标明类型，Swift 会推断你想要的是 Double：</p>
-<p>let pi = 3.14159<br>// pi 会被推测为 Double 类型<br>当推断浮点数的类型时，Swift 总是会选择 Double 而不是Float。</p>
-<p>如果表达式中同时出现了整数和浮点数，会被推断为 Double 类型：</p>
-<p>let anotherPi = 3 + 0.14159<br>// anotherPi 会被推测为 Double 类型<br>原始值 3 没有显式声明类型，而表达式中出现了一个浮点字面量，所以表达式会被推断为 Double 类型。</p>
-<p>数值型字面量<br>整数字面量可以被写作：</p>
-<p>一个十进制数，没有前缀<br>一个二进制数，前缀是0b<br>一个八进制数，前缀是0o<br>一个十六进制数，前缀是0x<br>下面的所有整数字面量的十进制值都是17:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let decimalInteger = 17</div><div class="line">let binaryInteger = 0b10001       // 二进制的17</div><div class="line">let octalInteger = 0o21           // 八进制的17</div><div class="line">let hexadecimalInteger = 0x11     // 十六进制的17</div></pre></td></tr></table></figure>
-<p>浮点字面量可以是十进制（没有前缀）或者是十六进制（前缀是 0x ）。小数点两边必须有至少一个十进制数字（或者是十六进制的数字）。十进制浮点数也可以有一个可选的指数（exponent)，通过大写或者小写的 e 来指定；十六进制浮点数必须有一个指数，通过大写或者小写的 p 来指定。</p>
-<p>如果一个十进制数的指数为 exp，那这个数相当于基数和10^exp的乘积：</p>
-<p>1.25e2 表示 1.25 × 10^2，等于 125.0。<br>1.25e-2 表示 1.25 × 10^-2，等于 0.0125。<br>如果一个十六进制数的指数为exp，那这个数相当于基数和2^exp的乘积：</p>
-<p>0xFp2 表示 15 × 2^2，等于 60.0。<br>0xFp-2 表示 15 × 2^-2，等于 3.75。<br>下面的这些浮点字面量都等于十进制的12.1875：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let decimalDouble = 12.1875</div><div class="line">let exponentDouble = 1.21875e1</div><div class="line">let hexadecimalDouble = 0xC.3p0</div></pre></td></tr></table></figure>
-<p>数值类字面量可以包括额外的格式来增强可读性。整数和浮点数都可以添加额外的零并且包含下划线，并不会影响字面量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let paddedDouble = 000123.456</div><div class="line">let oneMillion = 1_000_000</div><div class="line">let justOverOneMillion = 1_000_000.000_000_1</div></pre></td></tr></table></figure>
-<p>数值型类型转换<br>通常来讲，即使代码中的整数常量和变量已知非负，也请使用Int类型。总是使用默认的整数类型可以保证你的整数常量和变量可以直接被复用并且可以匹配整数类字面量的类型推断。</p>
-<p>只有在必要的时候才使用其他整数类型，比如要处理外部的长度明确的数据或者为了优化性能、内存占用等等。使用显式指定长度的类型可以及时发现值溢出并且可以暗示正在处理特殊数据。</p>
-<p>整数转换</p>
-<p>不同整数类型的变量和常量可以存储不同范围的数字。Int8类型的常量或者变量可以存储的数字范围是-128~127，而UInt8类型的常量或者变量能存储的数字范围是0~255。如果数字超出了常量或者变量可存储的范围，编译的时候会报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let cannotBeNegative: UInt8 = -1</div><div class="line">// UInt8 类型不能存储负数，所以会报错</div><div class="line">let tooBig: Int8 = Int8.max + 1</div><div class="line">// Int8 类型不能存储超过最大值的数，所以会报错</div></pre></td></tr></table></figure>
-<p>由于每种整数类型都可以存储不同范围的值，所以你必须根据不同情况选择性使用数值型类型转换。这种选择性使用的方式，可以预防隐式转换的错误并让你的代码中的类型转换意图变得清晰。</p>
-<p>要将一种数字类型转换成另一种，你要用当前值来初始化一个期望类型的新数字，这个数字的类型就是你的目标类型。在下面的例子中，常量twoThousand是UInt16类型，然而常量one是UInt8类型。它们不能直接相加，因为它们类型不同。所以要调用UInt16(one)来创建一个新的UInt16数字并用one的值来初始化，然后使用这个新数字来计算：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let twoThousand: UInt16 = 2_000</div><div class="line">let one: UInt8 = 1</div><div class="line">let twoThousandAndOne = twoThousand + UInt16(one)</div></pre></td></tr></table></figure>
-<p>现在两个数字的类型都是 UInt16，可以进行相加。目标常量 twoThousandAndOne 的类型被推断为 UInt16，因为它是两个 UInt16 值的和。</p>
-<p>SomeType(ofInitialValue) 是调用 Swift 构造器并传入一个初始值的默认方法。在语言内部，UInt16 有一个构造器，可以接受一个UInt8类型的值，所以这个构造器可以用现有的 UInt8 来创建一个新的 UInt16。注意，你并不能传入任意类型的值，只能传入 UInt16 内部有对应构造器的值。不过你可以扩展现有的类型来让它可以接收其他类型的值（包括自定义类型），请参考扩展。</p>
-<p>整数和浮点数转换</p>
-<p>整数和浮点数的转换必须显式指定类型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">let three = 3</div><div class="line">let pointOneFourOneFiveNine = 0.14159</div><div class="line">let pi = Double(three) + pointOneFourOneFiveNine</div><div class="line">// pi 等于 3.14159，所以被推测为 Double 类型</div><div class="line"></div><div class="line">```这个例子中，常量 three 的值被用来创建一个 Double 类型的值，所以加号两边的数类型须相同。如果不进行转换，两者无法相加。</div><div class="line"></div><div class="line">浮点数到整数的反向转换同样行，整数类型可以用 Double 或者 Float 类型来初始化：</div></pre></td></tr></table></figure>
-<p>let integerPi = Int(pi)<br>// integerPi 等于 3，所以被推测为 Int 类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">当用这种方式来初始化一个新的整数值时，浮点值会被截断。也就是说 4.75 会变成 4，-3.9 会变成 -3。</div><div class="line"></div><div class="line">注意：</div><div class="line">结合数字类常量和变量不同于结合数字类字面量。字面量3可以直接和字面量0.14159相加，因为数字字面量本身没有明确的类型。它们的类型只在编译器需要求值的时候被推测。</div><div class="line"></div><div class="line">类型别名</div><div class="line">类型别名（type aliases）就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。</div><div class="line"></div><div class="line">当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：</div><div class="line"></div><div class="line">typealias AudioSample = UInt16</div><div class="line">定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：</div></pre></td></tr></table></figure>
-<p>var maxAmplitudeFound = AudioSample.min<br>// maxAmplitudeFound 现在是 0</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">本例中，AudioSample被定义为UInt16的一个别名。因为它是别名，AudioSample.min实际上是UInt16.min，所以会给maxAmplitudeFound赋一个初值0。</div><div class="line"></div><div class="line"></div><div class="line">布尔值</div><div class="line">Swift 有一个基本的布尔（Boolean）类型，叫做Bool。布尔值指逻辑上的值，因为它们只能是真或者假。Swift 有两个布尔常量，true 和 false：</div></pre></td></tr></table></figure>
-<p>let orangesAreOrange = true<br>let turnipsAreDelicious = false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">orangesAreOrange 和 turnipsAreDelicious 的类型会被推断为 Bool，因为它们的初值是布尔字面量。就像之前提到的 Int 和 Double 一样，如果你创建变量的时候给它们赋值 true 或者 false，那你不需要将常量或者变量声明为 Bool 类型。初始化常量或者变量的时候如果所赋的值类型已知，就可以触发类型推断，这让 Swift 代码更加简洁并且可读性更高。</div><div class="line"></div><div class="line">当你编写条件语句比如 if 语句的时候，布尔值非常有用：</div></pre></td></tr></table></figure>
-<p>if turnipsAreDelicious {<br>    print(“Mmm, tasty turnips!”)<br>} else {<br>    print(“Eww, turnips are horrible.”)<br>}<br>// 输出 “Eww, turnips are horrible.”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">条件语句，例如if，请参考控制流。</div><div class="line"></div><div class="line">如果你在需要使用 Bool 类型的地方使用了非布尔值，Swift 的类型安全机制会报错。下面的例子会报告一个编译时错误：</div></pre></td></tr></table></figure></p>
-<p>let i = 1<br>if i {<br>    // 这个例子不会通过编译，会报错<br>}<br>然而，下面的例子是合法的：</p>
-<p>let i = 1<br>if i == 1 {<br>    // 这个例子会编译成功<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">i == 1 的比较结果是 Bool 类型，所以第二个例子可以通过类型检查。类似 i == 1 这样的比较，请参考基本操作符。</div><div class="line"></div><div class="line">和 Swift 中的其他类型安全的例子一样，这个方法可以避免错误并保证这块代码的意图总是清晰的。</div><div class="line"></div><div class="line"></div><div class="line">元组</div><div class="line">元组（tuples）把多个值组合成一个复合值。元组内的值可以是任意类型，并不要求是相同类型。</div><div class="line"></div><div class="line">下面这个例子中，(404, &quot;Not Found&quot;) 是一个描述 HTTP 状态码（HTTP status code）的元组。HTTP 状态码是当你请求网页的时候 web 服务器返回的一个特殊值。如果你请求的网页不存在就会返回一个 404 Not Found 状态码。</div></pre></td></tr></table></figure>
-<p>let http404Error = (404, “Not Found”)<br>// http404Error 的类型是 (Int, String)，值是 (404, “Not Found”)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(404, &quot;Not Found&quot;) 元组把一个 Int 值和一个 String 值组合起来表示 HTTP 状态码的两个部分：一个数字和一个人类可读的描述。这个元组可以被描述为“一个类型为 (Int, String) 的元组”。</div><div class="line"></div><div class="line">你可以把任意顺序的类型组合成一个元组，这个元组可以包含所有类型。只要你想，你可以创建一个类型为 (Int, Int, Int) 或者 (String, Bool) 或者其他任何你想要的组合的元组。</div><div class="line"></div><div class="line">你可以将一个元组的内容分解（decompose）成单独的常量和变量，然后你就可以正常使用它们了：</div></pre></td></tr></table></figure>
-<p>let (statusCode, statusMessage) = http404Error<br>print(“The status code is (statusCode)”)<br>// 输出 “The status code is 404”<br>print(“The status message is (statusMessage)”)<br>// 输出 “The status message is Not Found”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果你只需要一部分元组值，分解的时候可以把要忽略的部分用下划线（_）标记：</div></pre></td></tr></table></figure>
-<p>let (justTheStatusCode, _) = http404Error<br>print(“The status code is (justTheStatusCode)”)<br>// 输出 “The status code is 404”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">此外，你还可以通过下标来访问元组中的单个元素，下标从零开始：</div></pre></td></tr></table></figure>
-<p>print(“The status code is (http404Error.0)”)<br>// 输出 “The status code is 404”<br>print(“The status message is (http404Error.1)”)<br>// 输出 “The status message is Not Found”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">你可以在定义元组的时候给单个元素命名：</div></pre></td></tr></table></figure></p>
-<p>let http200Status = (statusCode: 200, description: “OK”)<br>给元组中的元素命名后，你可以通过名字来获取这些元素的值：</p>
-<p>print(“The status code is (http200Status.statusCode)”)<br>// 输出 “The status code is 200”<br>print(“The status message is (http200Status.description)”)<br>// 输出 “The status message is OK”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">作为函数返回值时，元组非常有用。一个用来获取网页的函数可能会返回一个 (Int, String) 元组来描述是否获取成功。和只能返回一个类型的值比较起来，一个包含两个不同类型值的元组可以让函数的返回信息更有用。请参考函数参数与返回值。</div><div class="line"></div><div class="line">注意：</div><div class="line">元组在临时组织值的时候很有用，但是并不适合创建复杂的数据结构。如果你的数据结构并不是临时使用，请使用类或者结构体而不是元组。请参考类和结构体。</div><div class="line"></div><div class="line">可选类型</div><div class="line">使用可选类型（optionals）来处理值可能缺失的情况。可选类型表示：</div><div class="line"></div><div class="line">有值，等于 x</div><div class="line">或者</div><div class="line"></div><div class="line">没有值</div><div class="line">注意：</div><div class="line">C 和 Objective-C 中并没有可选类型这个概念。最接近的是 Objective-C 中的一个特性，一个方法要不返回一个对象要不返回nil，nil表示“缺少一个合法的对象”。然而，这只对对象起作用——对于结构体，基本的 C 类型或者枚举类型不起作用。对于这些类型，Objective-C 方法一般会返回一个特殊值（比如NSNotFound）来暗示值缺失。这种方法假设方法的调用者知道并记得对特殊值进行判断。然而，Swift 的可选类型可以让你暗示任意类型的值缺失，并不需要一个特殊值。</div><div class="line">来看一个例子。Swift 的 Int 类型有一种构造器，作用是将一个 String 值转换成一个 Int 值。然而，并不是所有的字符串都可以转换成一个整数。字符串 &quot;123&quot; 可以被转换成数字 123 ，但是字符串 &quot;hello, world&quot; 不行。</div><div class="line"></div><div class="line">下面的例子使用这种构造器来尝试将一个 String 转换成 Int：</div></pre></td></tr></table></figure>
-<p>let possibleNumber = “123”<br>let convertedNumber = Int(possibleNumber)<br>// convertedNumber 被推测为类型 “Int?”， 或者类型 “optional Int”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">因为该构造器可能会失败，所以它返回一个可选类型（optional）Int，而不是一个 Int。一个可选的 Int 被写作 Int? 而不是 Int。问号暗示包含的值是可选类型，也就是说可能包含 Int 值也可能不包含值。（不能包含其他任何值比如 Bool 值或者 String 值。只能是 Int 或者什么都没有。）</div><div class="line"></div><div class="line"></div><div class="line">nil</div><div class="line"></div><div class="line">你可以给可选变量赋值为nil来表示它没有值：</div></pre></td></tr></table></figure>
-<p>var serverResponseCode: Int? = 404<br>// serverResponseCode 包含一个可选的 Int 值 404<br>serverResponseCode = nil<br>// serverResponseCode 现在不包含值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">注意：</div><div class="line">nil不能用于非可选的常量和变量。如果你的代码中有常量或者变量需要处理值缺失的情况，请把它们声明成对应的可选类型。</div><div class="line">如果你声明一个可选常量或者变量但是没有赋值，它们会自动被设置为 nil：</div></pre></td></tr></table></figure></p>
-<p>var surveyAnswer: String?<br>// surveyAnswer 被自动设置为 nil<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">注意：</div><div class="line">Swift 的 nil 和 Objective-C 中的 nil 并不一样。在 Objective-C 中，nil 是一个指向不存在对象的指针。在 Swift 中，nil 不是指针——它是一个确定的值，用来表示值缺失。任何类型的可选状态都可以被设置为 nil，不只是对象类型。</div><div class="line"></div><div class="line">if 语句以及强制解析</div><div class="line"></div><div class="line">你可以使用 if 语句和 nil 比较来判断一个可选值是否包含值。你可以使用“相等”(==)或“不等”(!=)来执行比较。</div><div class="line"></div><div class="line">如果可选类型有值，它将不等于 nil：</div></pre></td></tr></table></figure></p>
-<p>if convertedNumber != nil {<br>    print(“convertedNumber contains some integer value.”)<br>}<br>// 输出 “convertedNumber contains some integer value.”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">当你确定可选类型确实包含值之后，你可以在可选的名字后面加一个感叹号（!）来获取值。这个惊叹号表示“我知道这个可选有值，请使用它。”这被称为可选值的强制解析（forced unwrapping）：</div></pre></td></tr></table></figure>
-<p>if convertedNumber != nil {<br>    print(“convertedNumber has an integer value of (convertedNumber!).”)<br>}<br>// 输出 “convertedNumber has an integer value of 123.”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">更多关于 if 语句的内容，请参考控制流。</div><div class="line"></div><div class="line">注意：</div><div class="line">使用 ! 来获取一个不存在的可选值会导致运行时错误。使用 ! 来强制解析值之前，一定要确定可选包含一个非 nil 的值。</div><div class="line"></div><div class="line">可选绑定</div><div class="line"></div><div class="line">使用可选绑定（optional binding）来判断可选类型是否包含值，如果包含就把值赋给一个临时常量或者变量。可选绑定可以用在 if 和 while 语句中，这条语句不仅可以用来判断可选类型中是否有值，同时可以将可选类型中的值赋给一个常量或者变量。if 和 while 语句，请参考控制流。</div><div class="line"></div><div class="line">像下面这样在 if 语句中写一个可选绑定：</div></pre></td></tr></table></figure></p>
-<p>if let constantName = someOptional {<br>    statements<br>}<br>你可以像上面这样使用可选绑定来重写 possibleNumber 这个例子：</p>
-<p>if let actualNumber = Int(possibleNumber) {<br>    print(“\’(possibleNumber)\’ has an integer value of (actualNumber)”)<br>} else {<br>    print(“\’(possibleNumber)\’ could not be converted to an integer”)<br>}<br>// 输出 “‘123’ has an integer value of 123”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">这段代码可以被理解为：</div><div class="line"></div><div class="line">“如果 Int(possibleNumber) 返回的可选 Int 包含一个值，创建一个叫做 actualNumber 的新常量并将可选包含的值赋给它。”</div><div class="line"></div><div class="line">如果转换成功，actualNumber 常量可以在 if 语句的第一个分支中使用。它已经被可选类型 包含的 值初始化过，所以不需要再使用 ! 后缀来获取它的值。在这个例子中，actualNumber 只被用来输出转换结果。</div><div class="line"></div><div class="line">你可以在可选绑定中使用常量和变量。如果你想在if语句的第一个分支中操作 actualNumber 的值，你可以改成 if var actualNumber，这样可选类型包含的值就会被赋给一个变量而非常量。</div><div class="line"></div><div class="line">你可以包含多个可选绑定或多个布尔条件在一个 if 语句中，只要使用逗号分开就行。只要有任意一个可选绑定的值为nil，或者任意一个布尔条件为false，则整个if条件判断为false，这时你就需要使用嵌套 if 条件语句来处理，如下所示：</div></pre></td></tr></table></figure>
-<p>if let firstNumber = Int(“4”), let secondNumber = Int(“42”), firstNumber &lt; secondNumber &amp;&amp; secondNumber &lt; 100 {<br>    print(“(firstNumber) &lt; (secondNumber) &lt; 100”)<br>}<br>// 输出 “4 &lt; 42 &lt; 100”</p>
-<p>if let firstNumber = Int(“4”) {<br>    if let secondNumber = Int(“42”) {<br>        if firstNumber &lt; secondNumber &amp;&amp; secondNumber &lt; 100 {<br>            print(“(firstNumber) &lt; (secondNumber) &lt; 100”)<br>        }<br>    }<br>}<br>// 输出 “4 &lt; 42 &lt; 100”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">注意： 在 if 条件语句中使用常量和变量来创建一个可选绑定，仅在 if 语句的句中(body)中才能获取到值。相反，在 guard 语句中使用常量和变量来创建一个可选绑定，仅在 guard 语句外且在语句后才能获取到值，请参考提前退出。</div><div class="line"></div><div class="line">隐式解析可选类型</div><div class="line"></div><div class="line">如上所述，可选类型暗示了常量或者变量可以“没有值”。可选可以通过 if 语句来判断是否有值，如果有值的话可以通过可选绑定来解析值。</div><div class="line"></div><div class="line">有时候在程序架构中，第一次被赋值之后，可以确定一个可选类型_总会_有值。在这种情况下，每次都要判断和解析可选值是非常低效的，因为可以确定它总会有值。</div><div class="line"></div><div class="line">这种类型的可选状态被定义为隐式解析可选类型（implicitly unwrapped optionals）。把想要用作可选的类型的后面的问号（String?）改成感叹号（String!）来声明一个隐式解析可选类型。</div><div class="line"></div><div class="line">当可选类型被第一次赋值之后就可以确定之后一直有值的时候，隐式解析可选类型非常有用。隐式解析可选类型主要被用在 Swift 中类的构造过程中，请参考无主引用以及隐式解析可选属性。</div><div class="line"></div><div class="line">一个隐式解析可选类型其实就是一个普通的可选类型，但是可以被当做非可选类型来使用，并不需要每次都使用解析来获取可选值。下面的例子展示了可选类型 String 和隐式解析可选类型 String 之间的区别：</div></pre></td></tr></table></figure>
-<p>let possibleString: String? = “An optional string.”<br>let forcedString: String = possibleString! // 需要感叹号来获取值</p>
-<p>let assumedString: String! = “An implicitly unwrapped optional string.”<br>let implicitString: String = assumedString  // 不需要感叹号</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">你可以把隐式解析可选类型当做一个可以自动解析的可选类型。你要做的只是声明的时候把感叹号放到类型的结尾，而不是每次取值的可选名字的结尾。</div><div class="line"></div><div class="line">注意：</div><div class="line">如果你在隐式解析可选类型没有值的时候尝试取值，会触发运行时错误。和你在没有值的普通可选类型后面加一个惊叹号一样。</div><div class="line">你仍然可以把隐式解析可选类型当做普通可选类型来判断它是否包含值：</div></pre></td></tr></table></figure>
-<p>if assumedString != nil {<br>    print(assumedString)<br>}<br>// 输出 “An implicitly unwrapped optional string.”<br>你也可以在可选绑定中使用隐式解析可选类型来检查并解析它的值：</p>
-<p>if let definiteString = assumedString {<br>    print(definiteString)<br>}<br>// 输出 “An implicitly unwrapped optional string.”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">注意：</div><div class="line">如果一个变量之后可能变成nil的话请不要使用隐式解析可选类型。如果你需要在变量的生命周期中判断是否是nil的话，请使用普通可选类型。</div><div class="line"></div><div class="line">错误处理</div><div class="line">你可以使用 错误处理（error handling） 来应对程序执行中可能会遇到的错误条件。</div><div class="line"></div><div class="line">相对于可选中运用值的存在与缺失来表达函数的成功与失败，错误处理可以推断失败的原因，并传播至程序的其他部分。</div><div class="line"></div><div class="line">当一个函数遇到错误条件，它能报错。调用函数的地方能抛出错误消息并合理处理。</div></pre></td></tr></table></figure></p>
-<p>func canThrowAnError() throws {<br>    // 这个函数有可能抛出错误<br>}<br>一个函数可以通过在声明中添加throws关键词来抛出错误消息。当你的函数能抛出错误消息时, 你应该在表达式中前置try关键词。</p>
-<p>do {<br>    try canThrowAnError()<br>    // 没有错误消息抛出<br>} catch {<br>    // 有一个错误消息抛出<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">一个do语句创建了一个新的包含作用域,使得错误能被传播到一个或多个catch从句。</div><div class="line"></div><div class="line">这里有一个错误处理如何用来应对不同错误条件的例子。</div></pre></td></tr></table></figure>
-<p>func makeASandwich() throws {<br>    // …<br>}</p>
-<p>do {<br>    try makeASandwich()<br>    eatASandwich()<br>} catch SandwichError.outOfCleanDishes {<br>    washDishes()<br>} catch SandwichError.missingIngredients(let ingredients) {<br>    buyGroceries(ingredients)<br>}<br>```<br>在此例中，makeASandwich()（做一个三明治）函数会抛出一个错误消息如果没有干净的盘子或者某个原料缺失。因为 makeASandwich() 抛出错误，函数调用被包裹在 try 表达式中。将函数包裹在一个 do 语句中，任何被抛出的错误会被传播到提供的 catch 从句中。</p>
-<p>如果没有错误被抛出，eatASandwich() 函数会被调用。如果一个匹配 SandwichError.outOfCleanDishes 的错误被抛出，washDishes() 函数会被调用。如果一个匹配 SandwichError.missingIngredients 的错误被抛出，buyGroceries(_:) 函数会被调用，并且使用 catch 所捕捉到的关联值 [String] 作为参数。</p>
-<p>抛出，捕捉，以及传播错误会在错误处理章节详细说明。</p>
-<p>断言<br>可选类型可以让你判断值是否存在，你可以在代码中优雅地处理值缺失的情况。然而，在某些情况下，如果值缺失或者值并不满足特定的条件，你的代码可能没办法继续执行。这时，你可以在你的代码中触发一个 断言（assertion） 来结束代码运行并通过调试来找到值缺失的原因。</p>
-<p>使用断言进行调试</p>
-<p>断言会在运行时判断一个逻辑条件是否为 true。从字面意思来说，断言“断言”一个条件是否为真。你可以使用断言来保证在运行其他代码之前，某些重要的条件已经被满足。如果条件判断为 true，代码运行会继续进行；如果条件判断为 false，代码执行结束，你的应用被终止。</p>
-<p>如果你的代码在调试环境下触发了一个断言，比如你在 Xcode 中构建并运行一个应用，你可以清楚地看到不合法的状态发生在哪里并检查断言被触发时你的应用的状态。此外，断言允许你附加一条调试信息。</p>
-<p>你可以使用全局 assert(<em>:</em>:file:line:) 函数来写一个断言。向这个函数传入一个结果为 true 或者 false 的表达式以及一条信息，当表达式的结果为 false 的时候这条信息会被显示：</p>
-<p>let age = -3<br>assert(age &gt;= 0, “A person’s age cannot be less than zero”)<br>// 因为 age &lt; 0，所以断言会触发<br>在这个例子中，只有 age &gt;= 0 为 true 的时候，即 age 的值非负的时候，代码才会继续执行。如果 age 的值是负数，就像代码中那样，age &gt;= 0 为 false，断言被触发，终止应用。</p>
-<p>如果不需要断言信息，可以省略，就像这样：</p>
-<p>assert(age &gt;= 0)<br>注意：<br>当代码使用优化编译的时候，断言将会被禁用，例如在 Xcode 中，使用默认的 target Release 配置选项来 build 时，断言会被禁用。<br>何时使用断言</p>
-<p>当条件可能为假时使用断言，但是最终一定要<em>保证</em>条件为真，这样你的代码才能继续运行。断言的适用情景：</p>
-<p>整数类型的下标索引被传入一个自定义下标实现，但是下标索引值可能太小或者太大。<br>需要给函数传入一个值，但是非法的值可能导致函数不能正常执行。<br>一个可选值现在是 nil，但是后面的代码运行需要一个非 nil 值。    </p>
+            <h2 id="RN父组件与子组件之间通信"><a href="#RN父组件与子组件之间通信" class="headerlink" title="RN父组件与子组件之间通信"></a>RN父组件与子组件之间通信</h2><p>在开发中 我们经常会用到组件的复用。这样我们势必要用到如何在父组件中更新或者调用子组件的状态。</p>
+<p>以一个dialog 组件例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Dialog ref=&quot;dialog&quot; callback=&#123;this.callback.bind(this)&#125;/&gt;</div></pre></td></tr></table></figure>
+<p>自定义回调方法callback，处理选中逻辑<br>注意了 这里有一个ref参数 参数值将决定你后面如何在父组件中怎么调用Dialog 里面的方法<br>调用dialog 的 show方法 显示组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">this.refs.dialog.show(&quot;确定要取消订单吗&quot;);</div></pre></td></tr></table></figure>
 
           
         
@@ -908,7 +815,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/24/Swift可选绑定/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/RN布局之FlexBox/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -933,8 +840,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/24/Swift可选绑定/" itemprop="url">
-                  Swift可选绑定
+                <a class="post-title-link" href="/2017/03/22/RN布局之FlexBox/" itemprop="url">
+                  RN布局之FlexBox
                 </a>
               
             
@@ -948,8 +855,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-24T16:42:39+08:00">
-                2016-11-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T17:59:48+08:00">
+                2017-03-22
               </time>
             
 
@@ -964,8 +871,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/24/Swift可选绑定/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/24/Swift可选绑定/" itemprop="commentCount"></span>
+                <a href="/2017/03/22/RN布局之FlexBox/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/RN布局之FlexBox/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -993,18 +900,9 @@
       
         
           
-            <h3 id="Swift3-0可选绑定"><a href="#Swift3-0可选绑定" class="headerlink" title="Swift3.0可选绑定"></a>Swift3.0可选绑定</h3><p>使用可选绑定（optional binding）来判断可选类型是否包含值，如果包含就把值赋给一个临时常量或者变量。可选绑定可以用在 if 和 while 语句中，这条语句不仅可以用来判断可选类型中是否有值，同时可以将可选类型中的值赋给一个常量或者变量。if 和 while 语句，请参考控制流。</p>
-<p>像下面这样在 if 语句中写一个可选绑定：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if let constantName = someOptional &#123;</div><div class="line">    statements</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>你可以像上面这样使用可选绑定来重写 possibleNumber 这个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if let actualNumber = Int(possibleNumber) &#123;</div><div class="line">    print(&quot;\&apos;\(possibleNumber)\&apos; has an integer value of \(actualNumber)&quot;)</div><div class="line">&#125; else &#123;</div><div class="line">    print(&quot;\&apos;\(possibleNumber)\&apos; could not be converted to an integer&quot;)</div><div class="line">&#125;</div><div class="line">// 输出 &quot;&apos;123&apos; has an integer value of 123&quot;</div></pre></td></tr></table></figure>
-<p>这段代码可以被理解为：</p>
-<p>“如果 Int(possibleNumber) 返回的可选 Int 包含一个值，创建一个叫做 actualNumber 的新常量并将可选包含的值赋给它。”</p>
-<p>如果转换成功，actualNumber 常量可以在 if 语句的第一个分支中使用。它已经被可选类型 包含的 值初始化过，所以不需要再使用 ! 后缀来获取它的值。在这个例子中，actualNumber 只被用来输出转换结果。</p>
-<p>你可以在可选绑定中使用常量和变量。如果你想在if语句的第一个分支中操作 actualNumber 的值，你可以改成 if var actualNumber，这样可选类型包含的值就会被赋给一个变量而非常量。</p>
-<p>你可以包含多个可选绑定或多个布尔条件在一个 if 语句中，只要使用逗号分开就行。只要有任意一个可选绑定的值为nil，或者任意一个布尔条件为false，则整个if条件判断为false，这时你就需要使用嵌套 if 条件语句来处理，如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">if let firstNumber = Int(&quot;4&quot;), let secondNumber = Int(&quot;42&quot;), firstNumber &lt; secondNumber &amp;&amp; secondNumber &lt; 100 &#123;</div><div class="line">    print(&quot;\(firstNumber) &lt; \(secondNumber) &lt; 100&quot;)</div><div class="line">&#125;</div><div class="line">// 输出 &quot;4 &lt; 42 &lt; 100&quot;</div><div class="line"></div><div class="line">if let firstNumber = Int(&quot;4&quot;) &#123;</div><div class="line">    if let secondNumber = Int(&quot;42&quot;) &#123;</div><div class="line">        if firstNumber &lt; secondNumber &amp;&amp; secondNumber &lt; 100 &#123;</div><div class="line">            print(&quot;\(firstNumber) &lt; \(secondNumber) &lt; 100&quot;)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">// 输出 &quot;4 &lt; 42 &lt; 100&quot;</div></pre></td></tr></table></figure>
-<p>注意： 在 if 条件语句中使用常量和变量来创建一个可选绑定，仅在 if 语句的句中(body)中才能获取到值。相反，在 guard 语句中使用常量和变量来创建一个可选绑定，仅在 guard 语句外且在语句后才能获取到值，</p>
+            <h2 id="RN布局之FlexBox"><a href="#RN布局之FlexBox" class="headerlink" title="RN布局之FlexBox"></a>RN布局之FlexBox</h2><p><a href="http://blog.csdn.net/codetomylaw/article/details/52190636" target="_blank" rel="external">链接地址</a></p>
+<p>综述<br>flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。采用flex布局的元素，称为flex容器（flex Container），简称”容器”。它的所有子元素自动成为容器成员，称为flex项目（flex item），简称”项目”。</p>
+<p><strong>图解非常清楚 适合快速入门 &amp;&amp; 复习总结</strong></p>
 
           
         
@@ -1043,7 +941,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/24/Swift元组/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/RN组件之Text和TextInput常用点/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -1068,8 +966,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/24/Swift元组/" itemprop="url">
-                  Swift元组
+                <a class="post-title-link" href="/2017/03/22/RN组件之Text和TextInput常用点/" itemprop="url">
+                  RN组件之Text和TextInput常用点
                 </a>
               
             
@@ -1083,8 +981,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-24T16:27:45+08:00">
-                2016-11-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T17:40:33+08:00">
+                2017-03-22
               </time>
             
 
@@ -1099,8 +997,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/24/Swift元组/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/24/Swift元组/" itemprop="commentCount"></span>
+                <a href="/2017/03/22/RN组件之Text和TextInput常用点/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/RN组件之Text和TextInput常用点/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1128,23 +1026,45 @@
       
         
           
-            <h3 id="Swift3-0元组"><a href="#Swift3-0元组" class="headerlink" title="Swift3.0元组"></a>Swift3.0元组</h3><p>元组（tuples）把多个值组合成一个复合值。元组内的值可以是任意类型，并不要求是相同类型。</p>
-<p>下面这个例子中，(404, “Not Found”) 是一个描述 HTTP 状态码（HTTP status code）的元组。HTTP 状态码是当你请求网页的时候 web 服务器返回的一个特殊值。如果你请求的网页不存在就会返回一个 404 Not Found 状态码。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let http404Error = (404, &quot;Not Found&quot;)</div><div class="line">// http404Error 的类型是 (Int, String)，值是 (404, &quot;Not Found&quot;)</div></pre></td></tr></table></figure>
-<p>(404, “Not Found”) 元组把一个 Int 值和一个 String 值组合起来表示 HTTP 状态码的两个部分：一个数字和一个人类可读的描述。这个元组可以被描述为“一个类型为 (Int, String) 的元组”。</p>
-<p>你可以把任意顺序的类型组合成一个元组，这个元组可以包含所有类型。只要你想，你可以创建一个类型为 (Int, Int, Int) 或者 (String, Bool) 或者其他任何你想要的组合的元组。</p>
-<p>你可以将一个元组的内容分解（decompose）成单独的常量和变量，然后你就可以正常使用它们了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let (statusCode, statusMessage) = http404Error</div><div class="line">print(&quot;The status code is \(statusCode)&quot;)</div><div class="line">// 输出 &quot;The status code is 404&quot;</div><div class="line">print(&quot;The status message is \(statusMessage)&quot;)</div><div class="line">// 输出 &quot;The status message is Not Found&quot;</div></pre></td></tr></table></figure>
-<p>如果你只需要一部分元组值，分解的时候可以把要忽略的部分用下划线（_）标记：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let (justTheStatusCode, _) = http404Error</div><div class="line">print(&quot;The status code is \(justTheStatusCode)&quot;)</div><div class="line">// 输出 &quot;The status code is 404&quot;</div></pre></td></tr></table></figure>
-<p>此外，你还可以通过下标来访问元组中的单个元素，下标从零开始：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">print(&quot;The status code is \(http404Error.0)&quot;)</div><div class="line">// 输出 &quot;The status code is 404&quot;</div><div class="line">print(&quot;The status message is \(http404Error.1)&quot;)</div><div class="line">// 输出 &quot;The status message is Not Found&quot;</div></pre></td></tr></table></figure>
-<p>你可以在定义元组的时候给单个元素命名：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let http200Status = (statusCode: 200, description: &quot;OK&quot;)</div></pre></td></tr></table></figure>
-<p>给元组中的元素命名后，你可以通过名字来获取这些元素的值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">print(&quot;The status code is \(http200Status.statusCode)&quot;)</div><div class="line">// 输出 &quot;The status code is 200&quot;</div><div class="line">print(&quot;The status message is \(http200Status.description)&quot;)</div><div class="line">// 输出 &quot;The status message is OK&quot;</div></pre></td></tr></table></figure>
-<p>作为函数返回值时，元组非常有用。一个用来获取网页的函数可能会返回一个 (Int, String) 元组来描述是否获取成功。和只能返回一个类型的值比较起来，一个包含两个不同类型值的元组可以让函数的返回信息更有用。请参考函数参数与返回值。</p>
-<p>注意：<br>元组在临时组织值的时候很有用，但是并不适合创建复杂的数据结构。如果你的数据结构并不是临时使用，请使用类或者结构体而不是元组</p>
+            <h2 id="Text组件"><a href="#Text组件" class="headerlink" title="Text组件"></a>Text组件</h2><p>1、在使用Text的过程中，实现文本垂直居中、水平居中的效果（iOS和Android通用）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;View  style=&#123;styles.textView&#125;&gt;  </div><div class="line">    &lt;Text style=&#123;styles.text&#125;&gt; 水平垂直居中&lt;/Text&gt;  </div><div class="line">&lt;/View&gt;  </div><div class="line">  </div><div class="line">textView:&#123;  </div><div class="line">  flexDirection:&apos;column&apos;,  </div><div class="line">  justifyContent:&apos;center&apos;,  </div><div class="line">  alignItems:&apos;center&apos;,  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">text:&#123;  </div><div class="line">    fontSize:12,  </div><div class="line">    color:&apos;#f2f2f2&apos;,  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>尽量用view去包裹一层Text组件，text组件只负责基础的文字样式，View组件负责对齐方式等。</p>
+<p>2、在Android平台上，Text组件里使用paddingLeft 属性，不好使，直接顶着View了。<br>      解决方式：1）将paddingLeft放在View属性上<br>                        2）将paddingLeft修改为marginLeft<br>      建议使用第一种方案修改，把对齐方式交给view去处理，Text只负责文本属性的显示。</p>
+<h2 id="TextInput组件"><a href="#TextInput组件" class="headerlink" title="TextInput组件"></a>TextInput组件</h2><p>####TextInput属性：</p>
+<p>autoCapitalize enum(‘none’, ‘sentences’, ‘words’, ‘characters’)<br>控制TextInput是否要自动将特定字符切换为大写：<br>characters: 所有的字符。<br>words: 每个单词的第一个字符。<br>sentences: 每句话的第一个字符（默认）。<br>none: 不自动切换任何字符为大写。</p>
+<p>autoCorrect bool<br>如果为false，会关闭拼写自动修正。默认值是true。</p>
+<p>autoFocus bool<br>如果为true，在componentDidMount后会获得焦点。默认值为false。</p>
+<p>blurOnSubmit bool<br>如果为true，文本框会在提交的时候失焦。对于单行输入框默认值为true，多行则为false。注意：对于多行输入框来说，如果将blurOnSubmit设为true，则在按下回车键时就会失去焦点同时触发onSubmitEditing事件，而不会换行。</p>
+<p>defaultValue string<br>提供一个文本框中的初始值。当用户开始输入的时候，值就可以改变。在一些简单的使用情形下，如果你不想用监听消息然后更新value属性的方法来保持属性和状态同步的时候，就可以用defaultValue来代替。</p>
+<p>editable bool<br>如果为false，文本框是不可编辑的。默认值为true。</p>
+<p>keyboardType enum(“default”, ‘numeric’, ‘email-address’, “ascii-capable”, ‘numbers-and-punctuation’, ‘url’, ‘number-pad’, ‘phone-pad’, ‘name-phone-pad’, ‘decimal-pad’, ‘twitter’, ‘web-search’)<br>决定弹出的何种软键盘的，譬如numeric（纯数字键盘）。这些值在所有平台都可用：<br>default<br>numeric<br>email-address</p>
+<p>maxLength number<br>限制文本框中最多的字符数。使用这个属性而不用JS逻辑去实现，可以避免闪烁的现象。</p>
+<p>multiline bool<br>如果为true，文本框中可以输入多行文字。默认值为false。</p>
+<p>onBlur function<br>当文本框失去焦点的时候调用此回调函数。</p>
+<p>onChange function<br>当文本框内容变化时调用此回调函数。</p>
+<p>onChangeText function<br>当文本框内容变化时调用此回调函数。改变后的文字内容会作为参数传递。</p>
+<p>onEndEditing function<br>当文本输入结束后调用此回调函数。</p>
+<p>onFocus function<br>当文本框获得焦点的时候调用此回调函数。</p>
+<p>onLayout function<br>当组件挂载或者布局变化的时候调用，参数为{x, y, width, height}。</p>
+<p>onSubmitEditing function<br>此回调函数当软键盘的确定/提交按钮被按下的时候调用此函数。如果multiline={true}，此属性不可用。</p>
+<p>placeholder string<br>如果没有任何文字输入，会显示此字符串。</p>
+<p>placeholderTextColor string<br>占位字符串显示的文字颜色。</p>
+<p>secureTextEntry bool<br>如果为true，文本框会遮住之前输入的文字，这样类似密码之类的敏感文字可以更加安全。默认值为false。</p>
+<p>selectTextOnFocus bool<br>如果为true，当获得焦点的时候，所有的文字都会被选中。</p>
+<p>selectionColor string<br>设置输入框高亮时的颜色（在iOS上还包括光标）</p>
+<p>style Text#style<br>译注：这意味着本组件继承了所有Text的样式。</p>
+<p>value string<br>文本框中的文字内容。<br>TextInput是一个受约束的(Controlled)的组件，意味着如果提供了value属性，原生值会被强制与value属性保持一致。在大部分情况下这都工作的很好，不过有些情况下会导致一些闪烁现象——一个常见的原因就是通过不改变value来阻止用户进行编辑。如果你希望阻止用户输入，可以考虑设置editable={false}；如果你是希望限制输入的长度，可以考虑设置maxLength属性，这两个属性都不会导致闪烁。</p>
+<p>ios   clearButtonMode enum(‘never’, ‘while-editing’, ‘unless-editing’, ‘always’)<br>是否要在文本框右侧显示“清除”按钮。</p>
+<p>ios    clearTextOnFocus bool<br>如果为true，每次开始输入的时候都会清除文本框的内容。</p>
+<p>ios    enablesReturnKeyAutomatically bool<br>如果为true，键盘会在文本框内没有文字的时候禁用确认按钮。默认值为false。</p>
+<p>ios    keyboardAppearance enum(‘default’, ‘light’, ‘dark’)<br>指定键盘的颜色。</p>
+<p>ios   onKeyPress function<br>当一个键被按下的时候调用此回调。被按下的键会作为参数传递给回调函数。会在onChange之前调用。</p>
+<p>ios    returnKeyType enum(‘default’, ‘go’, ‘google’, ‘join’, ‘next’, ‘route’, ‘search’, ‘send’, ‘yahoo’, ‘done’, ‘emergency-call’)<br>决定“确定”按钮显示的内容。</p>
+<p>ios    selectionState DocumentSelectionState<br>参见DocumentSelectionState.js，可以控制一个文档中哪段文字被选中的状态。</p>
+<p>android  numberOfLines number<br>设置输入框的行数。当multiline设置为true时使用它，可以占据对应的行数。</p>
+<p>android  underlineColorAndroid string<br>文本框的下划线颜色(译注：如果要去掉文本框的边框，请将此属性设为透明transparent)。</p>
+<p>注意点：<br>1、在使用TextInput的过程中，在Android平台下，输入框下有个横线，此时需要将属性underlineColorAndroid  设置为transparent来解决。</p>
+<p>2、常用的TextInput是作为文本域，譬如最多输入50个字符。<br>      此时需要设置   multiline ={true}<br>                   maxLength ={50}</p>
 
           
         
@@ -1183,7 +1103,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/16/Android多模块并存布局重复问题/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/Navigator语法介绍及经典应用/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -1208,8 +1128,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/16/Android多模块并存布局重复问题/" itemprop="url">
-                  Android多模块并存布局重复问题
+                <a class="post-title-link" href="/2017/03/22/Navigator语法介绍及经典应用/" itemprop="url">
+                  Navigator语法介绍及经典应用
                 </a>
               
             
@@ -1223,8 +1143,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-16T15:35:05+08:00">
-                2016-11-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T16:22:01+08:00">
+                2017-03-22
               </time>
             
 
@@ -1239,8 +1159,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/16/Android多模块并存布局重复问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/16/Android多模块并存布局重复问题/" itemprop="commentCount"></span>
+                <a href="/2017/03/22/Navigator语法介绍及经典应用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/Navigator语法介绍及经典应用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1268,13 +1188,23 @@
       
         
           
-            <p>今天在集成一个使用相对比较普通的第三方库是,出现了莫名其妙的一个错误。如下：<br>NoSuchFieldError: No static field toolBar of type I in class Lcom/disdemo/R$id; or its superclasses</p>
-<p>androidjava.lang.NoSuchFieldError: R$id.xxx </p>
-<p>等类似的错误,反复check了下 没啥错误啊。</p>
-<p>最后从stackoverflow 看到也有遇到过类似情况的。大致清楚问题原因在 重复布局上面。<br>因为是第三方库 里面有些布局文件在主包 或者其他的第三方库中也存在。问题就出现在这里</p>
-<p>我这边的情况是将之前的源码形式替换为引入模块。就没删除原来 导入的布局文件 。偷懒的结果啊</p>
-<p>删除对应重复的资源 ，编译通过。</p>
-<p>总结:当这种莫名其妙的问题出现了时，一定要思考这之前你都大致做了什么操作 才能更好的定位问题。<br>不是每次你的错误都能在网上找到类似的情况。其实我一开始check时 也发现进入是的源码的位置<br>而不是通过gradle 引入的。当我删除源码后 发现出现了布局错误。此时我光看错误信息 而没有仔细分析为什么会出现这种情况 也没有想到时布局资源等没有删除。最后通过stackoverflow上面找到相关问题 才明确知道是资源重复 导致打包时出现的问题。</p>
+            <h2 id="Navigator语法介绍及经典应用"><a href="#Navigator语法介绍及经典应用" class="headerlink" title="Navigator语法介绍及经典应用"></a>Navigator语法介绍及经典应用</h2><p>官网说明:<br>使用导航器可以让你在应用的不同场景（页面）间进行切换。导航器通过路由对象来分辨不同的场景。利用renderScene方法，导航栏可以根据指定的路由来渲染场景。  </p>
+<p>可以通过configureScene属性获取指定路由对象的配置信息，从而改变场景的动画或者手势。查看Navigator.SceneConfigs来获取默认的动画和更多的场景配置选项。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>getCurrentRoutes() - 获取当前栈里的路由，也就是push进来，没有pop掉的那些。<br>jumpBack() - 跳回之前的路由，当然前提是保留现在的，还可以再跳回来，会给你保留原样。<br>jumpForward() - 上一个方法不是调到之前的路由了么，用这个跳回来就好了。<br>jumpTo(route) - 跳转到已有的场景并且不卸载。<br>push(route) - 跳转到新的场景，并且将场景入栈，你可以稍后跳转过去<br>pop() - 跳转回去并且卸载掉当前场景<br>replace(route) - 用一个新的路由替换掉当前场景<br>replaceAtIndex(route, index) - 替换掉指定序列的路由场景<br>replacePrevious(route) - 替换掉之前的场景<br>resetTo(route) - 跳转到新的场景，并且重置整个路由栈<br>immediatelyResetRouteStack(routeStack) - 用新的路由数组来重置路由栈<br>popToRoute(route) - pop到路由指定的场景，在整个路由栈中，处于指定场景之后的场景将会被卸载。<br>popToTop() - pop到栈中的第一个场景，卸载掉所有的其他场景。</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>1、configureScene<br>function 可选的函数，用来配置场景动画和手势。会带有两个参数调用，一个是当前的路由，一个是当前的路由栈。然后它应当返回一个场景配置对象<br>(route, routeStack) =&gt; Navigator.SceneConfigs.FloatFromRight</p>
+<p>Navigator.SceneConfigs.PushFromRight (默认)<br>Navigator.SceneConfigs.FloatFromRight<br>Navigator.SceneConfigs.FloatFromLeft<br>Navigator.SceneConfigs.FloatFromBottom<br>Navigator.SceneConfigs.FloatFromBottomAndroid<br>Navigator.SceneConfigs.FadeAndroid<br>Navigator.SceneConfigs.HorizontalSwipeJump<br>Navigator.SceneConfigs.HorizontalSwipeJumpFromRight<br>Navigator.SceneConfigs.VerticalUpSwipeJump<br>Navigator.SceneConfigs.VerticalDownSwipeJump</p>
+<p>2、renderScene<br>function 必要参数。用来渲染指定路由的场景。调用的参数是路由和导航器。</p>
+<p>(route, navigator) =&gt; <myscenecomponent title="{route.title}" navigator="{navigator}"></myscenecomponent></p>
+<p>3、initialRoute<br>object </p>
+<p>定义启动时加载的路由。路由是导航栏用来识别渲染场景的一个对象。</p>
+<p>其实，做过Android开发的是不是很熟悉，startActivityForResult    </p>
+<p>那么我们看看RN怎么实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">render() &#123;  </div><div class="line">  let defaultName = &apos;FormManager&apos;;  </div><div class="line">  let defaultComponent = FormManager;  </div><div class="line">  return (  </div><div class="line">    &lt;Navigator  </div><div class="line">      initialRoute=&#123;&#123; name: defaultName, component: defaultComponent &#125;&#125;  </div><div class="line">      configureScene=&#123;(route) =&gt; &#123;  </div><div class="line">        if (route.sceneConfig) &#123;  </div><div class="line">          return route.sceneConfig;  </div><div class="line">        &#125;  </div><div class="line">        return Navigator.SceneConfigs.HorizontalSwipeJump;  </div><div class="line">      &#125;&#125;  </div><div class="line">      renderScene=&#123;(route, navigator) =&gt; &#123;  </div><div class="line">        let Component = route.component;  </div><div class="line">        return &lt;Component &#123;...route.params&#125; navigator=&#123;navigator&#125; /&gt;  </div><div class="line">      &#125;&#125;  </div><div class="line">    /&gt;  </div><div class="line">  );  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的代码：<br>我们通过initialRoute初始化了一个Route，定义了初始化的Component。<br>设置了切换的动画效果：Navigator.SceneConfigs.HorizontalSwipeJump<br>指定路由和导航器，注意一定要有navigator={navigator} ，将导航器传递。</p>
+<h3 id="跳转页面"><a href="#跳转页面" class="headerlink" title="跳转页面"></a>跳转页面</h3><p>在FormManager这个Component中，譬如我们点击字段1，调用onPress方法，跳转到选项页面，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">choose()&#123;  </div><div class="line">  const self=this;  </div><div class="line">  const &#123; navigator &#125; = this.props;  </div><div class="line">  if(navigator) &#123;  </div><div class="line">      var route =&#123;  </div><div class="line">          name: &apos;ChooseItemComponent&apos;,  </div><div class="line">          component: ChooseItemComponent,  </div><div class="line">          params:&#123;  </div><div class="line">              title:&quot;选择页面&quot;,  </div><div class="line">              selectedItem:self.state.city,  </div><div class="line">              originList:cityList,  </div><div class="line">              getSelectedItem: function(selectedItem) &#123;  </div><div class="line">                InteractionManager.runAfterInteractions(() =&gt; &#123;  </div><div class="line">                  self.setState(&#123;  </div><div class="line">                      city: cityList[selectedItem],  </div><div class="line">                  &#125;)  </div><div class="line">                &#125;);  </div><div class="line">              &#125;  </div><div class="line">          &#125;,  </div><div class="line">          sceneConfig:Navigator.SceneConfigs.VerticalUpSwipeJump,  </div><div class="line">      &#125;;  </div><div class="line">      navigator.push(route);  </div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="返回-并传值给上个页面"><a href="#返回-并传值给上个页面" class="headerlink" title="返回 并传值给上个页面"></a>返回 并传值给上个页面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">chooseItem(i)&#123;  </div><div class="line">  var  self = this ;  </div><div class="line">  InteractionManager.runAfterInteractions(() =&gt; &#123;  </div><div class="line">    self.setState(&#123;  </div><div class="line">        selectedItem:i,  </div><div class="line">    &#125;)  </div><div class="line">  &#125;);  </div><div class="line">  const &#123; navigator &#125; = this.props;  </div><div class="line">  // 这里通过判断props 中对应的方法是否存在 如果存在调用上个页面传过来的方法 实现回传值的功能</div><div class="line">  if(this.props.getSelectedItem)&#123;  </div><div class="line">    this.props.getSelectedItem(i);  </div><div class="line">  &#125;  </div><div class="line">  setTimeout(function()&#123;  </div><div class="line">    if(navigator) &#123;  </div><div class="line">        navigator.pop();  </div><div class="line">    &#125;  </div><div class="line">  &#125; ,500);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里我们做了以下几件事：<br>1、修改本页面的状态机变量，通常表现为，选中某项后，显示一个对勾图片。（用户体验）<br>2、从props中获取Navigator，调用回调方法getSelectedItem，将值回传给parent。<br>3、pop掉本页面</p>
 
           
         
@@ -1313,7 +1243,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/02/nginx解决400badrequest的方法/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/RN与native交互之Callback、Promise/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -1338,8 +1268,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/02/nginx解决400badrequest的方法/" itemprop="url">
-                  nginx解决400badrequest的方法
+                <a class="post-title-link" href="/2017/03/22/RN与native交互之Callback、Promise/" itemprop="url">
+                  RN与native交互之Callback、Promise
                 </a>
               
             
@@ -1353,8 +1283,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-02T10:36:24+08:00">
-                2016-11-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T14:56:34+08:00">
+                2017-03-22
               </time>
             
 
@@ -1369,8 +1299,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/11/02/nginx解决400badrequest的方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/02/nginx解决400badrequest的方法/" itemprop="commentCount"></span>
+                <a href="/2017/03/22/RN与native交互之Callback、Promise/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/RN与native交互之Callback、Promise/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1398,29 +1328,18 @@
       
         
           
-            <h3 id="400-错误"><a href="#400-错误" class="headerlink" title="400 错误"></a>400 错误</h3><p>今天早上发现APP主会场反复切换页面10次 出现400错误。经过排查是请求链接后面反复追加了很多遍参数问题 导致header 过大 造成400 错误 。下面是一些常见可能造成400错误的情况。</p>
-<p>nginx的400错误比较难查找原因，因为此错误并不是每次都会出现的，另外，出现错误的时候，通常在浏览器和日志里看不到任何有关提示。</p>
-<p>经长时间观察和大量试验查明，此乃request header过大所引起，request过大，通常是由于cookie中写入了较大的值所引起。</p>
-<p>所幸在nginx中是有办法解决这个问题：</p>
-<p>在nginx.conf中，将client_header_buffer_size和large_client_header_buffers都调大，可缓解此问题。</p>
-<p>其中主要配置是client_header_buffer_size这一项，默认是1k，所以header小于1k的话是不会出现问题的。</p>
-<p>按我现在配置是：</p>
-<p>client_header_buffer_size 16k;<br>large_client_header_buffers 4 64k;</p>
-<p>这个配置可接收16k以下的header，在浏览器中cookie的字节数上限会非常大，所以实在是不好去使用那最大值。</p>
-<p>最好的解决办法当然是不要往cookie里写入太多的东西，不过如果是一个很大的网站，那么在一个二级域名写入了顶级域名下的cookie似乎是不好控制的，这需要制定一个规范来控制顶级域名的cookie写入量才可以解决得了。</p>
-<p>这个可能也是nginx的一个bug，因为buffer这个词义上说为缓冲，也就是说，如果没取完的话，是会循环取直至取完的，但是nginx并没有进行循环的动作直接返回了400错误。nginx的下一个版本可能会修正这个问题。</p>
-<hr>
-<p>最近发现16k的buffer居然还是不够用，改成128k了，变态一点对nginx来说也不是很大问题，重要是人不能因为这种事情搞疯了</p>
-<hr>
-<p>有朋友发现nginx在后台接收到很大的header时也会出现400错误，如：</p>
-<p>2008/08/02 22:51:14 [error] 16613#0: *105 upstream sent too big header while reading response header from upstream, client: 。。。。。。。。。。。。。</p>
-<p>在nginx的wiki里找了一遍，没有找到合适的语句，wiki更新过慢？于是查了一遍源码，在ngx_http_proxy_module.c也没有找到合适的语句。</p>
-<p>不过在nginx 0.3.12版的更新里有这么一句话：</p>
-<p>*) Change: the “proxy_header_buffer_size” and</p>
-<p>   “fastcgi_header_buffer_size” directives was renamed to the</p>
-<p>   “proxy_buffer_size” and “fastcgi_buffer_size” directives.</p>
-<p>不清楚作者改名用意何在，不过，proxy_buffer_size之前的名字proxy_header_buffer_size倒是有点合适，如果有朋友老遇到后台接收时抛出400错误，可以增大这个参数一试。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>问题大致就是出现在header过大 。需要进来规避此种情况</p>
+            <h2 id="RN与native交互之Callback、Promise"><a href="#RN与native交互之Callback、Promise" class="headerlink" title="RN与native交互之Callback、Promise"></a>RN与native交互之Callback、Promise</h2><p>一、Callback机制<br>首先Calllback是异步的，RN端调用Native端，Native会callback，但是时机是不确定的，如果多次调用的话，会存在问题。<br>Naive端是无法主动通过回调函数向RN端发送消息的。<br>具体实现代码如下：<br>Native端暴露好接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@ReactMethod  </div><div class="line">public void measureLayout(Callback errorCallback,Callback successCallback)&#123;  </div><div class="line">    try &#123;  </div><div class="line">        successCallback.invoke(100, 100, 200, 200);//调用回调函数，返回结果  </div><div class="line">    &#125; catch (IllegalViewOperationException e) &#123;  </div><div class="line">        errorCallback.invoke(e.getMessage());  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在RN端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;Text style=&#123;&#123; fontSize: 25 &#125;&#125; onPress=&#123;this.CallAndroid_callback&#125; &gt;调用原生方法_使用_回调函数</div><div class="line">&lt;/Text&gt;  </div><div class="line">  CallAndroid_callback = () =&gt; &#123;  </div><div class="line">    NativeModules.MyNativeModule.measureLayout((msg) =&gt; &#123;  </div><div class="line">        console.log(msg);  </div><div class="line">      &#125;,(x, y, width, height) =&gt; &#123;  </div><div class="line">        console.log(x + &apos;坐标,&apos; + y + &apos;坐标,&apos; + width + &apos;宽,&apos; + height + &apos;高&apos;);  </div><div class="line">      &#125;  </div><div class="line">    );  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>二、promise机制<br>Promise 的状态<br>一个 Promise 的当前状态必须为以下三种状态中的一种：等待态（Pending）、完成态（Fulfilled）和拒绝态（Rejected）。<br>等待态（Pending）<br>处于等待态时，promise 需满足以下条件：</p>
+<p>可以迁移至完成态或拒绝态</p>
+<p>完成态（Fulfilled）<br>处于完成态时，promise 需满足以下条件：<br>不能迁移至其他任何状态<br>必须拥有一个不可变的终值<br>拒绝态（Rejected）<br>处于拒绝态时，promise 需满足以下条件：</p>
+<p>不能迁移至其他任何状态<br>必须拥有一个不可变的据因</p>
+<p>在Native侧，暴露接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@ReactMethod  </div><div class="line">public void rnCallNative_promise(String msg, Promise promise) &#123;  </div><div class="line">  </div><div class="line">    try &#123;  </div><div class="line">        //业务逻辑处理  </div><div class="line">        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();  </div><div class="line">        String componentName = getCurrentActivity().getComponentName().toString();  </div><div class="line">        promise.resolve(componentName);  </div><div class="line">    &#125;catch (Exception e)&#123;  </div><div class="line">        promise.reject(&quot;100&quot;,e.getMessage());//promise 失败  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在RN侧：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;Text style=&#123;&#123; fontSize: 25 &#125;&#125; onPress=&#123;this.CallAndroid_promise&#125; &gt;调用原生方法_使用_Promise</div><div class="line">&lt;/Text&gt;  </div><div class="line">  </div><div class="line">  CallAndroid_promise = () =&gt; &#123;  </div><div class="line">    NativeModules.MyNativeModule.rnCallNative_promise(&apos;参数1&apos;,&apos;参数2&apos;).then(  </div><div class="line">      (msg) =&gt; &#123;  </div><div class="line">        console.log(&apos;promise成功：&apos;+msg);  </div><div class="line">      &#125;  </div><div class="line">    ).catch(  </div><div class="line">      (err) =&gt; &#123;  </div><div class="line">        console.log(err);  </div><div class="line">      &#125;  </div><div class="line">      );  </div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
           
         
@@ -1459,7 +1378,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/31/gem出错/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/08/ReactNative-Text的属性和样式/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -1484,8 +1403,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/31/gem出错/" itemprop="url">
-                  gem出错
+                <a class="post-title-link" href="/2017/03/08/ReactNative-Text的属性和样式/" itemprop="url">
+                  ReactNative_Text的属性和样式
                 </a>
               
             
@@ -1499,8 +1418,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-31T18:11:00+08:00">
-                2016-10-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T22:06:27+08:00">
+                2017-03-08
               </time>
             
 
@@ -1515,8 +1434,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/10/31/gem出错/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/31/gem出错/" itemprop="commentCount"></span>
+                <a href="/2017/03/08/ReactNative-Text的属性和样式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/08/ReactNative-Text的属性和样式/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1544,14 +1463,39 @@
       
         
           
-            <h3 id="mac安装cocoapods"><a href="#mac安装cocoapods" class="headerlink" title="mac安装cocoapods"></a>mac安装cocoapods</h3><p>先把本机ruby 环境进行了系统升级 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem update —system</div></pre></td></tr></table></figure>
-<p>顺利完成升级后<br>再安装cocoapods</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install cocoapods</div></pre></td></tr></table></figure>
-<p>出现错误：<br>ERROR:  While executing gem … (Errno::EPERM)<br>    Operation not permitted - /usr/bin/xcodeproj</p>
-<p>大致搜索了下 。都说是ruby版本低之类的，可以查看ruby版本 确认已经更新完成。<br>最后在 cocoapods github主页找到了相关问题 ：<br><a href="">https://github.com/CocoaPods/CocoaPods/issues/3680</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install -n /usr/local/bin cocoapods</div></pre></td></tr></table></figure>
-<p>解决问题！</p>
+            <h2 id="RN-Text-基础属性-amp-样式"><a href="#RN-Text-基础属性-amp-样式" class="headerlink" title="RN Text 基础属性&amp;样式"></a>RN Text 基础属性&amp;样式</h2><h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li>numberOfLines 文本行数限制，添加后超过限制行数文本会在末尾默认以…的形式省略。</li>
+<li>ellipsizeMode 设置文本缩略格式，配合numberOfLines使用，values：<br>tail：在末尾…省略（默认值）<br>clip：在末尾切割，直接切割字符无省略符<br>head：在前面…省略<br>middle：在中间…省略</li>
+<li>onPress 点击事件</li>
+<li>style 样式</li>
+</ul>
+<h3 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h3><ul>
+<li>color 字体颜色</li>
+<li>fontSize 字体大小</li>
+<li>fontFamily 字体</li>
+<li>fontStyle 字的样式  （normal：正常italic：斜体）</li>
+<li>fontWeight 设置粗体（normal：正常bold：粗体100，200，300， 400， 500， 600， 700， 800， 900）</li>
+<li>lineHeight 行高</li>
+<li>textAlign 文字对其方式（auto：自动对齐left：左对齐right：右对齐center：居中对齐）</li>
+<li>textDecorationLine 下划线和删除线样式（none：无线 underline：下划线line-through：删除线</li>
+<li>underline line-through：下划线和删除线）</li>
+</ul>
+<h2 id="RN-View的属性和样式"><a href="#RN-View的属性和样式" class="headerlink" title="RN View的属性和样式"></a>RN View的属性和样式</h2><h3 id="样式-1"><a href="#样式-1" class="headerlink" title="样式"></a>样式</h3><ul>
+<li>width：宽度</li>
+<li>height：高度</li>
+<li>backgroundColor：背景颜色</li>
+<li>backfaceVisibility：是否显示翻转’visible’，’hidden’</li>
+<li>borderColor：边框颜色</li>
+<li>borderWidth：边框宽度</li>
+<li>borderRadius：边框圆角半径</li>
+<li>borderStyle：边框样式’solid’实线，’dotted’点， ‘dashed’虚线</li>
+<li>borderTopColor：上边框颜色</li>
+<li>borderTopWidth：上边框宽度</li>
+<li>borderTopLeftRadius：左上角边框圆角的半径</li>
+<li>borderTopRightRadius：右上角边框圆角的半径</li>
+<li>overflow：内容超过容器时超出显示还是隐藏’visible’， ‘hidden’</li>
+<li>opacity：透明度</li>
+</ul>
 
           
         
@@ -1590,7 +1534,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/Swift创建导航控制器/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/03/AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -1615,8 +1559,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/25/Swift创建导航控制器/" itemprop="url">
-                  Swift创建导航控制器
+                <a class="post-title-link" href="/2017/03/03/AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法/" itemprop="url">
+                  AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法
                 </a>
               
             
@@ -1630,8 +1574,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-25T11:41:51+08:00">
-                2016-10-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-03T09:56:53+08:00">
+                2017-03-03
               </time>
             
 
@@ -1646,8 +1590,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/10/25/Swift创建导航控制器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/25/Swift创建导航控制器/" itemprop="commentCount"></span>
+                <a href="/2017/03/03/AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/03/AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1675,7 +1619,10 @@
       
         
           
-            <h3 id="Swift创建导航控制器"><a href="#Swift创建导航控制器" class="headerlink" title="Swift创建导航控制器"></a>Swift创建导航控制器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 导航按钮文字颜色 字体大小</div><div class="line">let attributes =  [NSForegroundColorAttributeName: UIColor.gray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line">let attributesPressed =  [NSForegroundColorAttributeName: UIColor.darkGray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line"></div><div class="line">// 首页</div><div class="line">// 第一步 获取ViewController 控制器，并且创建一个 导航控制器用来承载ViewController</div><div class="line">let mHomeViewController = UIStoryboard(name: &quot;HomePage&quot;, bundle: nil).instantiateViewController(withIdentifier: &quot;HomePage&quot;) as! HomePageViewController</div><div class="line">let mHomeNavController = UINavigationController(rootViewController: mHomeViewController)</div><div class="line">// 第二步 创建一个导航item 并且设置导航按钮的点击icon切换 设置字体颜色 和大小</div><div class="line">let mHomeNormalImage = UIImage(named: &quot;main_bottom_category_normal&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeSelectedImage = UIImage(named: &quot;main_bottom_category_hover&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeTabBarItem = UITabBarItem(title: &quot;精选&quot;, image: mHomeNormalImage, selectedImage: mHomeSelectedImage)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributes, for: .normal)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributesPressed, for: .focused)</div><div class="line">// 第三步:将导航item 对象 赋值给导航控制器</div><div class="line">mHomeNavController.tabBarItem = mHomeTabBarItem</div></pre></td></tr></table></figure>
+            <h2 id="AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法"><a href="#AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法" class="headerlink" title="AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法"></a>AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法</h2><p>AndroidStudio中获取查看签名SHA1证书指纹数据或MD5的方法</p>
+<p>原来在Eclipse中获取SHA1或者MD5，在IDE界面上就可以查找到。<br>切换到Android Studio后，如何查看呢？找了半天没找到。那就老办法命令行。<br>第一步、打开Android Studio的Tools-&gt;Open Terminal…（新版本已经调整了位置，如下图所示）</p>
+<p>第二步、输入命令：keytool -v -list -keystore <strong><em>.keystore<br>【一定要记得加上 -v 参数，不然只能看到SHA1，没有MD5】【</em></strong>.keystore，需要替换为你自己的密钥所在路径和文件名，也可以直接拷贝到.android目录】</p>
+<p>备注:密钥文件一定要在当前目录，不在的话 自行cd 到指定目录即可</p>
 
           
         
@@ -1709,7 +1656,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1750,7 +1697,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">63</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1760,7 +1707,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

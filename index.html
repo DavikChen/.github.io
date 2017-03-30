@@ -249,7 +249,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/Android在一个APP中通过包名或类名启动另一个APP/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/30/用happen-before规则重新审视DCL/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -274,8 +274,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/27/Android在一个APP中通过包名或类名启动另一个APP/" itemprop="url">
-                  Android在一个APP中通过包名或类名启动另一个APP
+                <a class="post-title-link" href="/2017/03/30/用happen-before规则重新审视DCL/" itemprop="url">
+                  用happen-before规则重新审视DCL
                 </a>
               
             
@@ -289,8 +289,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T18:28:05+08:00">
-                2017-03-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-30T13:34:02+08:00">
+                2017-03-30
               </time>
             
 
@@ -305,8 +305,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/27/Android在一个APP中通过包名或类名启动另一个APP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/Android在一个APP中通过包名或类名启动另一个APP/" itemprop="commentCount"></span>
+                <a href="/2017/03/30/用happen-before规则重新审视DCL/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/30/用happen-before规则重新审视DCL/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -334,47 +334,8 @@
       
         
           
-            <h2 id="Android在一个APP中通过包名或类名启动另一个APP"><a href="#Android在一个APP中通过包名或类名启动另一个APP" class="headerlink" title="Android在一个APP中通过包名或类名启动另一个APP"></a>Android在一个APP中通过包名或类名启动另一个APP</h2><p>开发有时需要在一个应用中启动另一个应用，比如Launcher加载所有的已安装的程序的列表，当点击图标时可以启动另一个应用。一般我们知道了另一个应用的包名和MainActivity的名字之后便可以直接通过如下代码来启动：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Intent intent = new Intent(Intent.ACTION_MAIN);  </div><div class="line">intent.addCategory(Intent.CATEGORY_LAUNCHER);              </div><div class="line">ComponentName cn = new ComponentName(packageName, className);              </div><div class="line">intent.setComponent(cn);  </div><div class="line">startActivity(intent); </div><div class="line">``` </div><div class="line">但是更多的时候，我们一般都不知道目标应用程序的启动Activity的类名，而只知道包名，接下来就需要这么做了，我封装成了一个方法，如下所示</div></pre></td></tr></table></figure>
-<p>private void doStartApplicationWithPackageName(String packagename) {</p>
-<pre><code>    // 通过包名获取此APP详细信息，包括Activities、services、versioncode、name等等
-    PackageInfo packageinfo = null;
-    try {
-        packageinfo = getPackageManager().getPackageInfo(packagename, 0);
-    } catch (NameNotFoundException e) {
-        e.printStackTrace();
-    }
-    if (packageinfo == null) {
-        return;
-    }
-
-    // 创建一个类别为CATEGORY_LAUNCHER的该包名的Intent
-    Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
-    resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-    resolveIntent.setPackage(packageinfo.packageName);
-
-    // 通过getPackageManager()的queryIntentActivities方法遍历
-    List&lt;ResolveInfo&gt; resolveinfoList = getPackageManager()
-            .queryIntentActivities(resolveIntent, 0);
-
-    ResolveInfo resolveinfo = resolveinfoList.iterator().next();
-    if (resolveinfo != null) {
-        // packagename = 参数packname
-        String packageName = resolveinfo.activityInfo.packageName;
-        // 这个就是我们要找的该APP的LAUNCHER的Activity[组织形式：packagename.mainActivityname]
-        String className = resolveinfo.activityInfo.name;
-        // LAUNCHER Intent
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-
-        // 设置ComponentName参数1:packagename参数2:MainActivity路径
-        ComponentName cn = new ComponentName(packageName, className);
-
-        intent.setComponent(cn);
-        startActivity(intent);
-    }
-}
-</code></pre><p>```</p>
+            <h2 id="用happen-before规则重新审视DCL"><a href="#用happen-before规则重新审视DCL" class="headerlink" title="用happen-before规则重新审视DCL"></a>用happen-before规则重新审视DCL</h2><p>这篇帖子对设计模式中的单例设计 已经DCL的 进行了很详细的说明 值得一读。</p>
+<p>链接:<a href="http://www.iteye.com/topic/260515" target="_blank" rel="external">http://www.iteye.com/topic/260515</a></p>
 
           
         
@@ -413,7 +374,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/Android开发之多线程编程简单例子/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/30/RandomAccessFile用法/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -438,8 +399,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/27/Android开发之多线程编程简单例子/" itemprop="url">
-                  Android开发之多线程编程简单例子
+                <a class="post-title-link" href="/2017/03/30/RandomAccessFile用法/" itemprop="url">
+                  RandomAccessFile用法
                 </a>
               
             
@@ -453,8 +414,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T18:23:07+08:00">
-                2017-03-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-30T11:35:55+08:00">
+                2017-03-30
               </time>
             
 
@@ -469,8 +430,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/27/Android开发之多线程编程简单例子/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/Android开发之多线程编程简单例子/" itemprop="commentCount"></span>
+                <a href="/2017/03/30/RandomAccessFile用法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/30/RandomAccessFile用法/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -498,8 +459,19 @@
       
         
           
-            <h2 id="Android开发之多线程编程简单例子"><a href="#Android开发之多线程编程简单例子" class="headerlink" title="Android开发之多线程编程简单例子"></a>Android开发之多线程编程简单例子</h2><p>Android可有两种方式实现多线程，一种是继承Thread类，一种是实现Runnable接口；前者只要继承了Thread类同时覆写了本类中的run()方法就可以实现多线程操作了，但是Java中一个类只能继承一个父类，这是这种方式的局限性，后者只需要实现一个接口而已，Java中可以实现多个接口。</p>
-<p>转自：<a href="http://blog.csdn.net/mad1989/article/details/38234759" target="_blank" rel="external">http://blog.csdn.net/mad1989/article/details/38234759</a></p>
+            <h2 id="RandomAccessFile用法"><a href="#RandomAccessFile用法" class="headerlink" title="RandomAccessFile用法"></a>RandomAccessFile用法</h2><p>RandomAccessFile是用来访问那些保存数据记录的文件的，你就可以用seek( )方法来访问记录，并进行读写了。这些记录的大小不必相同；但是其大小和位置必须是可知的。但是该类仅限于操作文件。</p>
+<p>RandomAccessFile不属于InputStream和OutputStream类系的。实际上，除了实现DataInput和DataOutput接口之外(DataInputStream和DataOutputStream也实现了这两个接口)，它和这两个类系毫不相干，甚至不使用InputStream和OutputStream类中已经存在的任何功能；它是一个完全独立的类，所有方法(绝大多数都只属于它自己)都是从零开始写的。这可能是因为RandomAccessFile能在文件里面前后移动，所以它的行为与其它的I/O类有些根本性的不同。总而言之，它是一个直接继承Object的，独立的类。</p>
+<p>基本上，RandomAccessFile的工作方式是，把DataInputStream和DataOutputStream结合起来，再加上它自己的一些方法，比如定位用的getFilePointer( )，在文件里移动用的seek( )，以及判断文件大小的length( )、skipBytes()跳过多少字节数。此外，它的构造函数还要一个表示以只读方式(“r”)，还是以读写方式(“rw”)打开文件的参数 (和C的fopen( )一模一样)。它不支持只写文件。</p>
+<p>只有RandomAccessFile才有seek搜寻方法，而这个方法也只适用于文件。BufferedInputStream有一个mark( )方法，你可以用它来设定标记(把结果保存在一个内部变量里)，然后再调用reset( )返回这个位置，但是它的功能太弱了，而且也不怎么实用。</p>
+<p>RandomAccessFile的绝大多数功能，但不是全部，已经被JDK 1.4的nio的”内存映射文件(memory-mapped files)”给取代了，你该考虑一下是不是用”内存映射文件”来代替RandomAccessFile了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class TestRandomAccessFile &#123;  </div><div class="line">    public static void main(String[] args) throws IOException &#123;  </div><div class="line">        RandomAccessFile rf = new RandomAccessFile(&quot;rtest.dat&quot;, &quot;rw&quot;);  </div><div class="line">        for (int i = 0; i &lt; 10; i++) &#123;  </div><div class="line">            //写入基本类型double数据  </div><div class="line">            rf.writeDouble(i * 1.414);  </div><div class="line">        &#125;  </div><div class="line">        rf.close();  </div><div class="line">        rf = new RandomAccessFile(&quot;rtest.dat&quot;, &quot;rw&quot;);  </div><div class="line">        //直接将文件指针移到第5个double数据后面  </div><div class="line">        rf.seek(5 * 8);  </div><div class="line">        //覆盖第6个double数据  </div><div class="line">        rf.writeDouble(47.0001);  </div><div class="line">        rf.close();  </div><div class="line">        rf = new RandomAccessFile(&quot;rtest.dat&quot;, &quot;r&quot;);  </div><div class="line">        for (int i = 0; i &lt; 10; i++) &#123;  </div><div class="line">            System.out.println(&quot;Value &quot; + i + &quot;: &quot; + rf.readDouble());  </div><div class="line">        &#125;  </div><div class="line">        rf.close();  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="内存映射文件"><a href="#内存映射文件" class="headerlink" title="内存映射文件"></a>内存映射文件</h3><p>内存映射文件能让你创建和修改那些因为太大而无法放入内存的文件。有了内存映射文件，你就可以认为文件已经全部读进了内存，然后把它当成一个非常大的数组来访问。这种解决办法能大大简化修改文件的代码。<br>fileChannel.map(FileChannel.MapMode mode, long position, long size)将此通道的文件区域直接映射到内存中。注意，你必须指明，它是从文件的哪个位置开始映射的，映射的范围又有多大；也就是说，它还可以映射一个大文件的某个小片断。</p>
+<p>MappedByteBuffer是ByteBuffer的子类，因此它具备了ByteBuffer的所有方法，但新添了force()将缓冲区的内容强制刷新到存储设备中去、load()将存储设备中的数据加载到内存中、isLoaded()位置内存中的数据是否与存储设置上同步。这里只简单地演示了一下put()和get()方法，除此之外，你还可以使用asCharBuffer( )之类的方法得到相应基本类型数据的缓冲视图后，可以方便的读写基本类型数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public class LargeMappedFiles &#123;  </div><div class="line">    static int length = 0x8000000; // 128 Mb  </div><div class="line">  </div><div class="line">    public static void main(String[] args) throws Exception &#123;  </div><div class="line">        // 为了以可读可写的方式打开文件，这里使用RandomAccessFile来创建文件。  </div><div class="line">        FileChannel fc = new RandomAccessFile(&quot;test.dat&quot;, &quot;rw&quot;).getChannel();  </div><div class="line">        //注意，文件通道的可读可写要建立在文件流本身可读写的基础之上  </div><div class="line">        MappedByteBuffer out = fc.map(FileChannel.MapMode.READ_WRITE, 0, length);  </div><div class="line">        //写128M的内容  </div><div class="line">        for (int i = 0; i &lt; length; i++) &#123;  </div><div class="line">            out.put((byte) &apos;x&apos;);  </div><div class="line">        &#125;  </div><div class="line">        System.out.println(&quot;Finished writing&quot;);  </div><div class="line">        //读取文件中间6个字节内容  </div><div class="line">        for (int i = length / 2; i &lt; length / 2 + 6; i++) &#123;  </div><div class="line">            System.out.print((char) out.get(i));  </div><div class="line">        &#125;  </div><div class="line">        fc.close();  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>尽管映射写似乎要用到FileOutputStream，但是映射文件中的所有输出 必须使用RandomAccessFile，但如果只需要读时可以使用FileInputStream，写映射文件时一定要使用随机访问文件，可能写时要读的原因吧。</p>
+<p>该程序创建了一个128Mb的文件，如果一次性读到内存可能导致内存溢出，但这里访问好像只是一瞬间的事，这是因为，真正调入内存的只是其中的一小部分，其余部分则被放在交换文件上。这样你就可以很方便地修改超大型的文件了(最大可以到2 GB)。注意，Java是调用操作系统的”文件映射机制”来提升性能的。</p>
+<p>利用RandomAccessFile实现文件的多线程下载，即多线程下载一个文件时，将文件分成几块，每块用不同的线程进行下载。下面是一个利用多线程在写文件时的例子，其中预先分配文件所需要的空间，然后在所分配的空间中进行分块，然后写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">/** </div><div class="line"> * 测试利用多线程进行文件的写操作 </div><div class="line"> */  </div><div class="line">public class Test &#123;  </div><div class="line">  </div><div class="line">    public static void main(String[] args) throws Exception &#123;  </div><div class="line">        // 预分配文件所占的磁盘空间，磁盘中会创建一个指定大小的文件  </div><div class="line">        RandomAccessFile raf = new RandomAccessFile(&quot;D://abc.txt&quot;, &quot;rw&quot;);  </div><div class="line">        raf.setLength(1024*1024); // 预分配 1M 的文件空间  </div><div class="line">        raf.close();  </div><div class="line">          </div><div class="line">        // 所要写入的文件内容  </div><div class="line">        String s1 = &quot;第一个字符串&quot;;  </div><div class="line">        String s2 = &quot;第二个字符串&quot;;  </div><div class="line">        String s3 = &quot;第三个字符串&quot;;  </div><div class="line">        String s4 = &quot;第四个字符串&quot;;  </div><div class="line">        String s5 = &quot;第五个字符串&quot;;  </div><div class="line">          </div><div class="line">        // 利用多线程同时写入一个文件  </div><div class="line">        new FileWriteThread(1024*1,s1.getBytes()).start(); // 从文件的1024字节之后开始写入数据  </div><div class="line">        new FileWriteThread(1024*2,s2.getBytes()).start(); // 从文件的2048字节之后开始写入数据  </div><div class="line">        new FileWriteThread(1024*3,s3.getBytes()).start(); // 从文件的3072字节之后开始写入数据  </div><div class="line">        new FileWriteThread(1024*4,s4.getBytes()).start(); // 从文件的4096字节之后开始写入数据  </div><div class="line">        new FileWriteThread(1024*5,s5.getBytes()).start(); // 从文件的5120字节之后开始写入数据  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    // 利用线程在文件的指定位置写入指定数据  </div><div class="line">    static class FileWriteThread extends Thread&#123;  </div><div class="line">        private int skip;  </div><div class="line">        private byte[] content;  </div><div class="line">          </div><div class="line">        public FileWriteThread(int skip,byte[] content)&#123;  </div><div class="line">            this.skip = skip;  </div><div class="line">            this.content = content;  </div><div class="line">        &#125;  </div><div class="line">          </div><div class="line">        public void run()&#123;  </div><div class="line">            RandomAccessFile raf = null;  </div><div class="line">            try &#123;  </div><div class="line">                raf = new RandomAccessFile(&quot;D://abc.txt&quot;, &quot;rw&quot;);  </div><div class="line">                raf.seek(skip);  </div><div class="line">                raf.write(content);  </div><div class="line">            &#125; catch (FileNotFoundException e) &#123;  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125; catch (IOException e) &#123;  </div><div class="line">                // TODO Auto-generated catch block  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125; finally &#123;  </div><div class="line">                try &#123;  </div><div class="line">                    raf.close();  </div><div class="line">                &#125; catch (Exception e) &#123;  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
           
         
@@ -538,7 +510,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/通过Parcelable协议传递数据出现错误/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/Android设计模式之单例设计模式的优缺点/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -563,8 +535,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/27/通过Parcelable协议传递数据出现错误/" itemprop="url">
-                  通过Parcelable协议传递数据出现错误
+                <a class="post-title-link" href="/2017/03/29/Android设计模式之单例设计模式的优缺点/" itemprop="url">
+                  Android设计模式之单例设计模式的优缺点
                 </a>
               
             
@@ -578,8 +550,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T17:56:36+08:00">
-                2017-03-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T18:28:09+08:00">
+                2017-03-29
               </time>
             
 
@@ -594,8 +566,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/27/通过Parcelable协议传递数据出现错误/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/通过Parcelable协议传递数据出现错误/" itemprop="commentCount"></span>
+                <a href="/2017/03/29/Android设计模式之单例设计模式的优缺点/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/Android设计模式之单例设计模式的优缺点/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -623,9 +595,17 @@
       
         
           
-            <h2 id="通过Parcelable协议传递数据出现错误"><a href="#通过Parcelable协议传递数据出现错误" class="headerlink" title="通过Parcelable协议传递数据出现错误"></a>通过Parcelable协议传递数据出现错误</h2><p>转自:<a href="http://blog.csdn.net/mad1989/article/details/36295879" target="_blank" rel="external">http://blog.csdn.net/mad1989/article/details/36295879</a></p>
-<p>自定义的数据类型需要implements Parcelable接口，并实现两个方法： describeContents和writeToParcel，还有一个最重要的CREATOR</p>
-<p><strong>写&amp;读对象属性的顺序需要保持一致 。否则会出现异常。</strong></p>
+            <h2 id="Android设计模式之单例设计模式的优缺点"><a href="#Android设计模式之单例设计模式的优缺点" class="headerlink" title="Android设计模式之单例设计模式的优缺点"></a>Android设计模式之单例设计模式的优缺点</h2><p>单例模式是运用频率很高的模式，但是，由于在客户端通常没有高并发的情况，因此，选择哪种实现方式并不会有太大的影响。即便如此，出于效率考虑，我们推荐使用以下两种方式的实现形式。</p>
+<p>1.Double Check Lock(DCL)实现单例</p>
+<p>DCL方式实现单例模式的优点是既能够在需要时才初始化单例，又能保证线程安全，且单例对象初始化后调用getInstance不进行同步锁，代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class Singleton&#123;</div><div class="line">    private static Singleton sInstance = null;</div><div class="line">    private Singleton()&#123;</div><div class="line">    &#125;</div><div class="line">    public void doSomething()&#123;</div><div class="line">    //这是你的业务代码</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static Singleton getInstance()&#123;</div><div class="line">    if(sInstance == null)&#123;</div><div class="line">        synchronized (Singleton.class)&#123;</div><div class="line">            if(sInstance == null)&#123;</div><div class="line">                sInstance = new Singleton();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return sInstance;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2.静态内部类单例模式<br>DCL虽然在一定程度上解决了资源消耗、多余的同步、线程安全等问题，但是，它还是在某些情况下出现失效问题。这个问题被称为双重检查锁定（DCL）失效，在《Java并发编程实践》一书的最后谈到了这个问题，并指出这种“优化”是丑陋的，不赞成使用。而建议使用如下的代码代替：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class Singleton&#123;</div><div class="line">    private Singleton()&#123;&#125;</div><div class="line">    public static Singleton getInstance()&#123;</div><div class="line">        return SingletonHolder.sInstance;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">    *静态内部类</div><div class="line">    */</div><div class="line">    private static class SingletonHolder&#123;</div><div class="line">        private static final Singleton sInstance = new Singleton();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当第一次 加载Singleton类时并不会初始化sInstance，只有在第一次调用Singleton的getInstance方法时才会导致sInstance被初始化。因此，第一次调用getInstance方法会导致虚拟机加载SingletonHolder类，这种方式不仅能够确保线程安全，也能够保证单例对象的唯一性，同时也延迟了单例的实例化，所以这才是推荐使用的单例模式实现方式。</p>
+<p>优点：</p>
+<p>（1）由于单例模式在内存中只有一个实例，减少了内存开支，特别是一个对象需要频繁地创建、销毁时，而且创建或销毁时性能又无法优化，单例模式的优势就非常明显。<br>（2）由于单例模式只生成一个实例，所以减少了系统的性能开销，当一个对象的产生需要比较多的资源时，比如读取配置、产生其他依赖对象时，则可以通过在应用启动时直接产生一个单例对象，然后用永久驻留内存的方式来解决。<br>（3）单例模式可以避免对资源的多重占用，例如一个写文件操作，由于只有一个实例存在内存中，避免对同一个资源文件的同时写操作。<br>（4）单例模式可以在系统设置全局的访问点，优化和共享资源访问，例如，可以设计一个单例类，负责所有数据表的映射处理。</p>
+<p>缺点：</p>
+<p>（1）单例模式一般没有接口，扩展很困难，若要扩展，除了修改代码基本上没有第二种途径可以实现。<br>（2）单例对象如果持有Context，那么很容易引发内存泄露，此时需要注意传给单例对象的Context最好是Application Context。</p>
 
           
         
@@ -664,7 +644,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/Android点击EditText文本框之外任何地方隐藏键盘的解决办法/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/安卓解决从系统安装完成打开和返回桌面打开启动两次应用的问题/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -689,8 +669,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/27/Android点击EditText文本框之外任何地方隐藏键盘的解决办法/" itemprop="url">
-                  Android点击EditText文本框之外任何地方隐藏键盘的解决办法
+                <a class="post-title-link" href="/2017/03/29/安卓解决从系统安装完成打开和返回桌面打开启动两次应用的问题/" itemprop="url">
+                  安卓解决从系统安装完成打开和返回桌面打开启动两次应用的问题
                 </a>
               
             
@@ -704,8 +684,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T17:50:14+08:00">
-                2017-03-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T17:45:49+08:00">
+                2017-03-29
               </time>
             
 
@@ -720,8 +700,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/27/Android点击EditText文本框之外任何地方隐藏键盘的解决办法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/Android点击EditText文本框之外任何地方隐藏键盘的解决办法/" itemprop="commentCount"></span>
+                <a href="/2017/03/29/安卓解决从系统安装完成打开和返回桌面打开启动两次应用的问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/安卓解决从系统安装完成打开和返回桌面打开启动两次应用的问题/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -749,13 +729,11 @@
       
         
           
-            <h2 id="Android点击EditText文本框之外任何地方隐藏键盘的解决办法"><a href="#Android点击EditText文本框之外任何地方隐藏键盘的解决办法" class="headerlink" title="Android点击EditText文本框之外任何地方隐藏键盘的解决办法"></a>Android点击EditText文本框之外任何地方隐藏键盘的解决办法</h2><p>1，实现方法一：通过给当前界面布局文件的父layout设置点击事件（相当于给整个Activity设置点击事件），在事件里进行键盘隐藏</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@Override  </div><div class="line">public void onClick(View v) &#123;  </div><div class="line">    switch (v.getId()) &#123;  </div><div class="line">    case R.id.traceroute_rootview:  </div><div class="line">         InputMethodManager imm = (InputMethodManager)  </div><div class="line">         getSystemService(Context.INPUT_METHOD_SERVICE);  </div><div class="line">         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);  </div><div class="line">        break;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>2，实现思路二：通过dispatchTouchEvent每次ACTION_DOWN事件中动态判断非EditText本身区域的点击事件，然后在事件中进行屏蔽。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public  boolean isShouldHideInput(View v, MotionEvent event) &#123;</div><div class="line">		if (v != null &amp;&amp; (v instanceof EditText)) &#123;</div><div class="line">			int[] leftTop = &#123; 0, 0 &#125;;</div><div class="line">			//获取输入框当前的location位置</div><div class="line">			v.getLocationInWindow(leftTop);</div><div class="line">			int left = leftTop[0];</div><div class="line">			int top = leftTop[1];</div><div class="line">			int bottom = top + v.getHeight();</div><div class="line">			int right = left + v.getWidth();</div><div class="line">			if (event.getX() &gt; left &amp;&amp; event.getX() &lt; right</div><div class="line">					&amp;&amp; event.getY() &gt; top &amp;&amp; event.getY() &lt; bottom) &#123;</div><div class="line">				// 点击的是输入框区域，保留点击EditText的事件</div><div class="line">				return false;</div><div class="line">			&#125; else &#123;</div><div class="line">				return true;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return false;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<p>isShoudHideInput(View v,MotionEvent e)方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public  boolean isShouldHideInput(View v, MotionEvent event) &#123;</div><div class="line">		if (v != null &amp;&amp; (v instanceof EditText)) &#123;</div><div class="line">			int[] leftTop = &#123; 0, 0 &#125;;</div><div class="line">			//获取输入框当前的location位置</div><div class="line">			v.getLocationInWindow(leftTop);</div><div class="line">			int left = leftTop[0];</div><div class="line">			int top = leftTop[1];</div><div class="line">			int bottom = top + v.getHeight();</div><div class="line">			int right = left + v.getWidth();</div><div class="line">			if (event.getX() &gt; left &amp;&amp; event.getX() &lt; right</div><div class="line">					&amp;&amp; event.getY() &gt; top &amp;&amp; event.getY() &lt; bottom) &#123;</div><div class="line">				// 点击的是输入框区域，保留点击EditText的事件</div><div class="line">				return false;</div><div class="line">			&#125; else &#123;</div><div class="line">				return true;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return false;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<p>两种方案都可行 主要还是看你的需求场景了。</p>
+            <h2 id="安卓解决从系统安装完成打开和返回桌面打开启动两次应用的问题"><a href="#安卓解决从系统安装完成打开和返回桌面打开启动两次应用的问题" class="headerlink" title="安卓解决从系统安装完成打开和返回桌面打开启动两次应用的问题"></a>安卓解决从系统安装完成打开和返回桌面打开启动两次应用的问题</h2><p>解决方法：<br>说了那么多废话，下面给出解决方案，在你的应用的起始页，记住一定要是程序打开的第一个页面，在onCreate方法里，在super.onCreate(savedInstanceState)这一行代码之后，一定要在这行代码之后，插入以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">    super.onCreate(savedInstanceState);</div><div class="line">    if (!isTaskRoot()) &#123;</div><div class="line">        finish();</div><div class="line">        return;</div><div class="line">    &#125; else &#123;</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>if(!isTaskRoot())</code>，判断该Activity是不是任务空间的源Activity，“非”也就是说是被系统重新实例化出来，如果你就放在launcher Activity中话，这里可以直接return了。</p>
+<p>转:<a href="http://blog.csdn.net/woshizisezise/article/details/51598684" target="_blank" rel="external">http://blog.csdn.net/woshizisezise/article/details/51598684</a></p>
+<p>来源google ：<br><a href="https://code.google.com/p/android/issues/detail?id=14262" target="_blank" rel="external">https://code.google.com/p/android/issues/detail?id=14262</a></p>
 
           
         
@@ -794,7 +772,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/Java类的实例化-static-父类构造函数执行顺序/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/Activity之isTaskRoot和moveTaskToBack方法简介/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -819,8 +797,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/27/Java类的实例化-static-父类构造函数执行顺序/" itemprop="url">
-                  Java类的实例化-static-父类构造函数执行顺序
+                <a class="post-title-link" href="/2017/03/29/Activity之isTaskRoot和moveTaskToBack方法简介/" itemprop="url">
+                  Activity之isTaskRoot和moveTaskToBack方法简介
                 </a>
               
             
@@ -834,8 +812,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T17:39:09+08:00">
-                2017-03-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T17:44:04+08:00">
+                2017-03-29
               </time>
             
 
@@ -850,8 +828,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/27/Java类的实例化-static-父类构造函数执行顺序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/Java类的实例化-static-父类构造函数执行顺序/" itemprop="commentCount"></span>
+                <a href="/2017/03/29/Activity之isTaskRoot和moveTaskToBack方法简介/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/Activity之isTaskRoot和moveTaskToBack方法简介/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -879,32 +857,16 @@
       
         
           
-            <h2 id="Java类的实例化、static、父类构造函数执行顺序"><a href="#Java类的实例化、static、父类构造函数执行顺序" class="headerlink" title="Java类的实例化、static、父类构造函数执行顺序"></a>Java类的实例化、static、父类构造函数执行顺序</h2><p>复习Java基础，以免自己以后犯原则性错误，这是最基本，最基础的东西。</p>
-<p>A类:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">public class A &#123;</div><div class="line"></div><div class="line">	int a1 = 8;</div><div class="line">	int a2 = getA2();</div><div class="line">	&#123;</div><div class="line">		int a3 = 9;</div><div class="line">		System.out.println(&quot;top of A() a1=&quot; + a1 + &quot; a2=&quot; + a2 + &quot;  a3=&quot; + a3);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public A() &#123;</div><div class="line">		this(66);</div><div class="line">		System.out.print(&quot;A 构造函数\n&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	&#123;</div><div class="line">		System.out.println(&quot;below A()..has start&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public A(int num) &#123;</div><div class="line">		System.out.print(&quot;A 带参数构造函数: &quot; + num + &quot;\n&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	static &#123;</div><div class="line">		System.out.println(&quot;I`m a static &#123;&#125; from class A..&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	int getA2() &#123;</div><div class="line">		System.out.println(&quot;getA2..&quot;);</div><div class="line">		return 7;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void methodA() &#123;</div><div class="line">		System.out.println(&quot;methodA&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>B类:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">public class B extends A &#123;</div><div class="line"></div><div class="line">	int b1 = 0;</div><div class="line">	int b2 = getB2();</div><div class="line">	&#123;</div><div class="line">		int b3 = 5;</div><div class="line">		System.out.println(&quot;top of B() b1=&quot; + b1 + &quot; b2=&quot; + b2 + &quot; b3=&quot; + b3);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public B() &#123;</div><div class="line">		this(33);</div><div class="line">		// super(44);//添加super语句，会导致实例化时直接执行父类带参数的构造函数</div><div class="line">		System.out.print(&quot;B 构造函数\n&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public B(int num) &#123;</div><div class="line">		// 添加super语句，会导致实例化时直接执行父类带参数的构造函数</div><div class="line">		// 前提是带参数的构造函数B会被运行（new实例化或this）</div><div class="line">		// super(77);</div><div class="line"></div><div class="line">		System.out.print(&quot;B 带参数构造函数:&quot; + num + &quot;\n&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	&#123;</div><div class="line">		System.out.println(&quot;below B()..has start&quot;);</div><div class="line">	&#125;</div><div class="line">	static &#123;</div><div class="line">		System.out.println(&quot;I`m a static &#123;&#125; from class B..&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	int getB2() &#123;</div><div class="line">		System.out.println(&quot;getB2..&quot;);</div><div class="line">		return 33;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void methodA() &#123;</div><div class="line">		System.out.println(&quot;methoaA int class B&quot;);</div><div class="line">		super.methodA();</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>main 类:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class mymain &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		System.out.println(&quot;main app run..&quot;);</div><div class="line">		B b = new B();</div><div class="line">//		B b = new B(22);</div><div class="line">		b.methodA();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>实验一</p>
-<p>思考一下打印输出的顺序？</p>
-<p>打印输出结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">main app run..</div><div class="line">I`m a static &#123;&#125; from class A..</div><div class="line">I`m a static &#123;&#125; from class B..</div><div class="line">getA2..</div><div class="line">top of A() a1=8 a2=7  a3=9</div><div class="line">below A()..has start</div><div class="line">A 带参数构造函数: 66</div><div class="line">A 构造函数</div><div class="line">getB2..</div><div class="line">top of B() b1=0 b2=33 b3=5</div><div class="line">below B()..has start</div><div class="line">B 带参数构造函数:33</div><div class="line">B 构造函数</div><div class="line">methoaA int class B</div><div class="line">methodA</div></pre></td></tr></table></figure>
-<p>分析：B类无参的构造函数中的this语句并没有影响到父类A类的构造函数执行顺序</p>
-<p>实验二</p>
-<p>如果我把B类无参数的构造函数，this(33)换成super(44)呢，看一下结果？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">main app run..</div><div class="line">I`m a static &#123;&#125; from class A..</div><div class="line">I`m a static &#123;&#125; from class B..</div><div class="line">getA2..</div><div class="line">top of A() a1=8 a2=7  a3=9</div><div class="line">below A()..has start</div><div class="line">A 带参数构造函数: 44</div><div class="line">getB2..</div><div class="line">top of B() b1=0 b2=33 b3=5</div><div class="line">below B()..has start</div><div class="line">B 构造函数</div><div class="line">methoaA int class B</div><div class="line">methodA</div></pre></td></tr></table></figure>
-<p>分析：B类无参构造函数中的super语句直接影响了父类（A类）构造函数的执行顺序，由于super(44)指向了父类带参数的构造函数，造成实例化时，只执行了父类带参数的构造函数，由此看出，super语句的有与无，对父类带参/不带参的构造函数是有影响的。</p>
-<p>实验三</p>
-<p>如果B类无参数的构造函数，如一开始那样this(33)保留，super去掉；但是B类带参数的构造函数添加 super(77)语句，结果又会是什么呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">main app run..</div><div class="line">I`m a static &#123;&#125; from class A..</div><div class="line">I`m a static &#123;&#125; from class B..</div><div class="line">getA2..</div><div class="line">top of A() a1=8 a2=7  a3=9</div><div class="line">below A()..has start</div><div class="line">A 带参数构造函数: 77</div><div class="line">getB2..</div><div class="line">top of B() b1=0 b2=33 b3=5</div><div class="line">below B()..has start</div><div class="line">B 带参数构造函数:33</div><div class="line">B 构造函数</div><div class="line">methoaA int class B</div><div class="line">methodA</div></pre></td></tr></table></figure>
-<p>分析：B类带参数的构造函数中的super(77)，又影响了父类构造函数的执行顺序，导致父类没有执行无参的构造函数，这一切都是因为有super语句！但是请记住，因为实例化B类无参的构造函数中有一句：this(33)，使编译器看到了B类带参数构造函数中的super语句。假如说，没有this(33)语句，并且B类new时并没有new到带参数的构造函数，此时编译器并不会查找到super语句，也就继续执行父类无参的构造函数，就像实验一的结果一样。</p>
-<p><strong>综合结论：</strong><br>一个类的实例化过程：<br>1，首先会执行类中static代码块(不管代码块是否在类的开头还是末尾处)，如果这个类有父类，同样会优先查找父类中的static代码块，然后是当前类的static。</p>
-<p>2，然后会从父类的第一行开始执行，直至代码末尾处，中间不管是有赋值还是method调用，都会按顺序一一执行（method），普通代码块{ }…</p>
-<p>3，其次才是父类的构造函数，执行带参数或不带参数的构造函数，依赖于实例化的类的构造函数有没有super父类的带参或不带参的构造函数，上边试验二三已经证明。</p>
-<p>4，然后会从子类（当前类）的第一行开始执行，直至代码末尾处，中间不管是有赋值还是method调用，都会按顺序一一执行（method），普通代码块{ }…</p>
-<p>5，其次会是子类（当前类）的构造函数，按顺序执行。</p>
-<p>6，最后是类方法的调用执行，如果子类覆盖了父类的method，执行时会先执行子类覆盖的method，method内如果有super.method()，才会调用父类的同名method，否则不会。</p>
+            <h2 id="Activity之isTaskRoot和moveTaskToBack方法简介"><a href="#Activity之isTaskRoot和moveTaskToBack方法简介" class="headerlink" title="Activity之isTaskRoot和moveTaskToBack方法简介"></a>Activity之isTaskRoot和moveTaskToBack方法简介</h2><p>1、public boolean isTaskRoot()用来判断该Activity是否为任务栈中的根Activity，即启动应用的第一个Activity</p>
+<p>2、public boolean moveTaskToBack (boolean nonRoot)用于将activity退到后台，不是finish</p>
+<p>从生命周期来说，会执行onPause、onStop，但不会执行onDestroy</p>
+<p>恢复的时候也一样，会执行onStart、onResume，但不会执行onCreate</p>
+<p>参数nonRoot表示的含义是此方法对非根activity是否有效，也就是说true表示对所有activity均有效，false表示只对根activity有效。</p>
+<p>返回值：该activity被退出到后台或者他已经在后台了返回true，否则返回false</p>
+<p>官方文档：</p>
+<p>public boolean moveTaskToBack (boolean nonRoot)<br>Since: API Level 1Move the task containing this activity to the back of the activity stack. The activity’s order within the task is unchanged.</p>
+<p>Parameters<br>nonRoot If false then this only works if the activity is the root of a task; if true it will work for any activity in a task.</p>
+<p>Returns<br>If the task was moved (or it was already at the back) true is returned, else false.</p>
 
           
         
@@ -943,7 +905,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/Android客户端和服务器以TCP/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/android实现应用程序前台和后台之间转换的监听的两种方式/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -968,8 +930,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/27/Android客户端和服务器以TCP/" itemprop="url">
-                  Android客户端和服务器以TCP
+                <a class="post-title-link" href="/2017/03/29/android实现应用程序前台和后台之间转换的监听的两种方式/" itemprop="url">
+                  android实现应用程序前台和后台之间转换的监听的两种方式
                 </a>
               
             
@@ -983,8 +945,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T17:05:57+08:00">
-                2017-03-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T17:01:52+08:00">
+                2017-03-29
               </time>
             
 
@@ -999,8 +961,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/27/Android客户端和服务器以TCP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/Android客户端和服务器以TCP/" itemprop="commentCount"></span>
+                <a href="/2017/03/29/android实现应用程序前台和后台之间转换的监听的两种方式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/android实现应用程序前台和后台之间转换的监听的两种方式/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1028,13 +990,14 @@
       
         
           
-            <h2 id="Socket-通信原理-Android客户端和服务器以TCP-amp-amp-UDP方式互通"><a href="#Socket-通信原理-Android客户端和服务器以TCP-amp-amp-UDP方式互通" class="headerlink" title="Socket 通信原理(Android客户端和服务器以TCP&amp;&amp;UDP方式互通)"></a>Socket 通信原理(Android客户端和服务器以TCP&amp;&amp;UDP方式互通)</h2><p>转自:<a href="http://blog.csdn.net/mad1989/article/details/9147661" target="_blank" rel="external">http://blog.csdn.net/mad1989/article/details/9147661</a></p>
-<h4 id="一、Socket通信简介"><a href="#一、Socket通信简介" class="headerlink" title="一、Socket通信简介"></a>一、Socket通信简介</h4><p>Android与服务器的通信方式主要有两种，一是Http通信，一是Socket通信。两者的最大差异在于，http连接使用的是“请求—响应方式”，即在请求时建立连接通道，当客户端向服务器发送请求后，服务器端才能向客户端返回数据。而Socket通信则是在双方建立起连接后就可以直接进行数据的传输，在连接时可实现信息的主动推送，而不需要每次由客户端想服务器发送请求。 那么，什么是socket？Socket又称套接字，在程序内部提供了与外界通信的端口，即端口通信。通过建立socket连接，可为通信双方的数据传输传提供通道。socket的主要特点有数据丢失率低，使用简单且易于移植。</p>
-<p><strong>1.1什么是Socket Socket</strong><br>是一种抽象层，应用程序通过它来发送和接收数据，使用Socket可以将应用程序添加到网络中，与处于同一网络中的其他应用程序进行通信。简单来说，Socket提供了程序内部与外界通信的端口并为通信双方的提供了数据传输通道。</p>
-<p><strong>1.2Socket的分类</strong><br>根据不同的的底层协议，Socket的实现是多样化的。本指南中只介绍TCP/IP协议族的内容，在这个协议族当中主要的Socket类型为流套接字（streamsocket）和数据报套接字(datagramsocket)。流套接字将TCP作为其端对端协议，提供了一个可信赖的字节流服务。数据报套接字使用UDP协议，提供数据打包发送服务。 下面，我们来认识一下这两种Socket类型的基本实现模型。</p>
-<h4 id="Socket基本实现原理"><a href="#Socket基本实现原理" class="headerlink" title="Socket基本实现原理"></a>Socket基本实现原理</h4><p><strong>3.1基于TCP协议的Socket</strong><br>服务器端首先声明一个ServerSocket对象并且指定端口号，然后调用Serversocket的accept（）方法接收客户端的数据。accept（）方法在没有数据进行接收的处于堵塞状态。（Socketsocket=serversocket.accept()）,一旦接收到数据，通过inputstream读取接收的数据。<br>  客户端创建一个Socket对象，指定服务器端的ip地址和端口号（Socketsocket=newSocket(“172.168.10.108”,8080);）,通过inputstream读取数据，获取服务器发出的数据（OutputStreamoutputstream=socket.getOutputStream()），最后将要发送的数据写入到outputstream即可进行TCP协议的socket数据传输。</p>
-<p><strong>3.2基于UDP协议的数据传输</strong></p>
-<p>服务器端首先创建一个DatagramSocket对象，并且指点监听的端口。接下来创建一个空的DatagramSocket对象用于接收数据（bytedata[]=newbyte[1024;]DatagramSocketpacket=newDatagramSocket（data，data.length））,使用DatagramSocket的receive方法接收客户端发送的数据，receive（）与serversocket的accepet（）类似，在没有数据进行接收的处于堵塞状态。<br>客户端也创建个DatagramSocket对象，并且指点监听的端口。接下来创建一个InetAddress对象，这个对象类似与一个网络的发送地址（InetAddressserveraddress=InetAddress.getByName（”172.168.1.120”））.定义要发送的一个字符串，创建一个DatagramPacket对象，并制定要讲这个数据报包发送到网络的那个地址以及端口号，最后使用DatagramSocket的对象的send（）发送数据。*（Stringstr=”hello”;bytedata[]=str.getByte();DatagramPacketpacket=new DatagramPacket(data,data.length,serveraddress,4567);socket.send(packet);）</p>
+            <h2 id="android实现应用程序前台和后台之间转换的监听的两种方式"><a href="#android实现应用程序前台和后台之间转换的监听的两种方式" class="headerlink" title="android实现应用程序前台和后台之间转换的监听的两种方式"></a>android实现应用程序前台和后台之间转换的监听的两种方式</h2><h3 id="一、通过ActivityManager-RunningAppProcessInfo判断"><a href="#一、通过ActivityManager-RunningAppProcessInfo判断" class="headerlink" title="一、通过ActivityManager.RunningAppProcessInfo判断"></a>一、通过ActivityManager.RunningAppProcessInfo判断</h3><p>首先，我们需要写一个BaseActivity，然后让我们应用程序的Activity都继承自BaseActivity，这样就可以统一管理，然后在BaseActivity的onResume()和onStop()方法中进行判断应用程序是否进入到后台并且是否从后台返回到了前台，直接看代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">public class BaseActivity extends Activity &#123;</div><div class="line"></div><div class="line">    public static boolean isActive; //全局变量</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_base);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onResume() &#123;</div><div class="line">        if (!isActive) &#123;</div><div class="line">            //app 从后台唤醒，进入前台</div><div class="line">            isActive = true;</div><div class="line">            Log.i(&quot;ACTIVITY&quot;, &quot;程序从后台唤醒&quot;);</div><div class="line">        &#125;</div><div class="line">        super.onResume();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onStart() &#123;</div><div class="line">        super.onStart();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onPause() &#123;</div><div class="line">        super.onPause();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onStop() &#123;</div><div class="line">        if (!isAppOnForeground()) &#123;</div><div class="line">            //app 进入后台</div><div class="line">            isActive = false;//记录当前已经进入后台</div><div class="line">            Log.i(&quot;ACTIVITY&quot;, &quot;程序进入后台&quot;);</div><div class="line">        &#125;</div><div class="line">        super.onStop();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onDestroy() &#123;</div><div class="line">        super.onDestroy();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * APP是否处于前台唤醒状态</div><div class="line">     *</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public boolean isAppOnForeground() &#123;</div><div class="line">        ActivityManager activityManager = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);</div><div class="line">        String packageName = getApplicationContext().getPackageName();</div><div class="line">        List&lt;ActivityManager.RunningAppProcessInfo&gt; appProcesses = activityManager</div><div class="line">                .getRunningAppProcesses();</div><div class="line">        if (appProcesses == null)</div><div class="line">            return false;</div><div class="line"></div><div class="line">        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) &#123;</div><div class="line">            // The name of the process that this object is associated with.</div><div class="line">            if (appProcess.processName.equals(packageName)</div><div class="line">                    &amp;&amp; appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) &#123;</div><div class="line">                return true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面我们来看看运行效果：</p>
+<p>10-23 12:31:31.610 23043-23043/com.cn.foregroundtest I/ACTIVITY: 程序从后台唤醒<br>10-23 12:31:39.432 23043-23043/com.cn.foregroundtest I/ACTIVITY: 程序进入后台<br>这样来回切换会发现，当我们按home键或者锁屏按钮的时候，就会执行onStop里面的方法，当我们重新返回到应用中的时候，会走onResume里面的方法，这样第一种方式就实现了。</p>
+<h3 id="二、通过Application中注册生命周期监听回调的方式"><a href="#二、通过Application中注册生命周期监听回调的方式" class="headerlink" title="二、通过Application中注册生命周期监听回调的方式"></a>二、通过Application中注册生命周期监听回调的方式</h3><p>首先，我们新建一个类TheApplication继承自Application，并在AndroidManifest.xml中将应用的Application声明为TheApplication，然后我们在TheApplication中实现onCreate()方法，在onCreate()方法中注册这样的一个回调方法registerActivityLifecycleCallbacks，来看看代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">public class TheApplication extends Application &#123;</div><div class="line"></div><div class="line">    private int mFinalCount;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate() &#123;</div><div class="line">        super.onCreate();</div><div class="line">        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() &#123;</div><div class="line">            @Override</div><div class="line">            public void onActivityCreated(Activity activity, Bundle savedInstanceState) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onActivityStarted(Activity activity) &#123;</div><div class="line">                mFinalCount++;</div><div class="line">                //如果mFinalCount ==1，说明是从后台到前台</div><div class="line">                Log.e(&quot;onActivityStarted&quot;, mFinalCount +&quot;&quot;);</div><div class="line">                if (mFinalCount == 1)&#123;</div><div class="line">                    //说明从后台回到了前台</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onActivityResumed(Activity activity) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onActivityPaused(Activity activity) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onActivityStopped(Activity activity) &#123;</div><div class="line">                mFinalCount--;</div><div class="line">                //如果mFinalCount ==0，说明是前台到后台</div><div class="line">                Log.i(&quot;onActivityStopped&quot;, mFinalCount +&quot;&quot;);</div><div class="line">                if (mFinalCount == 0)&#123;</div><div class="line">                    //说明从前台回到了后台</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onActivitySaveInstanceState(Activity activity, Bundle outState) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onActivityDestroyed(Activity activity) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>程序运行起来看看日志输出：</p>
+<p>10-23 12:38:22.925 5815-5815/com.cn.foregroundtest E/onActivityStarted: 1<br>10-23 12:38:27.554 5815-5815/com.cn.foregroundtest I/onActivityStopped: 0<br>10-23 12:38:29.817 5815-5815/com.cn.foregroundtest E/onActivityStarted: 1<br>10-23 12:38:31.368 5815-5815/com.cn.foregroundtest I/onActivityStopped: 0<br>可以看到当我来回切换应用返回到桌面和从桌面点击图标重新打开应用时，日志的输出情况和我之前提到的是一样的，当onActivityStarted里我们的变量值为1时，说明应用从后台返回到了前台界面，当onActivityStopped里我们的变量值为0时，说明我们的应用从前台界面返回到了后台，这里需要特别注意的一点是当我们锁屏时，这里也会认为应用返回到了后台进程。</p>
 
           
         
@@ -1073,7 +1036,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/Android-Service保活常见处理/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/Android小功能汇总/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -1098,8 +1061,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/27/Android-Service保活常见处理/" itemprop="url">
-                  Android-Service保活常见处理
+                <a class="post-title-link" href="/2017/03/29/Android小功能汇总/" itemprop="url">
+                  Android小功能汇总
                 </a>
               
             
@@ -1113,8 +1076,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T16:26:05+08:00">
-                2017-03-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T16:44:42+08:00">
+                2017-03-29
               </time>
             
 
@@ -1129,8 +1092,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/27/Android-Service保活常见处理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/Android-Service保活常见处理/" itemprop="commentCount"></span>
+                <a href="/2017/03/29/Android小功能汇总/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/Android小功能汇总/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1158,32 +1121,9 @@
       
         
           
-            <h2 id="Android-Service保活常见处理"><a href="#Android-Service保活常见处理" class="headerlink" title="Android-Service保活常见处理"></a>Android-Service保活常见处理</h2><p>转自：<a href="http://blog.csdn.net/mad1989/article/details/22492519" target="_blank" rel="external">http://blog.csdn.net/mad1989/article/details/22492519</a></p>
-<h3 id="Service简介"><a href="#Service简介" class="headerlink" title="Service简介"></a>Service简介</h3><p>Service是在一段不定的时间运行在后台，不和用户交互应用组件。每个Service必须在manifest中 通过<service>来声明。可以通过contect.startservice和contect.bindserverice来启动。和其他的应用组件一样，运行在进程的主线程中。这就是说如果service需要很多耗时或者阻塞的操作，需要在其子线程中实现（或者用系统提供的IntentService，它继承了Service，它处理数据是用自身新开的线程）。【当然你也可以在新的线程中startService，这样Service就不是在MainThread了】</service></p>
-<p>本地服务 Local Service 用于应用程序内部<br>它可以启动并运行，直至有人停止了它或它自己停止。在这种方式下，它以调用Context.startService()启动，而以调用Context.stopService()结束。它可以调用Service.stopSelf() 或 Service.stopSelfResult()来自己停止。不论调用了多少次startService()方法，你只需要调用一次stopService()来停止服务。<br>【用于实现应用程序自己的一些耗时任务，比如查询升级信息，并不占用应用程序比如Activity所属线程，而是单开线程后台执行，这样用户体验比较好】</p>
-<p>远程服务 Remote Service 用于Android系统内部的应用程序之间<br>它可以通过自己定义并暴露出来的接口进行程序操作。客户端建立一个到服务对象的连接，并通过那个连接来调用服务。连接以调用Context.bindService()方法建立，以调用 Context.unbindService()关闭。多个客户端可以绑定至同一个服务。如果服务此时还没有加载，bindService()会先加载它。<br>【可被其他应用程序复用，比如天气预报服务，其他应用程序不需要再写这样的服务，调用已有的即可】</p>
-<h4 id="Service的生命周期"><a href="#Service的生命周期" class="headerlink" title="Service的生命周期"></a>Service的生命周期</h4><h4 id="Service运行方式"><a href="#Service运行方式" class="headerlink" title="Service运行方式"></a>Service运行方式</h4><p>以startService()启动服务，系统将通过传入的Intent在底层搜索相关符合Intent里面信息的service。如果服务没有启动则先运行onCreate，然后运行onStartCommand （可在里面处理启动时传过来的Intent和其他参数），直到明显调用stopService或者stopSelf才将停止Service。无论运行startService多少次，只要调用一次stopService或者stopSelf，Service都会停止。使用stopSelf(int)方法可以保证在处理好intent后再停止。onStartCommand ，在2.0后被引入用于service的启动函数，2.0之前为public void onStart(Intent intent, int startId) 。<br>以bindService()方法启用服务，调用者与服务绑定在了一起，调用者一旦退出，服务也就终止。onBind()只有采用Context.bindService()方法启动服务时才会回调该方法。该方法在调用者与服务绑定时被调用，当调用者与服务已经绑定，多次调用Context.bindService()方法并不会导致该方法被多次调用。采用Context.bindService()方法启动服务时只能调用onUnbind()方法解除调用者与服务解除，服务结束时会调用onDestroy()方法。</p>
-<p>3，拥有service的进程具有较高的优先级<br>官方文档告诉我们，Android系统会尽量保持拥有service的进程运行，只要在该service已经被启动(start)或者客户端连接(bindService)到它。当内存不足时，需要保持，拥有service的进程具有较高的优先级。<br>1． 如果service正在调用onCreate,onStartCommand或者onDestory方法，那么用于当前service的进程则变为前台进程以避免被killed。<br>2． 如果当前service已经被启动(start)，拥有它的进程则比那些用户可见的进程优先级低一些，但是比那些不可见的进程更重要，这就意味着service一般不会被killed.<br>3． 如果客户端已经连接到service (bindService),那么拥有Service的进程则拥有最高的优先级，可以认为service是可见的。<br>4． 如果service可以使用startForeground(int, Notification)方法来将service设置为前台状态，那么系统就认为是对用户可见的，并不会在内存不足时killed。<br>5． 如果有其他的应用组件作为Service,Activity等运行在相同的进程中，那么将会增加该进程的重要性。</p>
-<p>保证service不被杀掉</p>
-<p>onStartCommand方法，返回START_STICKY</p>
-<p>StartCommond几个常量参数简介：<br>1、START_STICKY<br>在运行onStartCommand后service进程被kill后，那将保留在开始状态，但是不保留那些传入的intent。不久后service就会再次尝试重新创建，因为保留在开始状态，在创建     service后将保证调用onstartCommand。如果没有传递任何开始命令给service，那将获取到null的intent。<br>2、START_NOT_STICKY<br>在运行onStartCommand后service进程被kill后，并且没有新的intent传递给它。Service将移出开始状态，并且直到新的明显的方法（startService）调用才重新创建。因为如果没有传递任何未决定的intent那么service是不会启动，也就是期间onstartCommand不会接收到任何null的intent。<br>3、START_REDELIVER_INTENT<br>在运行onStartCommand后service进程被kill后，系统将会再次启动service，并传入最后一个intent给onstartCommand。直到调用stopSelf(int)才停止传递intent。如果在被kill后还有未处理好的intent，那被kill后服务还是会自动启动。因此onstartCommand不会接收到任何null的intent。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@Override  </div><div class="line">public int onStartCommand(Intent intent, int flags, int startId) &#123;  </div><div class="line">    flags = START_STICKY;  </div><div class="line">    return super.onStartCommand(intent, flags, startId);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>【结论】 手动返回START_STICKY，亲测当service因内存不足被kill，当内存又有的时候，service又被重新创建，比较不错，但是不能保证任何情况下都被重建，比如进程被干掉了….</p>
-<p>提升service优先级</p>
-<p>在AndroidManifest.xml文件中对于intent-filter可以通过android:priority = “1000”这个属性设置最高优先级，1000是最高值，如果数字越小则优先级越低，同时适用于广播。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;service  </div><div class="line">    android:name=&quot;com.dbjtech.acbxt.waiqin.UploadService&quot;  </div><div class="line">    android:enabled=&quot;true&quot; &gt;  </div><div class="line">    &lt;intent-filter android:priority=&quot;1000&quot; &gt;  </div><div class="line">        &lt;action android:name=&quot;com.dbjtech.myservice&quot; /&gt;  </div><div class="line">    &lt;/intent-filter&gt;  </div><div class="line">&lt;/service&gt;</div></pre></td></tr></table></figure>
-<p>【结论】目前看来，priority这个属性貌似只适用于broadcast，对于Service来说可能无效</p>
-<p>提升service进程优先级</p>
-<p>Android中的进程是托管的，当系统进程空间紧张的时候，会依照优先级自动进行进程的回收。Android将进程分为6个等级,它们按优先级顺序由高到低依次是:<br>   1.前台进程( FOREGROUND_APP)<br>   2.可视进程(VISIBLE_APP )</p>
-<ol>
-<li>次要服务进程(SECONDARY_SERVER )<br>4.后台进程 (HIDDEN_APP)<br>5.内容供应节点(CONTENT_PROVIDER)<br>6.空进程(EMPTY_APP)<br>当service运行在低内存的环境时，将会kill掉一些存在的进程。因此进程的优先级将会很重要，可以使用startForeground 将service放到前台状态。这样在低内存时被kill的几率会低一些。</li>
-</ol>
-<p>在onStartCommand方法内添加如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Notification notification = new Notification(R.drawable.ic_launcher,  </div><div class="line"> getString(R.string.app_name), System.currentTimeMillis());  </div><div class="line">  </div><div class="line"> PendingIntent pendingintent = PendingIntent.getActivity(this, 0,  </div><div class="line"> new Intent(this, AppMain.class), 0);  </div><div class="line"> notification.setLatestEventInfo(this, &quot;uploadservice&quot;, &quot;请保持程序在后台运行&quot;,  </div><div class="line"> pendingintent);  </div><div class="line"> startForeground(0x111, notification);</div></pre></td></tr></table></figure>
-<p>Application加上Persistent属性</p>
-<p>看Android的文档知道，当进程长期不活动，或系统需要资源时，会自动清理门户，杀死一些Service，和不可见的Activity等所在的进程。但是如果某个进程不想被杀死（如数据缓存进程，或状态监控进程，或远程服务进程），可以这么做：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;application  </div><div class="line">    android:name=&quot;com.test.Application&quot;  </div><div class="line">    android:allowBackup=&quot;true&quot;  </div><div class="line">    android:icon=&quot;@drawable/ic_launcher&quot;  </div><div class="line">    android:label=&quot;@string/app_name&quot;  </div><div class="line">   &lt;span style=&quot;color:#ff0000;&quot;&gt; android:persistent=&quot;true&quot;&lt;/span&gt;  </div><div class="line">    android:theme=&quot;@style/AppTheme&quot; &gt;  </div><div class="line">&lt;/application&gt;</div></pre></td></tr></table></figure>
-<p>【结论】据说这个属性不能乱设置，不过设置后，的确发现优先级提高不少，或许是相当于系统级的进程，但是还是无法保证存活</p>
+            <h2 id="Android小功能汇总"><a href="#Android小功能汇总" class="headerlink" title="Android小功能汇总"></a>Android小功能汇总</h2><h3 id="TextView-实现复制文本功能"><a href="#TextView-实现复制文本功能" class="headerlink" title="TextView 实现复制文本功能"></a>TextView 实现复制文本功能</h3><p>Android api 11 以后可以直接设置<br>android:textIsSelectable=”true”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;TextView</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;match_parent&quot;</div><div class="line">        android:textSize=&quot;16sp&quot;</div><div class="line">        android:text=&quot;Hello World&quot;</div><div class="line">        android:gravity=&quot;center&quot;</div><div class="line">        android:textIsSelectable=&quot;true&quot;</div><div class="line">        /&gt;</div></pre></td></tr></table></figure>
+<h3 id="新增控件汇总"><a href="#新增控件汇总" class="headerlink" title="新增控件汇总"></a>新增控件汇总</h3><p>4.3新增控件，有很多Android的新控件不断的推出，我在此进行汇总，学习。<br>新增控件：<br>CalendarView<br>GridLayout<br>RecyclerView<br>AppWidgetHostView<br>SwipeRefreshLayout<br>SlidingPaneLayout<br>DrawerLayout<br>NestedScrollView<br>Switch<br>PagerTitleStrip<br>NoSaveStateFrameLayout<br>MySearchView<br>ViewSwitcher<br>StackView<br>SearchView<br>KeyboardView</p>
 
           
         
@@ -1222,7 +1162,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/Android卸载程序之后跳转到指定的反馈页面/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/转浅析Java抽象类和接口的比较/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -1247,8 +1187,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/27/Android卸载程序之后跳转到指定的反馈页面/" itemprop="url">
-                  Android卸载程序之后跳转到指定的反馈页面
+                <a class="post-title-link" href="/2017/03/29/转浅析Java抽象类和接口的比较/" itemprop="url">
+                  转浅析Java抽象类和接口的比较
                 </a>
               
             
@@ -1262,8 +1202,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T16:24:07+08:00">
-                2017-03-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T16:37:19+08:00">
+                2017-03-29
               </time>
             
 
@@ -1278,8 +1218,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/27/Android卸载程序之后跳转到指定的反馈页面/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/Android卸载程序之后跳转到指定的反馈页面/" itemprop="commentCount"></span>
+                <a href="/2017/03/29/转浅析Java抽象类和接口的比较/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/转浅析Java抽象类和接口的比较/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1307,8 +1247,8 @@
       
         
           
-            <h2 id="Android卸载程序之后跳转到指定的反馈页面"><a href="#Android卸载程序之后跳转到指定的反馈页面" class="headerlink" title="Android卸载程序之后跳转到指定的反馈页面"></a>Android卸载程序之后跳转到指定的反馈页面</h2><p>转自：<a href="http://blog.csdn.net/jiangwei0910410003/article/details/42177117" target="_blank" rel="external">http://blog.csdn.net/jiangwei0910410003/article/details/42177117</a></p>
-<p><strong>总结：</strong><br>我写这篇文章的目的以及我从这个过程中唯一学习到的一个知识点就是当父进程消亡了，子进程并不会消亡，所以我们可以记住这个知识点，以后遇到像应用被卸载之后的一些逻辑操作都可以采用这种方式去解决。   </p>
+            <h2 id="转浅析Java抽象类和接口的比较"><a href="#转浅析Java抽象类和接口的比较" class="headerlink" title="转浅析Java抽象类和接口的比较"></a>转浅析Java抽象类和接口的比较</h2><p>下面这篇文章分析了 我们 在使用抽象类 和接口时的一些分析 值得参考 学习</p>
+<p><a href="http://blog.csdn.net/mad1989/article/details/38334163" target="_blank" rel="external">http://blog.csdn.net/mad1989/article/details/38334163</a></p>
 
           
         
@@ -1347,7 +1287,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/android-adb-install安装常见错误列表/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/Android实现网络多线程文件下载/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -1372,8 +1312,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/27/android-adb-install安装常见错误列表/" itemprop="url">
-                  android_adb_install安装常见错误列表
+                <a class="post-title-link" href="/2017/03/29/Android实现网络多线程文件下载/" itemprop="url">
+                  Android实现网络多线程文件下载
                 </a>
               
             
@@ -1387,8 +1327,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T15:38:48+08:00">
-                2017-03-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T16:02:11+08:00">
+                2017-03-29
               </time>
             
 
@@ -1403,8 +1343,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/27/android-adb-install安装常见错误列表/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/android-adb-install安装常见错误列表/" itemprop="commentCount"></span>
+                <a href="/2017/03/29/Android实现网络多线程文件下载/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/Android实现网络多线程文件下载/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1432,8 +1372,10 @@
       
         
           
-            <h2 id="android-adb-install安装常见错误列表"><a href="#android-adb-install安装常见错误列表" class="headerlink" title="android_adb_install安装常见错误列表"></a>android_adb_install安装常见错误列表</h2><p>这些错误基本是在 cmd 命令行安装时遇到的。</p>
-<p>INSTALL_FAILED_ALREADY_EXISTS                 程序已经存在<br>INSTALL_FAILED_INVALID_APK                     无效的APK<br>INSTALL_FAILED_INVALID_URI                     无效的链接<br>INSTALL_FAILED_INSUFFICIENT_STORAGE          没有足够的存储空间<br>INSTALL_FAILED_DUPLICATE_PACKAGE             已存在同名程序<br>INSTALL_FAILED_NO_SHARED_USER                要求的共享用户不存在<br>INSTALL_FAILED_UPDATE_INCOMPATIBLE           版本不能共存<br>INSTALL_FAILED_SHARED_USER_INCOMPATIBLE     需求的共享用户签名错误<br>INSTALL_FAILED_MISSING_SHARED_LIBRARY       需求的共享库已丢失<br>INSTALL_FAILED_REPLACE_COULDNT_DELETE      需求的共享库无效<br>INSTALL_FAILED_DEXOPT                          dex优化验证失败<br>INSTALL_FAILED_OLDER_SDK                      系统版本过旧<br>INSTALL_FAILED_CONFLICTING_PROVIDER          存在同名的内容提供者<br>INSTALL_FAILED_NEWER_SDK                      系统版本过新<br>INSTALL_FAILED_TEST_ONLY                      调用者不被允许测试的测试程序<br>INSTALL_FAILED_CPU_ABI_INCOMPATIBLE         包含的本机代码不兼容<br>CPU_ABIINSTALL_FAILED_MISSING_FEATURE       使用了一个无效的特性<br>INSTALL_FAILED_CONTAINER_ERROR              SD卡访问失败<br>INSTALL_FAILED_INVALID_INSTALL_LOCATION     无效的安装路径<br>INSTALL_FAILED_MEDIA_UNAVAILABLE            SD卡不存在<br>INSTALL_FAILED_INTERNAL_ERROR                系统问题导致安装失败<br>DEFAULT                                          未知错误</p>
+            <h2 id="Android实现网络多线程文件下载"><a href="#Android实现网络多线程文件下载" class="headerlink" title="Android实现网络多线程文件下载"></a>Android实现网络多线程文件下载</h2><p>这里主要用到 RandomAccessFile 类进行分隔下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// 计算每条线程下载的数据长度  </div><div class="line">blockSize = (fileSize % threadNum) == 0 ? fileSize / threadNum : fileSize / threadNum + 1;  </div><div class="line">举例:线程下载的数据长度   (10%3 == 0 ？ 10/3:10/3+1) ,第1，2个线程下载长度是4M，第三个线程下载长度为2M</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">RandomAccessFile  raf = new RandomAccessFile(file, &quot;rwd&quot;);  </div><div class="line">raf.seek(startPos); // 移动到当前线程开始下载的位置</div></pre></td></tr></table></figure>
+<p>转自:<a href="http://blog.csdn.net/mad1989/article/details/38421465" target="_blank" rel="external">http://blog.csdn.net/mad1989/article/details/38421465</a></p>
 
           
         
@@ -1472,7 +1414,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/static用法详解/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/运行时权限处理完全解析/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -1497,8 +1439,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/27/static用法详解/" itemprop="url">
-                  static用法详解
+                <a class="post-title-link" href="/2017/03/29/运行时权限处理完全解析/" itemprop="url">
+                  android6.0运行时权限处理完全解析
                 </a>
               
             
@@ -1512,8 +1454,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T15:32:29+08:00">
-                2017-03-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T15:30:48+08:00">
+                2017-03-29
               </time>
             
 
@@ -1528,8 +1470,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/27/static用法详解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/static用法详解/" itemprop="commentCount"></span>
+                <a href="/2017/03/29/运行时权限处理完全解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/运行时权限处理完全解析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1557,21 +1499,38 @@
       
         
           
-            <h2 id="复习java中静态代码块的用法"><a href="#复习java中静态代码块的用法" class="headerlink" title="复习java中静态代码块的用法"></a>复习java中静态代码块的用法</h2><h3 id="一-Java-静态代码块-静态方法区别"><a href="#一-Java-静态代码块-静态方法区别" class="headerlink" title="一.Java 静态代码块 静态方法区别"></a>一.Java 静态代码块 静态方法区别</h3><p>一般情况下,如果有些代码必须在项目启动的时候就执行的时候,需要使用静态代码块,这种代码是主动执行的;需要在项目启动的时候就初始化,在不创建对象的情况下,其他程序来调用的时候,需要使用静态方法,这种代码是被动执行的. 静态方法在类加载的时候 就已经加载 可以用类名直接调用<br>比如main方法就必须是静态的 这是程序入口<br>两者的区别就是:静态代码块是自动执行的;<br>静态方法是被调用的时候才执行的.</p>
-<h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><p>（1）在Java里，可以定义一个不需要创建对象的方法，这种方法就是静态方法。要实现这样的效果，只需要在类中定义的方法前加上static关键字。例如：</p>
-<p>public static int maximum(int n1,int n2)</p>
-<p>使用类的静态方法时，注意：</p>
-<p>a在静态方法里只能直接调用同类中其他的静态成员（包括变量和方法），而不能直接访问类中的非静态成员。这是因为，对于非静态的方法和变量，需要先创建类的实例对象后才可使用，而静态方法在使用前不用创建任何对象。</p>
-<p>b 静态方法不能以任何方式引用this和super关键字，因为静态方法在使用前不用创建任何实例对象，当静态方法调用时，this所引用的对象根本没有产生。</p>
-<p>（2）静态变量是属于整个类的变量而不是属于某个对象的。注意不能把任何方法体内的变量声明为静态，例如：<br>fun()<br>{<br>static int i=0;//非法。<br>}</p>
-<p>（3）一个类可以使用不包含在任何方法体中的静态代码块，当类被载入时，静态代码块被执行，且只被执行一次，静态块常用来执行类属性的初始化。例如：<br>static<br>{<br>}</p>
-<h4 id="类装载步骤"><a href="#类装载步骤" class="headerlink" title="类装载步骤"></a>类装载步骤</h4><p>在Java中，类装载器把一个类装入Java虚拟机中，要经过三个步骤来完成：装载、链接和初始化，其中链接又可以分成校验、准备和解析三步，除了解析外，其它步骤是严格按照顺序完成的，各个步骤的主要工作如下：</p>
-<p>装载：查找和导入类或接口的二进制数据；<br>链接：执行下面的校验、准备和解析步骤，其中解析步骤是可以选择的；<br>校验：检查导入类或接口的二进制数据的正确性；<br>准备：给类的静态变量分配并初始化存储空间；<br>解析：将符号引用转成直接引用；<br>初始化：激活类的静态变量的初始化Java代码和静态Java代码块。<br>初始化类中属性是静态代码块的常用用途，但只能使用一次。</p>
-<p>####（二）静态代码块的初始化顺序</p>
-<figure class="highlight plain"><figcaption><span>Parent&#123;   </span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">static String name = &quot;hello&quot;;   </div><div class="line">&#123;   </div><div class="line">System.out.println(&quot;parent block&quot;);   </div><div class="line">&#125;   </div><div class="line">static &#123;   </div><div class="line">System.out.println(&quot;parent static block&quot;);   </div><div class="line">&#125;   </div><div class="line">public Parent()&#123;   </div><div class="line">System.out.println(&quot;parent constructor&quot;);   </div><div class="line">&#125;   </div><div class="line">&#125;   </div><div class="line">  </div><div class="line">class Child extends Parent&#123;   </div><div class="line">static String childName = &quot;hello&quot;;   </div><div class="line">&#123;   </div><div class="line">System.out.println(&quot;child block&quot;);   </div><div class="line">&#125;   </div><div class="line">static &#123;   </div><div class="line">System.out.println(&quot;child static block&quot;);   </div><div class="line">&#125;   </div><div class="line">public Child()&#123;   </div><div class="line">System.out.println(&quot;child constructor&quot;);   </div><div class="line">&#125;   </div><div class="line">&#125;   </div><div class="line">  </div><div class="line">public class StaticIniBlockOrderTest &#123;   </div><div class="line">  </div><div class="line">public static void main(String[] args) &#123;   </div><div class="line">new Child();//语句(*)   </div><div class="line">&#125;   </div><div class="line">&#125;  </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">问题：当执行完语句(*)时，打印结果是什么顺序？为什么？</div><div class="line">解答：当执行完语句(*)时，打印结果是这样一个顺序 :</div><div class="line">parent static block</div><div class="line">child static block</div><div class="line">parent block</div><div class="line">parent constructor</div><div class="line">child block</div><div class="line">child constructor</div></pre></td></tr></table></figure>
-<p>分析:当执行new Child()时，它首先去看父类里面有没有静态代码块，如果有，它先去执行父类里面静态代码块里面的内容，当父类的静态代码块里面的内容执行完毕之后，接着去执行子类(自己这个类)里面的静态代码块，当子类的静态代码块执行完毕之后，它接着又去看父类有没有非静态代码块，如果有就执行父类的非静态代码块，父类的非静态代码块执行完毕，接着执行父类的构造方法；父类的构造方法执行完毕之后，它接着去看子类有没有非静态代码块，如果有就执行子类的非静态代码块。子类的非静态代码块执行完毕再去执行子类的构造方法，这个就是一个对象的初始化顺序。</p>
-<p><strong>总结:</strong><br>对象的初始化顺序:首先执行父类静态的内容，父类静态的内容执行完毕后，接着去执行子类的静态的内容，当子类的静态内容执行完毕之后，再去看父类有没有非静态代码块，如果有就执行父类的非静态代码块，父类的非静态代码块执行完毕，接着执行父类的构造方法；父类的构造方法执行完毕之后，它接着去看子类有没有非静态代码块，如果有就执行子类的非静态代码块。子类的非静态代码块执行完毕再去执行子类的构造方法。总之一句话，静态代码块内容先执行，接着执行父类非静态代码块和构造方法，然后执行子类非静态代码块和构造方法。</p>
-<p>注意:子类的构造方法，不管这个构造方法带不带参数，默认的它都会先去寻找父类的不带参数的构造方法。如果父类没有不带参数的构造方法，那么子类必须用supper关键子来调用父类带参数的构造方法，否则编译不能通过。</p>
+            <h3 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h3><p>随着Android 6.0发布以及普及，我们开发者所要应对的主要就是新版本SDK带来的一些变化，首先关注的就是权限机制的变化。对于6.0的几个主要的变化，查看查看官网的这篇文章<a href="http://developer.android.com/intl/zh-cn/about/versions/marshmallow/android-6.0-changes.html，其中当然包含Runtime" target="_blank" rel="external">http://developer.android.com/intl/zh-cn/about/versions/marshmallow/android-6.0-changes.html，其中当然包含Runtime</a> Permissions。</p>
+<p>ok，本篇文章目的之一就是对运行时权限处理的一个介绍，以及对目前权限相关的库的一些了解。</p>
+<p>当然非常推荐阅读官网权限相关文章：</p>
+<p>Working with System Permissions<br>Permissions Best Practices<br>本文也是在上述文章基础上理解、实验以及封装。</p>
+<h3 id="二、运行时权限的变化及特点"><a href="#二、运行时权限的变化及特点" class="headerlink" title="二、运行时权限的变化及特点"></a>二、运行时权限的变化及特点</h3><p>对于6.0以下的权限及在安装的时候，根据权限声明产生一个权限列表，用户只有在同意之后才能完成app的安装，造成了我们想要使用某个app，就要默默忍受其一些不必要的权限（比如是个app都要访问通讯录、短信等）。而在6.0以后，我们可以直接安装，当app需要我们授予不恰当的权限的时候，我们可以予以拒绝（比如：单机的象棋对战，请求访问任何权限，我都是不同意的）。当然你也可以在设置界面对每个app的权限进行查看，以及对单个权限进行授权或者解除授权。</p>
+<p>新的权限机制更好的保护了用户的隐私，Google将权限分为两类，一类是Normal Permissions，这类权限一般不涉及用户隐私，是不需要用户进行授权的，比如手机震动、访问网络等；另一类是Dangerous Permission，一般是涉及到用户隐私的，需要用户进行授权，比如读取sdcard、访问通讯录等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line">Normal Permissions如下</div><div class="line">ACCESS_LOCATION_EXTRA_COMMANDS</div><div class="line">ACCESS_NETWORK_STATE</div><div class="line">ACCESS_NOTIFICATION_POLICY</div><div class="line">ACCESS_WIFI_STATE</div><div class="line">BLUETOOTH</div><div class="line">BLUETOOTH_ADMIN</div><div class="line">BROADCAST_STICKY</div><div class="line">CHANGE_NETWORK_STATE</div><div class="line">CHANGE_WIFI_MULTICAST_STATE</div><div class="line">CHANGE_WIFI_STATE</div><div class="line">DISABLE_KEYGUARD</div><div class="line">EXPAND_STATUS_BAR</div><div class="line">GET_PACKAGE_SIZE</div><div class="line">INSTALL_SHORTCUT</div><div class="line">INTERNET</div><div class="line">KILL_BACKGROUND_PROCESSES</div><div class="line">MODIFY_AUDIO_SETTINGS</div><div class="line">NFC</div><div class="line">READ_SYNC_SETTINGS</div><div class="line">READ_SYNC_STATS</div><div class="line">RECEIVE_BOOT_COMPLETED</div><div class="line">REORDER_TASKS</div><div class="line">REQUEST_INSTALL_PACKAGES</div><div class="line">SET_ALARM</div><div class="line">SET_TIME_ZONE</div><div class="line">SET_WALLPAPER</div><div class="line">SET_WALLPAPER_HINTS</div><div class="line">TRANSMIT_IR</div><div class="line">UNINSTALL_SHORTCUT</div><div class="line">USE_FINGERPRINT</div><div class="line">VIBRATE</div><div class="line">WAKE_LOCK</div><div class="line">WRITE_SYNC_SETTINGS</div><div class="line"></div><div class="line">Dangerous Permissions:</div><div class="line">group:android.permission-group.CONTACTS</div><div class="line">  permission:android.permission.WRITE_CONTACTS</div><div class="line">  permission:android.permission.GET_ACCOUNTS</div><div class="line">  permission:android.permission.READ_CONTACTS</div><div class="line"></div><div class="line">group:android.permission-group.PHONE</div><div class="line">  permission:android.permission.READ_CALL_LOG</div><div class="line">  permission:android.permission.READ_PHONE_STATE</div><div class="line">  permission:android.permission.CALL_PHONE</div><div class="line">  permission:android.permission.WRITE_CALL_LOG</div><div class="line">  permission:android.permission.USE_SIP</div><div class="line">  permission:android.permission.PROCESS_OUTGOING_CALLS</div><div class="line">  permission:com.android.voicemail.permission.ADD_VOICEMAIL</div><div class="line"></div><div class="line">group:android.permission-group.CALENDAR</div><div class="line">  permission:android.permission.READ_CALENDAR</div><div class="line">  permission:android.permission.WRITE_CALENDAR</div><div class="line"></div><div class="line">group:android.permission-group.CAMERA</div><div class="line">  permission:android.permission.CAMERA</div><div class="line"></div><div class="line">group:android.permission-group.SENSORS</div><div class="line">  permission:android.permission.BODY_SENSORS</div><div class="line"></div><div class="line">group:android.permission-group.LOCATION</div><div class="line">  permission:android.permission.ACCESS_FINE_LOCATION</div><div class="line">  permission:android.permission.ACCESS_COARSE_LOCATION</div><div class="line"></div><div class="line">group:android.permission-group.STORAGE</div><div class="line">  permission:android.permission.READ_EXTERNAL_STORAGE</div><div class="line">  permission:android.permission.WRITE_EXTERNAL_STORAGE</div><div class="line"></div><div class="line">group:android.permission-group.MICROPHONE</div><div class="line">  permission:android.permission.RECORD_AUDIO</div><div class="line"></div><div class="line">group:android.permission-group.SMS</div><div class="line">  permission:android.permission.READ_SMS</div><div class="line">  permission:android.permission.RECEIVE_WAP_PUSH</div><div class="line">  permission:android.permission.RECEIVE_MMS</div><div class="line">  permission:android.permission.RECEIVE_SMS</div><div class="line">  permission:android.permission.SEND_SMS</div><div class="line">  permission:android.permission.READ_CELL_BROADCASTS</div></pre></td></tr></table></figure>
+<p>看到上面的dangerous permissions，会发现一个问题，好像危险权限都是一组一组的，恩，没错，的确是这样的，</p>
+<p>那么有个问题：分组对我们的权限机制有什么影响吗？</p>
+<p>的确是有影响的，如果app运行在Android 6.x的机器上，对于授权机制是这样的。如果你申请某个危险的权限，假设你的app早已被用户授权了同一组的某个危险权限，那么系统会立即授权，而不需要用户去点击授权。比如你的app对READ_CONTACTS已经授权了，当你的app申请WRITE_CONTACTS时，系统会直接授权通过。此外，对于申请时弹出的dialog上面的文本说明也是对整个权限组的说明，而不是单个权限（ps:这个dialog是不能进行定制的）。</p>
+<p>不过需要注意的是，不要对权限组过多的依赖，尽可能对每个危险权限都进行正常流程的申请，因为在后期的版本中这个权限组可能会产生变化。</p>
+<p>三、相关API</p>
+<p>好在运行时相关的API也比较简单，所以适配起来并不会非常痛苦。</p>
+<p>API的讲解就跟着申请权限步骤一起了：</p>
+<p>在AndroidManifest文件中添加需要的权限。</p>
+<p>这个步骤和我们之前的开发并没有什么变化，试图去申请一个没有声明的权限可能会导致程序崩溃。</p>
+<p>检查权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if (ContextCompat.checkSelfPermission(thisActivity,</div><div class="line">                Manifest.permission.READ_CONTACTS)</div><div class="line">        != PackageManager.PERMISSION_GRANTED) &#123;</div><div class="line">&#125;else&#123;</div><div class="line">    //</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里涉及到一个API，ContextCompat.checkSelfPermission，主要用于检测某个权限是否已经被授予，方法返回值为PackageManager.PERMISSION_DENIED或者PackageManager.PERMISSION_GRANTED。当返回DENIED就需要进行申请授权了。</p>
+<p>申请授权</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ActivityCompat.requestPermissions(thisActivity,</div><div class="line">               new String[]&#123;Manifest.permission.READ_CONTACTS&#125;,</div><div class="line">               MY_PERMISSIONS_REQUEST_READ_CONTACTS);</div></pre></td></tr></table></figure>
+<p>该方法是异步的，第一个参数是Context；第二个参数是需要申请的权限的字符串数组；第三个参数为requestCode，主要用于回调的时候检测。可以从方法名requestPermissions以及第二个参数看出，是支持一次性申请多个权限的，系统会通过对话框逐一询问用户是否授权。</p>
+<p>处理权限申请回调</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onRequestPermissionsResult(int requestCode,</div><div class="line">        String permissions[], int[] grantResults) &#123;</div><div class="line">    switch (requestCode) &#123;</div><div class="line">        case MY_PERMISSIONS_REQUEST_READ_CONTACTS: &#123;</div><div class="line">            // If request is cancelled, the result arrays are empty.</div><div class="line">            if (grantResults.length &gt; 0</div><div class="line">                &amp;&amp; grantResults[0] == PackageManager.PERMISSION_GRANTED) &#123;</div><div class="line"></div><div class="line">                // permission was granted, yay! Do the</div><div class="line">                // contacts-related task you need to do.</div><div class="line"></div><div class="line">            &#125; else &#123;</div><div class="line"></div><div class="line">                // permission denied, boo! Disable the</div><div class="line">                // functionality that depends on this permission.</div><div class="line">            &#125;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ok，对于权限的申请结果，首先验证requestCode定位到你的申请，然后验证grantResults对应于申请的结果，这里的数组对应于申请时的第二个权限字符串数组。如果你同时申请两个权限，那么grantResults的length就为2，分别记录你两个权限的申请结果。如果申请成功，就可以做你的事情了~</p>
+<p>当然，到此我们的权限申请的不走，基本介绍就如上述。不过还有个API值得提一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// Should we show an explanation?</div><div class="line">if (ActivityCompat.shouldShowRequestPermissionRationale(thisActivity,</div><div class="line">        Manifest.permission.READ_CONTACTS)) </div><div class="line">    // Show an expanation to the user *asynchronously* -- don&apos;t block</div><div class="line">    // this thread waiting for the user&apos;s response! After the user</div><div class="line">    // sees the explanation, try again to request the permission.</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个API主要用于给用户一个申请权限的解释，该方法只有在用户在上一次已经拒绝过你的这个权限申请。也就是说，用户已经拒绝一次了，你又弹个授权框，你需要给用户一个解释，为什么要授权，则使用该方法。</p>
+<p>那么将上述几个步骤结合到一起就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">// Here, thisActivity is the current activity</div><div class="line">if (ContextCompat.checkSelfPermission(thisActivity,</div><div class="line">                Manifest.permission.READ_CONTACTS)</div><div class="line">        != PackageManager.PERMISSION_GRANTED) &#123;</div><div class="line"></div><div class="line">    // Should we show an explanation?</div><div class="line">    if (ActivityCompat.shouldShowRequestPermissionRationale(thisActivity,</div><div class="line">            Manifest.permission.READ_CONTACTS)) &#123;</div><div class="line"></div><div class="line">        // Show an expanation to the user *asynchronously* -- don&apos;t block</div><div class="line">        // this thread waiting for the user&apos;s response! After the user</div><div class="line">        // sees the explanation, try again to request the permission.</div><div class="line"></div><div class="line">    &#125; else &#123;</div><div class="line"></div><div class="line">        // No explanation needed, we can request the permission.</div><div class="line"></div><div class="line">        ActivityCompat.requestPermissions(thisActivity,</div><div class="line">                new String[]&#123;Manifest.permission.READ_CONTACTS&#125;,</div><div class="line">                MY_PERMISSIONS_REQUEST_READ_CONTACTS);</div><div class="line"></div><div class="line">        // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an</div><div class="line">        // app-defined int constant. The callback method gets the</div><div class="line">        // result of the request.</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="四、封装"><a href="#四、封装" class="headerlink" title="四、封装"></a>四、封装</h3><p>github :<br><a href="https://github.com/lovedise/PermissionGen" target="_blank" rel="external">https://github.com/lovedise/PermissionGen</a><br><a href="https://github.com/hongyangAndroid/MPermissions" target="_blank" rel="external">https://github.com/hongyangAndroid/MPermissions</a></p>
+<p>转自:<a href="http://blog.csdn.net/lmj623565791/article/details/50709663" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/50709663</a></p>
 
           
         
@@ -1605,7 +1564,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1646,7 +1605,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">63</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1656,7 +1615,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

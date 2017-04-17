@@ -249,6 +249,444 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/ReactNative实现图片上传功能/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/24/ReactNative实现图片上传功能/" itemprop="url">
+                  ReactNative实现图片上传功能
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-24T17:26:26+08:00">
+                2017-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/24/ReactNative实现图片上传功能/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/24/ReactNative实现图片上传功能/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ReactNative实现图片上传功能"><a href="#ReactNative实现图片上传功能" class="headerlink" title="ReactNative实现图片上传功能"></a>ReactNative实现图片上传功能</h2><p>我们的项目里需要使用图片上传（用JS 实现图片上传），那我们有没有什么办法呢？<br>通过搜索React-native的github， 会发现里面有这么一篇文章：<a href="https://github.com/facebook/react-native/issues/5308" target="_blank" rel="external">https://github.com/facebook/react-native/issues/5308</a></p>
+<p>解决方案：<br>采用FormData来实现，FormData 的API参考：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FormData" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/API/FormData</a><br>利用FormData对象,你可以使用一系列的键值对来模拟一个完整的表单,然后使用XMLHttpRequest发送这个”表单”.</p>
+<p>那么我们就来看看在RN里怎么做，贴代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">uploadImage()&#123;  </div><div class="line">  let formData = new FormData();  </div><div class="line">  let file = &#123;uri: uri, type: &apos;multipart/form-data&apos;, name: &apos;a.jpg&apos;&#125;;  </div><div class="line">  </div><div class="line">  formData.append(&quot;images&quot;,file);  </div><div class="line">  </div><div class="line">  fetch(url,&#123;  </div><div class="line">    method:&apos;POST&apos;,  </div><div class="line">    headers:&#123;  </div><div class="line">        &apos;Content-Type&apos;:&apos;multipart/form-data&apos;,  </div><div class="line">    &#125;,  </div><div class="line">    body:formData,  </div><div class="line">  &#125;)  </div><div class="line">  .then((response) =&gt; response.text() )  </div><div class="line">  .then((responseData)=&gt;&#123;  </div><div class="line">  </div><div class="line">    console.log(&apos;responseData&apos;,responseData);  </div><div class="line">  &#125;)  </div><div class="line">  .catch((error)=&gt;&#123;console.error(&apos;error&apos;,error)&#125;);  </div><div class="line">  </div><div class="line">&#125; </div><div class="line">``` </div><div class="line"></div><div class="line">1、首先我们new了一个FormData</div><div class="line">2、创建一个file对象，uri是什么？如下示例：</div><div class="line">Android:  file:///storage/emulated/0/Pictures/eb645893-4c00-44a3-a9b4-a2116e955f7c.jpg</div><div class="line">ios:         /Users/ashleydw/Library/Developer/CoreSimulator/Devices/23EE88D0-6E91-43AD-A3B6-06F87698C5A8/data/Containers/Data/Application/A73E68D3-7424-4301-9934-AD0F8251C1EB/tmp/7803DA8A-0E40-4FCB-A593-884805878172.jpg</div><div class="line">3、设置header</div></pre></td></tr></table></figure>
+<p>‘Content-Type’:’multipart/form-data’,<br>```<br>4、将创建好的FormData赋值给body</p>
+<p>这样我们就完成了图片上传的功能。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/23/RN组件之ListView的shiyong/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/23/RN组件之ListView的shiyong/" itemprop="url">
+                  RN组件之ListView的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T16:08:16+08:00">
+                2017-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/23/RN组件之ListView的shiyong/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/23/RN组件之ListView的shiyong/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="RN组件之ListView的使用"><a href="#RN组件之ListView的使用" class="headerlink" title="RN组件之ListView的使用"></a>RN组件之ListView的使用</h2><p>ReactNative提供的ListView组件，ListView是我们最常用的组件。<br>还是先来看看官网怎么说的。<br>ListView - 一个核心组件，用于高效地显示一个可以垂直滚动的变化的数据列表。最基本的使用方式就是创建一个ListView.DataSource数据源，然后给它传递一个普通的数据数组，再使用数据源来实例化一个ListView组件，并且定义它的renderRow回调函数，这个函数会接受数组中的每个数据作为参数，返回一个可渲染的组件（作为listview的每一行）。</p>
+<p>ListView还支持一些高级特性，譬如给每段/组(section)数据添加一个带有粘性的头部（类似iPhone的通讯录，其首字母会在滑动过程中吸附在屏幕上方）；在列表头部和尾部增加单独的内容；在到达列表尾部的时候调用回调函数(onEndReached)，还有在视野内可见的数据变化时调用回调函数(onChangeVisibleRows)，以及一些性能方面的优化。</p>
+<p>有一些性能优化使得ListView可以滚动的更加平滑，尤其是在动态加载可能很大（或者概念上无限长的）数据集的时候：<br>只更新变化的行 - 提供给数据源的rowHasChanged函数可以告诉ListView它是否需要重绘一行数据（即：数据是否发生了变化）参见ListViewDataSource<br>限制频率的行渲染 - 默认情况下，每次消息循环只有一行会被渲染（可以用pageSize属性配置）。这把较大的工作分散成小的碎片，以降低因为渲染而导致丢帧的可能性。</p>
+<p>属性<br>ScrollView props…<br>译注：这意味着ListView可以使用所有ScrollView的属性。</p>
+<p>dataSource ListViewDataSource<br>ListView.DataSource实例（列表依赖的数据源）</p>
+<p>initialListSize number<br>指定在组件刚挂载的时候渲染多少行数据。用这个属性来确保首屏显示合适数量的数据，而不是花费太多帧逐步显示出来。</p>
+<p>onChangeVisibleRows function<br>(visibleRows, changedRows) =&gt; void<br>当可见的行的集合变化的时候调用此回调函数。visibleRows 以 { sectionID: { rowID: true }}的格式包含了所有可见行，而changedRows 以{ sectionID: { rowID: true | false }}的格式包含了所有刚刚改变了可见性的行，其中如果值为true表示一个行变得可见，而为false表示行刚刚离开可视区域而变得不可见。</p>
+<p>onEndReached function<br>当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用。原生的滚动事件会被作为参数传递。译注：当第一次渲染时，如果数据不足一屏（比如初始值是空的），这个事件也会被触发。</p>
+<p>onEndReachedThreshold number<br>调用onEndReached之前的临界值，单位是像素。</p>
+<p>pageSize number<br>每次事件循环（每帧）渲染的行数。</p>
+<p>removeClippedSubviews bool<br>用于提升大列表的滚动性能。需要给行容器添加样式overflow:’hidden’。（Android已默认添加此样式）。此属性默认开启。</p>
+<p>renderFooter function<br>() =&gt; renderable<br>页头与页脚会在每次渲染过程中都重新渲染（如果提供了这些属性）。如果它们重绘的性能开销很大，把他们包装到一个StaticContainer或者其它恰当的结构中。页脚会永远在列表的最底部，而页头会在最顶部。</p>
+<p>renderHeader function </p>
+<p>renderRow function<br>(rowData, sectionID, rowID, highlightRow) =&gt; renderable<br>从数据源(Data source)中接受一条数据，以及它和它所在section的ID。返回一个可渲染的组件来为这行数据进行渲染。默认情况下参数中的数据就是放进数据源中的数据本身，不过也可以提供一些转换器。<br>如果某一行正在被高亮（通过调用highlightRow函数），ListView会得到相应的通知。当一行被高亮时，其两侧的分割线会被隐藏。行的高亮状态可以通过调用highlightRow(null)来重置。</p>
+<p>renderScrollComponent function<br>(props) =&gt; renderable<br>指定一个函数，在其中返回一个可以滚动的组件。ListView将会在该组件内部进行渲染。默认情况下会返回一个包含指定属性的ScrollView。</p>
+<p>renderSectionHeader function<br>(sectionData, sectionID) =&gt; renderable<br>如果提供了此函数，会为每个小节(section)渲染一个粘性的标题。<br>粘性是指当它刚出现时，会处在对应小节的内容顶部；继续下滑当它到达屏幕顶端的时候，它会停留在屏幕顶端，一直到对应的位置被下一个小节的标题占据为止。</p>
+<p>renderSeparator function<br>(sectionID, rowID, adjacentRowHighlighted) =&gt; renderable<br>如果提供了此属性，一个可渲染的组件会被渲染在每一行下面，除了小节标题的前面的最后一行。在其上方的小节ID和行ID，以及邻近的行是否被高亮会作为参数传递进来。</p>
+<p>scrollRenderAheadDistance number<br>当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行。</p>
+<p>iOS stickyHeaderIndices [number]<br>一个子视图下标的数组，用于决定哪些成员会在滚动之后固定在屏幕顶端。举个例子，传递stickyHeaderIndices={[0]}会让第一个成员固定在滚动视图顶端。这个属性不能和horizontal={true}一起使用。</p>
+<p>示例：<br>1、在构造函数中我们定义dataSource的rowHasChanged函数，告诉ListView它是否需要重绘一行数据。这个写法很固定！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">constructor(props) &#123;  </div><div class="line">    super(props);  </div><div class="line">    this.state = &#123;  </div><div class="line">        dataSource: new ListView.DataSource(&#123;  </div><div class="line">            rowHasChanged: (r1, r2) =&gt; r1 !== r2,  </div><div class="line">        &#125;),  </div><div class="line">    &#125;;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2、在componentWillMount方法中加载数据（fetch用法可以参照我之前写的文章）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">componentWillMount() &#123;  </div><div class="line">   this._fetchListData(params);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3、在_fetchListData方法获取数据后设置dataSource</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">this.setState(&#123;  </div><div class="line">   dataSource: this.state.dataSource.cloneWithRows(list),  </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>4、在render方法中定义ListView</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;ListView  </div><div class="line">    enableEmptySections=&#123;true&#125;  </div><div class="line">    dataSource=&#123;this.state.dataSource&#125;  </div><div class="line">    renderRow=&#123;this.renderRow.bind(this)&#125;  </div><div class="line">    renderFooter=&#123;this.renderFooter.bind(this)&#125;  </div><div class="line">    renderHeader=&#123;this.rendHeader.bind(this)&#125;  </div><div class="line">    onEndReached=&#123;()=&gt;&#123;console.log(&apos;---&apos;);&#125;&#125;  </div><div class="line">/&gt;</div></pre></td></tr></table></figure>
+<p>5、实现renderRow方法<br>从数据源(Data source)中接受一条数据，以及它和它所在section的ID。返回一个可渲染的组件来为这行数据进行渲染</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> renderRow(rowData, sectionid, rowid) &#123;  </div><div class="line">    return (&lt;View&gt;xxxxx&lt;/View&gt;);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>6、实现_rendHeader方法和_renderFooter方法<br>页头与页脚会在每次渲染过程中都重新渲染。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">rendHeader() &#123;  </div><div class="line">    return (&lt;View&gt;header&lt;/View&gt;);  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"> renderFooter() &#123;  </div><div class="line">    return (&lt;View&gt;footer&lt;/View&gt;);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>综上 基本掌握listview 的使用 。还需要配合RefreshControl 来实现下拉刷新和加载更多<br>如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;ListView</div><div class="line">       dataSource=&#123;this.state.dataSource&#125;</div><div class="line">       renderRow=&#123;this.getItemView.bind(this)&#125;</div><div class="line">       renderHeader=&#123;this.renderHeader.bind(this)&#125;</div><div class="line">       initialListSize=&#123;10&#125;</div><div class="line">       enableEmptySections = &#123;true&#125;</div><div class="line">       style=&#123;&#123;backgroundColor:&apos;#F0F0F0&apos;&#125;&#125;</div><div class="line">       onEndReached=&#123;this.onLoadMore.bind(this)&#125;</div><div class="line">       onEndReachedThreshold=&#123;10&#125;</div><div class="line">       renderFooter=&#123;this.renderLoadingMoreView.bind(this)&#125;</div><div class="line">       refreshControl=&#123;</div><div class="line">             &lt;RefreshControl</div><div class="line">               refreshing=&#123; this.state.isRefreshing &#125;</div><div class="line">               onRefresh=&#123; this.onRefresh.bind(this) &#125;</div><div class="line">               tintColor=&quot;gray&quot;</div><div class="line">               colors=&#123;[&apos;#00af8b&apos;]&#125;</div><div class="line">               progressBackgroundColor=&quot;#FFFFFF&quot;/&gt;</div><div class="line">    &#125;/&gt;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/23/RN之组件点击事件处理/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/23/RN之组件点击事件处理/" itemprop="url">
+                  RN之组件点击事件处理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T13:34:23+08:00">
+                2017-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/23/RN之组件点击事件处理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/23/RN之组件点击事件处理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="RN之组件点击事件处理"><a href="#RN之组件点击事件处理" class="headerlink" title="RN之组件点击事件处理"></a>RN之组件点击事件处理</h2><p>我们来看下ReactNative提供的可触摸组件。<br>分别为:TouchableHighlight、TouchableNativeFeedback、TouchableOpacity、TouchableWithoutFeedback。<br>TouchableWithoutFeedback控件是触摸点击不带反馈效果的，另外三个都是有反馈效果。这三个组件都继承了所有TouchableWithoutFeedback的属性。</p>
+<p>1、TouchableWithoutFeedback<br>官网解释：<br>除非你有一个很好的理由，否则不要用这个组件。所有能够响应触屏操作的元素在触屏后都应该有一个视觉上的反馈（然而本组件没有任何视觉反馈）。这也是为什么一个”web”应用总是显得不够”原生”的主要原因之一。<br>注意：TouchableWithoutFeedback只支持一个子节点，如果你希望包含多个子组件，用一个View来包装它们。</p>
+<p>属性<br>accessible bool </p>
+<p>delayLongPress number<br>单位是毫秒，从onPressIn开始，到onLongPress被调用的延迟。</p>
+<p>delayPressIn number<br>单位是毫秒，从触摸操作开始到onPressIn被调用的延迟。</p>
+<p>delayPressOut number<br>单位是毫秒，从触摸操作结束开始到onPressOut被调用的延迟。</p>
+<p>disabled bool<br>如果设为true，则禁止此组件的一切交互。</p>
+<p>hitSlop {top: number, left: number, bottom: number, right: number}<br>这一属性定义了按钮的外延范围。这一范围也会使pressRetentionOffset（见下文）变得更大。 注意：触摸范围不会超过父视图的边界，也不会影响原先和本组件层叠的视图（保留原先的触摸优先级）。</p>
+<p>onLayout function<br>当加载或者布局改变的时候被调用，参数为：{nativeEvent: {layout: {x, y, width, height}}}</p>
+<p>onLongPress function </p>
+<p>onPress function<br>当触摸操作结束时调用，但如果被取消了则不调用（譬如响应者被一个滚动操作取代）</p>
+<p>onPressIn function </p>
+<p>onPressOut function </p>
+<p>pressRetentionOffset {top: number, left: number, bottom: number, right: number}<br>在当前视图不能滚动的前提下指定这个属性，可以决定当手指移开多远距离之后，会不再激活按钮。但如果手指再次移回范围内，按钮会被再次激活。只要视图不能滚动，你可以来回多次这样的操作。确保你传入一个常量来减少内存分配</p>
+<p>2、TouchableHighlight<br>官网的解释：<br>本组件用于封装视图，使其可以正确响应触摸操作。当按下的时候，封装的视图的不透明度会降低，同时会有一个底层的颜色透过而被用户看到，使得视图变暗或变亮。在底层实现上，实际会创建一个新的视图到视图层级中，如果使用的方法不正确，有时候会导致一些不希望出现的视觉效果。譬如没有给视图的backgroundColor显式声明一个不透明的颜色。<br>注意：TouchableHighlight只支持一个子节点，如果你希望包含多个子组件，用一个View来包装它们。</p>
+<p>属性<br>TouchableWithoutFeedback props…<br>译注：这意味着本组件继承了所有TouchableWithoutFeedback的属性。</p>
+<p>activeOpacity number<br>指定封装的视图在被触摸操作激活时以多少不透明度显示（通常在0到1之间）。</p>
+<p>onHideUnderlay function<br>当底层的颜色被隐藏的时候调用。</p>
+<p>onShowUnderlay function<br>当底层的颜色被显示的时候调用。</p>
+<p>style View#style </p>
+<p>underlayColor string<br>有触摸操作时显示出来的底层的颜色。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;TouchableHighlight underlayColor=&apos;#f0f0f0&apos; onPress=&#123;this.openIM.bind(this)&#125; style=&#123;styles.userIMImageView&#125;&gt;  </div><div class="line">      &lt;Image source=&#123;&#123;uri:&apos;im&apos;&#125;&#125; style=&#123;styles.userIMImage&#125;/&gt;  </div><div class="line">&lt;/TouchableHighlight&gt;</div></pre></td></tr></table></figure>
+<p>这个很简单的例子，就是一个图片，点击后背景色变为：#f0f0f0</p>
+<p>3、TouchableOpacity<br>官网解释：<br>本组件用于封装视图，使其可以正确响应触摸操作。当按下的时候，封装的视图的不透明度会降低。这个过程并不会真正改变视图层级，大部分情况下很容易添加到应用中而不会带来一些奇怪的副作用。（译注：此组件与TouchableHighlight的区别在于并没有额外的颜色变化，更适于一般场景）。<br>属性<br>TouchableWithoutFeedback props…<br>译注：这意味着本组件继承了所有TouchableWithoutFeedback的属性。</p>
+<p>activeOpacity number<br>指定封装的视图在被触摸操作激活时以多少不透明度显示（通常在0到1之间）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;TouchableOpacity  </div><div class="line">    style=&#123;styles.saveView&#125;  </div><div class="line">    onPress=&#123;this.refuse.bind(this)&#125;  </div><div class="line">    activeOpacity=&#123;0.7&#125;  &gt;  </div><div class="line">    &lt;Text style=&#123;styles.saveText&#125;&gt;  </div><div class="line">       拒单  </div><div class="line">    &lt;/Text&gt;  </div><div class="line">&lt;/TouchableOpacity&gt;</div></pre></td></tr></table></figure>
+<p>上面这边代码实现的效果是：按钮点击后，不透明度为0.7<br>1、将TouchableOpacity组件当成一个View组件，子组件为Text，封装成一个Button<br>2、当按钮被点击时，不透明度activeOpacity设置为0.7</p>
+<p>需要注意的是TouchableHighlight和TouchableHighlight只有设置onPress方法后，对应的背景色和透明度才有效。</p>
+<p>4、TouchableNativeFeedback<br>官网解释：<br>本组件用于封装视图，使其可以正确响应触摸操作（仅限Android平台）</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/RN父组件与子组件之间通信/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1214,395 +1652,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/02/React-Native延迟加载数据/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/02/React-Native延迟加载数据/" itemprop="url">
-                  React-Native延迟加载数据
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-02T22:01:17+08:00">
-                2017-03-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/02/React-Native延迟加载数据/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/02/React-Native延迟加载数据/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="React-Native延迟加载数据"><a href="#React-Native延迟加载数据" class="headerlink" title="React-Native延迟加载数据"></a>React-Native延迟加载数据</h2><p>发现在componentDidMount 方法里面执行网络请求，获取数据成功后 更新UI，现象是从A页面跳转到B页面 跳转会存在明显的卡顿现象。</p>
-<p>按照React-Native的生命周期调用规则，在setState之后，RN会依次调用shouldComponentUpdate -&gt; componentWillUpdate -&gt; render -&gt; componentDidUpdate生命周期方法。然而问题就出在state更新后调用render方法时，会停止当前Component进入屏幕时的滚动动画。造成新Component进入画面一半时停住，甚至新Component还没开始进入画面时就停住，等到componentDidUpdate执行完成后才继续向前滚动。严重影响使用体验。</p>
-<p>这个时候我们就需要让这个state更新操作延迟进行。为了实现这个目的，可以使用RN提供的一个工具：InteractionManager<br> 从名称上可以看出，这是一个管理互动操作的工具。其中有一个方法runAfterInteraction（func）。这个方法用来标记参数中传入的方法在所有当前进行的交互和动画完成后再执行。可以理解为将func加入到一个等待队列。</p>
-<p> 我们可以使用这个方法来避免在Component进入画面的动画完成前打断动画的问题。类似于这样：</p>
-<p> componentDidMount() {<br>   InteractionManager.runAfterInteractions(()=&gt;{<br>      this._fetchData();<br>   });<br>}</p>
-<p>这样，在Component进入画面的动画结束后，才会执行拉取数据的操作，这个逻辑才符合我们的预期。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/11/AndroidWebViewjs失效问题/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/11/AndroidWebViewjs失效问题/" itemprop="url">
-                  AndroidWebViewjs失效问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T19:09:22+08:00">
-                2017-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/01/11/AndroidWebViewjs失效问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/AndroidWebViewjs失效问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Android-WebView-js失效问题"><a href="#Android-WebView-js失效问题" class="headerlink" title="Android WebView js失效问题"></a>Android WebView js失效问题</h1><p>最近遇到一个很诡异的webview问题,当网页出现一次错误后 后面不管是恢复网络还是其他ok的页面 js都会加载不了<br>查了很多资料 没什么结果。<br>最后仔细思考后 看了下代码 在网页错误回调函数中发现调用了 mWebView.resumeTimers(); 方法。</p>
-<p>然后看下API说明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public void pauseTimers ()</div><div class="line"></div><div class="line">Added in API level 1</div><div class="line">Pauses all layout, parsing, and JavaScript timers for all WebViews. This is a global requests, not restricted to just this WebView. This can be useful if the application has been paused.</div></pre></td></tr></table></figure>
-<p>原来这个方法是全局生效的，会导致所有webview的js失效 终于解释了为什么一旦出现一次错误后 后续页面都加载不出来的问题了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/11/swift约束之SnapKit的使用一/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/11/swift约束之SnapKit的使用一/" itemprop="url">
-                  swift约束之SnapKit的使用一
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T16:10:01+08:00">
-                2017-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/01/11/swift约束之SnapKit的使用一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/swift约束之SnapKit的使用一/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="swift约束之SnapKit的使用一"><a href="#swift约束之SnapKit的使用一" class="headerlink" title="swift约束之SnapKit的使用一"></a>swift约束之SnapKit的使用一</h1><p>SnapKit中的常用属性有：<br>top(上)、left(左)、right(右)、bottom(下)、width(长)、height(宽)、centerX(横向中点)、centerY(纵向中点)</p>
-<h3 id="举个🌰"><a href="#举个🌰" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">view1.snp.makeConstraints &#123; (make) in</div><div class="line">            </div><div class="line">            //距self.view的上边20</div><div class="line">            make.top.equalTo(self.view).offset(20)</div><div class="line">            //距self.view的左边30</div><div class="line">            make.left.equalTo(self.view).offset(30)</div><div class="line">            //距self.view的右边30（右边数字前要加减号,不然会变成超出右边30）</div><div class="line">            make.right.equalTo(self.view).offset(-30)</div><div class="line">            //距self.view的下边50（下边数字前要加减号,不然会变成超出下边50）</div><div class="line">            make.bottom.equalTo(self.view).offset(-50)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-<h3 id="举个🌰-1"><a href="#举个🌰-1" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">view2.snp.makeConstraints &#123; (make) in</div><div class="line">            </div><div class="line">            //距view1的上边50</div><div class="line">            make.top.equalTo(view1).offset(50)</div><div class="line">            //距view1的左边50</div><div class="line">            make.left.equalTo(view1).offset(50)</div><div class="line">            //设置长为100</div><div class="line">            make.width.equalTo(100)</div><div class="line">            //设置高为60</div><div class="line">            make.height.equalTo(60)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-<h3 id="举个🌰-2"><a href="#举个🌰-2" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">view3.snp.makeConstraints &#123; (make) in</div><div class="line">            </div><div class="line">            //横向坐标等于view1</div><div class="line">            make.centerX.equalTo(view1)</div><div class="line">            //纵向坐标等于view1(横和纵都相等就等于对view1居中)</div><div class="line">            make.centerY.equalTo(view1)</div><div class="line">            //长等于view2的2倍</div><div class="line">            make.width.equalTo(view2).multipliedBy(2)</div><div class="line">            //高等于view2的3分之一</div><div class="line">            make.height.equalTo(view2).dividedBy(3)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-<p>以上就是基本的 Snapkit的使用，后续再更新….</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1643,7 +1697,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">70</span>
+              <span class="site-state-item-count">74</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1653,7 +1707,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

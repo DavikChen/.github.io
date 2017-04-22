@@ -249,6 +249,136 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/Android点击EditText文本框之外任何地方隐藏键盘的解决办法/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/27/Android点击EditText文本框之外任何地方隐藏键盘的解决办法/" itemprop="url">
+                  Android点击EditText文本框之外任何地方隐藏键盘的解决办法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T17:50:14+08:00">
+                2017-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/27/Android点击EditText文本框之外任何地方隐藏键盘的解决办法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/Android点击EditText文本框之外任何地方隐藏键盘的解决办法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Android点击EditText文本框之外任何地方隐藏键盘的解决办法"><a href="#Android点击EditText文本框之外任何地方隐藏键盘的解决办法" class="headerlink" title="Android点击EditText文本框之外任何地方隐藏键盘的解决办法"></a>Android点击EditText文本框之外任何地方隐藏键盘的解决办法</h2><p>1，实现方法一：通过给当前界面布局文件的父layout设置点击事件（相当于给整个Activity设置点击事件），在事件里进行键盘隐藏</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@Override  </div><div class="line">public void onClick(View v) &#123;  </div><div class="line">    switch (v.getId()) &#123;  </div><div class="line">    case R.id.traceroute_rootview:  </div><div class="line">         InputMethodManager imm = (InputMethodManager)  </div><div class="line">         getSystemService(Context.INPUT_METHOD_SERVICE);  </div><div class="line">         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);  </div><div class="line">        break;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2，实现思路二：通过dispatchTouchEvent每次ACTION_DOWN事件中动态判断非EditText本身区域的点击事件，然后在事件中进行屏蔽。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public  boolean isShouldHideInput(View v, MotionEvent event) &#123;</div><div class="line">		if (v != null &amp;&amp; (v instanceof EditText)) &#123;</div><div class="line">			int[] leftTop = &#123; 0, 0 &#125;;</div><div class="line">			//获取输入框当前的location位置</div><div class="line">			v.getLocationInWindow(leftTop);</div><div class="line">			int left = leftTop[0];</div><div class="line">			int top = leftTop[1];</div><div class="line">			int bottom = top + v.getHeight();</div><div class="line">			int right = left + v.getWidth();</div><div class="line">			if (event.getX() &gt; left &amp;&amp; event.getX() &lt; right</div><div class="line">					&amp;&amp; event.getY() &gt; top &amp;&amp; event.getY() &lt; bottom) &#123;</div><div class="line">				// 点击的是输入框区域，保留点击EditText的事件</div><div class="line">				return false;</div><div class="line">			&#125; else &#123;</div><div class="line">				return true;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return false;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>isShoudHideInput(View v,MotionEvent e)方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public  boolean isShouldHideInput(View v, MotionEvent event) &#123;</div><div class="line">		if (v != null &amp;&amp; (v instanceof EditText)) &#123;</div><div class="line">			int[] leftTop = &#123; 0, 0 &#125;;</div><div class="line">			//获取输入框当前的location位置</div><div class="line">			v.getLocationInWindow(leftTop);</div><div class="line">			int left = leftTop[0];</div><div class="line">			int top = leftTop[1];</div><div class="line">			int bottom = top + v.getHeight();</div><div class="line">			int right = left + v.getWidth();</div><div class="line">			if (event.getX() &gt; left &amp;&amp; event.getX() &lt; right</div><div class="line">					&amp;&amp; event.getY() &gt; top &amp;&amp; event.getY() &lt; bottom) &#123;</div><div class="line">				// 点击的是输入框区域，保留点击EditText的事件</div><div class="line">				return false;</div><div class="line">			&#125; else &#123;</div><div class="line">				return true;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return false;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>两种方案都可行 主要还是看你的需求场景了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/Java类的实例化-static-父类构造函数执行顺序/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1166,14 +1296,14 @@
 <p> 1.EditText默认不弹出软件键盘<br>    方法一：<br>          在 AndroidMainfest.xml中选择哪个activity，设置windowSoftInputMode属性为 adjustUnspecified|stateHidden<br>                   android:windowSoftInputMode=”adjustUnspecified|stateHidden”<br>    方法二：<br>         让 EditText失去焦点，使用EditText的clearFocus方法<br>            edit.clearFocus();<br>    方法三：<br>         强制隐藏Android输入法窗口<br>         例如：EditText edit=(EditText)findViewById(R.id.edit);<br>           InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);<br>           imm.hideSoftInputFromWindow(edit.getWindowToken(),0);<br>    2.EditText始终不弹出软件键盘<br>        例：EditText edit=(EditText)findViewById(R.id.edit);<br>          edit.setInputType(InputType.TYPE_NULL);</p>
 <p>Button 继承自 VIEW , VIEW 有的属性它都能用 &lt;?xml version=”1.0” encoding=”utf-8”?&gt;</p>
 <p><selector xmlns:android="http://schemas.android.com/apk/res/android"></selector></p>
-<item android:state_pressed="true"> （这里的样式是当按钮被按下时的显示）<br><shape><br><a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#x67;&#x72;&#97;&#x64;&#105;&#101;&#x6e;&#116;&#xa;&#97;&#x6e;&#100;&#x72;&#111;&#x69;&#x64;&#x3a;&#x73;&#116;&#x61;&#114;&#x74;&#x43;&#x6f;&#x6c;&#111;&#x72;&#x3d;&#34;&#64;&#x64;&#114;&#x61;&#119;&#97;&#x62;&#x6c;&#x65;&#x2f;&#103;&#114;&#97;&#x79;&#x22;&#xa;&#x61;&#110;&#x64;&#x72;&#111;&#105;&#x64;&#x3a;&#x65;&#110;&#100;&#x43;&#x6f;&#108;&#111;&#x72;&#x3d;&#x22;&#x40;&#100;&#x72;&#x61;&#119;&#x61;&#x62;&#x6c;&#101;&#47;&#x77;&#104;&#x69;&#116;&#x65;&#x22;&#10;&#97;&#110;&#x64;&#114;&#x6f;&#x69;&#x64;&#x3a;&#97;&#x6e;&#x67;&#108;&#101;&#x3d;&#x22;&#x2a;&#x22;&#47;">&#x67;&#x72;&#97;&#x64;&#105;&#101;&#x6e;&#116;&#xa;&#97;&#x6e;&#100;&#x72;&#111;&#x69;&#x64;&#x3a;&#x73;&#116;&#x61;&#114;&#x74;&#x43;&#x6f;&#x6c;&#111;&#x72;&#x3d;&#34;&#64;&#x64;&#114;&#x61;&#119;&#97;&#x62;&#x6c;&#x65;&#x2f;&#103;&#114;&#97;&#x79;&#x22;&#xa;&#x61;&#110;&#x64;&#x72;&#111;&#105;&#x64;&#x3a;&#x65;&#110;&#100;&#x43;&#x6f;&#108;&#111;&#x72;&#x3d;&#x22;&#x40;&#100;&#x72;&#x61;&#119;&#x61;&#x62;&#x6c;&#101;&#47;&#x77;&#104;&#x69;&#116;&#x65;&#x22;&#10;&#97;&#110;&#x64;&#114;&#x6f;&#x69;&#x64;&#x3a;&#97;&#x6e;&#x67;&#108;&#101;&#x3d;&#x22;&#x2a;&#x22;&#47;</a><br><a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#115;&#116;&#x72;&#111;&#107;&#101;&#10;&#97;&#110;&#x64;&#114;&#x6f;&#105;&#100;&#x3a;&#x77;&#105;&#100;&#116;&#x68;&#61;&#34;&#42;&#100;&#112;&#34;&#xa;&#x61;&#110;&#100;&#114;&#x6f;&#105;&#x64;&#x3a;&#x63;&#x6f;&#x6c;&#x6f;&#114;&#x3d;&#34;&#64;&#100;&#114;&#x61;&#x77;&#x61;&#98;&#108;&#x65;&#x2f;&#116;&#x65;&#97;&#108;&#34;&#x2f;">&#115;&#116;&#x72;&#111;&#107;&#101;&#10;&#97;&#110;&#x64;&#114;&#x6f;&#105;&#100;&#x3a;&#x77;&#105;&#100;&#116;&#x68;&#61;&#34;&#42;&#100;&#112;&#34;&#xa;&#x61;&#110;&#100;&#114;&#x6f;&#105;&#x64;&#x3a;&#x63;&#x6f;&#x6c;&#x6f;&#114;&#x3d;&#34;&#64;&#100;&#114;&#x61;&#x77;&#x61;&#98;&#108;&#x65;&#x2f;&#116;&#x65;&#97;&#108;&#34;&#x2f;</a><br><corners android:radius="*dp"><br><padding android:left="**dp" android:top="*dp" android:right="**dp" android:bottom="*dp"><br></padding></corners></shape><br></item>
+<item android:state_pressed="true"> （这里的样式是当按钮被按下时的显示）<br><shape><br><a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x67;&#114;&#97;&#100;&#105;&#101;&#110;&#116;&#xa;&#x61;&#x6e;&#x64;&#x72;&#111;&#x69;&#x64;&#x3a;&#x73;&#x74;&#x61;&#x72;&#x74;&#x43;&#111;&#108;&#x6f;&#x72;&#x3d;&#x22;&#64;&#100;&#114;&#x61;&#x77;&#x61;&#x62;&#x6c;&#101;&#47;&#103;&#x72;&#97;&#x79;&#34;&#xa;&#x61;&#x6e;&#100;&#x72;&#x6f;&#x69;&#100;&#x3a;&#x65;&#110;&#100;&#67;&#111;&#x6c;&#111;&#x72;&#61;&#x22;&#64;&#100;&#x72;&#x61;&#x77;&#x61;&#x62;&#108;&#101;&#x2f;&#119;&#x68;&#105;&#116;&#101;&#34;&#10;&#x61;&#110;&#100;&#114;&#111;&#105;&#100;&#x3a;&#x61;&#110;&#103;&#x6c;&#x65;&#x3d;&#34;&#42;&#x22;&#x2f;">&#x67;&#114;&#97;&#100;&#105;&#101;&#110;&#116;&#xa;&#x61;&#x6e;&#x64;&#x72;&#111;&#x69;&#x64;&#x3a;&#x73;&#x74;&#x61;&#x72;&#x74;&#x43;&#111;&#108;&#x6f;&#x72;&#x3d;&#x22;&#64;&#100;&#114;&#x61;&#x77;&#x61;&#x62;&#x6c;&#101;&#47;&#103;&#x72;&#97;&#x79;&#34;&#xa;&#x61;&#x6e;&#100;&#x72;&#x6f;&#x69;&#100;&#x3a;&#x65;&#110;&#100;&#67;&#111;&#x6c;&#111;&#x72;&#61;&#x22;&#64;&#100;&#x72;&#x61;&#x77;&#x61;&#x62;&#108;&#101;&#x2f;&#119;&#x68;&#105;&#116;&#101;&#34;&#10;&#x61;&#110;&#100;&#114;&#111;&#105;&#100;&#x3a;&#x61;&#110;&#103;&#x6c;&#x65;&#x3d;&#34;&#42;&#x22;&#x2f;</a><br><a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#58;&#115;&#x74;&#114;&#111;&#x6b;&#x65;&#xa;&#97;&#x6e;&#x64;&#x72;&#x6f;&#105;&#100;&#x3a;&#x77;&#x69;&#100;&#116;&#104;&#61;&#34;&#42;&#x64;&#x70;&#34;&#10;&#97;&#x6e;&#100;&#114;&#x6f;&#x69;&#x64;&#x3a;&#99;&#x6f;&#x6c;&#x6f;&#114;&#x3d;&#34;&#x40;&#100;&#114;&#x61;&#x77;&#97;&#98;&#108;&#101;&#47;&#x74;&#x65;&#97;&#x6c;&#34;&#x2f;">&#115;&#x74;&#114;&#111;&#x6b;&#x65;&#xa;&#97;&#x6e;&#x64;&#x72;&#x6f;&#105;&#100;&#x3a;&#x77;&#x69;&#100;&#116;&#104;&#61;&#34;&#42;&#x64;&#x70;&#34;&#10;&#97;&#x6e;&#100;&#114;&#x6f;&#x69;&#x64;&#x3a;&#99;&#x6f;&#x6c;&#x6f;&#114;&#x3d;&#34;&#x40;&#100;&#114;&#x61;&#x77;&#97;&#98;&#108;&#101;&#47;&#x74;&#x65;&#97;&#x6c;&#34;&#x2f;</a><br><corners android:radius="*dp"><br><padding android:left="**dp" android:top="*dp" android:right="**dp" android:bottom="*dp"><br></padding></corners></shape><br></item>
 
-<item android:state_focused="true">（这里的样式是移动到按钮时的显示）<br><shape><br><a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#x67;&#x72;&#97;&#100;&#x69;&#x65;&#110;&#x74;&#10;&#x61;&#110;&#100;&#114;&#x6f;&#x69;&#100;&#x3a;&#x73;&#116;&#97;&#x72;&#x74;&#67;&#111;&#108;&#111;&#114;&#61;&#34;&#64;&#x64;&#114;&#97;&#119;&#97;&#x62;&#108;&#x65;&#x2f;&#115;&#105;&#108;&#x76;&#x65;&#x72;&#x22;&#10;&#97;&#x6e;&#100;&#x72;&#111;&#105;&#x64;&#58;&#101;&#110;&#100;&#67;&#111;&#108;&#x6f;&#114;&#x3d;&#34;&#x40;&#100;&#x72;&#x61;&#x77;&#x61;&#98;&#108;&#101;&#47;&#x73;&#112;&#x72;&#105;&#x6e;&#x67;&#x67;&#114;&#101;&#x65;&#110;&#x22;&#xa;&#97;&#x6e;&#x64;&#114;&#x6f;&#x69;&#x64;&#x3a;&#x61;&#110;&#x67;&#x6c;&#101;&#x3d;&#x22;&#42;&#34;&#x2f;">&#x67;&#x72;&#97;&#100;&#x69;&#x65;&#110;&#x74;&#10;&#x61;&#110;&#100;&#114;&#x6f;&#x69;&#100;&#x3a;&#x73;&#116;&#97;&#x72;&#x74;&#67;&#111;&#108;&#111;&#114;&#61;&#34;&#64;&#x64;&#114;&#97;&#119;&#97;&#x62;&#108;&#x65;&#x2f;&#115;&#105;&#108;&#x76;&#x65;&#x72;&#x22;&#10;&#97;&#x6e;&#100;&#x72;&#111;&#105;&#x64;&#58;&#101;&#110;&#100;&#67;&#111;&#108;&#x6f;&#114;&#x3d;&#34;&#x40;&#100;&#x72;&#x61;&#x77;&#x61;&#98;&#108;&#101;&#47;&#x73;&#112;&#x72;&#105;&#x6e;&#x67;&#x67;&#114;&#101;&#x65;&#110;&#x22;&#xa;&#97;&#x6e;&#x64;&#114;&#x6f;&#x69;&#x64;&#x3a;&#x61;&#110;&#x67;&#x6c;&#101;&#x3d;&#x22;&#42;&#34;&#x2f;</a><br><a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#58;&#115;&#116;&#114;&#111;&#107;&#x65;&#xa;&#x61;&#x6e;&#x64;&#114;&#111;&#x69;&#100;&#58;&#x77;&#105;&#x64;&#x74;&#x68;&#x3d;&#x22;&#x2a;&#100;&#112;&#x22;&#xa;&#x61;&#110;&#100;&#114;&#x6f;&#x69;&#x64;&#x3a;&#99;&#111;&#108;&#x6f;&#114;&#61;&#x22;&#64;&#100;&#x72;&#x61;&#x77;&#97;&#98;&#108;&#101;&#47;&#x74;&#101;&#x61;&#108;&#x22;&#47;">&#115;&#116;&#114;&#111;&#107;&#x65;&#xa;&#x61;&#x6e;&#x64;&#114;&#111;&#x69;&#100;&#58;&#x77;&#105;&#x64;&#x74;&#x68;&#x3d;&#x22;&#x2a;&#100;&#112;&#x22;&#xa;&#x61;&#110;&#100;&#114;&#x6f;&#x69;&#x64;&#x3a;&#99;&#111;&#108;&#x6f;&#114;&#61;&#x22;&#64;&#100;&#x72;&#x61;&#x77;&#97;&#98;&#108;&#101;&#47;&#x74;&#101;&#x61;&#108;&#x22;&#47;</a><br><corners android:radius="*dp"><br><padding android:left="**dp" android:top="*dp" android:right="**dp" android:bottom="*dp"><br></padding></corners></shape><br></item>
+<item android:state_focused="true">（这里的样式是移动到按钮时的显示）<br><shape><br><a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#103;&#x72;&#x61;&#x64;&#x69;&#x65;&#x6e;&#x74;&#10;&#x61;&#110;&#x64;&#114;&#111;&#x69;&#x64;&#x3a;&#115;&#x74;&#x61;&#114;&#116;&#67;&#x6f;&#108;&#x6f;&#114;&#x3d;&#x22;&#64;&#100;&#114;&#x61;&#x77;&#97;&#98;&#108;&#101;&#47;&#x73;&#x69;&#108;&#x76;&#101;&#114;&#x22;&#10;&#x61;&#110;&#x64;&#114;&#111;&#x69;&#100;&#58;&#x65;&#110;&#100;&#67;&#111;&#x6c;&#111;&#x72;&#x3d;&#x22;&#x40;&#100;&#114;&#x61;&#x77;&#x61;&#98;&#x6c;&#x65;&#47;&#115;&#x70;&#x72;&#105;&#x6e;&#103;&#103;&#114;&#x65;&#101;&#x6e;&#x22;&#10;&#x61;&#110;&#x64;&#114;&#x6f;&#x69;&#x64;&#x3a;&#97;&#x6e;&#x67;&#x6c;&#101;&#61;&#x22;&#x2a;&#x22;&#47;">&#103;&#x72;&#x61;&#x64;&#x69;&#x65;&#x6e;&#x74;&#10;&#x61;&#110;&#x64;&#114;&#111;&#x69;&#x64;&#x3a;&#115;&#x74;&#x61;&#114;&#116;&#67;&#x6f;&#108;&#x6f;&#114;&#x3d;&#x22;&#64;&#100;&#114;&#x61;&#x77;&#97;&#98;&#108;&#101;&#47;&#x73;&#x69;&#108;&#x76;&#101;&#114;&#x22;&#10;&#x61;&#110;&#x64;&#114;&#111;&#x69;&#100;&#58;&#x65;&#110;&#100;&#67;&#111;&#x6c;&#111;&#x72;&#x3d;&#x22;&#x40;&#100;&#114;&#x61;&#x77;&#x61;&#98;&#x6c;&#x65;&#47;&#115;&#x70;&#x72;&#105;&#x6e;&#103;&#103;&#114;&#x65;&#101;&#x6e;&#x22;&#10;&#x61;&#110;&#x64;&#114;&#x6f;&#x69;&#x64;&#x3a;&#97;&#x6e;&#x67;&#x6c;&#101;&#61;&#x22;&#x2a;&#x22;&#47;</a><br><a href="&#109;&#x61;&#105;&#108;&#116;&#111;&#58;&#115;&#x74;&#x72;&#x6f;&#107;&#101;&#10;&#97;&#110;&#100;&#x72;&#111;&#105;&#100;&#x3a;&#x77;&#105;&#100;&#x74;&#x68;&#61;&#34;&#42;&#x64;&#x70;&#x22;&#xa;&#97;&#x6e;&#x64;&#114;&#x6f;&#105;&#100;&#58;&#x63;&#x6f;&#x6c;&#x6f;&#x72;&#61;&#34;&#x40;&#x64;&#114;&#x61;&#x77;&#x61;&#98;&#x6c;&#101;&#x2f;&#116;&#101;&#97;&#x6c;&#x22;&#x2f;">&#115;&#x74;&#x72;&#x6f;&#107;&#101;&#10;&#97;&#110;&#100;&#x72;&#111;&#105;&#100;&#x3a;&#x77;&#105;&#100;&#x74;&#x68;&#61;&#34;&#42;&#x64;&#x70;&#x22;&#xa;&#97;&#x6e;&#x64;&#114;&#x6f;&#105;&#100;&#58;&#x63;&#x6f;&#x6c;&#x6f;&#x72;&#61;&#34;&#x40;&#x64;&#114;&#x61;&#x77;&#x61;&#98;&#x6c;&#101;&#x2f;&#116;&#101;&#97;&#x6c;&#x22;&#x2f;</a><br><corners android:radius="*dp"><br><padding android:left="**dp" android:top="*dp" android:right="**dp" android:bottom="*dp"><br></padding></corners></shape><br></item>
 
 <p><item> （这里的样式是按钮正常时的显示）</item></p>
 <p><shape></shape></p>
-<p><a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x67;&#114;&#97;&#x64;&#105;&#101;&#110;&#116;&#xa;&#x61;&#110;&#100;&#x72;&#x6f;&#105;&#x64;&#58;&#115;&#x74;&#x61;&#114;&#x74;&#x43;&#x6f;&#x6c;&#x6f;&#x72;&#61;&#x22;&#x40;&#100;&#114;&#x61;&#119;&#97;&#98;&#108;&#101;&#x2f;&#115;&#105;&#108;&#x76;&#x65;&#x72;&#x22;&#xa;&#x61;&#x6e;&#x64;&#x72;&#111;&#x69;&#100;&#x3a;&#x65;&#x6e;&#100;&#67;&#x6f;&#108;&#111;&#114;&#x3d;&#34;&#64;&#x64;&#114;&#97;&#x77;&#97;&#98;&#108;&#101;&#x2f;&#115;&#x6e;&#111;&#119;&#x22;&#10;&#x61;&#110;&#100;&#x72;&#x6f;&#x69;&#100;&#58;&#x61;&#x6e;&#x67;&#108;&#x65;&#61;&#34;&#x2a;&#34;&#x2f;">&#x67;&#114;&#97;&#x64;&#105;&#101;&#110;&#116;&#xa;&#x61;&#110;&#100;&#x72;&#x6f;&#105;&#x64;&#58;&#115;&#x74;&#x61;&#114;&#x74;&#x43;&#x6f;&#x6c;&#x6f;&#x72;&#61;&#x22;&#x40;&#100;&#114;&#x61;&#119;&#97;&#98;&#108;&#101;&#x2f;&#115;&#105;&#108;&#x76;&#x65;&#x72;&#x22;&#xa;&#x61;&#x6e;&#x64;&#x72;&#111;&#x69;&#100;&#x3a;&#x65;&#x6e;&#100;&#67;&#x6f;&#108;&#111;&#114;&#x3d;&#34;&#64;&#x64;&#114;&#97;&#x77;&#97;&#98;&#108;&#101;&#x2f;&#115;&#x6e;&#111;&#119;&#x22;&#10;&#x61;&#110;&#100;&#x72;&#x6f;&#x69;&#100;&#58;&#x61;&#x6e;&#x67;&#108;&#x65;&#61;&#34;&#x2a;&#34;&#x2f;</a></p>
-<p><a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#x3a;&#115;&#x74;&#x72;&#111;&#x6b;&#101;&#xa;&#97;&#110;&#x64;&#x72;&#111;&#x69;&#x64;&#x3a;&#119;&#105;&#100;&#x74;&#104;&#61;&#x22;&#x2a;&#x64;&#x70;&#34;&#xa;&#97;&#x6e;&#x64;&#114;&#111;&#x69;&#100;&#58;&#99;&#x6f;&#x6c;&#111;&#x72;&#x3d;&#34;&#x40;&#100;&#114;&#x61;&#x77;&#97;&#x62;&#108;&#x65;&#47;&#x74;&#x65;&#97;&#108;&#34;&#x2f;">&#115;&#x74;&#x72;&#111;&#x6b;&#101;&#xa;&#97;&#110;&#x64;&#x72;&#111;&#x69;&#x64;&#x3a;&#119;&#105;&#100;&#x74;&#104;&#61;&#x22;&#x2a;&#x64;&#x70;&#34;&#xa;&#97;&#x6e;&#x64;&#114;&#111;&#x69;&#100;&#58;&#99;&#x6f;&#x6c;&#111;&#x72;&#x3d;&#34;&#x40;&#100;&#114;&#x61;&#x77;&#97;&#x62;&#108;&#x65;&#47;&#x74;&#x65;&#97;&#108;&#34;&#x2f;</a></p>
+<p><a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#58;&#x67;&#114;&#x61;&#x64;&#105;&#x65;&#x6e;&#116;&#10;&#x61;&#x6e;&#100;&#114;&#111;&#x69;&#100;&#x3a;&#115;&#116;&#x61;&#x72;&#x74;&#x43;&#111;&#x6c;&#111;&#114;&#x3d;&#34;&#x40;&#100;&#x72;&#x61;&#119;&#97;&#98;&#108;&#101;&#x2f;&#115;&#105;&#x6c;&#x76;&#101;&#114;&#34;&#xa;&#97;&#110;&#100;&#x72;&#111;&#x69;&#x64;&#x3a;&#101;&#110;&#x64;&#67;&#111;&#108;&#111;&#114;&#61;&#34;&#64;&#x64;&#x72;&#97;&#119;&#97;&#98;&#108;&#x65;&#x2f;&#x73;&#110;&#111;&#x77;&#x22;&#xa;&#x61;&#x6e;&#100;&#114;&#x6f;&#x69;&#100;&#58;&#97;&#110;&#x67;&#x6c;&#x65;&#x3d;&#34;&#42;&#34;&#47;">&#x67;&#114;&#x61;&#x64;&#105;&#x65;&#x6e;&#116;&#10;&#x61;&#x6e;&#100;&#114;&#111;&#x69;&#100;&#x3a;&#115;&#116;&#x61;&#x72;&#x74;&#x43;&#111;&#x6c;&#111;&#114;&#x3d;&#34;&#x40;&#100;&#x72;&#x61;&#119;&#97;&#98;&#108;&#101;&#x2f;&#115;&#105;&#x6c;&#x76;&#101;&#114;&#34;&#xa;&#97;&#110;&#100;&#x72;&#111;&#x69;&#x64;&#x3a;&#101;&#110;&#x64;&#67;&#111;&#108;&#111;&#114;&#61;&#34;&#64;&#x64;&#x72;&#97;&#119;&#97;&#98;&#108;&#x65;&#x2f;&#x73;&#110;&#111;&#x77;&#x22;&#xa;&#x61;&#x6e;&#100;&#114;&#x6f;&#x69;&#100;&#58;&#97;&#110;&#x67;&#x6c;&#x65;&#x3d;&#34;&#42;&#34;&#47;</a></p>
+<p><a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#58;&#115;&#116;&#x72;&#x6f;&#107;&#x65;&#10;&#x61;&#x6e;&#x64;&#114;&#x6f;&#105;&#100;&#x3a;&#119;&#x69;&#x64;&#116;&#104;&#61;&#x22;&#42;&#x64;&#112;&#x22;&#10;&#x61;&#x6e;&#x64;&#114;&#x6f;&#105;&#100;&#58;&#99;&#111;&#x6c;&#111;&#114;&#x3d;&#x22;&#x40;&#100;&#x72;&#x61;&#119;&#x61;&#x62;&#108;&#101;&#x2f;&#x74;&#101;&#97;&#108;&#34;&#x2f;">&#115;&#116;&#x72;&#x6f;&#107;&#x65;&#10;&#x61;&#x6e;&#x64;&#114;&#x6f;&#105;&#100;&#x3a;&#119;&#x69;&#x64;&#116;&#104;&#61;&#x22;&#42;&#x64;&#112;&#x22;&#10;&#x61;&#x6e;&#x64;&#114;&#x6f;&#105;&#100;&#58;&#99;&#111;&#x6c;&#111;&#114;&#x3d;&#x22;&#x40;&#100;&#x72;&#x61;&#119;&#x61;&#x62;&#108;&#101;&#x2f;&#x74;&#101;&#97;&#108;&#34;&#x2f;</a></p>
 <p><corners android:radius="*dp"></corners></p>
 <p><padding android:left="**dp" android:top="*dp" android:right="**dp" android:bottom="*dp"><br><br><br><br>注：</padding></p>
 <p><padding android:left="**dp" android:top="*dp" android:right="**dp" android:bottom="*dp"><br>这里 left 和 right 控制的是 Button 上的字体与按钮的左边缘和右边缘的距离，也就是控制按钮是长还是短；这里的 top 和 bottom 控制的是 Button 上的字体与按钮的上边缘和下边缘的距离，也就是控制按钮时高还是矮。</padding></p>
@@ -1464,149 +1594,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/RN组件封装-组合样式-父子组件通信/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/27/RN组件封装-组合样式-父子组件通信/" itemprop="url">
-                  RN组件封装/组合样式/父子组件通信
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T13:45:45+08:00">
-                2017-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/27/RN组件封装-组合样式-父子组件通信/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/RN组件封装-组合样式-父子组件通信/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="RN组件封装-组合样式-父子组件通信"><a href="#RN组件封装-组合样式-父子组件通信" class="headerlink" title="RN组件封装/组合样式/父子组件通信"></a>RN组件封装/组合样式/父子组件通信</h2><ol>
-<li>对外共享关键字</li>
-</ol>
-<p>在对外共享的组件一定要在创建类时声明对外共享的关键字:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export default class</div></pre></td></tr></table></figure>
-<ol>
-<li>使用多种样式</li>
-</ol>
-<p>在标签上使用多个css样式的时候要用[]给括起来，并且行内样式的优先级大于StyleSheet定义的样式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">style=&#123;[styles.button, &#123;backgroundColor: this.props.bg&#125;]</div></pre></td></tr></table></figure>
-<ol>
-<li>父-&gt;子组件传值</li>
-</ol>
-<p>在父组件的标签中直接定义props和值： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">如text、bg、click等。另外也可以传递对象值。</div><div class="line">&lt;Button text=&quot;确定&quot; bg=&quot;red&quot; click=&#123;() =&gt; alert(&apos;点击了确定按钮&apos;)&#125;/&gt;</div></pre></td></tr></table></figure>
-<p>在子组件中使用解构来获取porps传递过来的值并使用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">const &#123;text, bg&#125; = this.props;</div><div class="line">const &#123;click&#125; = this.props;</div><div class="line"></div><div class="line"> &lt;TouchableOpacity style=&#123;[styles.button, &#123;backgroundColor: this.props.bg&#125;]&#125; onPress=&#123;this.onPressHandler&#125; &gt;</div><div class="line">        &lt;Text style=&#123;styles.buttonText&#125;&gt;&#123;this.props.text&#125;&lt;/Text&gt;</div><div class="line">&lt;/TouchableOpacity&gt;</div></pre></td></tr></table></figure>
-<h3 id="子组件代码"><a href="#子组件代码" class="headerlink" title="子组件代码"></a>子组件代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">import React, &#123;Component&#125; from &apos;react&apos;;</div><div class="line">import &#123;</div><div class="line">    StyleSheet,</div><div class="line">    View,</div><div class="line">    Text,</div><div class="line">    TouchableOpacity,</div><div class="line">&#125; from &apos;react-native&apos;;</div><div class="line"></div><div class="line">export default class Button extends Component &#123;</div><div class="line">    onPressHandler = () =&gt; &#123;</div><div class="line">        const &#123;click&#125; = this.props;</div><div class="line">        click();</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        // 利用解构取出需要的值</div><div class="line">        const &#123;text, bg&#125; = this.props;</div><div class="line">        return (</div><div class="line">            &lt;View style=&#123;styles.container&#125;&gt;</div><div class="line">                &#123; /* 在标签上使用多个css样式的时候要用[]给括起来，并且行内样式的优先级大于StyleSheet定义的样式 */ &#125;</div><div class="line">                &lt;TouchableOpacity style=&#123;[styles.button, &#123;backgroundColor: this.props.bg&#125;]&#125;</div><div class="line">                                  onPress=&#123;this.onPressHandler&#125;&gt;</div><div class="line">                    &lt;Text style=&#123;styles.buttonText&#125;&gt;&#123;this.props.text&#125;&lt;/Text&gt;</div><div class="line">                &lt;/TouchableOpacity&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">    container: &#123;&#125;,</div><div class="line">    button: &#123;</div><div class="line">        backgroundColor: &apos;gray&apos;,</div><div class="line">        borderRadius: 20,</div><div class="line">        padding: 10,</div><div class="line">        width: 100,</div><div class="line">        justifyContent: &apos;center&apos;,</div><div class="line">        margin: 20,</div><div class="line">    &#125;,</div><div class="line">    buttonText: &#123;</div><div class="line">        textAlign: &apos;center&apos;,</div><div class="line">    &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="父组件调用子组件并且传值"><a href="#父组件调用子组件并且传值" class="headerlink" title="父组件调用子组件并且传值"></a>父组件调用子组件并且传值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">import React, &#123;Component&#125; from &apos;react&apos;;</div><div class="line">import &#123;</div><div class="line">    AppRegistry,</div><div class="line">    StyleSheet,</div><div class="line">    View,</div><div class="line">&#125; from &apos;react-native&apos;;</div><div class="line"></div><div class="line">//  导入button组件</div><div class="line">import Button from &apos;./src/components/Button&apos;</div><div class="line"></div><div class="line">export default class ButtonDemo extends Component &#123;</div><div class="line">    render() &#123;</div><div class="line">        return (</div><div class="line">            &lt;View style=&#123;styles.container&#125;&gt;</div><div class="line">                &lt;Button text=&quot;确定&quot; bg=&quot;red&quot; click=&#123;() =&gt; alert(&apos;点击了确定按钮&apos;)&#125;/&gt;</div><div class="line">                &lt;Button text=&quot;取消&quot; bg=&quot;blue&quot;  click=&#123;() =&gt; alert(&apos;点击了取消按钮&apos;)&#125;/&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">    container: &#123;</div><div class="line">        flex: 1,</div><div class="line">        justifyContent: &apos;center&apos;,</div><div class="line">        alignItems: &apos;center&apos;,</div><div class="line">        backgroundColor: &apos;#F5FCFF&apos;,</div><div class="line">    &#125;,</div><div class="line">&#125;);</div><div class="line"></div><div class="line">AppRegistry.registerComponent(&apos;ButtomDemo&apos;, () =&gt; ButtomDemo);</div></pre></td></tr></table></figure>
-<p>这也是我们经常封装一个组件 实现组件共用的常见做法。更复杂的 可能还需要考虑iOS Android 平台的兼容 扩展性 稳定性等问题。这里只是给个简单的例子 </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1652,7 +1639,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">79</span>
+              <span class="site-state-item-count">80</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1662,7 +1649,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="RN-利用async和await简单实现多次重试机制," />
 
 
 
@@ -84,16 +84,22 @@
 
 
 
-<meta name="description" content="记录在工作中遇到的各种技术问题">
+<meta name="description" content="RN-利用async和await简单实现多次重试机制在实际开发中 我们经常需要实现多次重试机制。而在ReactNative 如何实现呢。今天看到了 async 和await的结合例子 如下
+首页定义重试的次数常量，定义一个 async 函数 里面循环3次 并且捕获了操作可能出现的异常,如网络不佳
+123456789101112131415const superagent = require(&amp;ap">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ES6变量的解构赋值">
-<meta property="og:url" content="http://yoursite.com/2017/04/07/ES6变量的解构赋值/index.html">
+<meta property="og:title" content="RN-利用async和await简单实现多次重试机制">
+<meta property="og:url" content="http://yoursite.com/2017/04/22/RN-利用async和await简单实现多次重试机制/index.html">
 <meta property="og:site_name" content="带刀大哥">
-<meta property="og:description" content="记录在工作中遇到的各种技术问题">
-<meta property="og:updated_time" content="2017-04-07T06:37:04.000Z">
+<meta property="og:description" content="RN-利用async和await简单实现多次重试机制在实际开发中 我们经常需要实现多次重试机制。而在ReactNative 如何实现呢。今天看到了 async 和await的结合例子 如下
+首页定义重试的次数常量，定义一个 async 函数 里面循环3次 并且捕获了操作可能出现的异常,如网络不佳
+123456789101112131415const superagent = require(&amp;ap">
+<meta property="og:updated_time" content="2017-04-22T07:40:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ES6变量的解构赋值">
-<meta name="twitter:description" content="记录在工作中遇到的各种技术问题">
+<meta name="twitter:title" content="RN-利用async和await简单实现多次重试机制">
+<meta name="twitter:description" content="RN-利用async和await简单实现多次重试机制在实际开发中 我们经常需要实现多次重试机制。而在ReactNative 如何实现呢。今天看到了 async 和await的结合例子 如下
+首页定义重试的次数常量，定义一个 async 函数 里面循环3次 并且捕获了操作可能出现的异常,如网络不佳
+123456789101112131415const superagent = require(&amp;ap">
 
 
 
@@ -121,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/07/ES6变量的解构赋值/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/22/RN-利用async和await简单实现多次重试机制/"/>
 
 
 
 
 
-  <title> ES6变量的解构赋值 | 带刀大哥 </title>
+  <title> RN-利用async和await简单实现多次重试机制 | 带刀大哥 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +254,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/07/ES6变量的解构赋值/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/22/RN-利用async和await简单实现多次重试机制/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
@@ -272,7 +278,7 @@
             
             
               
-                ES6变量的解构赋值
+                RN-利用async和await简单实现多次重试机制
               
             
           </h1>
@@ -285,8 +291,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-07T14:37:04+08:00">
-                2017-04-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-22T15:35:51+08:00">
+                2017-04-22
               </time>
             
 
@@ -301,8 +307,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/04/07/ES6变量的解构赋值/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/07/ES6变量的解构赋值/" itemprop="commentCount"></span>
+                <a href="/2017/04/22/RN-利用async和await简单实现多次重试机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/22/RN-利用async和await简单实现多次重试机制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -328,7 +334,12 @@
       
 
       
-        
+        <h2 id="RN-利用async和await简单实现多次重试机制"><a href="#RN-利用async和await简单实现多次重试机制" class="headerlink" title="RN-利用async和await简单实现多次重试机制"></a>RN-利用async和await简单实现多次重试机制</h2><p>在实际开发中 我们经常需要实现多次重试机制。而在ReactNative 如何实现呢。<br>今天看到了 async 和await的结合例子 如下</p>
+<p>首页定义重试的次数常量，<br>定义一个 async 函数 里面循环3次 并且捕获了操作可能出现的异常,如网络不佳</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">const superagent = require(&apos;superagent&apos;);</div><div class="line">const NUM_RETRIES = 3;</div><div class="line"></div><div class="line">async function test() &#123;</div><div class="line">  let i;</div><div class="line">  for (i = 0; i &lt; NUM_RETRIES; ++i) &#123;</div><div class="line">    try &#123;</div><div class="line">      await superagent.get(&apos;http://google.com/this-throws-an-error&apos;);</div><div class="line">      break;</div><div class="line">    &#125; catch(err) &#123;&#125;</div><div class="line">  &#125;</div><div class="line">  console.log(i); // 3</div><div class="line">&#125;</div><div class="line"></div><div class="line">test();</div></pre></td></tr></table></figure>
+<p>上面代码中，如果await操作成功，就会使用break语句退出循环；如果失败，会被catch语句捕捉，然后进入下一轮循环。</p>
+<p>如此简单实现了一个重试机制。</p>
+
       
     </div>
 
@@ -349,13 +360,19 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/RN-利用async和await简单实现多次重试机制/" rel="tag"># RN-利用async和await简单实现多次重试机制</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/07/ES6之let命令/" rel="next" title="ES6之let和const命令">
-                <i class="fa fa-chevron-left"></i> ES6之let和const命令
+              <a href="/2017/04/22/RN-ListView-单选实现方案/" rel="next" title="RN_ListView_单选实现方案">
+                <i class="fa fa-chevron-left"></i> RN_ListView_单选实现方案
               </a>
             
           </div>
@@ -363,10 +380,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/10/传导运算符/" rel="prev" title="es6对象的扩展之null 传导运算符">
-                es6对象的扩展之null 传导运算符 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -392,8 +405,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/04/07/ES6变量的解构赋值/"
-           data-title="ES6变量的解构赋值" data-url="http://yoursite.com/2017/04/07/ES6变量的解构赋值/">
+      <div class="ds-thread" data-thread-key="2017/04/22/RN-利用async和await简单实现多次重试机制/"
+           data-title="RN-利用async和await简单实现多次重试机制" data-url="http://yoursite.com/2017/04/22/RN-利用async和await简单实现多次重试机制/">
       </div>
     
   </div>
@@ -417,8 +430,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/davikchen_pic.jpg"
@@ -464,6 +486,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RN-利用async和await简单实现多次重试机制"><span class="nav-number">1.</span> <span class="nav-text">RN-利用async和await简单实现多次重试机制</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

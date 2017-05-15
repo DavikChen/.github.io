@@ -249,6 +249,142 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/30/RandomAccessFile用法/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/30/RandomAccessFile用法/" itemprop="url">
+                  RandomAccessFile用法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-30T11:35:55+08:00">
+                2017-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/30/RandomAccessFile用法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/30/RandomAccessFile用法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="RandomAccessFile用法"><a href="#RandomAccessFile用法" class="headerlink" title="RandomAccessFile用法"></a>RandomAccessFile用法</h2><p>RandomAccessFile是用来访问那些保存数据记录的文件的，你就可以用seek( )方法来访问记录，并进行读写了。这些记录的大小不必相同；但是其大小和位置必须是可知的。但是该类仅限于操作文件。</p>
+<p>RandomAccessFile不属于InputStream和OutputStream类系的。实际上，除了实现DataInput和DataOutput接口之外(DataInputStream和DataOutputStream也实现了这两个接口)，它和这两个类系毫不相干，甚至不使用InputStream和OutputStream类中已经存在的任何功能；它是一个完全独立的类，所有方法(绝大多数都只属于它自己)都是从零开始写的。这可能是因为RandomAccessFile能在文件里面前后移动，所以它的行为与其它的I/O类有些根本性的不同。总而言之，它是一个直接继承Object的，独立的类。</p>
+<p>基本上，RandomAccessFile的工作方式是，把DataInputStream和DataOutputStream结合起来，再加上它自己的一些方法，比如定位用的getFilePointer( )，在文件里移动用的seek( )，以及判断文件大小的length( )、skipBytes()跳过多少字节数。此外，它的构造函数还要一个表示以只读方式(“r”)，还是以读写方式(“rw”)打开文件的参数 (和C的fopen( )一模一样)。它不支持只写文件。</p>
+<p>只有RandomAccessFile才有seek搜寻方法，而这个方法也只适用于文件。BufferedInputStream有一个mark( )方法，你可以用它来设定标记(把结果保存在一个内部变量里)，然后再调用reset( )返回这个位置，但是它的功能太弱了，而且也不怎么实用。</p>
+<p>RandomAccessFile的绝大多数功能，但不是全部，已经被JDK 1.4的nio的”内存映射文件(memory-mapped files)”给取代了，你该考虑一下是不是用”内存映射文件”来代替RandomAccessFile了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class TestRandomAccessFile &#123;  </div><div class="line">    public static void main(String[] args) throws IOException &#123;  </div><div class="line">        RandomAccessFile rf = new RandomAccessFile(&quot;rtest.dat&quot;, &quot;rw&quot;);  </div><div class="line">        for (int i = 0; i &lt; 10; i++) &#123;  </div><div class="line">            //写入基本类型double数据  </div><div class="line">            rf.writeDouble(i * 1.414);  </div><div class="line">        &#125;  </div><div class="line">        rf.close();  </div><div class="line">        rf = new RandomAccessFile(&quot;rtest.dat&quot;, &quot;rw&quot;);  </div><div class="line">        //直接将文件指针移到第5个double数据后面  </div><div class="line">        rf.seek(5 * 8);  </div><div class="line">        //覆盖第6个double数据  </div><div class="line">        rf.writeDouble(47.0001);  </div><div class="line">        rf.close();  </div><div class="line">        rf = new RandomAccessFile(&quot;rtest.dat&quot;, &quot;r&quot;);  </div><div class="line">        for (int i = 0; i &lt; 10; i++) &#123;  </div><div class="line">            System.out.println(&quot;Value &quot; + i + &quot;: &quot; + rf.readDouble());  </div><div class="line">        &#125;  </div><div class="line">        rf.close();  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="内存映射文件"><a href="#内存映射文件" class="headerlink" title="内存映射文件"></a>内存映射文件</h3><p>内存映射文件能让你创建和修改那些因为太大而无法放入内存的文件。有了内存映射文件，你就可以认为文件已经全部读进了内存，然后把它当成一个非常大的数组来访问。这种解决办法能大大简化修改文件的代码。<br>fileChannel.map(FileChannel.MapMode mode, long position, long size)将此通道的文件区域直接映射到内存中。注意，你必须指明，它是从文件的哪个位置开始映射的，映射的范围又有多大；也就是说，它还可以映射一个大文件的某个小片断。</p>
+<p>MappedByteBuffer是ByteBuffer的子类，因此它具备了ByteBuffer的所有方法，但新添了force()将缓冲区的内容强制刷新到存储设备中去、load()将存储设备中的数据加载到内存中、isLoaded()位置内存中的数据是否与存储设置上同步。这里只简单地演示了一下put()和get()方法，除此之外，你还可以使用asCharBuffer( )之类的方法得到相应基本类型数据的缓冲视图后，可以方便的读写基本类型数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public class LargeMappedFiles &#123;  </div><div class="line">    static int length = 0x8000000; // 128 Mb  </div><div class="line">  </div><div class="line">    public static void main(String[] args) throws Exception &#123;  </div><div class="line">        // 为了以可读可写的方式打开文件，这里使用RandomAccessFile来创建文件。  </div><div class="line">        FileChannel fc = new RandomAccessFile(&quot;test.dat&quot;, &quot;rw&quot;).getChannel();  </div><div class="line">        //注意，文件通道的可读可写要建立在文件流本身可读写的基础之上  </div><div class="line">        MappedByteBuffer out = fc.map(FileChannel.MapMode.READ_WRITE, 0, length);  </div><div class="line">        //写128M的内容  </div><div class="line">        for (int i = 0; i &lt; length; i++) &#123;  </div><div class="line">            out.put((byte) &apos;x&apos;);  </div><div class="line">        &#125;  </div><div class="line">        System.out.println(&quot;Finished writing&quot;);  </div><div class="line">        //读取文件中间6个字节内容  </div><div class="line">        for (int i = length / 2; i &lt; length / 2 + 6; i++) &#123;  </div><div class="line">            System.out.print((char) out.get(i));  </div><div class="line">        &#125;  </div><div class="line">        fc.close();  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>尽管映射写似乎要用到FileOutputStream，但是映射文件中的所有输出 必须使用RandomAccessFile，但如果只需要读时可以使用FileInputStream，写映射文件时一定要使用随机访问文件，可能写时要读的原因吧。</p>
+<p>该程序创建了一个128Mb的文件，如果一次性读到内存可能导致内存溢出，但这里访问好像只是一瞬间的事，这是因为，真正调入内存的只是其中的一小部分，其余部分则被放在交换文件上。这样你就可以很方便地修改超大型的文件了(最大可以到2 GB)。注意，Java是调用操作系统的”文件映射机制”来提升性能的。</p>
+<p>利用RandomAccessFile实现文件的多线程下载，即多线程下载一个文件时，将文件分成几块，每块用不同的线程进行下载。下面是一个利用多线程在写文件时的例子，其中预先分配文件所需要的空间，然后在所分配的空间中进行分块，然后写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">/** </div><div class="line"> * 测试利用多线程进行文件的写操作 </div><div class="line"> */  </div><div class="line">public class Test &#123;  </div><div class="line">  </div><div class="line">    public static void main(String[] args) throws Exception &#123;  </div><div class="line">        // 预分配文件所占的磁盘空间，磁盘中会创建一个指定大小的文件  </div><div class="line">        RandomAccessFile raf = new RandomAccessFile(&quot;D://abc.txt&quot;, &quot;rw&quot;);  </div><div class="line">        raf.setLength(1024*1024); // 预分配 1M 的文件空间  </div><div class="line">        raf.close();  </div><div class="line">          </div><div class="line">        // 所要写入的文件内容  </div><div class="line">        String s1 = &quot;第一个字符串&quot;;  </div><div class="line">        String s2 = &quot;第二个字符串&quot;;  </div><div class="line">        String s3 = &quot;第三个字符串&quot;;  </div><div class="line">        String s4 = &quot;第四个字符串&quot;;  </div><div class="line">        String s5 = &quot;第五个字符串&quot;;  </div><div class="line">          </div><div class="line">        // 利用多线程同时写入一个文件  </div><div class="line">        new FileWriteThread(1024*1,s1.getBytes()).start(); // 从文件的1024字节之后开始写入数据  </div><div class="line">        new FileWriteThread(1024*2,s2.getBytes()).start(); // 从文件的2048字节之后开始写入数据  </div><div class="line">        new FileWriteThread(1024*3,s3.getBytes()).start(); // 从文件的3072字节之后开始写入数据  </div><div class="line">        new FileWriteThread(1024*4,s4.getBytes()).start(); // 从文件的4096字节之后开始写入数据  </div><div class="line">        new FileWriteThread(1024*5,s5.getBytes()).start(); // 从文件的5120字节之后开始写入数据  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    // 利用线程在文件的指定位置写入指定数据  </div><div class="line">    static class FileWriteThread extends Thread&#123;  </div><div class="line">        private int skip;  </div><div class="line">        private byte[] content;  </div><div class="line">          </div><div class="line">        public FileWriteThread(int skip,byte[] content)&#123;  </div><div class="line">            this.skip = skip;  </div><div class="line">            this.content = content;  </div><div class="line">        &#125;  </div><div class="line">          </div><div class="line">        public void run()&#123;  </div><div class="line">            RandomAccessFile raf = null;  </div><div class="line">            try &#123;  </div><div class="line">                raf = new RandomAccessFile(&quot;D://abc.txt&quot;, &quot;rw&quot;);  </div><div class="line">                raf.seek(skip);  </div><div class="line">                raf.write(content);  </div><div class="line">            &#125; catch (FileNotFoundException e) &#123;  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125; catch (IOException e) &#123;  </div><div class="line">                // TODO Auto-generated catch block  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125; finally &#123;  </div><div class="line">                try &#123;  </div><div class="line">                    raf.close();  </div><div class="line">                &#125; catch (Exception e) &#123;  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/Android设计模式之单例设计模式的优缺点/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1432,170 +1568,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/Android在一个APP中通过包名或类名启动另一个APP/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/27/Android在一个APP中通过包名或类名启动另一个APP/" itemprop="url">
-                  Android在一个APP中通过包名或类名启动另一个APP
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T18:28:05+08:00">
-                2017-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/27/Android在一个APP中通过包名或类名启动另一个APP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/Android在一个APP中通过包名或类名启动另一个APP/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Android在一个APP中通过包名或类名启动另一个APP"><a href="#Android在一个APP中通过包名或类名启动另一个APP" class="headerlink" title="Android在一个APP中通过包名或类名启动另一个APP"></a>Android在一个APP中通过包名或类名启动另一个APP</h2><p>开发有时需要在一个应用中启动另一个应用，比如Launcher加载所有的已安装的程序的列表，当点击图标时可以启动另一个应用。一般我们知道了另一个应用的包名和MainActivity的名字之后便可以直接通过如下代码来启动：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Intent intent = new Intent(Intent.ACTION_MAIN);  </div><div class="line">intent.addCategory(Intent.CATEGORY_LAUNCHER);              </div><div class="line">ComponentName cn = new ComponentName(packageName, className);              </div><div class="line">intent.setComponent(cn);  </div><div class="line">startActivity(intent); </div><div class="line">``` </div><div class="line">但是更多的时候，我们一般都不知道目标应用程序的启动Activity的类名，而只知道包名，接下来就需要这么做了，我封装成了一个方法，如下所示</div></pre></td></tr></table></figure>
-<p>private void doStartApplicationWithPackageName(String packagename) {</p>
-<pre><code>    // 通过包名获取此APP详细信息，包括Activities、services、versioncode、name等等
-    PackageInfo packageinfo = null;
-    try {
-        packageinfo = getPackageManager().getPackageInfo(packagename, 0);
-    } catch (NameNotFoundException e) {
-        e.printStackTrace();
-    }
-    if (packageinfo == null) {
-        return;
-    }
-
-    // 创建一个类别为CATEGORY_LAUNCHER的该包名的Intent
-    Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
-    resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-    resolveIntent.setPackage(packageinfo.packageName);
-
-    // 通过getPackageManager()的queryIntentActivities方法遍历
-    List&lt;ResolveInfo&gt; resolveinfoList = getPackageManager()
-            .queryIntentActivities(resolveIntent, 0);
-
-    ResolveInfo resolveinfo = resolveinfoList.iterator().next();
-    if (resolveinfo != null) {
-        // packagename = 参数packname
-        String packageName = resolveinfo.activityInfo.packageName;
-        // 这个就是我们要找的该APP的LAUNCHER的Activity[组织形式：packagename.mainActivityname]
-        String className = resolveinfo.activityInfo.name;
-        // LAUNCHER Intent
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-
-        // 设置ComponentName参数1:packagename参数2:MainActivity路径
-        ComponentName cn = new ComponentName(packageName, className);
-
-        intent.setComponent(cn);
-        startActivity(intent);
-    }
-}
-</code></pre><p>```</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1641,7 +1613,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">82</span>
+              <span class="site-state-item-count">83</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1651,7 +1623,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

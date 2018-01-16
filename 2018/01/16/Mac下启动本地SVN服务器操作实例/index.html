@@ -96,15 +96,15 @@ SVN目录配置: 1.创建本地目录 sudo mkdir -p">
 1svnserve --version
 没啥问题的话 可以显示svn相关版本信息
 SVN目录配置: 1.创建本地目录 sudo mkdir -p">
-<meta property="og:image" content="http://yoursite.com/media/15161033649048.png">
-<meta property="og:updated_time" content="2018-01-16T15:17:44.333Z">
+<meta property="og:image" content="http://yoursite.com/media/15161033649048-1.png">
+<meta property="og:updated_time" content="2018-01-16T15:26:15.040Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac下启动本地SVN服务器操作实例">
 <meta name="twitter:description" content="Mac下启动本地SVN服务器操作实例在PC端有很好的本地SVN服务器软件,那在Mac上我们应该如何搭建本地SVN 服务器呢。其实Mac本身就可以做到这一点。Mac默认已经安装了svn，我们只需要进行配置并开启就可以了首先我们可以验证一下是否安装了svn
 1svnserve --version
 没啥问题的话 可以显示svn相关版本信息
 SVN目录配置: 1.创建本地目录 sudo mkdir -p">
-<meta name="twitter:image" content="http://yoursite.com/media/15161033649048.png">
+<meta name="twitter:image" content="http://yoursite.com/media/15161033649048-1.png">
 
 
 
@@ -342,7 +342,7 @@ SVN目录配置: 1.创建本地目录 sudo mkdir -p">
         <h3 id="Mac下启动本地SVN服务器操作实例"><a href="#Mac下启动本地SVN服务器操作实例" class="headerlink" title="Mac下启动本地SVN服务器操作实例"></a>Mac下启动本地SVN服务器操作实例</h3><p>在PC端有很好的本地SVN服务器软件,那在Mac上我们应该如何搭建本地SVN 服务器呢。其实Mac本身就可以做到这一点。<br>Mac默认已经安装了svn，我们只需要进行配置并开启就可以了首先我们可以验证一下是否安装了svn</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">svnserve --version</div></pre></td></tr></table></figure>
 <p>没啥问题的话 可以显示svn相关版本信息</p>
-<p><strong>SVN目录配置:</strong><br> 1.创建本地目录 sudo mkdir -p /Users/xxx/dirName<br> 2.sudo svnadmin create /Users/xxx/dirName 此时切换到目录下可以看到svn相关的文件已经创建完成<br><strong>SVN权限配置:</strong><br> 1.在仓库目录下的conf目录里面 有一个svnserve.conf文件 打开文件后如下图<br><img src="media/15161033649048.png" alt="15161033649048"></p>
+<p><strong>SVN目录配置:</strong><br> 1.创建本地目录 sudo mkdir -p /Users/xxx/dirName<br> 2.sudo svnadmin create /Users/xxx/dirName 此时切换到目录下可以看到svn相关的文件已经创建完成<br><strong>SVN权限配置:</strong><br> 1.在仓库目录下的conf目录里面 有一个svnserve.conf文件 打开文件后如下图<br><img src="media/15161033649048-1.png" alt="15161033649048"></p>
 <p>修改以上位置，其中anon-access = read代表匿名访问的时候是只读的，若改为anon-access = none代表禁止匿名访问，需要帐号密码才能访问<br>修改同目录下的passwd文件<br>  在文件尾部以userName= password的形式添加用户</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">user1= 123456</div><div class="line">user2= 123456</div></pre></td></tr></table></figure>
 <p><strong>配置authz文件</strong></p>

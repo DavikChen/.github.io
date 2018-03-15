@@ -249,6 +249,130 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/Swift创建导航控制器/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/25/Swift创建导航控制器/" itemprop="url">
+                  Swift创建导航控制器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-25T11:41:51+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/10/25/Swift创建导航控制器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/25/Swift创建导航控制器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Swift创建导航控制器"><a href="#Swift创建导航控制器" class="headerlink" title="Swift创建导航控制器"></a>Swift创建导航控制器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 导航按钮文字颜色 字体大小</div><div class="line">let attributes =  [NSForegroundColorAttributeName: UIColor.gray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line">let attributesPressed =  [NSForegroundColorAttributeName: UIColor.darkGray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line"></div><div class="line">// 首页</div><div class="line">// 第一步 获取ViewController 控制器，并且创建一个 导航控制器用来承载ViewController</div><div class="line">let mHomeViewController = UIStoryboard(name: &quot;HomePage&quot;, bundle: nil).instantiateViewController(withIdentifier: &quot;HomePage&quot;) as! HomePageViewController</div><div class="line">let mHomeNavController = UINavigationController(rootViewController: mHomeViewController)</div><div class="line">// 第二步 创建一个导航item 并且设置导航按钮的点击icon切换 设置字体颜色 和大小</div><div class="line">let mHomeNormalImage = UIImage(named: &quot;main_bottom_category_normal&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeSelectedImage = UIImage(named: &quot;main_bottom_category_hover&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeTabBarItem = UITabBarItem(title: &quot;精选&quot;, image: mHomeNormalImage, selectedImage: mHomeSelectedImage)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributes, for: .normal)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributesPressed, for: .focused)</div><div class="line">// 第三步:将导航item 对象 赋值给导航控制器</div><div class="line">mHomeNavController.tabBarItem = mHomeTabBarItem</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/24/swift3-0UITableView使用/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1390,133 +1514,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/20/函数/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/20/函数/" itemprop="url">
-                  函数
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-20T17:37:49+08:00">
-                2016-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/09/20/函数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/20/函数/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="JavaScript-函数"><a href="#JavaScript-函数" class="headerlink" title="JavaScript 函数"></a>JavaScript 函数</h1><h4 id="局部-JavaScript-变量"><a href="#局部-JavaScript-变量" class="headerlink" title="局部 JavaScript 变量"></a>局部 JavaScript 变量</h4><p>在 JavaScript 函数内部声明的变量（使用 var）是局部变量，所以只能在函数内部访问它。（该变量的作用域是局部的）。<br>您可以在不同的函数中使用名称相同的局部变量，因为只有声明过该变量的函数才能识别出该变量。<br>只要函数运行完毕，本地变量就会被删除。</p>
-<h4 id="全局-JavaScript-变量"><a href="#全局-JavaScript-变量" class="headerlink" title="全局 JavaScript 变量"></a>全局 JavaScript 变量</h4><p>在函数外声明的变量是全局变量，网页上的所有脚本和函数都能访问它。</p>
-<h4 id="JavaScript-变量的生存期"><a href="#JavaScript-变量的生存期" class="headerlink" title="JavaScript 变量的生存期"></a>JavaScript 变量的生存期</h4><p>JavaScript 变量的生命期从它们被声明的时间开始。<br>局部变量会在函数运行以后被删除。<br>全局变量会在页面关闭后被删除。</p>
-<h4 id="向未声明的-JavaScript-变量分配值"><a href="#向未声明的-JavaScript-变量分配值" class="headerlink" title="向未声明的 JavaScript 变量分配值"></a>向未声明的 JavaScript 变量分配值</h4><p>如果您把值赋给尚未声明的变量，该变量将被自动作为全局变量声明。<br>这条语句：<br>carname=”Volvo”;<br>将声明一个全局变量 carname，即使它在函数内执行。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1562,7 +1559,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">92</span>
+              <span class="site-state-item-count">93</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1572,7 +1569,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

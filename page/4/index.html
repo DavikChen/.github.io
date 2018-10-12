@@ -249,6 +249,150 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/05/JS截取字符串常用方法详细整理/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/05/JS截取字符串常用方法详细整理/" itemprop="url">
+                  JS截取字符串常用方法详细整理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-05T14:22:08+08:00">
+                2017-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/04/05/JS截取字符串常用方法详细整理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/05/JS截取字符串常用方法详细整理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="JS截取字符串常用方法详细整理"><a href="#JS截取字符串常用方法详细整理" class="headerlink" title="JS截取字符串常用方法详细整理"></a>JS截取字符串常用方法详细整理</h2><p>使用 substring()或者slice() </p>
+<p>函数：split()<br>功能：使用一个指定的分隔符把一个字符串分割存储到数组<br>例子：<br>str=”jpg|bmp|gif|ico|png”;<br>arr=theString.split(”|”);<br>//arr是一个包含字符值”jpg”、”bmp”、”gif”、”ico”和”png”的数组 </p>
+<p>函数：Join()<br>功能：使用您选择的分隔符将一个数组合并为一个字符串<br>例子：<br>代码如下:<br>var delimitedString=myArray.join(delimiter);<br>var myList=new Array(”jpg”,”bmp”,”gif”,”ico”,”png”);<br>var portableList=myList.join(”|”);<br>//结果是jpg|bmp|gif|ico|png </p>
+<p>函数：substring()<br>功能：字符串截取，比如想从”MinidxSearchEngine”中得到”Minidx”就要用到substring(0,6) </p>
+<p>函数：indexOf()<br>功能：返回字符串中匹配子串的第一个字符的下标<br>代码如下:<br>var myString=”Javascript”;<br>var w=myString.indexOf(”v”);w will be 2<br>var x=myString.indexOf(”S”);x will be 4<br>var y=myString.indexOf(”script”);y will also be 4 </p>
+<p>var z=myString.indexOf(”key”);z will be -1 </p>
+<p>续： </p>
+<p>1.substring 方法 </p>
+<p>定义和用法<br>substring 方法用于提取字符串中介于两个指定下标之间的字符。 </p>
+<p>语法<br>stringObject.substring(start,stop) </p>
+<p>参数 描述<br>start 必需。一个非负的整数，规定要提取的子串的第一个字符在 stringObject 中的位置。<br>stop 可选。一个非负的整数，比要提取的子串的最后一个字符在 stringObject 中的位置多 1。如果省略该参数，那么返回的子串会一直到字符串的结尾。 </p>
+<p>返回值<br>一个新的字符串，该字符串值包含 stringObject 的一个子字符串，其内容是从 start 处到 stop-1 处的所有字符，其长度为 stop 减 start。 </p>
+<p>说明<br>substring 方法返回的子串包括 start 处的字符，但不包括 end 处的字符。<br>如果 start 与 end 相等，那么该方法返回的就是一个空串（即长度为 0 的字符串）。<br>如果 start 比 end 大，那么该方法在提取子串之前会先交换这两个参数。<br>如果 start 或 end 为负数，那么它将被替换为 0。 </p>
+<p>2.substr 方法 </p>
+<p>定义和用法<br>substr 方法用于返回一个从指定位置开始的指定长度的子字符串。 </p>
+<p>语法<br>stringObject.substr(start [, length ]) </p>
+<p>参数 描述<br>start 必需。所需的子字符串的起始位置。字符串中的第一个字符的索引为 0。<br>length 可选。在返回的子字符串中应包括的字符个数。 </p>
+<p>说明<br>如果 length 为 0 或负数，将返回一个空字符串。<br>如果没有指定该参数，则子字符串将延续到stringObject的最后。 </p>
+<p>举例：<br>代码如下:<br>var str = “0123456789”; </p>
+<p>alert(str.substring(0));————“0123456789”<br>alert(str.substring(5));————“56789”<br>alert(str.substring(10));———–””<br>alert(str.substring(12));———–””<br>alert(str.substring(-5));———–”0123456789”<br>alert(str.substring(-10));———-“0123456789”<br>alert(str.substring(-12));———-“0123456789”<br>alert(str.substring(0,5));———-“01234”<br>alert(str.substring(0,10));———“0123456789”<br>alert(str.substring(0,12));———“0123456789”<br>alert(str.substring(2,0));———-“01”<br>alert(str.substring(2,2));———-“”<br>alert(str.substring(2,5));———-“234”<br>alert(str.substring(2,12));———“23456789”<br>alert(str.substring(2,-2));———“01”<br>alert(str.substring(-1,5));———“01234”<br>alert(str.substring(-1,-5));——–”” </p>
+<p>alert(str.substr(0));—————“0123456789”<br>alert(str.substr(5));—————“56789”<br>alert(str.substr(10));————–””<br>alert(str.substr(12));————–””<br>alert(str.substr(-5));————–”0123456789”<br>alert(str.substr(-10));————-“0123456789”<br>alert(str.substr(-12));————-“0123456789”<br>alert(str.substr(0,5));————-“01234”<br>alert(str.substr(0,10));————“0123456789”<br>alert(str.substr(0,12));————“0123456789”<br>alert(str.substr(2,0));————-“”<br>alert(str.substr(2,2));————-“23”<br>alert(str.substr(2,5));————-“23456”<br>alert(str.substr(2,12));————“23456789”<br>alert(str.substr(2,-2));————“”<br>alert(str.substr(-1,5));————“01234”<br>alert(str.substr(-1,-5));———–”” </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/05/RippleDrawable的简单使用/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1475,132 +1619,6 @@ public static void main(String[] args) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/Android小功能汇总/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/29/Android小功能汇总/" itemprop="url">
-                  Android小功能汇总
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T16:44:42+08:00">
-                2017-03-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/29/Android小功能汇总/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/Android小功能汇总/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Android小功能汇总"><a href="#Android小功能汇总" class="headerlink" title="Android小功能汇总"></a>Android小功能汇总</h2><h3 id="TextView-实现复制文本功能"><a href="#TextView-实现复制文本功能" class="headerlink" title="TextView 实现复制文本功能"></a>TextView 实现复制文本功能</h3><p>Android api 11 以后可以直接设置<br>android:textIsSelectable=”true”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;TextView</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;match_parent&quot;</div><div class="line">        android:textSize=&quot;16sp&quot;</div><div class="line">        android:text=&quot;Hello World&quot;</div><div class="line">        android:gravity=&quot;center&quot;</div><div class="line">        android:textIsSelectable=&quot;true&quot;</div><div class="line">        /&gt;</div></pre></td></tr></table></figure>
-<h3 id="新增控件汇总"><a href="#新增控件汇总" class="headerlink" title="新增控件汇总"></a>新增控件汇总</h3><p>4.3新增控件，有很多Android的新控件不断的推出，我在此进行汇总，学习。<br>新增控件：<br>CalendarView<br>GridLayout<br>RecyclerView<br>AppWidgetHostView<br>SwipeRefreshLayout<br>SlidingPaneLayout<br>DrawerLayout<br>NestedScrollView<br>Switch<br>PagerTitleStrip<br>NoSaveStateFrameLayout<br>MySearchView<br>ViewSwitcher<br>StackView<br>SearchView<br>KeyboardView</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1646,7 +1664,7 @@ public static void main(String[] args) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">97</span>
+              <span class="site-state-item-count">98</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

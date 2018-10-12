@@ -249,6 +249,140 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/Mac下启动本地SVN服务器操作实例/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/01/16/Mac下启动本地SVN服务器操作实例/" itemprop="url">
+                  Mac下启动本地SVN服务器操作实例
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-16T18:32:03+08:00">
+                2018-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2018/01/16/Mac下启动本地SVN服务器操作实例/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/16/Mac下启动本地SVN服务器操作实例/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Mac下启动本地SVN服务器操作实例"><a href="#Mac下启动本地SVN服务器操作实例" class="headerlink" title="Mac下启动本地SVN服务器操作实例"></a>Mac下启动本地SVN服务器操作实例</h3><p>在PC端有很好的本地SVN服务器软件,那在Mac上我们应该如何搭建本地SVN 服务器呢。其实Mac本身就可以做到这一点。<br>Mac默认已经安装了svn，我们只需要进行配置并开启就可以了首先我们可以验证一下是否安装了svn</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">svnserve --version</div></pre></td></tr></table></figure>
+<p>没啥问题的话 可以显示svn相关版本信息</p>
+<p><strong>SVN目录配置:</strong><br> 1.创建本地目录 sudo mkdir -p /Users/xxx/dirName<br> 2.sudo svnadmin create /Users/xxx/dirName 此时切换到目录下可以看到svn相关的文件已经创建完成<br><strong>SVN权限配置:</strong><br> 1.在仓库目录下的conf目录里面 有一个svnserve.conf文件 打开文件后如下图<br><img src="https://raw.githubusercontent.com/DavikChen/DavikChen.github.io/master/images/15161033649048.png" alt=""></p>
+<p>修改以上位置，其中anon-access = read代表匿名访问的时候是只读的，若改为anon-access = none代表禁止匿名访问，需要帐号密码才能访问<br>修改同目录下的passwd文件<br>  在文件尾部以userName= password的形式添加用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">user1= 123456</div><div class="line">user2= 123456</div></pre></td></tr></table></figure>
+<p><strong>配置authz文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># [/foo/bar]</div><div class="line"># harry = rw</div><div class="line"># &amp;joe = r</div><div class="line"># * =</div><div class="line"></div><div class="line">users = davikchen</div><div class="line">[/]</div><div class="line">@users = rw</div><div class="line"></div><div class="line"># [repository:/baz/fuz]</div><div class="line"># @harry_and_sally = rw</div><div class="line"># * = r</div></pre></td></tr></table></figure>
+<p>在[groups]下添加uesrs = davikchen标示创建了一个用户组，此用户组包含有davikchen用户<br>[/]<br>@users = rw 这两句标示给users用户组相应的权限<br>[/]表示授权的目录路径，这里是根目录，假如根目录下有一个目录叫做test,那么我们如果要编辑此目录的权限那么就要写成[test:/]<br>@uesr表示给用户组授权，如果要给某一个用户授权则不用写前面的@<br>r表示可读，w表示可写</p>
+<p><strong>启动svn服务器</strong><br>在终端输入<br>svnserve -d -r /Users/xxx/dirName<br>注意这里是仓库的根目录</p>
+<p>这样SVN服务器算配置完成了 。根据我们刚才配置的账号 我们可以通过 SVN工具Cornerstone 链接到本地仓库。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/BootStrap-dropdown示例/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1428,138 +1562,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/22/RN-ListView-单选实现方案/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/22/RN-ListView-单选实现方案/" itemprop="url">
-                  RN_ListView_单选实现方案
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-22T11:08:56+08:00">
-                2017-04-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/04/22/RN-ListView-单选实现方案/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/22/RN-ListView-单选实现方案/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="RNListView单选实现方案"><a href="#RNListView单选实现方案" class="headerlink" title="RNListView单选实现方案"></a>RN<em>ListView</em>单选实现方案</h2><p>今天有一个故障报修页面的开发任务，功能很简单 从后端API接口获取列表数据 然后选择一项，最后提交到服务器。<br>页面UI基本完成后，发现我并不能直接更新listview 的item视图。ReactNative 的listview 也没有和Android类似的<br>adapter.notifyDataSetChanged(),</p>
-<p>最后想到在页面的 getItemView 中进行处理。因为这里我可以传值给item view。<br>步骤是这样的。</p>
-<p>item点击事件中记录当前点击的唯一位置标识</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">onItemClick(rowData) &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">            dataSource: UseCarTroubleList.cloneWithRows(mUserCarToubleData.fault),</div><div class="line">            isLoadingComplete: true,</div><div class="line">            mCurrentChoice:rowData.fault_id,</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>在getItemView 方法中我把mCurrentChoice 传给item 视图 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">getItemView(rowData, sectionID, rowID) &#123;</div><div class="line">        return (</div><div class="line">             &lt;TouchableOpacity activeOpacity=&#123;0.7&#125; </div><div class="line">             onPress=&#123;this.onItemClick.bind(this, rowData)&#125;&gt;</div><div class="line">                &lt;View&gt;</div><div class="line">                    &lt;CarTroubleItem  itemData=&#123;rowData&#125;     </div><div class="line">                     mCurrentChoice=&#123;this.state.mCurrentChoice&#125;&gt;&lt;/CarTroubleItem&gt;</div><div class="line">                &lt;/View&gt;</div><div class="line">             &lt;/TouchableOpacity&gt;</div><div class="line">        );</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>这样我就把最新选择的item postition 进行了更新 。</p>
-<p><strong>问题:</strong><br>1.虽然实现了功能 这样每次都更新是否影响性能<br>2.是否可以在数据mode 上新增一个是否选择标识 如果是多选 每次只更新一个item ，单选的话 可能需要重置上次数据和设<br>  新的位置，也就是更新2个item   </p>
-<p><strong>实现方案很多 大家按照各自的业务场景来就OK了。</strong></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1605,7 +1607,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">97</span>
+              <span class="site-state-item-count">98</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

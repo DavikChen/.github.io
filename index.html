@@ -249,6 +249,135 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/16/jQuery事件委托/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/10/16/jQuery事件委托/" itemprop="url">
+                  jQuery事件委托
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-16T15:54:23+08:00">
+                2018-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2018/10/16/jQuery事件委托/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/16/jQuery事件委托/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="jQuery-事件委托"><a href="#jQuery-事件委托" class="headerlink" title="jQuery 事件委托"></a>jQuery 事件委托</h4><p>事件委托是通过事件冒泡的原理，利用父级去触发子级的事件。</p>
+<p>如下html，如果不用事件委托，将每一个li都去添加click事件监听，非常麻烦。</p>
+<p>另外就是如果通过js动态创建的子节点，需要重新绑定事件。</p>
+<p>而利用事件委托的话，只需要给父级绑定一个事件监听，即可让每个li都绑定上相应的事件。</p>
+<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=&quot;wrap&quot;&gt;</div><div class="line">    &lt;li&gt;item1&lt;/li&gt;</div><div class="line">    &lt;li&gt;item2&lt;/li&gt;</div><div class="line">    &lt;li&gt;item3&lt;/li&gt;</div><div class="line">    &lt;li&gt;item4&lt;/li&gt;</div><div class="line">    &lt;li&gt;item5&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line"></div><div class="line">    // 普通事件</div><div class="line">    $(&apos;li&apos;).click(function()&#123;</div><div class="line">        $(this).css(&apos;background&apos;, &apos;#D4DFE6&apos;);</div><div class="line">    &#125;);</div><div class="line">      </div><div class="line"></div><div class="line">    // 动态添加DOM节点</div><div class="line">    $(&apos;#addBtn&apos;).click(function()&#123;</div><div class="line">        $(&apos;#wrap&apos;).append( $(&apos;&lt;li&gt;item&apos;+ ($(&apos;li&apos;).length + 1) +&apos;&lt;/li&gt;&apos;) );</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 事件委托</div><div class="line">     */</div><div class="line"></div><div class="line">    // jQuery 1.9已废弃</div><div class="line">    /*$(&apos;li&apos;).live(&apos;click&apos;, function()&#123;</div><div class="line">        $(this).css(&apos;background&apos;, &apos;#D4DFE6&apos;);</div><div class="line">    &#125;);*/</div><div class="line"></div><div class="line">    // jQuery的delegate写法</div><div class="line">    $(&apos;#wrap&apos;).delegate(&apos;li&apos;, &apos;click&apos;, function(ev)&#123;</div><div class="line"></div><div class="line">        // this 指向委托的对象 li</div><div class="line">        $(this).css(&apos;background&apos;, &apos;#D4DFE6&apos;);</div><div class="line"></div><div class="line">        // 找到父级 ul#wrap</div><div class="line">        $(ev.delegateTarget).css(&apos;border&apos;, &apos;2px solid #f00&apos;);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    // jQuery的on的写法</div><div class="line">    $(&apos;#wrap&apos;).on(&apos;click&apos;, &apos;li&apos;, function(ev) &#123;</div><div class="line">        // this 指向委托的对象 li</div><div class="line">        $(this).css(&apos;background&apos;, &apos;#D4DFE6&apos;);</div><div class="line"></div><div class="line">        // 找到父级 ul#wrap</div><div class="line">        $(ev.delegateTarget).css(&apos;border&apos;, &apos;2px solid #f00&apos;);</div><div class="line">    &#125;)</div><div class="line"></div><div class="line"></div><div class="line">    // js原生写法</div><div class="line">    var _wrap = document.getElementById(&apos;wrap&apos;);</div><div class="line">    _wrap.addEventListener(&apos;click&apos;, function(ev)&#123;</div><div class="line">        var ev = ev || event;</div><div class="line">        if( ev.target.nodeName == &apos;LI&apos; ) &#123;</div><div class="line">            ev.target.style.background = &apos;#8EC0E4&apos;;</div><div class="line">            console.log( ev.target.innerHTML );</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // 找到父级 ul#wrap</div><div class="line">        this.style.border = &apos;2px solid #f00&apos;;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/12/jQuery事件命名空间/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1430,135 +1559,6 @@ top_table.setTabMode(TabLayout.MODE_FIXED);不在起作用。</code><br>效果�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/17/E000013错误问题/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/01/17/E000013错误问题/" itemprop="url">
-                  MacSvn导入工程出现svn:E000013错误问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-17T10:04:27+08:00">
-                2018-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2018/01/17/E000013错误问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/17/E000013错误问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="MacSvn导入工程出现svn-E000013错误问题"><a href="#MacSvn导入工程出现svn-E000013错误问题" class="headerlink" title="MacSvn导入工程出现svn:E000013错误问题"></a>MacSvn导入工程出现svn:E000013错误问题</h3><p>SVN本地存储配置完成后,导出一个工程时出现了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">svn: E000013: Can&apos;t open file &apos;/Users/davikchen/AndroidSvn/db/txn-current-lock&apos;: Permission denied</div></pre></td></tr></table></figure>
-<p>看字面意思是权限不够。最后查资料说是托管时 用户分组不对。意思大致是因为版本库SVN是root用户创建的但是启动服务的时候没有选择root启动，而是在其他用户转托管太下启动的，所以只能读不能写。</p>
-<p>尝试kill掉SVN托管服务 重新用root用户进行托管</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">解决方法：停止svn服务：killall svnserve</div><div class="line">在创建版本库的用户下启动svn ： svnserve -d -r /opt/....(你版本库的路径)。</div></pre></td></tr></table></figure>
-<p>托管用户问题解决后,顺利导入工程项目。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1604,7 +1604,7 @@ top_table.setTabMode(TabLayout.MODE_FIXED);不在起作用。</code><br>效果�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">98</span>
+              <span class="site-state-item-count">99</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -6,15 +6,15 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -29,7 +29,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -63,49 +63,38 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
 
 
 
 
 
 
-<meta name="description" content="jQuery 事件委托事件委托是通过事件冒泡的原理，利用父级去触发子级的事件。
-如下html，如果不用事件委托，将每一个li都去添加click事件监听，非常麻烦。
-另外就是如果通过js动态创建的子节点，需要重新绑定事件。
-而利用事件委托的话，只需要给父级绑定一个事件监听，即可让每个li都绑定上相应的事件。
-html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
+<meta name="description" content="jQuery 事件委托事件委托是通过事件冒泡的原理，利用父级去触发子级的事件。 如下html，如果不用事件委托，将每一个li都去添加click事件监听，非常麻烦。 另外就是如果通过js动态创建的子节点，需要重新绑定事件。 而利用事件委托的话，只需要给父级绑定一个事件监听，即可让每个li都绑定上相应的事件。 html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jQuery事件委托">
 <meta property="og:url" content="http://yoursite.com/2018/10/16/jQuery事件委托/index.html">
 <meta property="og:site_name" content="带刀大哥">
-<meta property="og:description" content="jQuery 事件委托事件委托是通过事件冒泡的原理，利用父级去触发子级的事件。
-如下html，如果不用事件委托，将每一个li都去添加click事件监听，非常麻烦。
-另外就是如果通过js动态创建的子节点，需要重新绑定事件。
-而利用事件委托的话，只需要给父级绑定一个事件监听，即可让每个li都绑定上相应的事件。
-html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
+<meta property="og:description" content="jQuery 事件委托事件委托是通过事件冒泡的原理，利用父级去触发子级的事件。 如下html，如果不用事件委托，将每一个li都去添加click事件监听，非常麻烦。 另外就是如果通过js动态创建的子节点，需要重新绑定事件。 而利用事件委托的话，只需要给父级绑定一个事件监听，即可让每个li都绑定上相应的事件。 html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-10-16T07:54:40.387Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery事件委托">
-<meta name="twitter:description" content="jQuery 事件委托事件委托是通过事件冒泡的原理，利用父级去触发子级的事件。
-如下html，如果不用事件委托，将每一个li都去添加click事件监听，非常麻烦。
-另外就是如果通过js动态创建的子节点，需要重新绑定事件。
-而利用事件委托的话，只需要给父级绑定一个事件监听，即可让每个li都绑定上相应的事件。
-html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
+<meta name="twitter:description" content="jQuery 事件委托事件委托是通过事件冒泡的原理，利用父级去触发子级的事件。 如下html，如果不用事件委托，将每一个li都去添加click事件监听，非常麻烦。 另外就是如果通过js动态创建的子节点，需要重新绑定事件。 而利用事件委托的话，只需要给父级绑定一个事件监听，即可让每个li都绑定上相应的事件。 html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
 
 
 
@@ -133,7 +122,7 @@ html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/16/jQuery事件委托/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/16/jQuery事件委托/">
 
 
 
@@ -168,7 +157,7 @@ html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">带刀大哥</span>
       <span class="logo-line-after"><i></i></span>
@@ -195,7 +184,7 @@ html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -205,7 +194,7 @@ html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -215,7 +204,7 @@ html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -225,7 +214,7 @@ html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -264,14 +253,14 @@ html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content="">
+    <meta itemprop="description" content>
     <meta itemprop="image" content="/images/davikchen_pic.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="带刀大哥">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src="">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
     </span>
   </span>
 
@@ -410,8 +399,7 @@ html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2018/10/16/jQuery事件委托/"
-           data-title="jQuery事件委托" data-url="http://yoursite.com/2018/10/16/jQuery事件委托/">
+      <div class="ds-thread" data-thread-key="2018/10/16/jQuery事件委托/" data-title="jQuery事件委托" data-url="http://yoursite.com/2018/10/16/jQuery事件委托/">
       </div>
     
   </div>
@@ -436,7 +424,7 @@ html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -447,9 +435,7 @@ html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/davikchen_pic.jpg"
-               alt="DavikChen" />
+          <img class="site-author-image" itemprop="image" src="/images/davikchen_pic.jpg" alt="DavikChen">
           <p class="site-author-name" itemprop="name">DavikChen</p>
           <p class="site-description motion-element" itemprop="description">记录在工作中遇到的各种技术问题</p>
         </div>
@@ -501,7 +487,7 @@ html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#jQuery-事件委托"><span class="nav-number">1.</span> <span class="nav-text">jQuery 事件委托</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html"><span class="nav-number"></span> <span class="nav-text">html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js"><span class="nav-number"></span> <span class="nav-text">js</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#jQuery-事件委托"><span class="nav-number">1.</span> <span class="nav-text">jQuery 事件委托</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#html"><span class="nav-number"></span> <span class="nav-text">html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js"><span class="nav-number"></span> <span class="nav-text">js</span></a></li></div>
             
 
           </div>
@@ -519,7 +505,7 @@ html1234567&amp;lt;ul id=&amp;quot;wrap&amp;quot;&amp;gt;    &amp;">
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2019</span>

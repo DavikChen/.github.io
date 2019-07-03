@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="RNListView单选实现方案今天有一个故障报修页面的开发任务，功能很简单 从后端API接口获取列表数据 然后选择一项，最后提交到服务器。页面UI基本完成后，发现我并不能直接更新listview 的item视图。ReactNative 的listview 也没有和Android类似的adapter.notifyDataSetChanged(), 最后想到在页面的 getItemView 中进行处">
+<meta name="description" content="RN_ListView_单选实现方案今天有一个故障报修页面的开发任务，功能很简单 从后端API接口获取列表数据 然后选择一项，最后提交到服务器。页面UI基本完成后，发现我并不能直接更新listview 的item视图。ReactNative 的listview 也没有和Android类似的adapter.notifyDataSetChanged(), 最后想到在页面的 getItemView 中进">
 <meta name="keywords" content="RN_ListView_单选实现方案">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RN_ListView_单选实现方案">
 <meta property="og:url" content="http://yoursite.com/2017/04/22/RN-ListView-单选实现方案/index.html">
 <meta property="og:site_name" content="带刀大哥">
-<meta property="og:description" content="RNListView单选实现方案今天有一个故障报修页面的开发任务，功能很简单 从后端API接口获取列表数据 然后选择一项，最后提交到服务器。页面UI基本完成后，发现我并不能直接更新listview 的item视图。ReactNative 的listview 也没有和Android类似的adapter.notifyDataSetChanged(), 最后想到在页面的 getItemView 中进行处">
+<meta property="og:description" content="RN_ListView_单选实现方案今天有一个故障报修页面的开发任务，功能很简单 从后端API接口获取列表数据 然后选择一项，最后提交到服务器。页面UI基本完成后，发现我并不能直接更新listview 的item视图。ReactNative 的listview 也没有和Android类似的adapter.notifyDataSetChanged(), 最后想到在页面的 getItemView 中进">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-04-22T03:25:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RN_ListView_单选实现方案">
-<meta name="twitter:description" content="RNListView单选实现方案今天有一个故障报修页面的开发任务，功能很简单 从后端API接口获取列表数据 然后选择一项，最后提交到服务器。页面UI基本完成后，发现我并不能直接更新listview 的item视图。ReactNative 的listview 也没有和Android类似的adapter.notifyDataSetChanged(), 最后想到在页面的 getItemView 中进行处">
+<meta name="twitter:description" content="RN_ListView_单选实现方案今天有一个故障报修页面的开发任务，功能很简单 从后端API接口获取列表数据 然后选择一项，最后提交到服务器。页面UI基本完成后，发现我并不能直接更新listview 的item视图。ReactNative 的listview 也没有和Android类似的adapter.notifyDataSetChanged(), 最后想到在页面的 getItemView 中进">
 
 
 
@@ -330,12 +330,14 @@
       
 
       
-        <h2 id="RNListView单选实现方案"><a href="#RNListView单选实现方案" class="headerlink" title="RNListView单选实现方案"></a>RN<em>ListView</em>单选实现方案</h2><p>今天有一个故障报修页面的开发任务，功能很简单 从后端API接口获取列表数据 然后选择一项，最后提交到服务器。<br>页面UI基本完成后，发现我并不能直接更新listview 的item视图。ReactNative 的listview 也没有和Android类似的<br>adapter.notifyDataSetChanged(),</p>
+        <h2 id="RN-ListView-单选实现方案"><a href="#RN-ListView-单选实现方案" class="headerlink" title="RN_ListView_单选实现方案"></a>RN_ListView_单选实现方案</h2><p>今天有一个故障报修页面的开发任务，功能很简单 从后端API接口获取列表数据 然后选择一项，最后提交到服务器。<br>页面UI基本完成后，发现我并不能直接更新listview 的item视图。ReactNative 的listview 也没有和Android类似的<br>adapter.notifyDataSetChanged(),</p>
 <p>最后想到在页面的 getItemView 中进行处理。因为这里我可以传值给item view。<br>步骤是这样的。</p>
 <p>item点击事件中记录当前点击的唯一位置标识</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">onItemClick(rowData) &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">            dataSource: UseCarTroubleList.cloneWithRows(mUserCarToubleData.fault),</div><div class="line">            isLoadingComplete: true,</div><div class="line">            mCurrentChoice:rowData.fault_id,</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">onItemClick(rowData) &#123;</span><br><span class="line">        this.setState(&#123;</span><br><span class="line">            dataSource: UseCarTroubleList.cloneWithRows(mUserCarToubleData.fault),</span><br><span class="line">            isLoadingComplete: true,</span><br><span class="line">            mCurrentChoice:rowData.fault_id,</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
 <p>在getItemView 方法中我把mCurrentChoice 传给item 视图 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">getItemView(rowData, sectionID, rowID) &#123;</div><div class="line">        return (</div><div class="line">             &lt;TouchableOpacity activeOpacity=&#123;0.7&#125; </div><div class="line">             onPress=&#123;this.onItemClick.bind(this, rowData)&#125;&gt;</div><div class="line">                &lt;View&gt;</div><div class="line">                    &lt;CarTroubleItem  itemData=&#123;rowData&#125;     </div><div class="line">                     mCurrentChoice=&#123;this.state.mCurrentChoice&#125;&gt;&lt;/CarTroubleItem&gt;</div><div class="line">                &lt;/View&gt;</div><div class="line">             &lt;/TouchableOpacity&gt;</div><div class="line">        );</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">getItemView(rowData, sectionID, rowID) &#123;</span><br><span class="line">        return (</span><br><span class="line">             &lt;TouchableOpacity activeOpacity=&#123;0.7&#125; </span><br><span class="line">             onPress=&#123;this.onItemClick.bind(this, rowData)&#125;&gt;</span><br><span class="line">                &lt;View&gt;</span><br><span class="line">                    &lt;CarTroubleItem  itemData=&#123;rowData&#125;     </span><br><span class="line">                     mCurrentChoice=&#123;this.state.mCurrentChoice&#125;&gt;&lt;/CarTroubleItem&gt;</span><br><span class="line">                &lt;/View&gt;</span><br><span class="line">             &lt;/TouchableOpacity&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
 <p>这样我就把最新选择的item postition 进行了更新 。</p>
 <p><strong>问题:</strong><br>1.虽然实现了功能 这样每次都更新是否影响性能<br>2.是否可以在数据mode 上新增一个是否选择标识 如果是多选 每次只更新一个item ，单选的话 可能需要重置上次数据和设<br>  新的位置，也就是更新2个item   </p>
 <p><strong>实现方案很多 大家按照各自的业务场景来就OK了。</strong></p>
@@ -452,7 +454,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -497,7 +499,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RNListView单选实现方案"><span class="nav-number">1.</span> <span class="nav-text">RNListView单选实现方案</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RN-ListView-单选实现方案"><span class="nav-number">1.</span> <span class="nav-text">RN_ListView_单选实现方案</span></a></li></ol></div>
             
 
           </div>

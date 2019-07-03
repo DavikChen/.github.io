@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="空合运算符（Nil Coalescing Operator）空合运算符（a ?? b）将对可选类型 a 进行空判断，如果 a 包含一个值就进行解封，否则就返回一个默认值 b。表达式 a 必须是 Optional 类型。默认值 b 的类型必须要和 a 存储值的类型保持一致。 空合运算符是对以下代码的简短表达方法： 1a != nil ? a! : b 上述代码使用了三目运算符。当可选类型 a 的值不">
+<meta name="description" content="空合运算符（Nil Coalescing Operator）空合运算符（a ?? b）将对可选类型 a 进行空判断，如果 a 包含一个值就进行解封，否则就返回一个默认值 b。表达式 a 必须是 Optional 类型。默认值 b 的类型必须要和 a 存储值的类型保持一致。 空合运算符是对以下代码的简短表达方法： 1a != nil ? a! : b  上述代码使用了三目运算符。当可选类型 a 的值">
 <meta name="keywords" content="Swift3.0空合运算符（Nil Coalescing Operator）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift3空合运算符">
 <meta property="og:url" content="http://yoursite.com/2016/11/24/Swift3空合运算符/index.html">
 <meta property="og:site_name" content="带刀大哥">
-<meta property="og:description" content="空合运算符（Nil Coalescing Operator）空合运算符（a ?? b）将对可选类型 a 进行空判断，如果 a 包含一个值就进行解封，否则就返回一个默认值 b。表达式 a 必须是 Optional 类型。默认值 b 的类型必须要和 a 存储值的类型保持一致。 空合运算符是对以下代码的简短表达方法： 1a != nil ? a! : b 上述代码使用了三目运算符。当可选类型 a 的值不">
+<meta property="og:description" content="空合运算符（Nil Coalescing Operator）空合运算符（a ?? b）将对可选类型 a 进行空判断，如果 a 包含一个值就进行解封，否则就返回一个默认值 b。表达式 a 必须是 Optional 类型。默认值 b 的类型必须要和 a 存储值的类型保持一致。 空合运算符是对以下代码的简短表达方法： 1a != nil ? a! : b  上述代码使用了三目运算符。当可选类型 a 的值">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-04-17T08:03:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift3空合运算符">
-<meta name="twitter:description" content="空合运算符（Nil Coalescing Operator）空合运算符（a ?? b）将对可选类型 a 进行空判断，如果 a 包含一个值就进行解封，否则就返回一个默认值 b。表达式 a 必须是 Optional 类型。默认值 b 的类型必须要和 a 存储值的类型保持一致。 空合运算符是对以下代码的简短表达方法： 1a != nil ? a! : b 上述代码使用了三目运算符。当可选类型 a 的值不">
+<meta name="twitter:description" content="空合运算符（Nil Coalescing Operator）空合运算符（a ?? b）将对可选类型 a 进行空判断，如果 a 包含一个值就进行解封，否则就返回一个默认值 b。表达式 a 必须是 Optional 类型。默认值 b 的类型必须要和 a 存储值的类型保持一致。 空合运算符是对以下代码的简短表达方法： 1a != nil ? a! : b  上述代码使用了三目运算符。当可选类型 a 的值">
 
 
 
@@ -332,13 +332,16 @@
       
         <h3 id="空合运算符（Nil-Coalescing-Operator）"><a href="#空合运算符（Nil-Coalescing-Operator）" class="headerlink" title="空合运算符（Nil Coalescing Operator）"></a>空合运算符（Nil Coalescing Operator）</h3><p>空合运算符（a ?? b）将对可选类型 a 进行空判断，如果 a 包含一个值就进行解封，否则就返回一个默认值 b。表达式 a 必须是 Optional 类型。默认值 b 的类型必须要和 a 存储值的类型保持一致。</p>
 <p>空合运算符是对以下代码的简短表达方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a != nil ? a! : b</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a != nil ? a! : b</span><br></pre></td></tr></table></figure>
+
 <p>上述代码使用了三目运算符。当可选类型 a 的值不为空时，进行强制解封（a!），访问 a 中的值；反之返回默认值 b。无疑空合运算符（??）提供了一种更为优雅的方式去封装条件判断和解封两种行为，显得简洁以及更具可读性。</p>
 <p>注意： 如果 a 为非空值（non-nil），那么值 b 将不会被计算。这也就是所谓的短路求值。<br>下文例子采用空合运算符，实现了在默认颜色名和可选自定义颜色名之间抉择：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let defaultColorName = &quot;red&quot;</div><div class="line">var userDefinedColorName: String?   //默认值为 nil</div><div class="line"></div><div class="line">var colorNameToUse = userDefinedColorName ?? defaultColorName</div><div class="line">// userDefinedColorName 的值为空，所以 colorNameToUse 的值为 &quot;red&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let defaultColorName = &quot;red&quot;</span><br><span class="line">var userDefinedColorName: String?   //默认值为 nil</span><br><span class="line"></span><br><span class="line">var colorNameToUse = userDefinedColorName ?? defaultColorName</span><br><span class="line">// userDefinedColorName 的值为空，所以 colorNameToUse 的值为 &quot;red&quot;</span><br></pre></td></tr></table></figure>
+
 <p>userDefinedColorName 变量被定义为一个可选的 String 类型，默认值为 nil。由于 userDefinedColorName 是一个可选类型，我们可以使用空合运算符去判断其值。在上一个例子中，通过空合运算符为一个名为 colorNameToUse 的变量赋予一个字符串类型初始值。 由于 userDefinedColorName 值为空，因此表达式 userDefinedColorName ?? defaultColorName 返回 defaultColorName 的值，即 red。</p>
 <p>另一种情况，分配一个非空值（non-nil）给 userDefinedColorName，再次执行空合运算，运算结果为封包在 userDefaultColorName 中的值，而非默认值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">userDefinedColorName = &quot;green&quot;</div><div class="line">colorNameToUse = userDefinedColorName ?? defaultColorName</div><div class="line">// userDefinedColorName 非空，因此 colorNameToUse 的值为 &quot;green&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userDefinedColorName = &quot;green&quot;</span><br><span class="line">colorNameToUse = userDefinedColorName ?? defaultColorName</span><br><span class="line">// userDefinedColorName 非空，因此 colorNameToUse 的值为 &quot;green&quot;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -452,7 +455,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

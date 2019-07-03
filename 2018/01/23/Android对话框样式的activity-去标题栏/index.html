@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -332,14 +332,19 @@
       
         <h3 id="Android对话框样式的activity-去标题栏"><a href="#Android对话框样式的activity-去标题栏" class="headerlink" title="Android对话框样式的activity-去标题栏"></a>Android对话框样式的activity-去标题栏</h3><p>在日常开发中 个人比较常用activity来实现一个弹出对话框的功能。比如升级对话框 分享弹出框等。<br>今天实现运行后发现 对话框有一个带黑色边框的标题,这是因为activity使用的样式是<code>Theme.AppCompat.Light</code></p>
 <p>尝试在style中去掉标题 如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;Theme.CustomDialog&quot; parent=&quot;Theme.AppCompat.Light.Dialog&quot;&gt;</div><div class="line">        &lt;item name=&quot;android:windowBackground&quot;&gt;@drawable/filled_box&lt;/item&gt;</div><div class="line">        &lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;</div><div class="line">        &lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;</div><div class="line">        &lt;item name=&quot;android:windowFullscreen&quot;&gt;true&lt;/item&gt;</div><div class="line">        &lt;item name=&quot;android:windowContentOverlay&quot;&gt;@null&lt;/item&gt;</div><div class="line">    &lt;/style&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=&quot;Theme.CustomDialog&quot; parent=&quot;Theme.AppCompat.Light.Dialog&quot;&gt;</span><br><span class="line">        &lt;item name=&quot;android:windowBackground&quot;&gt;@drawable/filled_box&lt;/item&gt;</span><br><span class="line">        &lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;</span><br><span class="line">        &lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;</span><br><span class="line">        &lt;item name=&quot;android:windowFullscreen&quot;&gt;true&lt;/item&gt;</span><br><span class="line">        &lt;item name=&quot;android:windowContentOverlay&quot;&gt;@null&lt;/item&gt;</span><br><span class="line">    &lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
 <p>运行后发现没有生效,这就奇怪了. 应该是这样操作的啊？ 怎么就不行了。<br>最后通过比较 发现 下面2个属性的命名空间不能待 android 否则不生效。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;</div><div class="line"> &lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;</span><br><span class="line"> &lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;</span><br></pre></td></tr></table></figure>
+
 <p>修改运行后 果然生效了。</p>
 <p>黑色dialog：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Dialog&quot;&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Dialog&quot;&gt;</span><br></pre></td></tr></table></figure>
+
 <p>如果需要白色的:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.Dialog&quot;&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.Dialog&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
 <p>DONE!</p>
 
       
@@ -454,7 +459,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

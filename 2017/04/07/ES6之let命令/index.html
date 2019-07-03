@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="let命令和const命令ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。 1234567&amp;#123;    let a = 10;    var b = 1;&amp;#125;a // ReferenceError: a is not defined.b //1 上面代码在代码块之中，分别用let和var声明了两个变量。然后在代码块之外调">
+<meta name="description" content="let命令和const命令ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。 1234567&amp;#123;    let a = 10;    var b = 1;&amp;#125;a // ReferenceError: a is not defined.b //1  上面代码在代码块之中，分别用let和var声明了两个变量。然后在代码块之外">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6之let和const命令">
 <meta property="og:url" content="http://yoursite.com/2017/04/07/ES6之let命令/index.html">
 <meta property="og:site_name" content="带刀大哥">
-<meta property="og:description" content="let命令和const命令ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。 1234567&amp;#123;    let a = 10;    var b = 1;&amp;#125;a // ReferenceError: a is not defined.b //1 上面代码在代码块之中，分别用let和var声明了两个变量。然后在代码块之外调">
+<meta property="og:description" content="let命令和const命令ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。 1234567&amp;#123;    let a = 10;    var b = 1;&amp;#125;a // ReferenceError: a is not defined.b //1  上面代码在代码块之中，分别用let和var声明了两个变量。然后在代码块之外">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-04-07T05:51:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6之let和const命令">
-<meta name="twitter:description" content="let命令和const命令ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。 1234567&amp;#123;    let a = 10;    var b = 1;&amp;#125;a // ReferenceError: a is not defined.b //1 上面代码在代码块之中，分别用let和var声明了两个变量。然后在代码块之外调">
+<meta name="twitter:description" content="let命令和const命令ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。 1234567&amp;#123;    let a = 10;    var b = 1;&amp;#125;a // ReferenceError: a is not defined.b //1  上面代码在代码块之中，分别用let和var声明了两个变量。然后在代码块之外">
 
 
 
@@ -330,36 +330,48 @@
 
       
         <h2 id="let命令和const命令"><a href="#let命令和const命令" class="headerlink" title="let命令和const命令"></a>let命令和const命令</h2><p>ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    let a = 10;</div><div class="line">    var b = 1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">a // ReferenceError: a is not defined.</div><div class="line">b //1</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    let a = 10;</span><br><span class="line">    var b = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a // ReferenceError: a is not defined.</span><br><span class="line">b //1</span><br></pre></td></tr></table></figure>
+
 <p>上面代码在代码块之中，分别用let和var声明了两个变量。然后在代码块之外调用这两个变量，结果let声明的变量报错，var声明的变量返回了正确的值。这表明，let声明的变量只在它所在的代码块有效。</p>
 <p>for循环的计数器，就很合适使用let命令。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for(let i = 0; i &lt; arr.length; i++)&#123;&#125;</div><div class="line"></div><div class="line">console.log(i)</div><div class="line">//ReferenceError: i is not defined</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(let i = 0; i &lt; arr.length; i++)&#123;&#125;</span><br><span class="line"></span><br><span class="line">console.log(i)</span><br><span class="line">//ReferenceError: i is not defined</span><br></pre></td></tr></table></figure>
+
 <p>上面代码的计数器i，只在for循环体内有效。</p>
 <p>下面的代码如果使用var，最后输出的是9。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var a = [];</div><div class="line">for (var i = 0; i &lt; 10; i++) &#123;</div><div class="line">  var c = i;</div><div class="line">  a[i] = function () &#123;</div><div class="line">    console.log(c);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line">a[6](); // 9</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var a = [];</span><br><span class="line">for (var i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">  var c = i;</span><br><span class="line">  a[i] = function () &#123;</span><br><span class="line">    console.log(c);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">a[6](); // 9</span><br></pre></td></tr></table></figure>
+
 <p>如果使用let，声明的变量仅在块级作用域内有效，最后输出的是6。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var a = [];</div><div class="line">for (var i = 0; i &lt; 10; i++) &#123;</div><div class="line">  let c = i;</div><div class="line">  a[i] = function () &#123;</div><div class="line">    console.log(c);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line">a[6](); // 6</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var a = [];</span><br><span class="line">for (var i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">  let c = i;</span><br><span class="line">  a[i] = function () &#123;</span><br><span class="line">    console.log(c);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">a[6](); // 6</span><br></pre></td></tr></table></figure>
+
 <p>let不像var那样，会发生“变量提升”现象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function do_something() &#123;</div><div class="line">  console.log(foo); // ReferenceError</div><div class="line">  let foo = 2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function do_something() &#123;</span><br><span class="line">  console.log(foo); // ReferenceError</span><br><span class="line">  let foo = 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>上面代码在声明foo之前，就使用这个变量，结果会抛出一个错误。</p>
 <p>注意，let不允许在相同作用域内，重复声明同一个变量。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 报错</div><div class="line">&#123;</div><div class="line">    let a = 10;</div><div class="line">    var a = 1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 报错</div><div class="line">&#123;</div><div class="line">    let a = 10;</div><div class="line">    let a = 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 报错</span><br><span class="line">&#123;</span><br><span class="line">    let a = 10;</span><br><span class="line">    var a = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 报错</span><br><span class="line">&#123;</span><br><span class="line">    let a = 10;</span><br><span class="line">    let a = 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>let实际上为JavaScript新增了块级作用域。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function f1() &#123;</div><div class="line">  let n = 5;</div><div class="line">  if (true) &#123;</div><div class="line">      let n = 10;</div><div class="line">  &#125;</div><div class="line">  console.log(n); // 5</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function f1() &#123;</span><br><span class="line">  let n = 5;</span><br><span class="line">  if (true) &#123;</span><br><span class="line">      let n = 10;</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(n); // 5</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>上面的函数有两个代码块，都声明了变量n，运行后输出5。这表示外层代码块不受内层代码块的影响。如果使用var定义变量n，最后输出的值就是10。</p>
 <p>块级作用域的出现，实际上使得获得广泛应用的立即执行匿名函数（IIFE）不再必要了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// IIFE写法</div><div class="line">(function () &#123;</div><div class="line">    var tmp = ...;</div><div class="line">    ...</div><div class="line">&#125;());</div><div class="line"></div><div class="line">// 块级作用域写法</div><div class="line">&#123;</div><div class="line">    let tmp = ...;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// IIFE写法</span><br><span class="line">(function () &#123;</span><br><span class="line">    var tmp = ...;</span><br><span class="line">    ...</span><br><span class="line">&#125;());</span><br><span class="line"></span><br><span class="line">// 块级作用域写法</span><br><span class="line">&#123;</span><br><span class="line">    let tmp = ...;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>另外，ES6也规定，函数本身的作用域，在其所在的块级作用域之内</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function f() &#123; console.log(&apos;I am outside!&apos;); &#125;</div><div class="line">(function () &#123;</div><div class="line">  if(false) &#123;</div><div class="line">    // 重复声明一次函数f</div><div class="line">    function f() &#123; console.log(&apos;I am inside!&apos;); &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  f();</div><div class="line">&#125;());</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function f() &#123; console.log(&apos;I am outside!&apos;); &#125;</span><br><span class="line">(function () &#123;</span><br><span class="line">  if(false) &#123;</span><br><span class="line">    // 重复声明一次函数f</span><br><span class="line">    function f() &#123; console.log(&apos;I am inside!&apos;); &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  f();</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+
 <p>上面代码在ES5中运行，会得到“I am inside!”，但是在ES6中运行，会得到“I am outside!”。这是因为ES5存在函数提升，不管会不会进入if代码块，函数声明都会提升到当前作用域的顶部，得到执行；而ES6支持块级作用域，不管会不会进入if代码块，其内部声明的函数皆不会影响到作用域的外部。</p>
 <p>需要注意的是，如果在严格模式下，函数只能在顶层作用域和函数内声明，其他情况（比如if代码块、循环代码块）的声明都会报错。</p>
 <h3 id="const命令"><a href="#const命令" class="headerlink" title="const命令"></a>const命令</h3><p>const也用来声明变量，但是声明的是常量。一旦声明，常量的值就不能改变。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">const PI = 3.1415;</div><div class="line">PI // 3.1415</div><div class="line"></div><div class="line">PI = 3;</div><div class="line">PI // 3.1415</div><div class="line"></div><div class="line">const PI = 3.1;</div><div class="line">PI // 3.1415</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const PI = 3.1415;</span><br><span class="line">PI // 3.1415</span><br><span class="line"></span><br><span class="line">PI = 3;</span><br><span class="line">PI // 3.1415</span><br><span class="line"></span><br><span class="line">const PI = 3.1;</span><br><span class="line">PI // 3.1415</span><br></pre></td></tr></table></figure>
+
 <p>上面代码表明改变常量的值是不起作用的。需要注意的是，对常量重新赋值不会报错，只会默默地失败。</p>
 <p>const的作用域与let命令相同：只在声明所在的块级作用域内有效。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (condition) &#123;</div><div class="line">    const MAX = 5;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (condition) &#123;</span><br><span class="line">    const MAX = 5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>// 常量MAX在此处不可得<br>const声明的常量，也与let一样不可重复声明。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var message = &quot;Hello!&quot;;</div><div class="line">let age = 25;</div><div class="line"></div><div class="line">// 以下两行都会报错</div><div class="line">const message = &quot;Goodbye!&quot;;</div><div class="line">const age = 30;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var message = &quot;Hello!&quot;;</span><br><span class="line">let age = 25;</span><br><span class="line"></span><br><span class="line">// 以下两行都会报错</span><br><span class="line">const message = &quot;Goodbye!&quot;;</span><br><span class="line">const age = 30;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -467,7 +479,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

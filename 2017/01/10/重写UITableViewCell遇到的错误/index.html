@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -331,10 +331,13 @@
 
       
         <h1 id="重写UITableViewCell遇到的错误-fatal-error-init-coder-has-not-been-implemented"><a href="#重写UITableViewCell遇到的错误-fatal-error-init-coder-has-not-been-implemented" class="headerlink" title="重写UITableViewCell遇到的错误 fatal error: init(coder:) has not been implemented"></a>重写UITableViewCell遇到的错误 fatal error: init(coder:) has not been implemented</h1><p>在swift中继承UIView的子类时候，会要求写required init这个方法，一般我就如上写，并没有出过什么问题。<br>今天实现分类列表页面时 采用的是storyboard + xib 来实现自定义cell。</p>
-<p>照例继承 UITableViewCell，出现必实现下面的方法 ，那就实现呗。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">required init?(coder aDecoder: NSCoder) &#123;</div><div class="line">        fatalError(&quot;init(coder:) has not been implemented&quot;)</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>照例继承 UITableViewCell，出现必实现下面的方法 ，那就实现呗。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">required init?(coder aDecoder: NSCoder) &#123;</span><br><span class="line">        fatalError(&quot;init(coder:) has not been implemented&quot;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
 <p>完成其他代码…..<br>运行 出现下面错误</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fatal error: init(coder:) has not been implemented</div></pre></td></tr></table></figure>
-<p>为什么 查了下 网上已经有明确答案<br><a href="http://stackoverflow.com/questions/29152553/fatal-error-initcoder-has-not-been-implemented" target="_blank" rel="external">链接</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal error: init(coder:) has not been implemented</span><br></pre></td></tr></table></figure>
+
+<p>为什么 查了下 网上已经有明确答案<br><a href="http://stackoverflow.com/questions/29152553/fatal-error-initcoder-has-not-been-implemented" target="_blank" rel="noopener">链接</a></p>
 <p>This is caused by the absence of the initializer init(coder aDecoder: NSCoder!)<br>on the target UIViewController</p>
 <p>That method is required because instantiating a UIViewController from a UIStoryboard calls it.</p>
 <p>To see how do we initialize UIViewController<br>from a UIStoryboard<br>please take a look here<br>Why is this not a problem on Objective-C?<br>Because Objective-C automatically inherits all the required UIViewController<br>initializers.<br>Why does not Swift automatically inherit the initializers?<br>Swift by default does not inherit the initializers due to safety. But it will inherit all the initializers from the superclass if all the properties have a value (or optional) and the subclass has not defined any designated initializers.<br>Solution</p>
@@ -452,7 +455,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

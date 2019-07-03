@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -250,6 +250,134 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/07/Android7-0关于PopWindow弹出位置的适配问题/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/07/Android7-0关于PopWindow弹出位置的适配问题/" itemprop="url">
+                  Android7.0关于PopWindow弹出位置的适配问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-07T16:40:02+08:00">
+                2018-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2018/03/07/Android7-0关于PopWindow弹出位置的适配问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/07/Android7-0关于PopWindow弹出位置的适配问题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Android7-0关于PopWindow弹出位置的适配问题"><a href="#Android7-0关于PopWindow弹出位置的适配问题" class="headerlink" title="Android7.0关于PopWindow弹出位置的适配问题"></a>Android7.0关于PopWindow弹出位置的适配问题</h3><p>在项目中经常遇到在tab下弹出PopWidnow的场景,而在Android7.0系统中会出现PopWindow弹出位置异常 导致PopWidnow占据整个屏幕。7.1系统以及修复</p>
+<p>这里特此记录下 方便以后查找</p>
+<p><strong>我这里推荐解决方案是重写PopWidnow显示方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public void showAsDropDown(View anchorView, int xoff, int yoff) &#123;</span><br><span class="line">        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N) &#123;</span><br><span class="line">            int[] a = new int[2];</span><br><span class="line">            anchorView.getLocationInWindow(a);</span><br><span class="line">            showAtLocation(anchorView, Gravity.NO_GRAVITY, xoff, a[1] + anchorView.getHeight() + yoff);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            super.showAsDropDown(anchorView, xoff, yoff);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void showAsDropDown(View anchorView) &#123;</span><br><span class="line">        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N) &#123;</span><br><span class="line">            int[] a = new int[2];</span><br><span class="line">            anchorView.getLocationInWindow(a);</span><br><span class="line">            showAtLocation(anchorView, Gravity.NO_GRAVITY, 0, a[1] + anchorView.getHeight() + 0);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            super.showAsDropDown(anchorView);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/23/Android对话框样式的activity-去标题栏/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -337,14 +465,19 @@
           
             <h3 id="Android对话框样式的activity-去标题栏"><a href="#Android对话框样式的activity-去标题栏" class="headerlink" title="Android对话框样式的activity-去标题栏"></a>Android对话框样式的activity-去标题栏</h3><p>在日常开发中 个人比较常用activity来实现一个弹出对话框的功能。比如升级对话框 分享弹出框等。<br>今天实现运行后发现 对话框有一个带黑色边框的标题,这是因为activity使用的样式是<code>Theme.AppCompat.Light</code></p>
 <p>尝试在style中去掉标题 如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;Theme.CustomDialog&quot; parent=&quot;Theme.AppCompat.Light.Dialog&quot;&gt;</div><div class="line">        &lt;item name=&quot;android:windowBackground&quot;&gt;@drawable/filled_box&lt;/item&gt;</div><div class="line">        &lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;</div><div class="line">        &lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;</div><div class="line">        &lt;item name=&quot;android:windowFullscreen&quot;&gt;true&lt;/item&gt;</div><div class="line">        &lt;item name=&quot;android:windowContentOverlay&quot;&gt;@null&lt;/item&gt;</div><div class="line">    &lt;/style&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=&quot;Theme.CustomDialog&quot; parent=&quot;Theme.AppCompat.Light.Dialog&quot;&gt;</span><br><span class="line">        &lt;item name=&quot;android:windowBackground&quot;&gt;@drawable/filled_box&lt;/item&gt;</span><br><span class="line">        &lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;</span><br><span class="line">        &lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;</span><br><span class="line">        &lt;item name=&quot;android:windowFullscreen&quot;&gt;true&lt;/item&gt;</span><br><span class="line">        &lt;item name=&quot;android:windowContentOverlay&quot;&gt;@null&lt;/item&gt;</span><br><span class="line">    &lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
 <p>运行后发现没有生效,这就奇怪了. 应该是这样操作的啊？ 怎么就不行了。<br>最后通过比较 发现 下面2个属性的命名空间不能待 android 否则不生效。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;</div><div class="line"> &lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;</span><br><span class="line"> &lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;</span><br></pre></td></tr></table></figure>
+
 <p>修改运行后 果然生效了。</p>
 <p>黑色dialog：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Dialog&quot;&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Dialog&quot;&gt;</span><br></pre></td></tr></table></figure>
+
 <p>如果需要白色的:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.Dialog&quot;&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.Dialog&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
 <p>DONE!</p>
 
           
@@ -470,10 +603,12 @@
         
           
             <h3 id="MacSvn导入工程出现svn-E000013错误问题"><a href="#MacSvn导入工程出现svn-E000013错误问题" class="headerlink" title="MacSvn导入工程出现svn:E000013错误问题"></a>MacSvn导入工程出现svn:E000013错误问题</h3><p>SVN本地存储配置完成后,导出一个工程时出现了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">svn: E000013: Can&apos;t open file &apos;/Users/davikchen/AndroidSvn/db/txn-current-lock&apos;: Permission denied</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn: E000013: Can&apos;t open file &apos;/Users/davikchen/AndroidSvn/db/txn-current-lock&apos;: Permission denied</span><br></pre></td></tr></table></figure>
+
 <p>看字面意思是权限不够。最后查资料说是托管时 用户分组不对。意思大致是因为版本库SVN是root用户创建的但是启动服务的时候没有选择root启动，而是在其他用户转托管太下启动的，所以只能读不能写。</p>
 <p>尝试kill掉SVN托管服务 重新用root用户进行托管</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">解决方法：停止svn服务：killall svnserve</div><div class="line">在创建版本库的用户下启动svn ： svnserve -d -r /opt/....(你版本库的路径)。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">解决方法：停止svn服务：killall svnserve</span><br><span class="line">在创建版本库的用户下启动svn ： svnserve -d -r /opt/....(你版本库的路径)。</span><br></pre></td></tr></table></figure>
+
 <p>托管用户问题解决后,顺利导入工程项目。</p>
 
           
@@ -599,13 +734,16 @@
         
           
             <h3 id="Mac下启动本地SVN服务器操作实例"><a href="#Mac下启动本地SVN服务器操作实例" class="headerlink" title="Mac下启动本地SVN服务器操作实例"></a>Mac下启动本地SVN服务器操作实例</h3><p>在PC端有很好的本地SVN服务器软件,那在Mac上我们应该如何搭建本地SVN 服务器呢。其实Mac本身就可以做到这一点。<br>Mac默认已经安装了svn，我们只需要进行配置并开启就可以了首先我们可以验证一下是否安装了svn</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">svnserve --version</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnserve --version</span><br></pre></td></tr></table></figure>
+
 <p>没啥问题的话 可以显示svn相关版本信息</p>
 <p><strong>SVN目录配置:</strong><br> 1.创建本地目录 sudo mkdir -p /Users/xxx/dirName<br> 2.sudo svnadmin create /Users/xxx/dirName 此时切换到目录下可以看到svn相关的文件已经创建完成<br><strong>SVN权限配置:</strong><br> 1.在仓库目录下的conf目录里面 有一个svnserve.conf文件 打开文件后如下图<br><img src="https://raw.githubusercontent.com/DavikChen/DavikChen.github.io/master/images/15161033649048.png" alt></p>
 <p>修改以上位置，其中anon-access = read代表匿名访问的时候是只读的，若改为anon-access = none代表禁止匿名访问，需要帐号密码才能访问<br>修改同目录下的passwd文件<br>  在文件尾部以userName= password的形式添加用户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">user1= 123456</div><div class="line">user2= 123456</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user1= 123456</span><br><span class="line">user2= 123456</span><br></pre></td></tr></table></figure>
+
 <p><strong>配置authz文件</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># [/foo/bar]</div><div class="line"># harry = rw</div><div class="line"># &amp;joe = r</div><div class="line"># * =</div><div class="line"></div><div class="line">users = davikchen</div><div class="line">[/]</div><div class="line">@users = rw</div><div class="line"></div><div class="line"># [repository:/baz/fuz]</div><div class="line"># @harry_and_sally = rw</div><div class="line"># * = r</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># [/foo/bar]</span><br><span class="line"># harry = rw</span><br><span class="line"># &amp;joe = r</span><br><span class="line"># * =</span><br><span class="line"></span><br><span class="line">users = davikchen</span><br><span class="line">[/]</span><br><span class="line">@users = rw</span><br><span class="line"></span><br><span class="line"># [repository:/baz/fuz]</span><br><span class="line"># @harry_and_sally = rw</span><br><span class="line"># * = r</span><br></pre></td></tr></table></figure>
+
 <p>在[groups]下添加uesrs = davikchen标示创建了一个用户组，此用户组包含有davikchen用户<br>[/]<br>@users = rw 这两句标示给users用户组相应的权限<br>[/]表示授权的目录路径，这里是根目录，假如根目录下有一个目录叫做test,那么我们如果要编辑此目录的权限那么就要写成[test:/]<br>@uesr表示给用户组授权，如果要给某一个用户授权则不用写前面的@<br>r表示可读，w表示可写</p>
 <p><strong>启动svn服务器</strong><br>在终端输入<br>svnserve -d -r /Users/xxx/dirName<br>注意这里是仓库的根目录</p>
 <p>这样SVN服务器算配置完成了 。根据我们刚才配置的账号 我们可以通过 SVN工具Cornerstone 链接到本地仓库。</p>
@@ -733,13 +871,17 @@
         
           
             <h2 id="BootStrap-dropdown示例"><a href="#BootStrap-dropdown示例" class="headerlink" title="BootStrap-dropdown示例"></a>BootStrap-dropdown示例</h2><p>dropdown在网站中使用还是比较频繁的,下面是一个简单的dropdown示例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;dropdown&quot;&gt;</div><div class="line">        &lt;button class=&quot;btn btn-default dropdown-toggle&quot; type=&quot;button&quot; id=&quot;dropdownMenu1&quot; data-toggle=&quot;dropdown&quot;&gt;</div><div class="line">            DavikChen</div><div class="line">            &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;</div><div class="line">        &lt;/button&gt;</div><div class="line">        &lt;ul class=&quot;dropdown-menu&quot; aria-labelledby=&quot;dropdownMenu1&quot;&gt;</div><div class="line">            &lt;li&gt;&lt;a&gt;个人中心&lt;/a&gt;&lt;/li&gt;</div><div class="line">            &lt;li role=&quot;separator&quot; class=&quot;divider&quot;&gt;&lt;/li&gt;</div><div class="line">            &lt;li&gt;&lt;a&gt;我的订单&lt;/a&gt;&lt;/li&gt;</div><div class="line">            &lt;li role=&quot;separator&quot; class=&quot;divider&quot;&gt;&lt;/li&gt;</div><div class="line">            &lt;li&gt;&lt;a&gt;我的优惠券&lt;/a&gt;&lt;/li&gt;</div><div class="line">            &lt;li role=&quot;separator&quot; class=&quot;divider&quot;&gt;&lt;/li&gt;</div><div class="line">            &lt;li&gt;&lt;a&gt;消息中心&lt;/a&gt;&lt;/li&gt;</div><div class="line">            &lt;li role=&quot;separator&quot; class=&quot;divider&quot;&gt;&lt;/li&gt;</div><div class="line">            &lt;li&gt;&lt;a&gt;设置&lt;/a&gt;&lt;/li&gt;</div><div class="line"></div><div class="line">        &lt;/ul&gt;</div><div class="line">    &lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;dropdown&quot;&gt;</span><br><span class="line">        &lt;button class=&quot;btn btn-default dropdown-toggle&quot; type=&quot;button&quot; id=&quot;dropdownMenu1&quot; data-toggle=&quot;dropdown&quot;&gt;</span><br><span class="line">            DavikChen</span><br><span class="line">            &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line">        &lt;ul class=&quot;dropdown-menu&quot; aria-labelledby=&quot;dropdownMenu1&quot;&gt;</span><br><span class="line">            &lt;li&gt;&lt;a&gt;个人中心&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li role=&quot;separator&quot; class=&quot;divider&quot;&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;&lt;a&gt;我的订单&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li role=&quot;separator&quot; class=&quot;divider&quot;&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;&lt;a&gt;我的优惠券&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li role=&quot;separator&quot; class=&quot;divider&quot;&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;&lt;a&gt;消息中心&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li role=&quot;separator&quot; class=&quot;divider&quot;&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;&lt;a&gt;设置&lt;/a&gt;&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
 <p>我们来分析下一个完整的dropdown示例的结构<br>第一步: 外层是一个div 并且class 应用了 “dropdown”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;dropdown&quot;&gt;</div><div class="line">      ....  </div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;dropdown&quot;&gt;</span><br><span class="line">      ....  </span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
 <p>第二步:添加一个按钮 并在按钮右边添加一个span表情小图标</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;button class=&quot;btn btn-default dropdown-toggle&quot; type=&quot;button&quot; id=&quot;dropdownMenu1&quot; data-toggle=&quot;dropdown&quot;&gt;</div><div class="line">&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;</div><div class="line">&lt;/button&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;button class=&quot;btn btn-default dropdown-toggle&quot; type=&quot;button&quot; id=&quot;dropdownMenu1&quot; data-toggle=&quot;dropdown&quot;&gt;</span><br><span class="line">&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;</span><br><span class="line">&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
 <p>第三步:添加下拉选项</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;ul class=&quot;dropdown-menu&quot; aria-labelledby=&quot;dropdownMenu1&quot;&gt;</div><div class="line">    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;个人中心&lt;/a&gt;&lt;/li&gt;</div><div class="line">    // 分隔线</div><div class="line">    &lt;li role=&quot;separator&quot; class=&quot;divider&quot;&gt;&lt;/li&gt;</div><div class="line">    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;我的订单&lt;/a&gt;&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class=&quot;dropdown-menu&quot; aria-labelledby=&quot;dropdownMenu1&quot;&gt;</span><br><span class="line">    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;个人中心&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">    // 分隔线</span><br><span class="line">    &lt;li role=&quot;separator&quot; class=&quot;divider&quot;&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;我的订单&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
 <p>这样一个简单的dropdown控件就完成了。当然真实项目中 肯定会应用得很复杂。需视情况自己扩展<br>done</p>
 
           
@@ -865,16 +1007,20 @@
         
           
             <h2 id="mac-下mongodb-connect-failed-连接错误"><a href="#mac-下mongodb-connect-failed-连接错误" class="headerlink" title="mac 下mongodb connect failed 连接错误"></a>mac 下mongodb connect failed 连接错误</h2><p>我是用brew install mongod 安装的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">MongoDB shell version v3.4.2</div><div class="line">connecting to: mongodb://127.0.0.1:27017</div><div class="line">2017-03-28T02:11:34.775+0800 W NETWORK [thread1] Failed to connect to 127.0.0.1:27017, in(checking socket for error after poll), reason: Connection refused</div><div class="line">2017-03-28T02:11:34.778+0800 E QUERY [thread1] Error: couldn&apos;t connect to server 127.0.0.1:27017, connection attempt failed :</div><div class="line">connect@src/mongo/shell/mongo.js:237:13</div><div class="line">@(connect):1:6</div><div class="line">exception: connect failed</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MongoDB shell version v3.4.2</span><br><span class="line">connecting to: mongodb://127.0.0.1:27017</span><br><span class="line">2017-03-28T02:11:34.775+0800 W NETWORK [thread1] Failed to connect to 127.0.0.1:27017, in(checking socket for error after poll), reason: Connection refused</span><br><span class="line">2017-03-28T02:11:34.778+0800 E QUERY [thread1] Error: couldn&apos;t connect to server 127.0.0.1:27017, connection attempt failed :</span><br><span class="line">connect@src/mongo/shell/mongo.js:237:13</span><br><span class="line">@(connect):1:6</span><br><span class="line">exception: connect failed</span><br></pre></td></tr></table></figure>
+
+
 <p>当mongodb service 没有运行的时候会发生这样的错误</p>
 <p>尝试了新建一个/data/db 目录，但不奏效</p>
 <p>最后找到了如下方法解决</p>
 <p>然后 在bash 输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew services start mongodb</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services start mongodb</span><br></pre></td></tr></table></figure>
+
 <p>再输入mongo进入数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongo</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br></pre></td></tr></table></figure>
+
 <p>回车，成功了！</p>
-<p>NodeJS使用MongoDB@v3.4+Access control is not enabled for the database解决方案<br><a href="http://www.zhimengzhe.com/shujuku/other/290673.html" target="_blank" rel="external">http://www.zhimengzhe.com/shujuku/other/290673.html</a><br><a href="http://blog.csdn.net/q1056843325/article/details/70941697" target="_blank" rel="external">http://blog.csdn.net/q1056843325/article/details/70941697</a></p>
+<p>NodeJS使用<a href="mailto:MongoDB@v3.4" target="_blank" rel="noopener">MongoDB@v3.4</a>+Access control is not enabled for the database解决方案<br><a href="http://www.zhimengzhe.com/shujuku/other/290673.html" target="_blank" rel="noopener">http://www.zhimengzhe.com/shujuku/other/290673.html</a><br><a href="http://blog.csdn.net/q1056843325/article/details/70941697" target="_blank" rel="noopener">http://blog.csdn.net/q1056843325/article/details/70941697</a></p>
 
           
         
@@ -1002,7 +1148,7 @@
 <p>但作为一名开发者,我们有必要在合适的时候知道自己的功能缺失 并善意的提醒用户如何开启。</p>
 <p>下面是从stackoverflow.找到的解决方法：<br>Now you can check it, as said in this Google I/O 2016 video.</p>
 <p>Use NotificationManagerCompat.areNotificationsEnabled(), from support library, to check if notifications are blocked on API 19+. The versions below API 19 will return true (notifications are enabled).</p>
-<p>链接:<a href="https://stackoverflow.com/questions/11649151/android-4-1-how-to-check-notifications-are-disabled-for-the-application" target="_blank" rel="external">https://stackoverflow.com/questions/11649151/android-4-1-how-to-check-notifications-are-disabled-for-the-application</a></p>
+<p>链接:<a href="https://stackoverflow.com/questions/11649151/android-4-1-how-to-check-notifications-are-disabled-for-the-application" target="_blank" rel="noopener">https://stackoverflow.com/questions/11649151/android-4-1-how-to-check-notifications-are-disabled-for-the-application</a></p>
 
           
         
@@ -1127,7 +1273,7 @@
         
           
             <h2 id="ReactNative之WebView踩坑记录"><a href="#ReactNative之WebView踩坑记录" class="headerlink" title="ReactNative之WebView踩坑记录"></a>ReactNative之WebView踩坑记录</h2><p>今天做一个简单的页面，页面中需要加载一个地图网页。当我弄完所有功能时 准备开学的看效果时。<br>懵逼了 怎么显示不了地图 高度 宽度都没问题。<br>测试了很多情况 依旧没能把地图显示出来。</p>
-<p>最后上官方看了一个帖子<br>地址:<a href="https://github.com/facebook/react-native/issues/5974" target="_blank" rel="external">https://github.com/facebook/react-native/issues/5974</a><br>发现有人也遇到过此问题。看评论 大家解决的方法都不一样。</p>
+<p>最后上官方看了一个帖子<br>地址:<a href="https://github.com/facebook/react-native/issues/5974" target="_blank" rel="noopener">https://github.com/facebook/react-native/issues/5974</a><br>发现有人也遇到过此问题。看评论 大家解决的方法都不一样。</p>
 <p>看完评论后 综合自己修改布局之前和现在的不同 发现问题可能出现在 View 嵌套包裹上</p>
 <p>In my case an alignItems: ‘center’ in the parent container was causing the problem.</p>
 <p>尝试去掉父布局的 alignItems 属性。</p>
@@ -1258,9 +1404,11 @@
         
           
             <h2 id="Android自定义横向的ProgressBar"><a href="#Android自定义横向的ProgressBar" class="headerlink" title="Android自定义横向的ProgressBar"></a>Android自定义横向的ProgressBar</h2><p>经常遇到需要自定义ProgressBar 的需求场景。这里贴下简单的例子：<br>第一步:在res下创建drawable文件夹，新建文件drawable/progressbar_color.xml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</div><div class="line"></div><div class="line">    &lt;!-- 背景  gradient是渐变,corners定义的是圆角 --&gt;</div><div class="line">    &lt;item android:id=&quot;@android:id/background&quot;&gt;</div><div class="line">        &lt;shape&gt;</div><div class="line">            &lt;corners android:radius=&quot;10dp&quot; /&gt;</div><div class="line"></div><div class="line">            &lt;solid android:color=&quot;#ffffff&quot; /&gt;</div><div class="line">        &lt;/shape&gt;</div><div class="line">    &lt;/item&gt;</div><div class="line">    &lt;!-- 第二条进度条颜色 --&gt;</div><div class="line">    &lt;item android:id=&quot;@android:id/secondaryProgress&quot;&gt;</div><div class="line">        &lt;clip&gt;</div><div class="line">            &lt;shape&gt;</div><div class="line">                &lt;corners android:radius=&quot;10dip&quot; /&gt;</div><div class="line"></div><div class="line">                &lt;gradient</div><div class="line">                    android:angle=&quot;90.0&quot;</div><div class="line">                    android:centerColor=&quot;#ac6079&quot;</div><div class="line">                    android:centerY=&quot;0.45&quot;</div><div class="line">                    android:endColor=&quot;#6c213a&quot;</div><div class="line">                    android:startColor=&quot;#e71a5e&quot; /&gt;</div><div class="line">            &lt;/shape&gt;</div><div class="line">        &lt;/clip&gt;</div><div class="line">    &lt;/item&gt;</div><div class="line">    &lt;!-- 进度条 --&gt;</div><div class="line">    &lt;item android:id=&quot;@android:id/progress&quot;&gt;</div><div class="line">        &lt;clip&gt;</div><div class="line">            &lt;shape&gt;</div><div class="line">                &lt;corners android:radius=&quot;10dip&quot; /&gt;</div><div class="line"></div><div class="line">                &lt;solid android:color=&quot;#FF8080&quot; /&gt;</div><div class="line">            &lt;/shape&gt;</div><div class="line">        &lt;/clip&gt;</div><div class="line">    &lt;/item&gt;</div><div class="line"></div><div class="line">&lt;/layer-list&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 背景  gradient是渐变,corners定义的是圆角 --&gt;</span><br><span class="line">    &lt;item android:id=&quot;@android:id/background&quot;&gt;</span><br><span class="line">        &lt;shape&gt;</span><br><span class="line">            &lt;corners android:radius=&quot;10dp&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;solid android:color=&quot;#ffffff&quot; /&gt;</span><br><span class="line">        &lt;/shape&gt;</span><br><span class="line">    &lt;/item&gt;</span><br><span class="line">    &lt;!-- 第二条进度条颜色 --&gt;</span><br><span class="line">    &lt;item android:id=&quot;@android:id/secondaryProgress&quot;&gt;</span><br><span class="line">        &lt;clip&gt;</span><br><span class="line">            &lt;shape&gt;</span><br><span class="line">                &lt;corners android:radius=&quot;10dip&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;gradient</span><br><span class="line">                    android:angle=&quot;90.0&quot;</span><br><span class="line">                    android:centerColor=&quot;#ac6079&quot;</span><br><span class="line">                    android:centerY=&quot;0.45&quot;</span><br><span class="line">                    android:endColor=&quot;#6c213a&quot;</span><br><span class="line">                    android:startColor=&quot;#e71a5e&quot; /&gt;</span><br><span class="line">            &lt;/shape&gt;</span><br><span class="line">        &lt;/clip&gt;</span><br><span class="line">    &lt;/item&gt;</span><br><span class="line">    &lt;!-- 进度条 --&gt;</span><br><span class="line">    &lt;item android:id=&quot;@android:id/progress&quot;&gt;</span><br><span class="line">        &lt;clip&gt;</span><br><span class="line">            &lt;shape&gt;</span><br><span class="line">                &lt;corners android:radius=&quot;10dip&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;solid android:color=&quot;#FF8080&quot; /&gt;</span><br><span class="line">            &lt;/shape&gt;</span><br><span class="line">        &lt;/clip&gt;</span><br><span class="line">    &lt;/item&gt;</span><br><span class="line"></span><br><span class="line">&lt;/layer-list&gt;</span><br></pre></td></tr></table></figure>
+
 <p>第二步：<br>然后在布局中引用就可以了。<br>activity_main.xml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;ProgressBar </div><div class="line">        android:id=&quot;@+id/my_progress&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;12dp&quot;</div><div class="line">        android:max=&quot;100&quot;</div><div class="line">        android:progress=&quot;40&quot;</div><div class="line">        android:secondaryProgress=&quot;70&quot;</div><div class="line">        style=&quot;?android:attr/progressBarStyleHorizontal&quot;</div><div class="line">        android:progressDrawable=&quot;@drawable/progressbar_color&quot;/&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;ProgressBar </span><br><span class="line">        android:id=&quot;@+id/my_progress&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;12dp&quot;</span><br><span class="line">        android:max=&quot;100&quot;</span><br><span class="line">        android:progress=&quot;40&quot;</span><br><span class="line">        android:secondaryProgress=&quot;70&quot;</span><br><span class="line">        style=&quot;?android:attr/progressBarStyleHorizontal&quot;</span><br><span class="line">        android:progressDrawable=&quot;@drawable/progressbar_color&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1386,7 +1534,8 @@
           
             <h2 id="Android-shape的使用"><a href="#Android-shape的使用" class="headerlink" title="Android_shape的使用"></a>Android_shape的使用</h2><p>在APP开发中 我们经常会用到xml来设置一个背景 而且有圆角 渐变 虚线等。一般UI设计师提供切图也可以 不过代码能实现的 我一般就不让UI设计师切图给我们了 只需要告诉研发人员 相关标注就OK了 。</p>
 <p>下面是shape的一些属性使用例子：<br>shape用于设定形状，可以在selector，layout等里面使用，有6个子标签，各属性如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</div><div class="line">    </div><div class="line">    &lt;!-- 圆角 --&gt;</div><div class="line">    &lt;corners</div><div class="line">        android:radius=&quot;9dp&quot;</div><div class="line">        android:topLeftRadius=&quot;2dp&quot;</div><div class="line">        android:topRightRadius=&quot;2dp&quot;</div><div class="line">        android:bottomLeftRadius=&quot;2dp&quot;</div><div class="line">        android:bottomRightRadius=&quot;2dp&quot;/&gt;&lt;!-- 设置圆角半径 --&gt;</div><div class="line">    </div><div class="line">    &lt;!-- 渐变 --&gt;</div><div class="line">    &lt;gradient</div><div class="line">        android:startColor=&quot;@android:color/white&quot;</div><div class="line">        android:centerColor=&quot;@android:color/black&quot;</div><div class="line">        android:endColor=&quot;@android:color/black&quot;</div><div class="line">        android:useLevel=&quot;true&quot;</div><div class="line">        android:angle=&quot;45&quot;</div><div class="line">        android:type=&quot;radial&quot;</div><div class="line">        android:centerX=&quot;0&quot;</div><div class="line">        android:centerY=&quot;0&quot;</div><div class="line">        android:gradientRadius=&quot;90&quot;/&gt;</div><div class="line">    </div><div class="line">    &lt;!-- 间隔 --&gt;</div><div class="line">    &lt;padding</div><div class="line">        android:left=&quot;2dp&quot;</div><div class="line">        android:top=&quot;2dp&quot;</div><div class="line">        android:right=&quot;2dp&quot;</div><div class="line">        android:bottom=&quot;2dp&quot;/&gt;&lt;!-- 各方向的间隔 --&gt;</div><div class="line">    </div><div class="line">    &lt;!-- 大小 --&gt;</div><div class="line">    &lt;size</div><div class="line">        android:width=&quot;50dp&quot;</div><div class="line">        android:height=&quot;50dp&quot;/&gt;&lt;!-- 宽度和高度 --&gt;</div><div class="line">    </div><div class="line">    &lt;!-- 填充 --&gt;</div><div class="line">    &lt;solid</div><div class="line">        android:color=&quot;@android:color/white&quot;/&gt;&lt;!-- 填充的颜色 --&gt;</div><div class="line">    </div><div class="line">    &lt;!-- 描边 --&gt;</div><div class="line">    &lt;stroke</div><div class="line">        android:width=&quot;2dp&quot;</div><div class="line">        android:color=&quot;@android:color/black&quot;</div><div class="line">        android:dashWidth=&quot;1dp&quot;</div><div class="line">        android:dashGap=&quot;2dp&quot;/&gt;</div><div class="line">    </div><div class="line">&lt;/shape&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 圆角 --&gt;</span><br><span class="line">    &lt;corners</span><br><span class="line">        android:radius=&quot;9dp&quot;</span><br><span class="line">        android:topLeftRadius=&quot;2dp&quot;</span><br><span class="line">        android:topRightRadius=&quot;2dp&quot;</span><br><span class="line">        android:bottomLeftRadius=&quot;2dp&quot;</span><br><span class="line">        android:bottomRightRadius=&quot;2dp&quot;/&gt;&lt;!-- 设置圆角半径 --&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 渐变 --&gt;</span><br><span class="line">    &lt;gradient</span><br><span class="line">        android:startColor=&quot;@android:color/white&quot;</span><br><span class="line">        android:centerColor=&quot;@android:color/black&quot;</span><br><span class="line">        android:endColor=&quot;@android:color/black&quot;</span><br><span class="line">        android:useLevel=&quot;true&quot;</span><br><span class="line">        android:angle=&quot;45&quot;</span><br><span class="line">        android:type=&quot;radial&quot;</span><br><span class="line">        android:centerX=&quot;0&quot;</span><br><span class="line">        android:centerY=&quot;0&quot;</span><br><span class="line">        android:gradientRadius=&quot;90&quot;/&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 间隔 --&gt;</span><br><span class="line">    &lt;padding</span><br><span class="line">        android:left=&quot;2dp&quot;</span><br><span class="line">        android:top=&quot;2dp&quot;</span><br><span class="line">        android:right=&quot;2dp&quot;</span><br><span class="line">        android:bottom=&quot;2dp&quot;/&gt;&lt;!-- 各方向的间隔 --&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 大小 --&gt;</span><br><span class="line">    &lt;size</span><br><span class="line">        android:width=&quot;50dp&quot;</span><br><span class="line">        android:height=&quot;50dp&quot;/&gt;&lt;!-- 宽度和高度 --&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 填充 --&gt;</span><br><span class="line">    &lt;solid</span><br><span class="line">        android:color=&quot;@android:color/white&quot;/&gt;&lt;!-- 填充的颜色 --&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 描边 --&gt;</span><br><span class="line">    &lt;stroke</span><br><span class="line">        android:width=&quot;2dp&quot;</span><br><span class="line">        android:color=&quot;@android:color/black&quot;</span><br><span class="line">        android:dashWidth=&quot;1dp&quot;</span><br><span class="line">        android:dashGap=&quot;2dp&quot;/&gt;</span><br><span class="line">    </span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure>
+
 <p>填充：设置填充的颜色</p>
 <p>间隔：设置四个方向上的间隔</p>
 <p>大小：设置大小</p>
@@ -1427,145 +1576,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/04/ReactNative跨模块常量/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content>
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/04/ReactNative跨模块常量/" itemprop="url">
-                  ReactNative跨模块常量
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-04T18:23:50+08:00">
-                2017-05-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/05/04/ReactNative跨模块常量/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/04/ReactNative跨模块常量/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="ReactNative跨模块常量"><a href="#ReactNative跨模块常量" class="headerlink" title="ReactNative跨模块常量"></a>ReactNative跨模块常量</h2><p>const声明的常量只在当前代码块有效。如果想设置跨模块的常量（即跨多个文件），或者说一个值要被多个模块共享，可以采用下面的写法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// constants.js 模块</div><div class="line">export const A = 1;</div><div class="line">export const B = 3;</div><div class="line">export const C = 4;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// test1.js 模块</div><div class="line">import * as constants from &apos;./constants&apos;;</div><div class="line">console.log(constants.A); // 1</div><div class="line">console.log(constants.B); // 3</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// test2.js 模块</div><div class="line">import &#123;A, B&#125; from &apos;./constants&apos;;</div><div class="line">console.log(A); // 1</div><div class="line">console.log(B); // 3</div><div class="line">如果要使用的常量非常多，可以建一个专门的constants目录，将各种常量写在不同的文件里面，保存在该目录下。</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// constants/db.js</div><div class="line">export const db = &#123;</div><div class="line">  url: &apos;http://my.couchdbserver.local:5984&apos;,</div><div class="line">  admin_username: &apos;admin&apos;,</div><div class="line">  admin_password: &apos;admin password&apos;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// constants/user.js</div><div class="line">export const users = [&apos;root&apos;, &apos;admin&apos;, &apos;staff&apos;, &apos;ceo&apos;, &apos;chief&apos;, &apos;moderator&apos;];</div></pre></td></tr></table></figure>
-<p>然后，将这些文件输出的常量，合并在index.js里面。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// constants/index.js</div><div class="line">export &#123;db&#125; from &apos;./db&apos;;</div><div class="line">export &#123;users&#125; from &apos;./users&apos;;</div></pre></td></tr></table></figure>
-<p>使用的时候，直接加载index.js就可以了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// script.js</div><div class="line">import &#123;db, users&#125; from &apos;./constants&apos;;</div></pre></td></tr></table></figure>
-<p><code>这里需要说明的一点是 当在其他模块想导出摸个模块的常量时 只指定constants 路径的原因是因为我们在constants目录里面有一个index.js 文件 编译器会自动寻找此文件 。</code></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1604,7 +1619,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

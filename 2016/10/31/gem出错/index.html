@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="mac安装cocoapods先把本机ruby 环境进行了系统升级  1sudo gem update —system 顺利完成升级后再安装cocoapods 1sudo gem install cocoapods 出现错误：ERROR:  While executing gem … (Errno::EPERM)    Operation not permitted - /usr/bin/xcode">
+<meta name="description" content="mac安装cocoapods先把本机ruby 环境进行了系统升级  1sudo gem update —system  顺利完成升级后再安装cocoapods 1sudo gem install cocoapods  出现错误：ERROR:  While executing gem … (Errno::EPERM)    Operation not permitted - /usr/bin/xco">
 <meta name="keywords" content="mac安装cocoapod gem出错">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gem出错">
 <meta property="og:url" content="http://yoursite.com/2016/10/31/gem出错/index.html">
 <meta property="og:site_name" content="带刀大哥">
-<meta property="og:description" content="mac安装cocoapods先把本机ruby 环境进行了系统升级  1sudo gem update —system 顺利完成升级后再安装cocoapods 1sudo gem install cocoapods 出现错误：ERROR:  While executing gem … (Errno::EPERM)    Operation not permitted - /usr/bin/xcode">
+<meta property="og:description" content="mac安装cocoapods先把本机ruby 环境进行了系统升级  1sudo gem update —system  顺利完成升级后再安装cocoapods 1sudo gem install cocoapods  出现错误：ERROR:  While executing gem … (Errno::EPERM)    Operation not permitted - /usr/bin/xco">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-10-31T10:16:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gem出错">
-<meta name="twitter:description" content="mac安装cocoapods先把本机ruby 环境进行了系统升级  1sudo gem update —system 顺利完成升级后再安装cocoapods 1sudo gem install cocoapods 出现错误：ERROR:  While executing gem … (Errno::EPERM)    Operation not permitted - /usr/bin/xcode">
+<meta name="twitter:description" content="mac安装cocoapods先把本机ruby 环境进行了系统升级  1sudo gem update —system  顺利完成升级后再安装cocoapods 1sudo gem install cocoapods  出现错误：ERROR:  While executing gem … (Errno::EPERM)    Operation not permitted - /usr/bin/xco">
 
 
 
@@ -331,12 +331,15 @@
 
       
         <h3 id="mac安装cocoapods"><a href="#mac安装cocoapods" class="headerlink" title="mac安装cocoapods"></a>mac安装cocoapods</h3><p>先把本机ruby 环境进行了系统升级 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem update —system</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem update —system</span><br></pre></td></tr></table></figure>
+
 <p>顺利完成升级后<br>再安装cocoapods</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install cocoapods</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install cocoapods</span><br></pre></td></tr></table></figure>
+
 <p>出现错误：<br>ERROR:  While executing gem … (Errno::EPERM)<br>    Operation not permitted - /usr/bin/xcodeproj</p>
 <p>大致搜索了下 。都说是ruby版本低之类的，可以查看ruby版本 确认已经更新完成。<br>最后在 cocoapods github主页找到了相关问题 ：<br><a href>https://github.com/CocoaPods/CocoaPods/issues/3680</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install -n /usr/local/bin cocoapods</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install -n /usr/local/bin cocoapods</span><br></pre></td></tr></table></figure>
+
 <p>解决问题！</p>
 
       
@@ -451,7 +454,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

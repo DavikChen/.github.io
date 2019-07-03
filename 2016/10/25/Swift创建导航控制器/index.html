@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -330,7 +330,8 @@
       
 
       
-        <h3 id="Swift创建导航控制器"><a href="#Swift创建导航控制器" class="headerlink" title="Swift创建导航控制器"></a>Swift创建导航控制器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// 导航按钮文字颜色 字体大小</div><div class="line">let attributes =  [NSForegroundColorAttributeName: UIColor.gray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line">let attributesPressed =  [NSForegroundColorAttributeName: UIColor.darkGray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</div><div class="line"></div><div class="line">// 首页</div><div class="line">// 第一步 获取ViewController 控制器，并且创建一个 导航控制器用来承载ViewController</div><div class="line">let mHomeViewController = UIStoryboard(name: &quot;HomePage&quot;, bundle: nil).instantiateViewController(withIdentifier: &quot;HomePage&quot;) as! HomePageViewController</div><div class="line">let mHomeNavController = UINavigationController(rootViewController: mHomeViewController)</div><div class="line">// 第二步 创建一个导航item 并且设置导航按钮的点击icon切换 设置字体颜色 和大小</div><div class="line">let mHomeNormalImage = UIImage(named: &quot;main_bottom_category_normal&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeSelectedImage = UIImage(named: &quot;main_bottom_category_hover&quot;)?.withRenderingMode(.alwaysOriginal)</div><div class="line">let mHomeTabBarItem = UITabBarItem(title: &quot;精选&quot;, image: mHomeNormalImage, selectedImage: mHomeSelectedImage)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributes, for: .normal)</div><div class="line">mHomeTabBarItem.setTitleTextAttributes(attributesPressed, for: .focused)</div><div class="line">// 第三步:将导航item 对象 赋值给导航控制器</div><div class="line">mHomeNavController.tabBarItem = mHomeTabBarItem</div></pre></td></tr></table></figure>
+        <h3 id="Swift创建导航控制器"><a href="#Swift创建导航控制器" class="headerlink" title="Swift创建导航控制器"></a>Swift创建导航控制器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 导航按钮文字颜色 字体大小</span><br><span class="line">let attributes =  [NSForegroundColorAttributeName: UIColor.gray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</span><br><span class="line">let attributesPressed =  [NSForegroundColorAttributeName: UIColor.darkGray,NSFontAttributeName: UIFont(name: &quot;Heiti SC&quot;, size: 10.0)!]</span><br><span class="line"></span><br><span class="line">// 首页</span><br><span class="line">// 第一步 获取ViewController 控制器，并且创建一个 导航控制器用来承载ViewController</span><br><span class="line">let mHomeViewController = UIStoryboard(name: &quot;HomePage&quot;, bundle: nil).instantiateViewController(withIdentifier: &quot;HomePage&quot;) as! HomePageViewController</span><br><span class="line">let mHomeNavController = UINavigationController(rootViewController: mHomeViewController)</span><br><span class="line">// 第二步 创建一个导航item 并且设置导航按钮的点击icon切换 设置字体颜色 和大小</span><br><span class="line">let mHomeNormalImage = UIImage(named: &quot;main_bottom_category_normal&quot;)?.withRenderingMode(.alwaysOriginal)</span><br><span class="line">let mHomeSelectedImage = UIImage(named: &quot;main_bottom_category_hover&quot;)?.withRenderingMode(.alwaysOriginal)</span><br><span class="line">let mHomeTabBarItem = UITabBarItem(title: &quot;精选&quot;, image: mHomeNormalImage, selectedImage: mHomeSelectedImage)</span><br><span class="line">mHomeTabBarItem.setTitleTextAttributes(attributes, for: .normal)</span><br><span class="line">mHomeTabBarItem.setTitleTextAttributes(attributesPressed, for: .focused)</span><br><span class="line">// 第三步:将导航item 对象 赋值给导航控制器</span><br><span class="line">mHomeNavController.tabBarItem = mHomeTabBarItem</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -444,7 +445,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

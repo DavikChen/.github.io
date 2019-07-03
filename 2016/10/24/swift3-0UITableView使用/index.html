@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -332,14 +332,19 @@
       
 
       
-        <h3 id="swift3-0UITableView使用"><a href="#swift3-0UITableView使用" class="headerlink" title="swift3.0UITableView使用"></a>swift3.0UITableView使用</h3><p>这里将采用Sotryboard来实现tableview的使用。代码地址:<a href="https://github.com/DavikChen/Swift3.0_tabBarController" target="_blank" rel="external"></a></p>
+        <h3 id="swift3-0UITableView使用"><a href="#swift3-0UITableView使用" class="headerlink" title="swift3.0UITableView使用"></a>swift3.0UITableView使用</h3><p>这里将采用Sotryboard来实现tableview的使用。代码地址:<a href="https://github.com/DavikChen/Swift3.0_tabBarController" target="_blank" rel="noopener"></a></p>
 <p>这里是在之前tabBarController demo 的基础上继续开发。我们将往首页的ViewController 里面添加一个tableView，</p>
 <p>第一步: Storyboard 拖拽一个TableView 控件进入，并且准备假数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@IBOutlet weak var mTableList: UITableView!</div><div class="line">var items: [String] = [&quot;We&quot;, &quot;Heart&quot;, &quot;Swift&quot;]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@IBOutlet weak var mTableList: UITableView!</span><br><span class="line">var items: [String] = [&quot;We&quot;, &quot;Heart&quot;, &quot;Swift&quot;]</span><br></pre></td></tr></table></figure>
+
 <p>第二步: 实现 UITableViewDelegate, UITableViewDataSource。Swift3.0版本较之前相关代理函数有些变化.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int&#123;</div><div class="line">        return self.items.count;</div><div class="line">    &#125;</div><div class="line">func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell &#123;</div><div class="line">let cell:UITableViewCell = mTableList.dequeueReusableCell(withIdentifier: &quot;cell&quot;)! as UITableViewCell</div><div class="line">        </div><div class="line">        cell.textLabel?.text = self.items[indexPath.row]</div><div class="line">        </div><div class="line">        return cell</div><div class="line">    &#125;</div><div class="line">   </div><div class="line">    </div><div class="line">func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) &#123;</div><div class="line">        mTableList?.deselectRow(at: indexPath, animated: true)</div><div class="line">        print(&quot;点击了item=\(indexPath.row)&quot;)</div><div class="line">      </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int&#123;</span><br><span class="line">        return self.items.count;</span><br><span class="line">    &#125;</span><br><span class="line">func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell &#123;</span><br><span class="line">let cell:UITableViewCell = mTableList.dequeueReusableCell(withIdentifier: &quot;cell&quot;)! as UITableViewCell</span><br><span class="line">        </span><br><span class="line">        cell.textLabel?.text = self.items[indexPath.row]</span><br><span class="line">        </span><br><span class="line">        return cell</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    </span><br><span class="line">func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) &#123;</span><br><span class="line">        mTableList?.deselectRow(at: indexPath, animated: true)</span><br><span class="line">        print(&quot;点击了item=\(indexPath.row)&quot;)</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
 <p>第三步: TableView 加载数据实现协议</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">override func viewDidLoad() &#123;</div><div class="line">    mTableList.register(UITableViewCell.self, forCellReuseIdentifier: &quot;cell&quot;)</div><div class="line">    mTableList.dataSource = self</div><div class="line">    mTableList.delegate = self;</div><div class="line">        </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    mTableList.register(UITableViewCell.self, forCellReuseIdentifier: &quot;cell&quot;)</span><br><span class="line">    mTableList.dataSource = self</span><br><span class="line">    mTableList.delegate = self;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>效果图:<br><img src="https://github.com/DavikChen/DavikChen.github.io/blob/master/img/homepage.png?raw=true" alt></p>
 
       
@@ -454,7 +459,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

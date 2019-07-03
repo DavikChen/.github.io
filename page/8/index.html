@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -250,6 +250,136 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/RN父组件与子组件之间通信/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/22/RN父组件与子组件之间通信/" itemprop="url">
+                  RN父组件与子组件之间通信
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T18:22:01+08:00">
+                2017-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/22/RN父组件与子组件之间通信/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/RN父组件与子组件之间通信/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="RN父组件与子组件之间通信"><a href="#RN父组件与子组件之间通信" class="headerlink" title="RN父组件与子组件之间通信"></a>RN父组件与子组件之间通信</h2><p>在开发中 我们经常会用到组件的复用。这样我们势必要用到如何在父组件中更新或者调用子组件的状态。</p>
+<p>以一个dialog 组件例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Dialog ref=&quot;dialog&quot; callback=&#123;this.callback.bind(this)&#125;/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>自定义回调方法callback，处理选中逻辑<br>注意了 这里有一个ref参数 参数值将决定你后面如何在父组件中怎么调用Dialog 里面的方法<br>调用dialog 的 show方法 显示组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.refs.dialog.show(&quot;确定要取消订单吗&quot;);</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/RN布局之FlexBox/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -335,7 +465,7 @@
       
         
           
-            <h2 id="RN布局之FlexBox"><a href="#RN布局之FlexBox" class="headerlink" title="RN布局之FlexBox"></a>RN布局之FlexBox</h2><p><a href="http://blog.csdn.net/codetomylaw/article/details/52190636" target="_blank" rel="external">链接地址</a></p>
+            <h2 id="RN布局之FlexBox"><a href="#RN布局之FlexBox" class="headerlink" title="RN布局之FlexBox"></a>RN布局之FlexBox</h2><p><a href="http://blog.csdn.net/codetomylaw/article/details/52190636" target="_blank" rel="noopener">链接地址</a></p>
 <p>综述<br>flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。采用flex布局的元素，称为flex容器（flex Container），简称”容器”。它的所有子元素自动成为容器成员，称为flex项目（flex item），简称”项目”。</p>
 <p><strong>图解非常清楚 适合快速入门 &amp;&amp; 复习总结</strong></p>
 
@@ -462,7 +592,8 @@
         
           
             <h2 id="Text组件"><a href="#Text组件" class="headerlink" title="Text组件"></a>Text组件</h2><p>1、在使用Text的过程中，实现文本垂直居中、水平居中的效果（iOS和Android通用）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;View  style=&#123;styles.textView&#125;&gt;  </div><div class="line">    &lt;Text style=&#123;styles.text&#125;&gt; 水平垂直居中&lt;/Text&gt;  </div><div class="line">&lt;/View&gt;  </div><div class="line">  </div><div class="line">textView:&#123;  </div><div class="line">  flexDirection:&apos;column&apos;,  </div><div class="line">  justifyContent:&apos;center&apos;,  </div><div class="line">  alignItems:&apos;center&apos;,  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">text:&#123;  </div><div class="line">    fontSize:12,  </div><div class="line">    color:&apos;#f2f2f2&apos;,  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;View  style=&#123;styles.textView&#125;&gt;  </span><br><span class="line">    &lt;Text style=&#123;styles.text&#125;&gt; 水平垂直居中&lt;/Text&gt;  </span><br><span class="line">&lt;/View&gt;  </span><br><span class="line">  </span><br><span class="line">textView:&#123;  </span><br><span class="line">  flexDirection:&apos;column&apos;,  </span><br><span class="line">  justifyContent:&apos;center&apos;,  </span><br><span class="line">  alignItems:&apos;center&apos;,  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">text:&#123;  </span><br><span class="line">    fontSize:12,  </span><br><span class="line">    color:&apos;#f2f2f2&apos;,  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>尽量用view去包裹一层Text组件，text组件只负责基础的文字样式，View组件负责对齐方式等。</p>
 <p>2、在Android平台上，Text组件里使用paddingLeft 属性，不好使，直接顶着View了。<br>      解决方式：1）将paddingLeft放在View属性上<br>                        2）将paddingLeft修改为marginLeft<br>      建议使用第一种方案修改，把对齐方式交给view去处理，Text只负责文本属性的显示。</p>
 <h2 id="TextInput组件"><a href="#TextInput组件" class="headerlink" title="TextInput组件"></a>TextInput组件</h2><p>####TextInput属性：</p>
@@ -634,11 +765,14 @@
 <p>定义启动时加载的路由。路由是导航栏用来识别渲染场景的一个对象。</p>
 <p>其实，做过Android开发的是不是很熟悉，startActivityForResult    </p>
 <p>那么我们看看RN怎么实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">render() &#123;  </div><div class="line">  let defaultName = &apos;FormManager&apos;;  </div><div class="line">  let defaultComponent = FormManager;  </div><div class="line">  return (  </div><div class="line">    &lt;Navigator  </div><div class="line">      initialRoute=&#123;&#123; name: defaultName, component: defaultComponent &#125;&#125;  </div><div class="line">      configureScene=&#123;(route) =&gt; &#123;  </div><div class="line">        if (route.sceneConfig) &#123;  </div><div class="line">          return route.sceneConfig;  </div><div class="line">        &#125;  </div><div class="line">        return Navigator.SceneConfigs.HorizontalSwipeJump;  </div><div class="line">      &#125;&#125;  </div><div class="line">      renderScene=&#123;(route, navigator) =&gt; &#123;  </div><div class="line">        let Component = route.component;  </div><div class="line">        return &lt;Component &#123;...route.params&#125; navigator=&#123;navigator&#125; /&gt;  </div><div class="line">      &#125;&#125;  </div><div class="line">    /&gt;  </div><div class="line">  );  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;  </span><br><span class="line">  let defaultName = &apos;FormManager&apos;;  </span><br><span class="line">  let defaultComponent = FormManager;  </span><br><span class="line">  return (  </span><br><span class="line">    &lt;Navigator  </span><br><span class="line">      initialRoute=&#123;&#123; name: defaultName, component: defaultComponent &#125;&#125;  </span><br><span class="line">      configureScene=&#123;(route) =&gt; &#123;  </span><br><span class="line">        if (route.sceneConfig) &#123;  </span><br><span class="line">          return route.sceneConfig;  </span><br><span class="line">        &#125;  </span><br><span class="line">        return Navigator.SceneConfigs.HorizontalSwipeJump;  </span><br><span class="line">      &#125;&#125;  </span><br><span class="line">      renderScene=&#123;(route, navigator) =&gt; &#123;  </span><br><span class="line">        let Component = route.component;  </span><br><span class="line">        return &lt;Component &#123;...route.params&#125; navigator=&#123;navigator&#125; /&gt;  </span><br><span class="line">      &#125;&#125;  </span><br><span class="line">    /&gt;  </span><br><span class="line">  );  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>上面的代码：<br>我们通过initialRoute初始化了一个Route，定义了初始化的Component。<br>设置了切换的动画效果：Navigator.SceneConfigs.HorizontalSwipeJump<br>指定路由和导航器，注意一定要有navigator={navigator} ，将导航器传递。</p>
 <h3 id="跳转页面"><a href="#跳转页面" class="headerlink" title="跳转页面"></a>跳转页面</h3><p>在FormManager这个Component中，譬如我们点击字段1，调用onPress方法，跳转到选项页面，代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">choose()&#123;  </div><div class="line">  const self=this;  </div><div class="line">  const &#123; navigator &#125; = this.props;  </div><div class="line">  if(navigator) &#123;  </div><div class="line">      var route =&#123;  </div><div class="line">          name: &apos;ChooseItemComponent&apos;,  </div><div class="line">          component: ChooseItemComponent,  </div><div class="line">          params:&#123;  </div><div class="line">              title:&quot;选择页面&quot;,  </div><div class="line">              selectedItem:self.state.city,  </div><div class="line">              originList:cityList,  </div><div class="line">              getSelectedItem: function(selectedItem) &#123;  </div><div class="line">                InteractionManager.runAfterInteractions(() =&gt; &#123;  </div><div class="line">                  self.setState(&#123;  </div><div class="line">                      city: cityList[selectedItem],  </div><div class="line">                  &#125;)  </div><div class="line">                &#125;);  </div><div class="line">              &#125;  </div><div class="line">          &#125;,  </div><div class="line">          sceneConfig:Navigator.SceneConfigs.VerticalUpSwipeJump,  </div><div class="line">      &#125;;  </div><div class="line">      navigator.push(route);  </div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="返回-并传值给上个页面"><a href="#返回-并传值给上个页面" class="headerlink" title="返回 并传值给上个页面"></a>返回 并传值给上个页面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">chooseItem(i)&#123;  </div><div class="line">  var  self = this ;  </div><div class="line">  InteractionManager.runAfterInteractions(() =&gt; &#123;  </div><div class="line">    self.setState(&#123;  </div><div class="line">        selectedItem:i,  </div><div class="line">    &#125;)  </div><div class="line">  &#125;);  </div><div class="line">  const &#123; navigator &#125; = this.props;  </div><div class="line">  // 这里通过判断props 中对应的方法是否存在 如果存在调用上个页面传过来的方法 实现回传值的功能</div><div class="line">  if(this.props.getSelectedItem)&#123;  </div><div class="line">    this.props.getSelectedItem(i);  </div><div class="line">  &#125;  </div><div class="line">  setTimeout(function()&#123;  </div><div class="line">    if(navigator) &#123;  </div><div class="line">        navigator.pop();  </div><div class="line">    &#125;  </div><div class="line">  &#125; ,500);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">choose()&#123;  </span><br><span class="line">  const self=this;  </span><br><span class="line">  const &#123; navigator &#125; = this.props;  </span><br><span class="line">  if(navigator) &#123;  </span><br><span class="line">      var route =&#123;  </span><br><span class="line">          name: &apos;ChooseItemComponent&apos;,  </span><br><span class="line">          component: ChooseItemComponent,  </span><br><span class="line">          params:&#123;  </span><br><span class="line">              title:&quot;选择页面&quot;,  </span><br><span class="line">              selectedItem:self.state.city,  </span><br><span class="line">              originList:cityList,  </span><br><span class="line">              getSelectedItem: function(selectedItem) &#123;  </span><br><span class="line">                InteractionManager.runAfterInteractions(() =&gt; &#123;  </span><br><span class="line">                  self.setState(&#123;  </span><br><span class="line">                      city: cityList[selectedItem],  </span><br><span class="line">                  &#125;)  </span><br><span class="line">                &#125;);  </span><br><span class="line">              &#125;  </span><br><span class="line">          &#125;,  </span><br><span class="line">          sceneConfig:Navigator.SceneConfigs.VerticalUpSwipeJump,  </span><br><span class="line">      &#125;;  </span><br><span class="line">      navigator.push(route);  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="返回-并传值给上个页面"><a href="#返回-并传值给上个页面" class="headerlink" title="返回 并传值给上个页面"></a>返回 并传值给上个页面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">chooseItem(i)&#123;  </span><br><span class="line">  var  self = this ;  </span><br><span class="line">  InteractionManager.runAfterInteractions(() =&gt; &#123;  </span><br><span class="line">    self.setState(&#123;  </span><br><span class="line">        selectedItem:i,  </span><br><span class="line">    &#125;)  </span><br><span class="line">  &#125;);  </span><br><span class="line">  const &#123; navigator &#125; = this.props;  </span><br><span class="line">  // 这里通过判断props 中对应的方法是否存在 如果存在调用上个页面传过来的方法 实现回传值的功能</span><br><span class="line">  if(this.props.getSelectedItem)&#123;  </span><br><span class="line">    this.props.getSelectedItem(i);  </span><br><span class="line">  &#125;  </span><br><span class="line">  setTimeout(function()&#123;  </span><br><span class="line">    if(navigator) &#123;  </span><br><span class="line">        navigator.pop();  </span><br><span class="line">    &#125;  </span><br><span class="line">  &#125; ,500);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这里我们做了以下几件事：<br>1、修改本页面的状态机变量，通常表现为，选中某项后，显示一个对勾图片。（用户体验）<br>2、从props中获取Navigator，调用回调方法getSelectedItem，将值回传给parent。<br>3、pop掉本页面</p>
 
           
@@ -764,17 +898,21 @@
         
           
             <h2 id="RN与native交互之Callback、Promise"><a href="#RN与native交互之Callback、Promise" class="headerlink" title="RN与native交互之Callback、Promise"></a>RN与native交互之Callback、Promise</h2><p>一、Callback机制<br>首先Calllback是异步的，RN端调用Native端，Native会callback，但是时机是不确定的，如果多次调用的话，会存在问题。<br>Naive端是无法主动通过回调函数向RN端发送消息的。<br>具体实现代码如下：<br>Native端暴露好接口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@ReactMethod  </div><div class="line">public void measureLayout(Callback errorCallback,Callback successCallback)&#123;  </div><div class="line">    try &#123;  </div><div class="line">        successCallback.invoke(100, 100, 200, 200);//调用回调函数，返回结果  </div><div class="line">    &#125; catch (IllegalViewOperationException e) &#123;  </div><div class="line">        errorCallback.invoke(e.getMessage());  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@ReactMethod  </span><br><span class="line">public void measureLayout(Callback errorCallback,Callback successCallback)&#123;  </span><br><span class="line">    try &#123;  </span><br><span class="line">        successCallback.invoke(100, 100, 200, 200);//调用回调函数，返回结果  </span><br><span class="line">    &#125; catch (IllegalViewOperationException e) &#123;  </span><br><span class="line">        errorCallback.invoke(e.getMessage());  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>在RN端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;Text style=&#123;&#123; fontSize: 25 &#125;&#125; onPress=&#123;this.CallAndroid_callback&#125; &gt;调用原生方法_使用_回调函数</div><div class="line">&lt;/Text&gt;  </div><div class="line">  CallAndroid_callback = () =&gt; &#123;  </div><div class="line">    NativeModules.MyNativeModule.measureLayout((msg) =&gt; &#123;  </div><div class="line">        console.log(msg);  </div><div class="line">      &#125;,(x, y, width, height) =&gt; &#123;  </div><div class="line">        console.log(x + &apos;坐标,&apos; + y + &apos;坐标,&apos; + width + &apos;宽,&apos; + height + &apos;高&apos;);  </div><div class="line">      &#125;  </div><div class="line">    );  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;Text style=&#123;&#123; fontSize: 25 &#125;&#125; onPress=&#123;this.CallAndroid_callback&#125; &gt;调用原生方法_使用_回调函数</span><br><span class="line">&lt;/Text&gt;  </span><br><span class="line">  CallAndroid_callback = () =&gt; &#123;  </span><br><span class="line">    NativeModules.MyNativeModule.measureLayout((msg) =&gt; &#123;  </span><br><span class="line">        console.log(msg);  </span><br><span class="line">      &#125;,(x, y, width, height) =&gt; &#123;  </span><br><span class="line">        console.log(x + &apos;坐标,&apos; + y + &apos;坐标,&apos; + width + &apos;宽,&apos; + height + &apos;高&apos;);  </span><br><span class="line">      &#125;  </span><br><span class="line">    );  </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
 <p>二、promise机制<br>Promise 的状态<br>一个 Promise 的当前状态必须为以下三种状态中的一种：等待态（Pending）、完成态（Fulfilled）和拒绝态（Rejected）。<br>等待态（Pending）<br>处于等待态时，promise 需满足以下条件：</p>
 <p>可以迁移至完成态或拒绝态</p>
 <p>完成态（Fulfilled）<br>处于完成态时，promise 需满足以下条件：<br>不能迁移至其他任何状态<br>必须拥有一个不可变的终值<br>拒绝态（Rejected）<br>处于拒绝态时，promise 需满足以下条件：</p>
 <p>不能迁移至其他任何状态<br>必须拥有一个不可变的据因</p>
 <p>在Native侧，暴露接口：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@ReactMethod  </div><div class="line">public void rnCallNative_promise(String msg, Promise promise) &#123;  </div><div class="line">  </div><div class="line">    try &#123;  </div><div class="line">        //业务逻辑处理  </div><div class="line">        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();  </div><div class="line">        String componentName = getCurrentActivity().getComponentName().toString();  </div><div class="line">        promise.resolve(componentName);  </div><div class="line">    &#125;catch (Exception e)&#123;  </div><div class="line">        promise.reject(&quot;100&quot;,e.getMessage());//promise 失败  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@ReactMethod  </span><br><span class="line">public void rnCallNative_promise(String msg, Promise promise) &#123;  </span><br><span class="line">  </span><br><span class="line">    try &#123;  </span><br><span class="line">        //业务逻辑处理  </span><br><span class="line">        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();  </span><br><span class="line">        String componentName = getCurrentActivity().getComponentName().toString();  </span><br><span class="line">        promise.resolve(componentName);  </span><br><span class="line">    &#125;catch (Exception e)&#123;  </span><br><span class="line">        promise.reject(&quot;100&quot;,e.getMessage());//promise 失败  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>在RN侧：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;Text style=&#123;&#123; fontSize: 25 &#125;&#125; onPress=&#123;this.CallAndroid_promise&#125; &gt;调用原生方法_使用_Promise</div><div class="line">&lt;/Text&gt;  </div><div class="line">  </div><div class="line">  CallAndroid_promise = () =&gt; &#123;  </div><div class="line">    NativeModules.MyNativeModule.rnCallNative_promise(&apos;参数1&apos;,&apos;参数2&apos;).then(  </div><div class="line">      (msg) =&gt; &#123;  </div><div class="line">        console.log(&apos;promise成功：&apos;+msg);  </div><div class="line">      &#125;  </div><div class="line">    ).catch(  </div><div class="line">      (err) =&gt; &#123;  </div><div class="line">        console.log(err);  </div><div class="line">      &#125;  </div><div class="line">      );  </div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;Text style=&#123;&#123; fontSize: 25 &#125;&#125; onPress=&#123;this.CallAndroid_promise&#125; &gt;调用原生方法_使用_Promise</span><br><span class="line">&lt;/Text&gt;  </span><br><span class="line">  </span><br><span class="line">  CallAndroid_promise = () =&gt; &#123;  </span><br><span class="line">    NativeModules.MyNativeModule.rnCallNative_promise(&apos;参数1&apos;,&apos;参数2&apos;).then(  </span><br><span class="line">      (msg) =&gt; &#123;  </span><br><span class="line">        console.log(&apos;promise成功：&apos;+msg);  </span><br><span class="line">      &#125;  </span><br><span class="line">    ).catch(  </span><br><span class="line">      (err) =&gt; &#123;  </span><br><span class="line">        console.log(err);  </span><br><span class="line">      &#125;  </span><br><span class="line">      );  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1312,7 +1450,8 @@
           
             <h1 id="Android-WebView-js失效问题"><a href="#Android-WebView-js失效问题" class="headerlink" title="Android WebView js失效问题"></a>Android WebView js失效问题</h1><p>最近遇到一个很诡异的webview问题,当网页出现一次错误后 后面不管是恢复网络还是其他ok的页面 js都会加载不了<br>查了很多资料 没什么结果。<br>最后仔细思考后 看了下代码 在网页错误回调函数中发现调用了 mWebView.resumeTimers(); 方法。</p>
 <p>然后看下API说明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public void pauseTimers ()</div><div class="line"></div><div class="line">Added in API level 1</div><div class="line">Pauses all layout, parsing, and JavaScript timers for all WebViews. This is a global requests, not restricted to just this WebView. This can be useful if the application has been paused.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public void pauseTimers ()</span><br><span class="line"></span><br><span class="line">Added in API level 1</span><br><span class="line">Pauses all layout, parsing, and JavaScript timers for all WebViews. This is a global requests, not restricted to just this WebView. This can be useful if the application has been paused.</span><br></pre></td></tr></table></figure>
+
 <p>原来这个方法是全局生效的，会导致所有webview的js失效 终于解释了为什么一旦出现一次错误后 后续页面都加载不出来的问题了。</p>
 
           
@@ -1438,142 +1577,13 @@
         
           
             <h1 id="swift约束之SnapKit的使用一"><a href="#swift约束之SnapKit的使用一" class="headerlink" title="swift约束之SnapKit的使用一"></a>swift约束之SnapKit的使用一</h1><p>SnapKit中的常用属性有：<br>top(上)、left(左)、right(右)、bottom(下)、width(长)、height(宽)、centerX(横向中点)、centerY(纵向中点)</p>
-<h3 id="举个🌰"><a href="#举个🌰" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">view1.snp.makeConstraints &#123; (make) in</div><div class="line">            </div><div class="line">            //距self.view的上边20</div><div class="line">            make.top.equalTo(self.view).offset(20)</div><div class="line">            //距self.view的左边30</div><div class="line">            make.left.equalTo(self.view).offset(30)</div><div class="line">            //距self.view的右边30（右边数字前要加减号,不然会变成超出右边30）</div><div class="line">            make.right.equalTo(self.view).offset(-30)</div><div class="line">            //距self.view的下边50（下边数字前要加减号,不然会变成超出下边50）</div><div class="line">            make.bottom.equalTo(self.view).offset(-50)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-<h3 id="举个🌰-1"><a href="#举个🌰-1" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">view2.snp.makeConstraints &#123; (make) in</div><div class="line">            </div><div class="line">            //距view1的上边50</div><div class="line">            make.top.equalTo(view1).offset(50)</div><div class="line">            //距view1的左边50</div><div class="line">            make.left.equalTo(view1).offset(50)</div><div class="line">            //设置长为100</div><div class="line">            make.width.equalTo(100)</div><div class="line">            //设置高为60</div><div class="line">            make.height.equalTo(60)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-<h3 id="举个🌰-2"><a href="#举个🌰-2" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">view3.snp.makeConstraints &#123; (make) in</div><div class="line">            </div><div class="line">            //横向坐标等于view1</div><div class="line">            make.centerX.equalTo(view1)</div><div class="line">            //纵向坐标等于view1(横和纵都相等就等于对view1居中)</div><div class="line">            make.centerY.equalTo(view1)</div><div class="line">            //长等于view2的2倍</div><div class="line">            make.width.equalTo(view2).multipliedBy(2)</div><div class="line">            //高等于view2的3分之一</div><div class="line">            make.height.equalTo(view2).dividedBy(3)</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<h3 id="举个🌰"><a href="#举个🌰" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">view1.snp.makeConstraints &#123; (make) in</span><br><span class="line">            </span><br><span class="line">            //距self.view的上边20</span><br><span class="line">            make.top.equalTo(self.view).offset(20)</span><br><span class="line">            //距self.view的左边30</span><br><span class="line">            make.left.equalTo(self.view).offset(30)</span><br><span class="line">            //距self.view的右边30（右边数字前要加减号,不然会变成超出右边30）</span><br><span class="line">            make.right.equalTo(self.view).offset(-30)</span><br><span class="line">            //距self.view的下边50（下边数字前要加减号,不然会变成超出下边50）</span><br><span class="line">            make.bottom.equalTo(self.view).offset(-50)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="举个🌰-1"><a href="#举个🌰-1" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">view2.snp.makeConstraints &#123; (make) in</span><br><span class="line">            </span><br><span class="line">            //距view1的上边50</span><br><span class="line">            make.top.equalTo(view1).offset(50)</span><br><span class="line">            //距view1的左边50</span><br><span class="line">            make.left.equalTo(view1).offset(50)</span><br><span class="line">            //设置长为100</span><br><span class="line">            make.width.equalTo(100)</span><br><span class="line">            //设置高为60</span><br><span class="line">            make.height.equalTo(60)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="举个🌰-2"><a href="#举个🌰-2" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">view3.snp.makeConstraints &#123; (make) in</span><br><span class="line">            </span><br><span class="line">            //横向坐标等于view1</span><br><span class="line">            make.centerX.equalTo(view1)</span><br><span class="line">            //纵向坐标等于view1(横和纵都相等就等于对view1居中)</span><br><span class="line">            make.centerY.equalTo(view1)</span><br><span class="line">            //长等于view2的2倍</span><br><span class="line">            make.width.equalTo(view2).multipliedBy(2)</span><br><span class="line">            //高等于view2的3分之一</span><br><span class="line">            make.height.equalTo(view2).dividedBy(3)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
 <p>以上就是基本的 Snapkit的使用，后续再更新….</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/10/重写UITableViewCell遇到的错误/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content>
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/10/重写UITableViewCell遇到的错误/" itemprop="url">
-                  重写UITableViewCell遇到的错误
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-10T17:56:52+08:00">
-                2017-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/01/10/重写UITableViewCell遇到的错误/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/10/重写UITableViewCell遇到的错误/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="重写UITableViewCell遇到的错误-fatal-error-init-coder-has-not-been-implemented"><a href="#重写UITableViewCell遇到的错误-fatal-error-init-coder-has-not-been-implemented" class="headerlink" title="重写UITableViewCell遇到的错误 fatal error: init(coder:) has not been implemented"></a>重写UITableViewCell遇到的错误 fatal error: init(coder:) has not been implemented</h1><p>在swift中继承UIView的子类时候，会要求写required init这个方法，一般我就如上写，并没有出过什么问题。<br>今天实现分类列表页面时 采用的是storyboard + xib 来实现自定义cell。</p>
-<p>照例继承 UITableViewCell，出现必实现下面的方法 ，那就实现呗。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">required init?(coder aDecoder: NSCoder) &#123;</div><div class="line">        fatalError(&quot;init(coder:) has not been implemented&quot;)</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>完成其他代码…..<br>运行 出现下面错误</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fatal error: init(coder:) has not been implemented</div></pre></td></tr></table></figure>
-<p>为什么 查了下 网上已经有明确答案<br><a href="http://stackoverflow.com/questions/29152553/fatal-error-initcoder-has-not-been-implemented" target="_blank" rel="external">链接</a></p>
-<p>This is caused by the absence of the initializer init(coder aDecoder: NSCoder!)<br>on the target UIViewController</p>
-<p>That method is required because instantiating a UIViewController from a UIStoryboard calls it.</p>
-<p>To see how do we initialize UIViewController<br>from a UIStoryboard<br>please take a look here<br>Why is this not a problem on Objective-C?<br>Because Objective-C automatically inherits all the required UIViewController<br>initializers.<br>Why does not Swift automatically inherit the initializers?<br>Swift by default does not inherit the initializers due to safety. But it will inherit all the initializers from the superclass if all the properties have a value (or optional) and the subclass has not defined any designated initializers.<br>Solution</p>
-<p>First method<br>Manually implementing init(coder aDecoder: NSCoder!)<br>on the target UIViewController<br>init(coder aDecoder: NSCoder!) { super.init(coder: aDecoder)}<br>Second method<br>Removing init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)<br>on your target UIViewController<br>will inherit all of the required initializers from the superclass asDave Wood pointed on his answer below</p>
 
           
         
@@ -1607,7 +1617,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1646,7 +1656,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

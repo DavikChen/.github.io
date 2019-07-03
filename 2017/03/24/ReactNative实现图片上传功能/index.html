@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -330,13 +330,16 @@
       
 
       
-        <h2 id="ReactNative实现图片上传功能"><a href="#ReactNative实现图片上传功能" class="headerlink" title="ReactNative实现图片上传功能"></a>ReactNative实现图片上传功能</h2><p>我们的项目里需要使用图片上传（用JS 实现图片上传），那我们有没有什么办法呢？<br>通过搜索React-native的github， 会发现里面有这么一篇文章：<a href="https://github.com/facebook/react-native/issues/5308" target="_blank" rel="external">https://github.com/facebook/react-native/issues/5308</a></p>
-<p>解决方案：<br>采用FormData来实现，FormData 的API参考：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FormData" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/API/FormData</a><br>利用FormData对象,你可以使用一系列的键值对来模拟一个完整的表单,然后使用XMLHttpRequest发送这个”表单”.</p>
+        <h2 id="ReactNative实现图片上传功能"><a href="#ReactNative实现图片上传功能" class="headerlink" title="ReactNative实现图片上传功能"></a>ReactNative实现图片上传功能</h2><p>我们的项目里需要使用图片上传（用JS 实现图片上传），那我们有没有什么办法呢？<br>通过搜索React-native的github， 会发现里面有这么一篇文章：<a href="https://github.com/facebook/react-native/issues/5308" target="_blank" rel="noopener">https://github.com/facebook/react-native/issues/5308</a></p>
+<p>解决方案：<br>采用FormData来实现，FormData 的API参考：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FormData" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/API/FormData</a><br>利用FormData对象,你可以使用一系列的键值对来模拟一个完整的表单,然后使用XMLHttpRequest发送这个”表单”.</p>
 <p>那么我们就来看看在RN里怎么做，贴代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">uploadImage()&#123;  </div><div class="line">  let formData = new FormData();  </div><div class="line">  let file = &#123;uri: uri, type: &apos;multipart/form-data&apos;, name: &apos;a.jpg&apos;&#125;;  </div><div class="line">  </div><div class="line">  formData.append(&quot;images&quot;,file);  </div><div class="line">  </div><div class="line">  fetch(url,&#123;  </div><div class="line">    method:&apos;POST&apos;,  </div><div class="line">    headers:&#123;  </div><div class="line">        &apos;Content-Type&apos;:&apos;multipart/form-data&apos;,  </div><div class="line">    &#125;,  </div><div class="line">    body:formData,  </div><div class="line">  &#125;)  </div><div class="line">  .then((response) =&gt; response.text() )  </div><div class="line">  .then((responseData)=&gt;&#123;  </div><div class="line">  </div><div class="line">    console.log(&apos;responseData&apos;,responseData);  </div><div class="line">  &#125;)  </div><div class="line">  .catch((error)=&gt;&#123;console.error(&apos;error&apos;,error)&#125;);  </div><div class="line">  </div><div class="line">&#125; </div><div class="line">``` </div><div class="line"></div><div class="line">1、首先我们new了一个FormData</div><div class="line">2、创建一个file对象，uri是什么？如下示例：</div><div class="line">Android:  file:///storage/emulated/0/Pictures/eb645893-4c00-44a3-a9b4-a2116e955f7c.jpg</div><div class="line">ios:         /Users/ashleydw/Library/Developer/CoreSimulator/Devices/23EE88D0-6E91-43AD-A3B6-06F87698C5A8/data/Containers/Data/Application/A73E68D3-7424-4301-9934-AD0F8251C1EB/tmp/7803DA8A-0E40-4FCB-A593-884805878172.jpg</div><div class="line">3、设置header</div></pre></td></tr></table></figure>
-<p>‘Content-Type’:’multipart/form-data’,<br>```<br>4、将创建好的FormData赋值给body</p>
-<p>这样我们就完成了图片上传的功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">uploadImage()&#123;  </span><br><span class="line">  let formData = new FormData();  </span><br><span class="line">  let file = &#123;uri: uri, type: &apos;multipart/form-data&apos;, name: &apos;a.jpg&apos;&#125;;  </span><br><span class="line">  </span><br><span class="line">  formData.append(&quot;images&quot;,file);  </span><br><span class="line">  </span><br><span class="line">  fetch(url,&#123;  </span><br><span class="line">    method:&apos;POST&apos;,  </span><br><span class="line">    headers:&#123;  </span><br><span class="line">        &apos;Content-Type&apos;:&apos;multipart/form-data&apos;,  </span><br><span class="line">    &#125;,  </span><br><span class="line">    body:formData,  </span><br><span class="line">  &#125;)  </span><br><span class="line">  .then((response) =&gt; response.text() )  </span><br><span class="line">  .then((responseData)=&gt;&#123;  </span><br><span class="line">  </span><br><span class="line">    console.log(&apos;responseData&apos;,responseData);  </span><br><span class="line">  &#125;)  </span><br><span class="line">  .catch((error)=&gt;&#123;console.error(&apos;error&apos;,error)&#125;);  </span><br><span class="line">  </span><br><span class="line">&#125; </span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">1、首先我们new了一个FormData</span><br><span class="line">2、创建一个file对象，uri是什么？如下示例：</span><br><span class="line">Android:  file:///storage/emulated/0/Pictures/eb645893-4c00-44a3-a9b4-a2116e955f7c.jpg</span><br><span class="line">ios:         /Users/ashleydw/Library/Developer/CoreSimulator/Devices/23EE88D0-6E91-43AD-A3B6-06F87698C5A8/data/Containers/Data/Application/A73E68D3-7424-4301-9934-AD0F8251C1EB/tmp/7803DA8A-0E40-4FCB-A593-884805878172.jpg</span><br><span class="line">3、设置header</span><br></pre></td></tr></table></figure>
 
+<p>‘Content-Type’:’multipart/form-data’, </p>
+<pre><code>4、将创建好的FormData赋值给body
+
+这样我们就完成了图片上传的功能。
+</code></pre>
       
     </div>
 
@@ -449,7 +452,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

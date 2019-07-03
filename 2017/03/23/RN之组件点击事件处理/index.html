@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -352,11 +352,13 @@
 <p>style View#style </p>
 <p>underlayColor string<br>有触摸操作时显示出来的底层的颜色。</p>
 <p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;TouchableHighlight underlayColor=&apos;#f0f0f0&apos; onPress=&#123;this.openIM.bind(this)&#125; style=&#123;styles.userIMImageView&#125;&gt;  </div><div class="line">      &lt;Image source=&#123;&#123;uri:&apos;im&apos;&#125;&#125; style=&#123;styles.userIMImage&#125;/&gt;  </div><div class="line">&lt;/TouchableHighlight&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;TouchableHighlight underlayColor=&apos;#f0f0f0&apos; onPress=&#123;this.openIM.bind(this)&#125; style=&#123;styles.userIMImageView&#125;&gt;  </span><br><span class="line">      &lt;Image source=&#123;&#123;uri:&apos;im&apos;&#125;&#125; style=&#123;styles.userIMImage&#125;/&gt;  </span><br><span class="line">&lt;/TouchableHighlight&gt;</span><br></pre></td></tr></table></figure>
+
 <p>这个很简单的例子，就是一个图片，点击后背景色变为：#f0f0f0</p>
 <p>3、TouchableOpacity<br>官网解释：<br>本组件用于封装视图，使其可以正确响应触摸操作。当按下的时候，封装的视图的不透明度会降低。这个过程并不会真正改变视图层级，大部分情况下很容易添加到应用中而不会带来一些奇怪的副作用。（译注：此组件与TouchableHighlight的区别在于并没有额外的颜色变化，更适于一般场景）。<br>属性<br>TouchableWithoutFeedback props…<br>译注：这意味着本组件继承了所有TouchableWithoutFeedback的属性。</p>
 <p>activeOpacity number<br>指定封装的视图在被触摸操作激活时以多少不透明度显示（通常在0到1之间）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;TouchableOpacity  </div><div class="line">    style=&#123;styles.saveView&#125;  </div><div class="line">    onPress=&#123;this.refuse.bind(this)&#125;  </div><div class="line">    activeOpacity=&#123;0.7&#125;  &gt;  </div><div class="line">    &lt;Text style=&#123;styles.saveText&#125;&gt;  </div><div class="line">       拒单  </div><div class="line">    &lt;/Text&gt;  </div><div class="line">&lt;/TouchableOpacity&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;TouchableOpacity  </span><br><span class="line">    style=&#123;styles.saveView&#125;  </span><br><span class="line">    onPress=&#123;this.refuse.bind(this)&#125;  </span><br><span class="line">    activeOpacity=&#123;0.7&#125;  &gt;  </span><br><span class="line">    &lt;Text style=&#123;styles.saveText&#125;&gt;  </span><br><span class="line">       拒单  </span><br><span class="line">    &lt;/Text&gt;  </span><br><span class="line">&lt;/TouchableOpacity&gt;</span><br></pre></td></tr></table></figure>
+
 <p>上面这边代码实现的效果是：按钮点击后，不透明度为0.7<br>1、将TouchableOpacity组件当成一个View组件，子组件为Text，封装成一个Button<br>2、当按钮被点击时，不透明度activeOpacity设置为0.7</p>
 <p>需要注意的是TouchableHighlight和TouchableHighlight只有设置onPress方法后，对应的背景色和透明度才有效。</p>
 <p>4、TouchableNativeFeedback<br>官网解释：<br>本组件用于封装视图，使其可以正确响应触摸操作（仅限Android平台）</p>
@@ -473,7 +475,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

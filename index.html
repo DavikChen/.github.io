@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -250,6 +250,138 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/border-collapse实现表格细线边框/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/07/03/border-collapse实现表格细线边框/" itemprop="url">
+                  border-collapse实现表格细线边框
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-03T10:40:07+08:00">
+                2019-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2019/07/03/border-collapse实现表格细线边框/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/07/03/border-collapse实现表格细线边框/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="border-collapse实现表格细线边框"><a href="#border-collapse实现表格细线边框" class="headerlink" title="border-collapse实现表格细线边框"></a>border-collapse实现表格细线边框</h1><p>虽然在xhtml+css 时代 table的使用越来越少，但需要布局数据型元素，用table还是很不错的选择。</p>
+<p>默认的样式虽然有点立体的感觉，但它在整体布局中并不是很美观，通常情况下,我们会把table属性的cellspacing设成1,然后为整个表格设一 个背景色;或是设置table的border为0，然后为所有td设置border-left和border-right ，这种方法比较常用，但是有些复杂，而且如果表格内容为空的情况下IE会不显示边框。另一种方法就是用CSS中的border-collapse属性,它有两个参数</p>
+<p>separate    边框会被分开。<br>collapse    默认。如果可能，边框会被合并为一个单一的边框。</p>
+<p>这里我们会用到： border-collapse:collapse;<br>在table中加入border-collapse:collapse;属性，并设置border为0,设置td{border:1px solid #ccc;}边框。就可以得到与第一种方法相同的效果。这种方法相对简单，而且在表格内容为空的情况下，边框不会出现不显示的情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">table &#123;</span><br><span class="line">    border-collapse:collapse;</span><br><span class="line">&#125;</span><br><span class="line">td &#123;</span><br><span class="line">    border:1px solid #666;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>面顺便带上CSS border-collapse 属性：</p>
+<p>CSS border-collapse 属性</p>
+<p>定义<br>border-collapse 属性设置表格的边框是否被合并为一个单一的边框，还是象在标准的 HTML 中那样分开显示。<br>继承性：Yes<br>脚本语法：<br>CSS 属性也可通过一段 JavaScript 被动态地改变。<br>object.style.borderCollapse=”collapse”</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/01/Cornerstone无法上传-a、-so等lib文件的问题/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -463,8 +595,10 @@
 <p>如下html，如果不用事件委托，将每一个li都去添加click事件监听，非常麻烦。</p>
 <p>另外就是如果通过js动态创建的子节点，需要重新绑定事件。</p>
 <p>而利用事件委托的话，只需要给父级绑定一个事件监听，即可让每个li都绑定上相应的事件。</p>
-<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=&quot;wrap&quot;&gt;</div><div class="line">    &lt;li&gt;item1&lt;/li&gt;</div><div class="line">    &lt;li&gt;item2&lt;/li&gt;</div><div class="line">    &lt;li&gt;item3&lt;/li&gt;</div><div class="line">    &lt;li&gt;item4&lt;/li&gt;</div><div class="line">    &lt;li&gt;item5&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
-<h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line"></div><div class="line">    // 普通事件</div><div class="line">    $(&apos;li&apos;).click(function()&#123;</div><div class="line">        $(this).css(&apos;background&apos;, &apos;#D4DFE6&apos;);</div><div class="line">    &#125;);</div><div class="line">      </div><div class="line"></div><div class="line">    // 动态添加DOM节点</div><div class="line">    $(&apos;#addBtn&apos;).click(function()&#123;</div><div class="line">        $(&apos;#wrap&apos;).append( $(&apos;&lt;li&gt;item&apos;+ ($(&apos;li&apos;).length + 1) +&apos;&lt;/li&gt;&apos;) );</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 事件委托</div><div class="line">     */</div><div class="line"></div><div class="line">    // jQuery 1.9已废弃</div><div class="line">    /*$(&apos;li&apos;).live(&apos;click&apos;, function()&#123;</div><div class="line">        $(this).css(&apos;background&apos;, &apos;#D4DFE6&apos;);</div><div class="line">    &#125;);*/</div><div class="line"></div><div class="line">    // jQuery的delegate写法</div><div class="line">    $(&apos;#wrap&apos;).delegate(&apos;li&apos;, &apos;click&apos;, function(ev)&#123;</div><div class="line"></div><div class="line">        // this 指向委托的对象 li</div><div class="line">        $(this).css(&apos;background&apos;, &apos;#D4DFE6&apos;);</div><div class="line"></div><div class="line">        // 找到父级 ul#wrap</div><div class="line">        $(ev.delegateTarget).css(&apos;border&apos;, &apos;2px solid #f00&apos;);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    // jQuery的on的写法</div><div class="line">    $(&apos;#wrap&apos;).on(&apos;click&apos;, &apos;li&apos;, function(ev) &#123;</div><div class="line">        // this 指向委托的对象 li</div><div class="line">        $(this).css(&apos;background&apos;, &apos;#D4DFE6&apos;);</div><div class="line"></div><div class="line">        // 找到父级 ul#wrap</div><div class="line">        $(ev.delegateTarget).css(&apos;border&apos;, &apos;2px solid #f00&apos;);</div><div class="line">    &#125;)</div><div class="line"></div><div class="line"></div><div class="line">    // js原生写法</div><div class="line">    var _wrap = document.getElementById(&apos;wrap&apos;);</div><div class="line">    _wrap.addEventListener(&apos;click&apos;, function(ev)&#123;</div><div class="line">        var ev = ev || event;</div><div class="line">        if( ev.target.nodeName == &apos;LI&apos; ) &#123;</div><div class="line">            ev.target.style.background = &apos;#8EC0E4&apos;;</div><div class="line">            console.log( ev.target.innerHTML );</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // 找到父级 ul#wrap</div><div class="line">        this.style.border = &apos;2px solid #f00&apos;;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul id=&quot;wrap&quot;&gt;</span><br><span class="line">    &lt;li&gt;item1&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;item2&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;item3&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;item4&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;item5&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;</span><br><span class="line"></span><br><span class="line">    // 普通事件</span><br><span class="line">    $(&apos;li&apos;).click(function()&#123;</span><br><span class="line">        $(this).css(&apos;background&apos;, &apos;#D4DFE6&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line">    // 动态添加DOM节点</span><br><span class="line">    $(&apos;#addBtn&apos;).click(function()&#123;</span><br><span class="line">        $(&apos;#wrap&apos;).append( $(&apos;&lt;li&gt;item&apos;+ ($(&apos;li&apos;).length + 1) +&apos;&lt;/li&gt;&apos;) );</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 事件委托</span><br><span class="line">     */</span><br><span class="line"></span><br><span class="line">    // jQuery 1.9已废弃</span><br><span class="line">    /*$(&apos;li&apos;).live(&apos;click&apos;, function()&#123;</span><br><span class="line">        $(this).css(&apos;background&apos;, &apos;#D4DFE6&apos;);</span><br><span class="line">    &#125;);*/</span><br><span class="line"></span><br><span class="line">    // jQuery的delegate写法</span><br><span class="line">    $(&apos;#wrap&apos;).delegate(&apos;li&apos;, &apos;click&apos;, function(ev)&#123;</span><br><span class="line"></span><br><span class="line">        // this 指向委托的对象 li</span><br><span class="line">        $(this).css(&apos;background&apos;, &apos;#D4DFE6&apos;);</span><br><span class="line"></span><br><span class="line">        // 找到父级 ul#wrap</span><br><span class="line">        $(ev.delegateTarget).css(&apos;border&apos;, &apos;2px solid #f00&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    // jQuery的on的写法</span><br><span class="line">    $(&apos;#wrap&apos;).on(&apos;click&apos;, &apos;li&apos;, function(ev) &#123;</span><br><span class="line">        // this 指向委托的对象 li</span><br><span class="line">        $(this).css(&apos;background&apos;, &apos;#D4DFE6&apos;);</span><br><span class="line"></span><br><span class="line">        // 找到父级 ul#wrap</span><br><span class="line">        $(ev.delegateTarget).css(&apos;border&apos;, &apos;2px solid #f00&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    // js原生写法</span><br><span class="line">    var _wrap = document.getElementById(&apos;wrap&apos;);</span><br><span class="line">    _wrap.addEventListener(&apos;click&apos;, function(ev)&#123;</span><br><span class="line">        var ev = ev || event;</span><br><span class="line">        if( ev.target.nodeName == &apos;LI&apos; ) &#123;</span><br><span class="line">            ev.target.style.background = &apos;#8EC0E4&apos;;</span><br><span class="line">            console.log( ev.target.innerHTML );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 找到父级 ul#wrap</span><br><span class="line">        this.style.border = &apos;2px solid #f00&apos;;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -588,27 +722,34 @@
       
         
           
-            <h4 id="jQuery事件命名空间"><a href="#jQuery事件命名空间" class="headerlink" title="jQuery事件命名空间"></a>jQuery事件命名空间</h4><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在jquery的官方API中，有对命名空间的一些描述，地址是：<a href="http://api.jquery.com/on/" target="_blank" rel="external">http://api.jquery.com/on/</a> 这里面有一些英文介绍，题目是“Event names and namespaces”下面有一些介绍。 假如一些朋友不是很理解的话，我在这里简单的介绍一下！</p>
+            <h4 id="jQuery事件命名空间"><a href="#jQuery事件命名空间" class="headerlink" title="jQuery事件命名空间"></a>jQuery事件命名空间</h4><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在jquery的官方API中，有对命名空间的一些描述，地址是：<a href="http://api.jquery.com/on/" target="_blank" rel="noopener">http://api.jquery.com/on/</a> 这里面有一些英文介绍，题目是“Event names and namespaces”下面有一些介绍。 假如一些朋友不是很理解的话，我在这里简单的介绍一下！</p>
 <h5 id="jQuery事件命名空间-1"><a href="#jQuery事件命名空间-1" class="headerlink" title="jQuery事件命名空间"></a>jQuery事件命名空间</h5><p>我们先看一些代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(“#haorooms”).on(&quot;click.a&quot;,function()&#123;&#125;);</div><div class="line">$(“#haorooms”).on(&quot;click.a.bb&quot;,function()&#123;&#125;);</div><div class="line">$(“#haorooms”).on(&quot;dbclick.a&quot;,function()&#123;&#125;);</div><div class="line">$(“#haorooms”).on(&quot;mouseover.a&quot;,function()&#123;&#125;);</div><div class="line">$(“#haorooms”).on(&quot;mouseout.a&quot;,function()&#123;&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(“#haorooms”).on(&quot;click.a&quot;,function()&#123;&#125;);</span><br><span class="line">$(“#haorooms”).on(&quot;click.a.bb&quot;,function()&#123;&#125;);</span><br><span class="line">$(“#haorooms”).on(&quot;dbclick.a&quot;,function()&#123;&#125;);</span><br><span class="line">$(“#haorooms”).on(&quot;mouseover.a&quot;,function()&#123;&#125;);</span><br><span class="line">$(“#haorooms”).on(&quot;mouseout.a&quot;,function()&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
 <p>当然，我们也可以用bind进行事件绑定。我们看到上面的代码，我们可以在事件后面，以点号，加我们的名字，就是事件命名空间。所谓事件命名空间，就是事件类型后面以点语法附加一个别名，以便引用事件，如”click.a”，其中”a”就是click当前事件类型的别名，即事件命名空间。</p>
 <p>假如我们要删除如下命名空间：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(“#haorooms”).on(&quot;click.a.bb&quot;,function()&#123;&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(“#haorooms”).on(&quot;click.a.bb&quot;,function()&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
 <p>我们可以用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(“#haorooms”).off(&quot;click.a.bb&quot;);//直接删除bb命名空间 【推荐】</div><div class="line">$(“#haorooms”).off(&quot;.bb&quot;); //直接删除bb命名空间 【推荐】</div><div class="line">$(“#haorooms”).off(&quot;.a&quot;); //删除.a命名空间下面所有的子空间【包括.a.bb   .a.cc等等，.a是.bb的父级，因此.a下面的都会删掉】</div><div class="line">$(“#haorooms”).off(&quot;click&quot;);//直接解绑click，下面的命名空间都会删除。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(“#haorooms”).off(&quot;click.a.bb&quot;);//直接删除bb命名空间 【推荐】</span><br><span class="line">$(“#haorooms”).off(&quot;.bb&quot;); //直接删除bb命名空间 【推荐】</span><br><span class="line">$(“#haorooms”).off(&quot;.a&quot;); //删除.a命名空间下面所有的子空间【包括.a.bb   .a.cc等等，.a是.bb的父级，因此.a下面的都会删掉】</span><br><span class="line">$(“#haorooms”).off(&quot;click&quot;);//直接解绑click，下面的命名空间都会删除。</span><br></pre></td></tr></table></figure>
+
 <p>要注意的是：</p>
 <p>假如我们写了如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(“#haorooms”).on(&quot;click&quot;,function()&#123;&#125;);</div><div class="line">$(“#haorooms”).on(&quot;click.a&quot;,function()&#123;&#125;);</div><div class="line">$(“#haorooms”).on(&quot;click.a.bb&quot;,function()&#123;&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(“#haorooms”).on(&quot;click&quot;,function()&#123;&#125;);</span><br><span class="line">$(“#haorooms”).on(&quot;click.a&quot;,function()&#123;&#125;);</span><br><span class="line">$(“#haorooms”).on(&quot;click.a.bb&quot;,function()&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
 <p>那么我们要用trigger触发click事件，也就是触发第一个，岂不是把click.a和click.a.bb都触发了，那如何解决这个问题呢，我只想触发click，而不触发click.a及以下的命名空间？</p>
 <p>没关系！ 有如下解决办法：</p>
 <p>如果事件类型后面附加感叹号，则表示触发不包含命名空间的特定事件类型。</p>
 <p>假如我们只想触发click，可以这么写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(“#haorooms”).trigger(&quot;click!&quot;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(“#haorooms”).trigger(&quot;click!&quot;)</span><br></pre></td></tr></table></figure>
+
 <p>只触发bb，可以这么写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(“#haorooms”).trigger(&quot;click.a.bb&quot;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(“#haorooms”).trigger(&quot;click.a.bb&quot;);</span><br></pre></td></tr></table></figure>
+
 <p>有了命名空间，可以方便我们在同一个事件上面做管理啦！！！</p>
 <h2 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h2><p>我在这里就不多描述了！所有自定义事件都可以通过jQuery方法触发，例如下面的示例自定一个Delay事件类型，并把它绑定到input元素对象上，然后在按钮单击事件中触发自定义事件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$(&quot;input&quot;).bind(&quot;delay&quot;,function(event)&#123;</div><div class="line">    setTimeout(function()&#123;</div><div class="line">          alert(event.type);</div><div class="line">    &#125;,1000);</div><div class="line">&#125;);</div><div class="line">$(&quot;input&quot;).click(function()&#123;</div><div class="line">      $(&quot;input&quot;).trigger(&quot;delay&quot;); //触发自定义事件</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;input&quot;).bind(&quot;delay&quot;,function(event)&#123;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">          alert(event.type);</span><br><span class="line">    &#125;,1000);</span><br><span class="line">&#125;);</span><br><span class="line">$(&quot;input&quot;).click(function()&#123;</span><br><span class="line">      $(&quot;input&quot;).trigger(&quot;delay&quot;); //触发自定义事件</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <p>自定义事件不是真正意义上的事件，可以把它理解为自定义函数，触发自定义事件就相当于调用自定义函数。</p>
 <p>通过上面的介绍，不知道大家对jquery的事件名称和命名空间有没有更深的了解了呢！期待您留言交流！</p>
 
@@ -735,10 +876,12 @@
         
           
             <h2 id="git切换路径"><a href="#git切换路径" class="headerlink" title="git切换路径"></a>git切换路径</h2><p>项目开发时 有时会遇到切换地址的问题。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">remote: Coding 提示: Repository not found! Git 仓库找不到</div><div class="line">fatal: repository &apos;https://git.coding.net/sswenhua_coding/school_pro.git/&apos; not found</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">remote: Coding 提示: Repository not found! Git 仓库找不到</span><br><span class="line">fatal: repository &apos;https://git.coding.net/sswenhua_coding/school_pro.git/&apos; not found</span><br></pre></td></tr></table></figure>
+
 <p>原因时 路径发现了变化。此时需要把路径重新设置下 </p>
 <p>解决方案:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote set-url origin git@github.com:xxxxxx/xxxxxx.git</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin git@github.com:xxxxxx/xxxxxx.git</span><br></pre></td></tr></table></figure>
+
 <p>后面的地址新地址。</p>
 
           
@@ -864,14 +1007,18 @@
         
           
             <h3 id="Tablayout设置下划线宽度以及遇到空指针问题"><a href="#Tablayout设置下划线宽度以及遇到空指针问题" class="headerlink" title="Tablayout设置下划线宽度以及遇到空指针问题"></a>Tablayout设置下划线宽度以及遇到空指针问题</h3><p>原生的Tablayout的下划线是没有直接提供API 来设置宽度的 而UI设计人员经常要求宽度和问题等宽。<br>解决方案:<br>利用反射获取到tablayout的mTabStrip，进行设置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">public static void setTabMargin(TabLayout tabs, int leftDip, int rightDip) &#123;</div><div class="line">        Class&lt;?&gt; tabLayout = tabs.getClass();</div><div class="line">        Field tabStrip = null;</div><div class="line">        try &#123;</div><div class="line">            tabStrip = tabLayout.getDeclaredField(&quot;mTabStrip&quot;);</div><div class="line">        &#125; catch (NoSuchFieldException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        tabStrip.setAccessible(true);</div><div class="line">        LinearLayout llTab = null;</div><div class="line">        try &#123;</div><div class="line">            llTab = (LinearLayout) tabStrip.get(tabs);</div><div class="line">        &#125; catch (IllegalAccessException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, leftDip, Resources.getSystem().getDisplayMetrics());</div><div class="line">        int right = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, rightDip, Resources.getSystem().getDisplayMetrics());</div><div class="line"></div><div class="line">        for (int i = 0; i &lt; llTab.getChildCount(); i++) &#123;</div><div class="line">            View child = llTab.getChildAt(i);</div><div class="line">            child.setPadding(0, 0, 0, 0);</div><div class="line">            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);</div><div class="line">            params.leftMargin = left;</div><div class="line">            params.rightMargin = right;</div><div class="line">            child.setLayoutParams(params);</div><div class="line">            child.invalidate();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public static void setTabMargin(TabLayout tabs, int leftDip, int rightDip) &#123;</span><br><span class="line">        Class&lt;?&gt; tabLayout = tabs.getClass();</span><br><span class="line">        Field tabStrip = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            tabStrip = tabLayout.getDeclaredField(&quot;mTabStrip&quot;);</span><br><span class="line">        &#125; catch (NoSuchFieldException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        tabStrip.setAccessible(true);</span><br><span class="line">        LinearLayout llTab = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            llTab = (LinearLayout) tabStrip.get(tabs);</span><br><span class="line">        &#125; catch (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, leftDip, Resources.getSystem().getDisplayMetrics());</span><br><span class="line">        int right = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, rightDip, Resources.getSystem().getDisplayMetrics());</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; llTab.getChildCount(); i++) &#123;</span><br><span class="line">            View child = llTab.getChildAt(i);</span><br><span class="line">            child.setPadding(0, 0, 0, 0);</span><br><span class="line">            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);</span><br><span class="line">            params.leftMargin = left;</span><br><span class="line">            params.rightMargin = right;</span><br><span class="line">            child.setLayoutParams(params);</span><br><span class="line">            child.invalidate();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
 <p>调用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mTabStrip.post(new Runnable() &#123;</div><div class="line">        @Override</div><div class="line">        public void run() &#123;</div><div class="line">            setTabMargin(mTabStrip,30,30);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mTabStrip.post(new Runnable() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            setTabMargin(mTabStrip,30,30);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
 <p>然而有些人会遇到空指针</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tabStrip = tabLayout.getDeclaredField(mTabStrip);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tabStrip = tabLayout.getDeclaredField(mTabStrip);</span><br></pre></td></tr></table></figure>
+
 <p>这句代码取不到值，这是因为混淆的时候把tablayout给混淆了。</p>
 <p>在混淆里面加入这句即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-keep class android.support.design.widget.TabLayout&#123;*;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-keep class android.support.design.widget.TabLayout&#123;*;&#125;</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -997,7 +1144,8 @@
           
             <h3 id="java-lang-UnsupportedOperationException解决方法"><a href="#java-lang-UnsupportedOperationException解决方法" class="headerlink" title="java.lang.UnsupportedOperationException解决方法"></a>java.lang.UnsupportedOperationException解决方法</h3><p>之前在使用Arrays.asList操作时,知道返回的list是没有add 等相关方法的,可是在实际使用时 不注意还是使用了 当出现错误时 也是一脸懵逼. 看来好记性不如烂笔头。这里先记录下来 。</p>
 <p>在项目中对List进行操作时报错java.lang.UnsupportedOperationException，后来发现操作的List是由数组转换而成的，通过看源码发现问题，并写测试程序如下。<br>代码块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String[] array = &#123;&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;&#125;;</div><div class="line">List&lt;String&gt; list = Arrays.asList(array);</div><div class="line">list.add(&quot;6&quot;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String[] array = &#123;&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;&#125;;</span><br><span class="line">List&lt;String&gt; list = Arrays.asList(array);</span><br><span class="line">list.add(&quot;6&quot;);</span><br></pre></td></tr></table></figure>
+
 <p>执行结果</p>
 <pre><code>Exception in thread &quot;main&quot; java.lang.UnsupportedOperationException
     at java.util.AbstractList.add(AbstractList.java:148)
@@ -1138,9 +1286,11 @@
 <p><code>app:tabMode=&quot;fixed&quot;或者
 top_table.setTabMode(TabLayout.MODE_FIXED);不在起作用。</code><br>效果如图：</p>
 <p>此时的解决办法，设置<br><code>app:tabMaxWidth=&quot;0dp&quot; 此值即可解决</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;android.support.design.widget.TabLayout</div><div class="line">            android:layout_width=&quot;match_parent&quot;</div><div class="line">            android:layout_height=&quot;wrap_content&quot;</div><div class="line">            app:tabMaxWidth=&quot;0dp&quot;</div><div class="line">            app:tabGravity=&quot;fill&quot;</div><div class="line">            app:tabMode=&quot;fixed&quot; /&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;android.support.design.widget.TabLayout</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            app:tabMaxWidth=&quot;0dp&quot;</span><br><span class="line">            app:tabGravity=&quot;fill&quot;</span><br><span class="line">            app:tabMode=&quot;fixed&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
 <p>TabLayout 默认是包含padding的<br>解决办法：<br>给TabLayout 添加如下几个padding属性设置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app:tabPaddingBottom=&quot;-1dp&quot;</div><div class="line">app:tabPaddingEnd=&quot;-1dp&quot;</div><div class="line">app:tabPaddingStart=&quot;-1dp&quot;</div><div class="line">app:tabPaddingTop=&quot;-1dp&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app:tabPaddingBottom=&quot;-1dp&quot;</span><br><span class="line">app:tabPaddingEnd=&quot;-1dp&quot;</span><br><span class="line">app:tabPaddingStart=&quot;-1dp&quot;</span><br><span class="line">app:tabPaddingTop=&quot;-1dp&quot;</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1266,7 +1416,8 @@ top_table.setTabMode(TabLayout.MODE_FIXED);不在起作用。</code><br>效果�
           
             <h3 id="Android-SafeProgressDialog"><a href="#Android-SafeProgressDialog" class="headerlink" title="Android-SafeProgressDialog"></a>Android-SafeProgressDialog</h3><p>进程在项目中回用到ProgressDialog 而ProgressDialog经常会导致IllegalArgumentException异常，原因是在延时线程里调用了ProgressDialog.dismiss，但此时主Activity已经destroy了，于是应用崩溃。</p>
 <p>如何避免呢 ，目前一种方式是覆写dismiss方法，在ProgressDialog.dismiss之前判断Activity是否存在</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">class SafeProgressDialog extends ProgressDialog&#123;</div><div class="line">    Activity mParentActivity;</div><div class="line">    public SafeProgressDialog(Context context)</div><div class="line">    &#123;</div><div class="line">        super(context);</div><div class="line">        mParentActivity = (Activity) context;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public void dismiss()</div><div class="line">    &#123;</div><div class="line">        if (mParentActivity != null &amp;&amp; !mParentActivity.isFinishing())</div><div class="line">        &#123;</div><div class="line">            super.dismiss();    //调用超类对应方法</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class SafeProgressDialog extends ProgressDialog&#123;</span><br><span class="line">    Activity mParentActivity;</span><br><span class="line">    public SafeProgressDialog(Context context)</span><br><span class="line">    &#123;</span><br><span class="line">        super(context);</span><br><span class="line">        mParentActivity = (Activity) context;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Override</span><br><span class="line">    public void dismiss()</span><br><span class="line">    &#123;</span><br><span class="line">        if (mParentActivity != null &amp;&amp; !mParentActivity.isFinishing())</span><br><span class="line">        &#123;</span><br><span class="line">            super.dismiss();    //调用超类对应方法</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>DONE!</p>
 
           
@@ -1423,138 +1574,11 @@ top_table.setTabMode(TabLayout.MODE_FIXED);不在起作用。</code><br>效果�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/07/Android7-0关于PopWindow弹出位置的适配问题/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content>
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/03/07/Android7-0关于PopWindow弹出位置的适配问题/" itemprop="url">
-                  Android7.0关于PopWindow弹出位置的适配问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-07T16:40:02+08:00">
-                2018-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2018/03/07/Android7-0关于PopWindow弹出位置的适配问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/07/Android7-0关于PopWindow弹出位置的适配问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Android7-0关于PopWindow弹出位置的适配问题"><a href="#Android7-0关于PopWindow弹出位置的适配问题" class="headerlink" title="Android7.0关于PopWindow弹出位置的适配问题"></a>Android7.0关于PopWindow弹出位置的适配问题</h3><p>在项目中经常遇到在tab下弹出PopWidnow的场景,而在Android7.0系统中会出现PopWindow弹出位置异常 导致PopWidnow占据整个屏幕。7.1系统以及修复</p>
-<p>这里特此记录下 方便以后查找</p>
-<p><strong>我这里推荐解决方案是重写PopWidnow显示方法</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">    public void showAsDropDown(View anchorView, int xoff, int yoff) &#123;</div><div class="line">        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N) &#123;</div><div class="line">            int[] a = new int[2];</div><div class="line">            anchorView.getLocationInWindow(a);</div><div class="line">            showAtLocation(anchorView, Gravity.NO_GRAVITY, xoff, a[1] + anchorView.getHeight() + yoff);</div><div class="line">        &#125; else &#123;</div><div class="line">            super.showAsDropDown(anchorView, xoff, yoff);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void showAsDropDown(View anchorView) &#123;</div><div class="line">        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N) &#123;</div><div class="line">            int[] a = new int[2];</div><div class="line">            anchorView.getLocationInWindow(a);</div><div class="line">            showAtLocation(anchorView, Gravity.NO_GRAVITY, 0, a[1] + anchorView.getHeight() + 0);</div><div class="line">        &#125; else &#123;</div><div class="line">            super.showAsDropDown(anchorView);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1593,7 +1617,7 @@ top_table.setTabMode(TabLayout.MODE_FIXED);不在起作用。</code><br>效果�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

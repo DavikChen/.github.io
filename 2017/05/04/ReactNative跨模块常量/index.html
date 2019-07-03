@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="ReactNative跨模块常量const声明的常量只在当前代码块有效。如果想设置跨模块的常量（即跨多个文件），或者说一个值要被多个模块共享，可以采用下面的写法。 1234// constants.js 模块export const A = 1;export const B = 3;export const C = 4; 1234// test1.js 模块import * as constant">
+<meta name="description" content="ReactNative跨模块常量const声明的常量只在当前代码块有效。如果想设置跨模块的常量（即跨多个文件），或者说一个值要被多个模块共享，可以采用下面的写法。 1234// constants.js 模块export const A = 1;export const B = 3;export const C = 4;  1234// test1.js 模块import * as constan">
 <meta name="keywords" content="ReactNative跨模块常量">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ReactNative跨模块常量">
 <meta property="og:url" content="http://yoursite.com/2017/05/04/ReactNative跨模块常量/index.html">
 <meta property="og:site_name" content="带刀大哥">
-<meta property="og:description" content="ReactNative跨模块常量const声明的常量只在当前代码块有效。如果想设置跨模块的常量（即跨多个文件），或者说一个值要被多个模块共享，可以采用下面的写法。 1234// constants.js 模块export const A = 1;export const B = 3;export const C = 4; 1234// test1.js 模块import * as constant">
+<meta property="og:description" content="ReactNative跨模块常量const声明的常量只在当前代码块有效。如果想设置跨模块的常量（即跨多个文件），或者说一个值要被多个模块共享，可以采用下面的写法。 1234// constants.js 模块export const A = 1;export const B = 3;export const C = 4;  1234// test1.js 模块import * as constan">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-05-08T05:41:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ReactNative跨模块常量">
-<meta name="twitter:description" content="ReactNative跨模块常量const声明的常量只在当前代码块有效。如果想设置跨模块的常量（即跨多个文件），或者说一个值要被多个模块共享，可以采用下面的写法。 1234// constants.js 模块export const A = 1;export const B = 3;export const C = 4; 1234// test1.js 模块import * as constant">
+<meta name="twitter:description" content="ReactNative跨模块常量const声明的常量只在当前代码块有效。如果想设置跨模块的常量（即跨多个文件），或者说一个值要被多个模块共享，可以采用下面的写法。 1234// constants.js 模块export const A = 1;export const B = 3;export const C = 4;  1234// test1.js 模块import * as constan">
 
 
 
@@ -331,15 +331,22 @@
 
       
         <h2 id="ReactNative跨模块常量"><a href="#ReactNative跨模块常量" class="headerlink" title="ReactNative跨模块常量"></a>ReactNative跨模块常量</h2><p>const声明的常量只在当前代码块有效。如果想设置跨模块的常量（即跨多个文件），或者说一个值要被多个模块共享，可以采用下面的写法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// constants.js 模块</div><div class="line">export const A = 1;</div><div class="line">export const B = 3;</div><div class="line">export const C = 4;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// test1.js 模块</div><div class="line">import * as constants from &apos;./constants&apos;;</div><div class="line">console.log(constants.A); // 1</div><div class="line">console.log(constants.B); // 3</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// test2.js 模块</div><div class="line">import &#123;A, B&#125; from &apos;./constants&apos;;</div><div class="line">console.log(A); // 1</div><div class="line">console.log(B); // 3</div><div class="line">如果要使用的常量非常多，可以建一个专门的constants目录，将各种常量写在不同的文件里面，保存在该目录下。</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// constants/db.js</div><div class="line">export const db = &#123;</div><div class="line">  url: &apos;http://my.couchdbserver.local:5984&apos;,</div><div class="line">  admin_username: &apos;admin&apos;,</div><div class="line">  admin_password: &apos;admin password&apos;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// constants/user.js</div><div class="line">export const users = [&apos;root&apos;, &apos;admin&apos;, &apos;staff&apos;, &apos;ceo&apos;, &apos;chief&apos;, &apos;moderator&apos;];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// constants.js 模块</span><br><span class="line">export const A = 1;</span><br><span class="line">export const B = 3;</span><br><span class="line">export const C = 4;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// test1.js 模块</span><br><span class="line">import * as constants from &apos;./constants&apos;;</span><br><span class="line">console.log(constants.A); // 1</span><br><span class="line">console.log(constants.B); // 3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// test2.js 模块</span><br><span class="line">import &#123;A, B&#125; from &apos;./constants&apos;;</span><br><span class="line">console.log(A); // 1</span><br><span class="line">console.log(B); // 3</span><br><span class="line">如果要使用的常量非常多，可以建一个专门的constants目录，将各种常量写在不同的文件里面，保存在该目录下。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// constants/db.js</span><br><span class="line">export const db = &#123;</span><br><span class="line">  url: &apos;http://my.couchdbserver.local:5984&apos;,</span><br><span class="line">  admin_username: &apos;admin&apos;,</span><br><span class="line">  admin_password: &apos;admin password&apos;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// constants/user.js</span><br><span class="line">export const users = [&apos;root&apos;, &apos;admin&apos;, &apos;staff&apos;, &apos;ceo&apos;, &apos;chief&apos;, &apos;moderator&apos;];</span><br></pre></td></tr></table></figure>
+
 <p>然后，将这些文件输出的常量，合并在index.js里面。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// constants/index.js</div><div class="line">export &#123;db&#125; from &apos;./db&apos;;</div><div class="line">export &#123;users&#125; from &apos;./users&apos;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// constants/index.js</span><br><span class="line">export &#123;db&#125; from &apos;./db&apos;;</span><br><span class="line">export &#123;users&#125; from &apos;./users&apos;;</span><br></pre></td></tr></table></figure>
+
 <p>使用的时候，直接加载index.js就可以了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// script.js</div><div class="line">import &#123;db, users&#125; from &apos;./constants&apos;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// script.js</span><br><span class="line">import &#123;db, users&#125; from &apos;./constants&apos;;</span><br></pre></td></tr></table></figure>
+
 <p><code>这里需要说明的一点是 当在其他模块想导出摸个模块的常量时 只指定constants 路径的原因是因为我们在constants目录里面有一个index.js 文件 编译器会自动寻找此文件 。</code></p>
 
       
@@ -454,7 +461,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

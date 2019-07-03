@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -250,6 +250,147 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/04/ReactNative跨模块常量/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/04/ReactNative跨模块常量/" itemprop="url">
+                  ReactNative跨模块常量
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-04T18:23:50+08:00">
+                2017-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/05/04/ReactNative跨模块常量/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/04/ReactNative跨模块常量/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ReactNative跨模块常量"><a href="#ReactNative跨模块常量" class="headerlink" title="ReactNative跨模块常量"></a>ReactNative跨模块常量</h2><p>const声明的常量只在当前代码块有效。如果想设置跨模块的常量（即跨多个文件），或者说一个值要被多个模块共享，可以采用下面的写法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// constants.js 模块</span><br><span class="line">export const A = 1;</span><br><span class="line">export const B = 3;</span><br><span class="line">export const C = 4;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// test1.js 模块</span><br><span class="line">import * as constants from &apos;./constants&apos;;</span><br><span class="line">console.log(constants.A); // 1</span><br><span class="line">console.log(constants.B); // 3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// test2.js 模块</span><br><span class="line">import &#123;A, B&#125; from &apos;./constants&apos;;</span><br><span class="line">console.log(A); // 1</span><br><span class="line">console.log(B); // 3</span><br><span class="line">如果要使用的常量非常多，可以建一个专门的constants目录，将各种常量写在不同的文件里面，保存在该目录下。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// constants/db.js</span><br><span class="line">export const db = &#123;</span><br><span class="line">  url: &apos;http://my.couchdbserver.local:5984&apos;,</span><br><span class="line">  admin_username: &apos;admin&apos;,</span><br><span class="line">  admin_password: &apos;admin password&apos;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// constants/user.js</span><br><span class="line">export const users = [&apos;root&apos;, &apos;admin&apos;, &apos;staff&apos;, &apos;ceo&apos;, &apos;chief&apos;, &apos;moderator&apos;];</span><br></pre></td></tr></table></figure>
+
+<p>然后，将这些文件输出的常量，合并在index.js里面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// constants/index.js</span><br><span class="line">export &#123;db&#125; from &apos;./db&apos;;</span><br><span class="line">export &#123;users&#125; from &apos;./users&apos;;</span><br></pre></td></tr></table></figure>
+
+<p>使用的时候，直接加载index.js就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// script.js</span><br><span class="line">import &#123;db, users&#125; from &apos;./constants&apos;;</span><br></pre></td></tr></table></figure>
+
+<p><code>这里需要说明的一点是 当在其他模块想导出摸个模块的常量时 只指定constants 路径的原因是因为我们在constants目录里面有一个index.js 文件 编译器会自动寻找此文件 。</code></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/26/解决React-Native中ScrollView中子控件无法获取点击事件问题/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -338,14 +479,18 @@
             <h2 id="解决React-Native中ScrollView中子控件无法获取点击事件问题"><a href="#解决React-Native中ScrollView中子控件无法获取点击事件问题" class="headerlink" title="解决React_Native中ScrollView中子控件无法获取点击事件问题"></a>解决React_Native中ScrollView中子控件无法获取点击事件问题</h2><p>今天在做登录页面是 新增一个需求 需要在登录页面下面放几张使用说明图，因为内容比较多需要用ScrollView作为根节点。<br>顺利完成页面UI。</p>
 <p>后面测试发现 点击获取验证码 或者点击登录按钮 都必须点击2次 。<br>第一次是让软键盘消失 此时子控件不会接收到点击事件<br>第二次点击获取验证码按钮 此时因为软键盘已经消失 所以可以响应点击事件</p>
 <p>如何解决此问题呢。<br>利用ScrollView 属性： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">keyboardShouldPersistTaps enum(&apos;always&apos;, &apos;never&apos;, &apos;handled&apos;, false, true)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keyboardShouldPersistTaps enum(&apos;always&apos;, &apos;never&apos;, &apos;handled&apos;, false, true)</span><br></pre></td></tr></table></figure>
+
 <p>如果当前界面有软键盘，那么点击scrollview后是否收起键盘，取决于本属性的设置。（译注：很多人反应TextInput无法自动失去焦点/需要点击多次切换到其他组件等等问题，其关键都是需要将TextInput放到ScrollView中再设置本属性）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&apos;never&apos;（默认值），点击TextInput以外的子组件会使当前的软键盘收起。此时子元素不会收到点击事件。</div><div class="line">&apos;always&apos;，键盘不会自动收起，ScrollView也不会捕捉点击事件，但子组件可以捕获。</div><div class="line">&apos;handled&apos;，当点击事件被子组件捕获时，键盘不会自动收起。这样切换TextInput时键盘可以保持状态。多数带有 TextInput的情况下你应该选择此项。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&apos;never&apos;（默认值），点击TextInput以外的子组件会使当前的软键盘收起。此时子元素不会收到点击事件。</span><br><span class="line">&apos;always&apos;，键盘不会自动收起，ScrollView也不会捕捉点击事件，但子组件可以捕获。</span><br><span class="line">&apos;handled&apos;，当点击事件被子组件捕获时，键盘不会自动收起。这样切换TextInput时键盘可以保持状态。多数带有 TextInput的情况下你应该选择此项。</span><br></pre></td></tr></table></figure>
+
 <p>也就是说只需要设置此属性为always就可以解决ScrollView中的子控件不能获得焦点的问题了，经过测试，问题确实解决了。</p>
 <p>其实也很简单，在ScrollView中第一层先包一个点击事件，然后点击事件设为空实现就可以了，大概看起来的样子是这样的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;ScrollView style=&#123;styles.flex_style&#125; keyboardShouldPersistTaps=&#123;&apos;always&apos;&#125;&gt;</div><div class="line">    &lt;TouchableOpacity activeOpacity=&#123;1.0&#125; onPress=&#123;this.dismissKeyboardClick.bind(this)&#125;&gt;</div><div class="line">       //TextInput 控件相关</div><div class="line">       </div><div class="line">    &lt;/TouchableOpacity&gt;</div><div class="line">&lt;/ScrollView&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ScrollView style=&#123;styles.flex_style&#125; keyboardShouldPersistTaps=&#123;&apos;always&apos;&#125;&gt;</span><br><span class="line">    &lt;TouchableOpacity activeOpacity=&#123;1.0&#125; onPress=&#123;this.dismissKeyboardClick.bind(this)&#125;&gt;</span><br><span class="line">       //TextInput 控件相关</span><br><span class="line">       </span><br><span class="line">    &lt;/TouchableOpacity&gt;</span><br><span class="line">&lt;/ScrollView&gt;</span><br></pre></td></tr></table></figure>
+
 <p>解决点击空白处键盘关闭的问题:<br>在点击事件中如果调用关闭键盘API就可以，使用也很简单，先引入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var dismissKeyboard = require(&apos;dismissKeyboard&apos;);</div><div class="line">在点击事件中调用</div><div class="line">dismissKeyboard();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var dismissKeyboard = require(&apos;dismissKeyboard&apos;);</span><br><span class="line">在点击事件中调用</span><br><span class="line">dismissKeyboard();</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -471,11 +616,13 @@
           
             <h2 id="RN-利用async和await简单实现多次重试机制"><a href="#RN-利用async和await简单实现多次重试机制" class="headerlink" title="RN-利用async和await简单实现多次重试机制"></a>RN-利用async和await简单实现多次重试机制</h2><p>在实际开发中 我们经常需要实现多次重试机制。而在ReactNative 如何实现呢。<br>今天看到了 async 和await的结合例子 如下</p>
 <p>首页定义重试的次数常量，<br>定义一个 async 函数 里面循环3次 并且捕获了操作可能出现的异常,如网络不佳</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">const superagent = require(&apos;superagent&apos;);</div><div class="line">const NUM_RETRIES = 3;</div><div class="line"></div><div class="line">async function test() &#123;</div><div class="line">  let i;</div><div class="line">  for (i = 0; i &lt; NUM_RETRIES; ++i) &#123;</div><div class="line">    try &#123;</div><div class="line">      await superagent.get(&apos;http://google.com/this-throws-an-error&apos;);</div><div class="line">      break;</div><div class="line">    &#125; catch(err) &#123;&#125;</div><div class="line">  &#125;</div><div class="line">  console.log(i); // 3</div><div class="line">&#125;</div><div class="line"></div><div class="line">test();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const superagent = require(&apos;superagent&apos;);</span><br><span class="line">const NUM_RETRIES = 3;</span><br><span class="line"></span><br><span class="line">async function test() &#123;</span><br><span class="line">  let i;</span><br><span class="line">  for (i = 0; i &lt; NUM_RETRIES; ++i) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">      await superagent.get(&apos;http://google.com/this-throws-an-error&apos;);</span><br><span class="line">      break;</span><br><span class="line">    &#125; catch(err) &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(i); // 3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
+
 <p>上面代码中，如果await操作成功，就会使用break语句退出循环；如果失败，会被catch语句捕捉，然后进入下一轮循环。</p>
 <p>如此简单实现了一个重试机制。</p>
 <p>再提供一个例子<br>按照顺序执行多个动画 如果中途遇到错误 不影响后续动画 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">async function chainAnimationsAsync(elem, animations) &#123;</div><div class="line">  var ret = null;</div><div class="line">  try &#123;</div><div class="line">    for(var anim of animations) &#123;</div><div class="line">      ret = await anim(elem);</div><div class="line">    &#125;</div><div class="line">  &#125; catch(e) &#123;</div><div class="line">    /* 忽略错误，继续执行 */</div><div class="line">  &#125;</div><div class="line">  return ret;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">async function chainAnimationsAsync(elem, animations) &#123;</span><br><span class="line">  var ret = null;</span><br><span class="line">  try &#123;</span><br><span class="line">    for(var anim of animations) &#123;</span><br><span class="line">      ret = await anim(elem);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; catch(e) &#123;</span><br><span class="line">    /* 忽略错误，继续执行 */</span><br><span class="line">  &#125;</span><br><span class="line">  return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>可以看到Async函数的实现最简洁，最符合语义，几乎没有语义不相关的代码。它将Generator写法中的自动执行器，改在语言层面提供，不暴露给用户，因此代码量最少。如果使用Generator写法，自动执行器需要用户自己提供。</p>
 
           
@@ -600,12 +747,14 @@
       
         
           
-            <h2 id="RNListView单选实现方案"><a href="#RNListView单选实现方案" class="headerlink" title="RNListView单选实现方案"></a>RN<em>ListView</em>单选实现方案</h2><p>今天有一个故障报修页面的开发任务，功能很简单 从后端API接口获取列表数据 然后选择一项，最后提交到服务器。<br>页面UI基本完成后，发现我并不能直接更新listview 的item视图。ReactNative 的listview 也没有和Android类似的<br>adapter.notifyDataSetChanged(),</p>
+            <h2 id="RN-ListView-单选实现方案"><a href="#RN-ListView-单选实现方案" class="headerlink" title="RN_ListView_单选实现方案"></a>RN_ListView_单选实现方案</h2><p>今天有一个故障报修页面的开发任务，功能很简单 从后端API接口获取列表数据 然后选择一项，最后提交到服务器。<br>页面UI基本完成后，发现我并不能直接更新listview 的item视图。ReactNative 的listview 也没有和Android类似的<br>adapter.notifyDataSetChanged(),</p>
 <p>最后想到在页面的 getItemView 中进行处理。因为这里我可以传值给item view。<br>步骤是这样的。</p>
 <p>item点击事件中记录当前点击的唯一位置标识</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">onItemClick(rowData) &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">            dataSource: UseCarTroubleList.cloneWithRows(mUserCarToubleData.fault),</div><div class="line">            isLoadingComplete: true,</div><div class="line">            mCurrentChoice:rowData.fault_id,</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">onItemClick(rowData) &#123;</span><br><span class="line">        this.setState(&#123;</span><br><span class="line">            dataSource: UseCarTroubleList.cloneWithRows(mUserCarToubleData.fault),</span><br><span class="line">            isLoadingComplete: true,</span><br><span class="line">            mCurrentChoice:rowData.fault_id,</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
 <p>在getItemView 方法中我把mCurrentChoice 传给item 视图 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">getItemView(rowData, sectionID, rowID) &#123;</div><div class="line">        return (</div><div class="line">             &lt;TouchableOpacity activeOpacity=&#123;0.7&#125; </div><div class="line">             onPress=&#123;this.onItemClick.bind(this, rowData)&#125;&gt;</div><div class="line">                &lt;View&gt;</div><div class="line">                    &lt;CarTroubleItem  itemData=&#123;rowData&#125;     </div><div class="line">                     mCurrentChoice=&#123;this.state.mCurrentChoice&#125;&gt;&lt;/CarTroubleItem&gt;</div><div class="line">                &lt;/View&gt;</div><div class="line">             &lt;/TouchableOpacity&gt;</div><div class="line">        );</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">getItemView(rowData, sectionID, rowID) &#123;</span><br><span class="line">        return (</span><br><span class="line">             &lt;TouchableOpacity activeOpacity=&#123;0.7&#125; </span><br><span class="line">             onPress=&#123;this.onItemClick.bind(this, rowData)&#125;&gt;</span><br><span class="line">                &lt;View&gt;</span><br><span class="line">                    &lt;CarTroubleItem  itemData=&#123;rowData&#125;     </span><br><span class="line">                     mCurrentChoice=&#123;this.state.mCurrentChoice&#125;&gt;&lt;/CarTroubleItem&gt;</span><br><span class="line">                &lt;/View&gt;</span><br><span class="line">             &lt;/TouchableOpacity&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
 <p>这样我就把最新选择的item postition 进行了更新 。</p>
 <p><strong>问题:</strong><br>1.虽然实现了功能 这样每次都更新是否影响性能<br>2.是否可以在数据mode 上新增一个是否选择标识 如果是多选 每次只更新一个item ，单选的话 可能需要重置上次数据和设<br>  新的位置，也就是更新2个item   </p>
 <p><strong>实现方案很多 大家按照各自的业务场景来就OK了。</strong></p>
@@ -734,11 +883,14 @@
           
             <h2 id="RN的Modal的问题的解决方案"><a href="#RN的Modal的问题的解决方案" class="headerlink" title="RN的Modal的问题的解决方案"></a>RN的Modal的问题的解决方案</h2><h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>本人目前在一家智能灯的企业做RN的开发。最近测试提交了好几BUG，莫名其妙的怎么会这么多BUG。<br>我先点开邮件仔细看了一下，发现好几个BUG相同的点都是类似压力测试，然后App莫名的就崩掉了。<br>那先复现一下BUG,再想办法解决！！！</p>
 <h3 id="正文"><a href="#正文" class="headerlink" title="正文:"></a>正文:</h3><p>先打个测试包BUG复现一下看看报的什么错**</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">java.lang.NullPointerException: Attempt to invoke virtual method &apos;void</div><div class="line">   com.facebook.react.uimanager.ReactShadowNode.setStyleWidth(float)&apos; on a null object reference</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.lang.NullPointerException: Attempt to invoke virtual method &apos;void</span><br><span class="line">   com.facebook.react.uimanager.ReactShadowNode.setStyleWidth(float)&apos; on a null object reference</span><br></pre></td></tr></table></figure>
+
 <p>好吧，好像经过我的测试后都是这一个问题。来解决问题。google发现有人遇到了这个问题 请戳这里<br>。这个问题的是过快的切换Modal的状态，导致程序奔溃。这怎么办呢？<br>既然是过快的切换，那么我加个延迟会如何呢类似这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">setTimeout(()=&gt;&#123;</div><div class="line">      this.setState(&#123;</div><div class="line">          isOpen:true</div><div class="line">      &#125;)</div><div class="line">  &#125;,100)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">      this.setState(&#123;</span><br><span class="line">          isOpen:true</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;,100)</span><br></pre></td></tr></table></figure>
+
 <p>这样就不会出问题了吧，我先测试高配的手机，没有问题！当我拿起配置低的手机的时候发现多次测试后还是会有几率奔溃，<br>测试的代码是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line">import React, &#123;Component, PropTypes&#125; from &apos;react&apos;</div><div class="line">import &#123;View,Text,StyleSheet,TouchableOpacity,Modal&#125; from &apos;react-native&apos;;</div><div class="line">//import Modal from &apos;react-native-modalbox&apos;;</div><div class="line">class ModalText extends Component &#123;</div><div class="line">    constructor (props) &#123;</div><div class="line">        super(props)</div><div class="line">        this.state=&#123;</div><div class="line">             swipeToClose: false,</div><div class="line">             isOpen:true</div><div class="line">        &#125;</div><div class="line">        this.SetTimeName = 0;</div><div class="line">    &#125;</div><div class="line">    onClose() &#123;</div><div class="line">        console.log(&apos;Modal just closed&apos;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    onOpen() &#123;</div><div class="line">        console.log(&apos;Modal just openned&apos;);</div><div class="line">    &#125;</div><div class="line">    onClosingState(state) &#123;</div><div class="line">    console.log(&apos;the open/close of the swipeToClose just changed&apos;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentDidMount () &#123;</div><div class="line">    let thiRef = this;</div><div class="line">        this.SetTimeName = setInterval(()=&gt;&#123;</div><div class="line">            if(this.state.swipeToClose==false)&#123;</div><div class="line">                this.setState(&#123;</div><div class="line">                    swipeToClose:true</div><div class="line">                &#125;)</div><div class="line">                this.refs.modal1.open();</div><div class="line">            &#125;else&#123;</div><div class="line">                this.setState(&#123;</div><div class="line">                    swipeToClose:false</div><div class="line">                &#125;)</div><div class="line">               this.refs.modal1.open();</div><div class="line">            &#125;</div><div class="line">        &#125;,500)</div><div class="line">      setTimeout(()=&gt;&#123;</div><div class="line">      clearInterval(thiRef.SetTimeName)</div><div class="line">      &#125;,10000)  </div><div class="line">     this.refs.modal1.open();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render () &#123;</div><div class="line">        return (</div><div class="line">            &lt;View style=&#123;&#123;flex:1&#125;&#125;&gt;</div><div class="line">            &lt;View style=&#123;&#123;width:300,height:300,backgroundColor:&quot;red&quot;,zIndex:0&#125;&#125;&gt;</div><div class="line">            &lt;TouchableOpacity style=&#123;&#123;flex:1&#125;&#125; onPress = &#123;alert(&quot;dsds&quot;)&#125;&gt;&lt;/TouchableOpacity&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">                &lt;Modal</div><div class="line">                style=&#123;[styles.modal, styles.modal1]&#125;</div><div class="line">                ref=&#123;&quot;modal1&quot;&#125;</div><div class="line">                swipeToClose=&#123;this.state.swipeToClose&#125;</div><div class="line">                onClosed=&#123;this.onClose&#125;</div><div class="line">                onOpened=&#123;this.onOpen&#125;</div><div class="line">                isOpen = &#123;this.state.isOpen&#125;</div><div class="line">                backdropPressToClose = &#123;false&#125;</div><div class="line">                onClosingState=&#123;this.onClosingState&#125;&gt;</div><div class="line">                     &lt;View style=&#123;&#123;width:100,height:100,backgroundColor:&apos;#FFF&apos;,zIndex:10000&#125;&#125;&gt;&lt;Text&gt;sadasdsa&lt;/Text&gt;&lt;/View&gt;</div><div class="line">                &lt;/Modal&gt;   </div><div class="line">            &lt;/View&gt;</div><div class="line"></div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">      modal: &#123;</div><div class="line">        justifyContent: &apos;center&apos;,</div><div class="line">        alignItems: &apos;center&apos;</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    modal1: &#123;</div><div class="line">        height: 230,</div><div class="line">        backgroundColor: &quot;#3B5998&quot;,</div><div class="line">        zIndex:9999</div><div class="line">    &#125;,</div><div class="line">&#125;)</div><div class="line">export default ModalText</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123;Component, PropTypes&#125; from &apos;react&apos;</span><br><span class="line">import &#123;View,Text,StyleSheet,TouchableOpacity,Modal&#125; from &apos;react-native&apos;;</span><br><span class="line">//import Modal from &apos;react-native-modalbox&apos;;</span><br><span class="line">class ModalText extends Component &#123;</span><br><span class="line">    constructor (props) &#123;</span><br><span class="line">        super(props)</span><br><span class="line">        this.state=&#123;</span><br><span class="line">             swipeToClose: false,</span><br><span class="line">             isOpen:true</span><br><span class="line">        &#125;</span><br><span class="line">        this.SetTimeName = 0;</span><br><span class="line">    &#125;</span><br><span class="line">    onClose() &#123;</span><br><span class="line">        console.log(&apos;Modal just closed&apos;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    onOpen() &#123;</span><br><span class="line">        console.log(&apos;Modal just openned&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">    onClosingState(state) &#123;</span><br><span class="line">    console.log(&apos;the open/close of the swipeToClose just changed&apos;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount () &#123;</span><br><span class="line">    let thiRef = this;</span><br><span class="line">        this.SetTimeName = setInterval(()=&gt;&#123;</span><br><span class="line">            if(this.state.swipeToClose==false)&#123;</span><br><span class="line">                this.setState(&#123;</span><br><span class="line">                    swipeToClose:true</span><br><span class="line">                &#125;)</span><br><span class="line">                this.refs.modal1.open();</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                this.setState(&#123;</span><br><span class="line">                    swipeToClose:false</span><br><span class="line">                &#125;)</span><br><span class="line">               this.refs.modal1.open();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,500)</span><br><span class="line">      setTimeout(()=&gt;&#123;</span><br><span class="line">      clearInterval(thiRef.SetTimeName)</span><br><span class="line">      &#125;,10000)  </span><br><span class="line">     this.refs.modal1.open();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render () &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;View style=&#123;&#123;flex:1&#125;&#125;&gt;</span><br><span class="line">            &lt;View style=&#123;&#123;width:300,height:300,backgroundColor:&quot;red&quot;,zIndex:0&#125;&#125;&gt;</span><br><span class="line">            &lt;TouchableOpacity style=&#123;&#123;flex:1&#125;&#125; onPress = &#123;alert(&quot;dsds&quot;)&#125;&gt;&lt;/TouchableOpacity&gt;</span><br><span class="line">            &lt;/View&gt;</span><br><span class="line">                &lt;Modal</span><br><span class="line">                style=&#123;[styles.modal, styles.modal1]&#125;</span><br><span class="line">                ref=&#123;&quot;modal1&quot;&#125;</span><br><span class="line">                swipeToClose=&#123;this.state.swipeToClose&#125;</span><br><span class="line">                onClosed=&#123;this.onClose&#125;</span><br><span class="line">                onOpened=&#123;this.onOpen&#125;</span><br><span class="line">                isOpen = &#123;this.state.isOpen&#125;</span><br><span class="line">                backdropPressToClose = &#123;false&#125;</span><br><span class="line">                onClosingState=&#123;this.onClosingState&#125;&gt;</span><br><span class="line">                     &lt;View style=&#123;&#123;width:100,height:100,backgroundColor:&apos;#FFF&apos;,zIndex:10000&#125;&#125;&gt;&lt;Text&gt;sadasdsa&lt;/Text&gt;&lt;/View&gt;</span><br><span class="line">                &lt;/Modal&gt;   </span><br><span class="line">            &lt;/View&gt;</span><br><span class="line"></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">const styles = StyleSheet.create(&#123;</span><br><span class="line">      modal: &#123;</span><br><span class="line">        justifyContent: &apos;center&apos;,</span><br><span class="line">        alignItems: &apos;center&apos;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    modal1: &#123;</span><br><span class="line">        height: 230,</span><br><span class="line">        backgroundColor: &quot;#3B5998&quot;,</span><br><span class="line">        zIndex:9999</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">export default ModalText</span><br></pre></td></tr></table></figure>
+
 <p>那么看来这种延迟的解决方案也是不行的，然而我们的业务需求，大概率的发生这种快速的Modal的状态切换。<br>那么官方带的Modal是不能用了，我们开始寻求第三方的Modal</p>
 <p>发现两个Modal可以选择的,继续以上面一段代码测试这两个Modal。</p>
 <p>react-native-modal<br>react-native-root-modal<br>第一个Modal会出现数据和视图变现不一致的Bug，最终测试react-native-root-modal没有问题。果断全部替换为新的Modal</p>
@@ -865,7 +1017,7 @@
       
         
           
-            <h2 id="Mac上安装MongoDB"><a href="#Mac上安装MongoDB" class="headerlink" title="Mac上安装MongoDB"></a>Mac上安装MongoDB</h2><p><a href="http://www.jianshu.com/p/dd0c39bf7be4" target="_blank" rel="external">http://www.jianshu.com/p/dd0c39bf7be4</a></p>
+            <h2 id="Mac上安装MongoDB"><a href="#Mac上安装MongoDB" class="headerlink" title="Mac上安装MongoDB"></a>Mac上安装MongoDB</h2><p><a href="http://www.jianshu.com/p/dd0c39bf7be4" target="_blank" rel="noopener">http://www.jianshu.com/p/dd0c39bf7be4</a></p>
 
           
         
@@ -989,9 +1141,11 @@
       
         
           
-            <h2 id="每次执行hexo-g-时都会出现下面错误。"><a href="#每次执行hexo-g-时都会出现下面错误。" class="headerlink" title="每次执行hexo -g  时都会出现下面错误。"></a>每次执行hexo -g  时都会出现下面错误。</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DavikChen-MacBook-Pro:hexo davikchen$ hexo g</div><div class="line">INFO  Start processing</div><div class="line">ERROR Process failed: _posts/Swift3空合运算符.md</div><div class="line">YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 1:</div></pre></td></tr></table></figure>
+            <h2 id="每次执行hexo-g-时都会出现下面错误。"><a href="#每次执行hexo-g-时都会出现下面错误。" class="headerlink" title="每次执行hexo -g  时都会出现下面错误。"></a>每次执行hexo -g  时都会出现下面错误。</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DavikChen-MacBook-Pro:hexo davikchen$ hexo g</span><br><span class="line">INFO  Start processing</span><br><span class="line">ERROR Process failed: _posts/Swift3空合运算符.md</span><br><span class="line">YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 1:</span><br></pre></td></tr></table></figure>
+
 <p>但是不会影响当前的操作 就没在意。迫于强迫症 决定看看是啥错误。之前一直只关注这句错误提示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 1:</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 1:</span><br></pre></td></tr></table></figure>
+
 <p>一直以为是_config.yml  配置文件里面有错误 检查发现没有问题，无意间看到上面<br><code>ERROR Process failed: _posts/Swift3空合运算符.md</code> 这句 然后打开文件一看 果然是少了一个空格 </p>
 <p>我类个去 服了。。<br>😀<br>世界清静了 </p>
 
@@ -1118,7 +1272,8 @@
         
           
             <h2 id="SVN-Working-copy-is-too-old-format-10-created-by-Subversion-1-6-错误解决方案"><a href="#SVN-Working-copy-is-too-old-format-10-created-by-Subversion-1-6-错误解决方案" class="headerlink" title="SVN Working copy is too old (format 10, created by Subversion 1.6)错误解决方案"></a>SVN Working copy is too old (format 10, created by Subversion 1.6)错误解决方案</h2><p>今天提交代码是 突然出现如下错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">The working copy needs to be upgraded</div><div class="line">svn: Working copy &apos;D:\adt-bundle-windows-x86_64-20130917\workspace\ECSF\res\anim&apos; is too old (format 10, created by Subversion 1.6)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The working copy needs to be upgraded</span><br><span class="line">svn: Working copy &apos;D:\adt-bundle-windows-x86_64-20130917\workspace\ECSF\res\anim&apos; is too old (format 10, created by Subversion 1.6)</span><br></pre></td></tr></table></figure>
+
 <p>解决方案：<br>找到报错误的文件下，里面有个.svn的文件夹，将其删除掉，然后重新同步或提交；</p>
 <p>备注:mac 下通过 ls -al 查看隐藏文件 通过rm -rf .svn  删除.svn 隐藏目录</p>
 <p>通过上面操作后  clean 项目 然后可以提交了。</p>
@@ -1246,13 +1401,15 @@
         
           
             <h2 id="es6对象的扩展之null-传导运算符"><a href="#es6对象的扩展之null-传导运算符" class="headerlink" title="es6对象的扩展之null 传导运算符"></a>es6对象的扩展之null 传导运算符</h2><h4 id="Null-传导运算符"><a href="#Null-传导运算符" class="headerlink" title="Null 传导运算符"></a>Null 传导运算符</h4><p>编程实务中，如果读取对象内部的某个属性，往往需要判断一下该对象是否存在。比如，要读取message.body.user.firstName，安全的写法是写成下面这样。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">const firstName = (message</div><div class="line">  &amp;&amp; message.body</div><div class="line">  &amp;&amp; message.body.user</div><div class="line">  &amp;&amp; message.body.user.firstName) || &apos;default&apos;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const firstName = (message</span><br><span class="line">  &amp;&amp; message.body</span><br><span class="line">  &amp;&amp; message.body.user</span><br><span class="line">  &amp;&amp; message.body.user.firstName) || &apos;default&apos;;</span><br></pre></td></tr></table></figure>
+
 <p>这样的层层判断非常麻烦，因此现在有一个提案，引入了“Null 传导运算符”（null propagation operator）?.，简化上面的写法。</p>
 <p>const firstName = message?.body?.user?.firstName || ‘default’;</p>
 <p>这里是分级取节点数据  只要一个节点数据不存在 则取默认值 . 这对于处理接口返回数据非常有益处</p>
 <p>上面代码有三个?.运算符，只要其中一个返回null或undefined，就不再往下运算，而是返回undefined。</p>
 <p>“Null 传导运算符”有四种用法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">obj?.prop // 读取对象属性</div><div class="line">obj?.[expr] // 同上</div><div class="line">func?.(...args) // 函数或对象方法的调用</div><div class="line">new C?.(...args) // 构造函数的调用</div><div class="line">传导运算符之所以写成obj?.prop，而不是obj?prop，是为了方便编译器能够区分三元运算符?:（比如obj?prop:123）。</div><div class="line"></div><div class="line">下面是更多的例子。</div><div class="line"></div><div class="line">// 如果 a 是 null 或 undefined, 返回 undefined</div><div class="line">// 否则返回 a.b.c().d</div><div class="line">a?.b.c().d</div><div class="line"></div><div class="line">// 如果 a 是 null 或 undefined，下面的语句不产生任何效果</div><div class="line">// 否则执行 a.b = 42</div><div class="line">a?.b = 42</div><div class="line"></div><div class="line">// 如果 a 是 null 或 undefined，下面的语句不产生任何效果</div><div class="line">delete a?.b</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">obj?.prop // 读取对象属性</span><br><span class="line">obj?.[expr] // 同上</span><br><span class="line">func?.(...args) // 函数或对象方法的调用</span><br><span class="line">new C?.(...args) // 构造函数的调用</span><br><span class="line">传导运算符之所以写成obj?.prop，而不是obj?prop，是为了方便编译器能够区分三元运算符?:（比如obj?prop:123）。</span><br><span class="line"></span><br><span class="line">下面是更多的例子。</span><br><span class="line"></span><br><span class="line">// 如果 a 是 null 或 undefined, 返回 undefined</span><br><span class="line">// 否则返回 a.b.c().d</span><br><span class="line">a?.b.c().d</span><br><span class="line"></span><br><span class="line">// 如果 a 是 null 或 undefined，下面的语句不产生任何效果</span><br><span class="line">// 否则执行 a.b = 42</span><br><span class="line">a?.b = 42</span><br><span class="line"></span><br><span class="line">// 如果 a 是 null 或 undefined，下面的语句不产生任何效果</span><br><span class="line">delete a?.b</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1405,165 +1562,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/07/ES6之let命令/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content>
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/07/ES6之let命令/" itemprop="url">
-                  ES6之let和const命令
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-07T11:34:47+08:00">
-                2017-04-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/04/07/ES6之let命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/07/ES6之let命令/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="let命令和const命令"><a href="#let命令和const命令" class="headerlink" title="let命令和const命令"></a>let命令和const命令</h2><p>ES6新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    let a = 10;</div><div class="line">    var b = 1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">a // ReferenceError: a is not defined.</div><div class="line">b //1</div></pre></td></tr></table></figure>
-<p>上面代码在代码块之中，分别用let和var声明了两个变量。然后在代码块之外调用这两个变量，结果let声明的变量报错，var声明的变量返回了正确的值。这表明，let声明的变量只在它所在的代码块有效。</p>
-<p>for循环的计数器，就很合适使用let命令。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for(let i = 0; i &lt; arr.length; i++)&#123;&#125;</div><div class="line"></div><div class="line">console.log(i)</div><div class="line">//ReferenceError: i is not defined</div></pre></td></tr></table></figure>
-<p>上面代码的计数器i，只在for循环体内有效。</p>
-<p>下面的代码如果使用var，最后输出的是9。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var a = [];</div><div class="line">for (var i = 0; i &lt; 10; i++) &#123;</div><div class="line">  var c = i;</div><div class="line">  a[i] = function () &#123;</div><div class="line">    console.log(c);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line">a[6](); // 9</div></pre></td></tr></table></figure>
-<p>如果使用let，声明的变量仅在块级作用域内有效，最后输出的是6。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var a = [];</div><div class="line">for (var i = 0; i &lt; 10; i++) &#123;</div><div class="line">  let c = i;</div><div class="line">  a[i] = function () &#123;</div><div class="line">    console.log(c);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line">a[6](); // 6</div></pre></td></tr></table></figure>
-<p>let不像var那样，会发生“变量提升”现象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function do_something() &#123;</div><div class="line">  console.log(foo); // ReferenceError</div><div class="line">  let foo = 2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面代码在声明foo之前，就使用这个变量，结果会抛出一个错误。</p>
-<p>注意，let不允许在相同作用域内，重复声明同一个变量。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 报错</div><div class="line">&#123;</div><div class="line">    let a = 10;</div><div class="line">    var a = 1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 报错</div><div class="line">&#123;</div><div class="line">    let a = 10;</div><div class="line">    let a = 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>let实际上为JavaScript新增了块级作用域。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function f1() &#123;</div><div class="line">  let n = 5;</div><div class="line">  if (true) &#123;</div><div class="line">      let n = 10;</div><div class="line">  &#125;</div><div class="line">  console.log(n); // 5</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面的函数有两个代码块，都声明了变量n，运行后输出5。这表示外层代码块不受内层代码块的影响。如果使用var定义变量n，最后输出的值就是10。</p>
-<p>块级作用域的出现，实际上使得获得广泛应用的立即执行匿名函数（IIFE）不再必要了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// IIFE写法</div><div class="line">(function () &#123;</div><div class="line">    var tmp = ...;</div><div class="line">    ...</div><div class="line">&#125;());</div><div class="line"></div><div class="line">// 块级作用域写法</div><div class="line">&#123;</div><div class="line">    let tmp = ...;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>另外，ES6也规定，函数本身的作用域，在其所在的块级作用域之内</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function f() &#123; console.log(&apos;I am outside!&apos;); &#125;</div><div class="line">(function () &#123;</div><div class="line">  if(false) &#123;</div><div class="line">    // 重复声明一次函数f</div><div class="line">    function f() &#123; console.log(&apos;I am inside!&apos;); &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  f();</div><div class="line">&#125;());</div></pre></td></tr></table></figure>
-<p>上面代码在ES5中运行，会得到“I am inside!”，但是在ES6中运行，会得到“I am outside!”。这是因为ES5存在函数提升，不管会不会进入if代码块，函数声明都会提升到当前作用域的顶部，得到执行；而ES6支持块级作用域，不管会不会进入if代码块，其内部声明的函数皆不会影响到作用域的外部。</p>
-<p>需要注意的是，如果在严格模式下，函数只能在顶层作用域和函数内声明，其他情况（比如if代码块、循环代码块）的声明都会报错。</p>
-<h3 id="const命令"><a href="#const命令" class="headerlink" title="const命令"></a>const命令</h3><p>const也用来声明变量，但是声明的是常量。一旦声明，常量的值就不能改变。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">const PI = 3.1415;</div><div class="line">PI // 3.1415</div><div class="line"></div><div class="line">PI = 3;</div><div class="line">PI // 3.1415</div><div class="line"></div><div class="line">const PI = 3.1;</div><div class="line">PI // 3.1415</div></pre></td></tr></table></figure>
-<p>上面代码表明改变常量的值是不起作用的。需要注意的是，对常量重新赋值不会报错，只会默默地失败。</p>
-<p>const的作用域与let命令相同：只在声明所在的块级作用域内有效。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (condition) &#123;</div><div class="line">    const MAX = 5;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>// 常量MAX在此处不可得<br>const声明的常量，也与let一样不可重复声明。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var message = &quot;Hello!&quot;;</div><div class="line">let age = 25;</div><div class="line"></div><div class="line">// 以下两行都会报错</div><div class="line">const message = &quot;Goodbye!&quot;;</div><div class="line">const age = 30;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1602,7 +1605,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

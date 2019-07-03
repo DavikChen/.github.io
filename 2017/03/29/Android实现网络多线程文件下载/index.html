@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -331,9 +331,11 @@
 
       
         <h2 id="Android实现网络多线程文件下载"><a href="#Android实现网络多线程文件下载" class="headerlink" title="Android实现网络多线程文件下载"></a>Android实现网络多线程文件下载</h2><p>这里主要用到 RandomAccessFile 类进行分隔下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// 计算每条线程下载的数据长度  </div><div class="line">blockSize = (fileSize % threadNum) == 0 ? fileSize / threadNum : fileSize / threadNum + 1;  </div><div class="line">举例:线程下载的数据长度   (10%3 == 0 ？ 10/3:10/3+1) ,第1，2个线程下载长度是4M，第三个线程下载长度为2M</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">RandomAccessFile  raf = new RandomAccessFile(file, &quot;rwd&quot;);  </div><div class="line">raf.seek(startPos); // 移动到当前线程开始下载的位置</div></pre></td></tr></table></figure>
-<p>转自:<a href="http://blog.csdn.net/mad1989/article/details/38421465" target="_blank" rel="external">http://blog.csdn.net/mad1989/article/details/38421465</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 计算每条线程下载的数据长度  </span><br><span class="line">blockSize = (fileSize % threadNum) == 0 ? fileSize / threadNum : fileSize / threadNum + 1;  </span><br><span class="line">举例:线程下载的数据长度   (10%3 == 0 ？ 10/3:10/3+1) ,第1，2个线程下载长度是4M，第三个线程下载长度为2M</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RandomAccessFile  raf = new RandomAccessFile(file, &quot;rwd&quot;);  </span><br><span class="line">raf.seek(startPos); // 移动到当前线程开始下载的位置</span><br></pre></td></tr></table></figure>
+
+<p>转自:<a href="http://blog.csdn.net/mad1989/article/details/38421465" target="_blank" rel="noopener">http://blog.csdn.net/mad1989/article/details/38421465</a></p>
 
       
     </div>
@@ -447,7 +449,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

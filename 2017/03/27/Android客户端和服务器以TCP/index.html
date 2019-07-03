@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -329,7 +329,7 @@
       
 
       
-        <h2 id="Socket-通信原理-Android客户端和服务器以TCP-amp-amp-UDP方式互通"><a href="#Socket-通信原理-Android客户端和服务器以TCP-amp-amp-UDP方式互通" class="headerlink" title="Socket 通信原理(Android客户端和服务器以TCP&amp;&amp;UDP方式互通)"></a>Socket 通信原理(Android客户端和服务器以TCP&amp;&amp;UDP方式互通)</h2><p>转自:<a href="http://blog.csdn.net/mad1989/article/details/9147661" target="_blank" rel="external">http://blog.csdn.net/mad1989/article/details/9147661</a></p>
+        <h2 id="Socket-通信原理-Android客户端和服务器以TCP-amp-amp-UDP方式互通"><a href="#Socket-通信原理-Android客户端和服务器以TCP-amp-amp-UDP方式互通" class="headerlink" title="Socket 通信原理(Android客户端和服务器以TCP&amp;&amp;UDP方式互通)"></a>Socket 通信原理(Android客户端和服务器以TCP&amp;&amp;UDP方式互通)</h2><p>转自:<a href="http://blog.csdn.net/mad1989/article/details/9147661" target="_blank" rel="noopener">http://blog.csdn.net/mad1989/article/details/9147661</a></p>
 <h4 id="一、Socket通信简介"><a href="#一、Socket通信简介" class="headerlink" title="一、Socket通信简介"></a>一、Socket通信简介</h4><p>Android与服务器的通信方式主要有两种，一是Http通信，一是Socket通信。两者的最大差异在于，http连接使用的是“请求—响应方式”，即在请求时建立连接通道，当客户端向服务器发送请求后，服务器端才能向客户端返回数据。而Socket通信则是在双方建立起连接后就可以直接进行数据的传输，在连接时可实现信息的主动推送，而不需要每次由客户端想服务器发送请求。 那么，什么是socket？Socket又称套接字，在程序内部提供了与外界通信的端口，即端口通信。通过建立socket连接，可为通信双方的数据传输传提供通道。socket的主要特点有数据丢失率低，使用简单且易于移植。</p>
 <p><strong>1.1什么是Socket Socket</strong><br>是一种抽象层，应用程序通过它来发送和接收数据，使用Socket可以将应用程序添加到网络中，与处于同一网络中的其他应用程序进行通信。简单来说，Socket提供了程序内部与外界通信的端口并为通信双方的提供了数据传输通道。</p>
 <p><strong>1.2Socket的分类</strong><br>根据不同的的底层协议，Socket的实现是多样化的。本指南中只介绍TCP/IP协议族的内容，在这个协议族当中主要的Socket类型为流套接字（streamsocket）和数据报套接字(datagramsocket)。流套接字将TCP作为其端对端协议，提供了一个可信赖的字节流服务。数据报套接字使用UDP协议，提供数据打包发送服务。 下面，我们来认识一下这两种Socket类型的基本实现模型。</p>
@@ -443,7 +443,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -330,14 +330,18 @@
 
       
         <h2 id="Fetch发送POST请求body参数内容的不同情况"><a href="#Fetch发送POST请求body参数内容的不同情况" class="headerlink" title="Fetch发送POST请求body参数内容的不同情况"></a>Fetch发送POST请求body参数内容的不同情况</h2><p>我们在请求http接口时候，通常都会使用get和post的方式，针对表单提交这类的请求，我们通常采用post方式。<br>那么在RN中的Fetch API中post提交有哪些坑呢？让我们撸起来。<br>我们先来说说Server端的代码，通常我们从Request获取参数时的方法为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">String paraValue = request.getParameter(paraName); </div><div class="line">``` </div><div class="line">我们下面说的判断能不能获取参数，就是按照这种方法来获取。</div><div class="line"></div><div class="line">在 RN中，通常我们会怎么写代码呢？</div><div class="line"></div><div class="line">方式一：</div></pre></td></tr></table></figure>
-<p>let url = “<a href="http://127.0.0.1:8080/api/”" target="_blank" rel="external">http://127.0.0.1:8080/api/”</a><br>let params = “name=admin&amp;password=admin123”;<br>fetch(url , {<br>  method: ‘POST’,<br>  headers: {},<br>  body: params,<br>}).then((response) =&gt; {<br>  if (response.ok) {<br>      return response.json();<br>  }<br>}).then((json) =&gt; {<br>  alert(JSON.stringify(json));<br>}).catch((error) =&gt; {<br>  console.error(error);<br>}); </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">方式二：</div></pre></td></tr></table></figure>
-<p>let params = {“name”:”admin”,”password”:”admin123”};<br>fetch(url , {<br>  method: ‘POST’,<br>  headers: {},<br>  body:JSON.stringify(params),<br>}).then((response) =&gt; {<br>  if (response.ok) {<br>      return response.json();<br>  }<br>}).then((json) =&gt; {<br>  alert(JSON.stringify(json));<br>}).catch((error) =&gt; {<br>  console.error(error);<br>});<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">通过以上方式发起请求 发现后端接口无法接受到参数值,经过联调发现参数传递的方式存在问题。</div><div class="line"></div><div class="line">通过代理工具进行抓包 同样也看到 参数都是以字符文本形式传给后端的。不是我们正常的表单请求 </div><div class="line"></div><div class="line">备注:也许你会问在jquery中，我们就是按照方案一这种方式做的啊，怎么好使呢？</div><div class="line">答：因为参数 &quot;name=admin&amp;password=admin123” 在jquery中，传入对象框架会自动封装成formData的形式，fetch没有这个功能。</div><div class="line"></div><div class="line">既然fetch不会自动转FormData，那我们自己new一个FormData，直接传给body。</div><div class="line">在FormData中也可以传递字节流实现上传图片的功能</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String paraValue = request.getParameter(paraName); </span><br><span class="line">``` </span><br><span class="line">我们下面说的判断能不能获取参数，就是按照这种方法来获取。</span><br><span class="line"></span><br><span class="line">在 RN中，通常我们会怎么写代码呢？</span><br><span class="line"></span><br><span class="line">方式一：</span><br></pre></td></tr></table></figure>
+
+<p>let url = “<a href="http://127.0.0.1:8080/api/”" target="_blank" rel="noopener">http://127.0.0.1:8080/api/”</a><br>let params = “name=admin&amp;password=admin123”;<br>fetch(url , {<br>  method: ‘POST’,<br>  headers: {},<br>  body: params,<br>}).then((response) =&gt; {<br>  if (response.ok) {<br>      return response.json();<br>  }<br>}).then((json) =&gt; {<br>  alert(JSON.stringify(json));<br>}).catch((error) =&gt; {<br>  console.error(error);<br>}); </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">方式二：</span><br></pre></td></tr></table></figure>
+
+<p>let params = {“name”:”admin”,”password”:”admin123”};<br>fetch(url , {<br>  method: ‘POST’,<br>  headers: {},<br>  body:JSON.stringify(params),<br>}).then((response) =&gt; {<br>  if (response.ok) {<br>      return response.json();<br>  }<br>}).then((json) =&gt; {<br>  alert(JSON.stringify(json));<br>}).catch((error) =&gt; {<br>  console.error(error);<br>});  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">通过以上方式发起请求 发现后端接口无法接受到参数值,经过联调发现参数传递的方式存在问题。</span><br><span class="line"></span><br><span class="line">通过代理工具进行抓包 同样也看到 参数都是以字符文本形式传给后端的。不是我们正常的表单请求 </span><br><span class="line"></span><br><span class="line">备注:也许你会问在jquery中，我们就是按照方案一这种方式做的啊，怎么好使呢？</span><br><span class="line">答：因为参数 &quot;name=admin&amp;password=admin123” 在jquery中，传入对象框架会自动封装成formData的形式，fetch没有这个功能。</span><br><span class="line"></span><br><span class="line">既然fetch不会自动转FormData，那我们自己new一个FormData，直接传给body。</span><br><span class="line">在FormData中也可以传递字节流实现上传图片的功能</span><br></pre></td></tr></table></figure>
+
 <p>let formData = new FormData();<br>formData.append(“name”,”admin”);<br>formData.append(“password”,”admin123”);  </p>
 <p>fetch(url , {<br> method: ‘POST’,<br> headers: {},<br> body: formData,<br>).then((response) =&gt; {<br> if (response.ok) {<br>     return response.json();<br> }<br>).then((json) =&gt; {<br> alert(JSON.stringify(json));<br>).catch((error) =&gt; {<br> console.error(error);<br>); </p>
-<p>```<br>这样我们就可以在Server端获取到name和password的值了。</p>
-
+<pre><code>这样我们就可以在Server端获取到name和password的值了。
+</code></pre>
       
     </div>
 
@@ -444,7 +448,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

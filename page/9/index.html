@@ -250,6 +250,137 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/11/swift约束之SnapKit的使用一/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/11/swift约束之SnapKit的使用一/" itemprop="url">
+                  swift约束之SnapKit的使用一
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T16:10:01+08:00">
+                2017-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/01/11/swift约束之SnapKit的使用一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/swift约束之SnapKit的使用一/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="swift约束之SnapKit的使用一"><a href="#swift约束之SnapKit的使用一" class="headerlink" title="swift约束之SnapKit的使用一"></a>swift约束之SnapKit的使用一</h1><p>SnapKit中的常用属性有：<br>top(上)、left(左)、right(右)、bottom(下)、width(长)、height(宽)、centerX(横向中点)、centerY(纵向中点)</p>
+<h3 id="举个🌰"><a href="#举个🌰" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">view1.snp.makeConstraints &#123; (make) in</span><br><span class="line">            </span><br><span class="line">            //距self.view的上边20</span><br><span class="line">            make.top.equalTo(self.view).offset(20)</span><br><span class="line">            //距self.view的左边30</span><br><span class="line">            make.left.equalTo(self.view).offset(30)</span><br><span class="line">            //距self.view的右边30（右边数字前要加减号,不然会变成超出右边30）</span><br><span class="line">            make.right.equalTo(self.view).offset(-30)</span><br><span class="line">            //距self.view的下边50（下边数字前要加减号,不然会变成超出下边50）</span><br><span class="line">            make.bottom.equalTo(self.view).offset(-50)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="举个🌰-1"><a href="#举个🌰-1" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">view2.snp.makeConstraints &#123; (make) in</span><br><span class="line">            </span><br><span class="line">            //距view1的上边50</span><br><span class="line">            make.top.equalTo(view1).offset(50)</span><br><span class="line">            //距view1的左边50</span><br><span class="line">            make.left.equalTo(view1).offset(50)</span><br><span class="line">            //设置长为100</span><br><span class="line">            make.width.equalTo(100)</span><br><span class="line">            //设置高为60</span><br><span class="line">            make.height.equalTo(60)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="举个🌰-2"><a href="#举个🌰-2" class="headerlink" title="举个🌰"></a>举个🌰</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">view3.snp.makeConstraints &#123; (make) in</span><br><span class="line">            </span><br><span class="line">            //横向坐标等于view1</span><br><span class="line">            make.centerX.equalTo(view1)</span><br><span class="line">            //纵向坐标等于view1(横和纵都相等就等于对view1居中)</span><br><span class="line">            make.centerY.equalTo(view1)</span><br><span class="line">            //长等于view2的2倍</span><br><span class="line">            make.width.equalTo(view2).multipliedBy(2)</span><br><span class="line">            //高等于view2的3分之一</span><br><span class="line">            make.height.equalTo(view2).dividedBy(3)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上就是基本的 Snapkit的使用，后续再更新….</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/10/重写UITableViewCell遇到的错误/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1664,143 +1795,6 @@ assert(age &gt;= 0)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/24/swift3-0UITableView使用/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content>
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/24/swift3-0UITableView使用/" itemprop="url">
-                  swift3.0UITableView使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-24T18:00:34+08:00">
-                2016-10-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/10/24/swift3-0UITableView使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/24/swift3-0UITableView使用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="swift3-0UITableView使用"><a href="#swift3-0UITableView使用" class="headerlink" title="swift3.0UITableView使用"></a>swift3.0UITableView使用</h3><p>这里将采用Sotryboard来实现tableview的使用。代码地址:<a href="https://github.com/DavikChen/Swift3.0_tabBarController" target="_blank" rel="noopener"></a></p>
-<p>这里是在之前tabBarController demo 的基础上继续开发。我们将往首页的ViewController 里面添加一个tableView，</p>
-<p>第一步: Storyboard 拖拽一个TableView 控件进入，并且准备假数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@IBOutlet weak var mTableList: UITableView!</span><br><span class="line">var items: [String] = [&quot;We&quot;, &quot;Heart&quot;, &quot;Swift&quot;]</span><br></pre></td></tr></table></figure>
-
-<p>第二步: 实现 UITableViewDelegate, UITableViewDataSource。Swift3.0版本较之前相关代理函数有些变化.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int&#123;</span><br><span class="line">        return self.items.count;</span><br><span class="line">    &#125;</span><br><span class="line">func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell &#123;</span><br><span class="line">let cell:UITableViewCell = mTableList.dequeueReusableCell(withIdentifier: &quot;cell&quot;)! as UITableViewCell</span><br><span class="line">        </span><br><span class="line">        cell.textLabel?.text = self.items[indexPath.row]</span><br><span class="line">        </span><br><span class="line">        return cell</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    </span><br><span class="line">func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) &#123;</span><br><span class="line">        mTableList?.deselectRow(at: indexPath, animated: true)</span><br><span class="line">        print(&quot;点击了item=\(indexPath.row)&quot;)</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>第三步: TableView 加载数据实现协议</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    mTableList.register(UITableViewCell.self, forCellReuseIdentifier: &quot;cell&quot;)</span><br><span class="line">    mTableList.dataSource = self</span><br><span class="line">    mTableList.delegate = self;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>效果图:<br><img src="https://github.com/DavikChen/DavikChen.github.io/blob/master/img/homepage.png?raw=true" alt></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1844,7 +1838,7 @@ assert(age &gt;= 0)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">101</span>
+              <span class="site-state-item-count">102</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

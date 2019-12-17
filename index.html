@@ -335,7 +335,13 @@
       
         
           
-            
+            <h4 id="Android-Stuido打包出现Cause-buildOutput-apkData-must-not-be-null错误问题解决方案"><a href="#Android-Stuido打包出现Cause-buildOutput-apkData-must-not-be-null错误问题解决方案" class="headerlink" title="Android Stuido打包出现Cause: buildOutput.apkData must not be null错误问题解决方案"></a>Android Stuido打包出现Cause: buildOutput.apkData must not be null错误问题解决方案</h4><p>背景：今天需要打一个线上发布版本，我就按照平常操作打包，可出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cause: buildOutput.apkData must not be null</span><br></pre></td></tr></table></figure>
+
+<p>顿时误解，网上搜索后的 clean make project 都没效果。因为最近刚升级了Android Studio 想想可能是升级造成的。<br>因为再升级之前也打过包，而output.json文件是老版本的，就是打包后的输出文件夹里面的文件。<br>尝试删除打包输出文件夹，重新打包 错误消失</p>
+<p><img src=".././images/15765528278222.jpg" alt></p>
+<p><strong>最终解决方案：删除打包文件夹 错误消失</strong></p>
+
           
         
       

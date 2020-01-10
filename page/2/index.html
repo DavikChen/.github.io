@@ -250,6 +250,146 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/java-lang-UnsupportedOperationException解决方法/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/04/23/java-lang-UnsupportedOperationException解决方法/" itemprop="url">
+                  java.lang.UnsupportedOperationException解决方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T16:51:28+08:00">
+                2018-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2018/04/23/java-lang-UnsupportedOperationException解决方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/23/java-lang-UnsupportedOperationException解决方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="java-lang-UnsupportedOperationException解决方法"><a href="#java-lang-UnsupportedOperationException解决方法" class="headerlink" title="java.lang.UnsupportedOperationException解决方法"></a>java.lang.UnsupportedOperationException解决方法</h3><p>之前在使用Arrays.asList操作时,知道返回的list是没有add 等相关方法的,可是在实际使用时 不注意还是使用了 当出现错误时 也是一脸懵逼. 看来好记性不如烂笔头。这里先记录下来 。</p>
+<p>在项目中对List进行操作时报错java.lang.UnsupportedOperationException，后来发现操作的List是由数组转换而成的，通过看源码发现问题，并写测试程序如下。<br>代码块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String[] array = &#123;&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;&#125;;</span><br><span class="line">List&lt;String&gt; list = Arrays.asList(array);</span><br><span class="line">list.add(&quot;6&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>执行结果</p>
+<pre><code>Exception in thread &quot;main&quot; java.lang.UnsupportedOperationException
+    at java.util.AbstractList.add(AbstractList.java:148)
+    at java.util.AbstractList.add(AbstractList.java:108)
+    at com.atguigu.test.ListTest.main(ListTest.java:11)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke(Method.java:498)
+    at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)
+</code></pre><p>发生问题的原因如下：<br>调用Arrays.asList()生产的List的add、remove方法时报异常，<br><strong>这是由Arrays.asList() 返回的市Arrays的内部类ArrayList， 而不是java.util.ArrayList。Arrays的内部类ArrayList和java.util.ArrayList都是继承AbstractList，remove、add等方法AbstractList中是默认throw UnsupportedOperationException而且不作任何操作</strong>。java.util.ArrayList重新了这些方法而Arrays的内部类ArrayList没有重新，所以会抛出异常。解决方法如下：</p>
+<p>List<string> list = Arrays.asList(array);<br>List arrList = new ArrayList(list);<br>arrList.add(“6”);</string></p>
+<p>DONE!</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/19/Android-TabLayout在宽屏幕上tab不能平均分配的问题解决/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1436,134 +1576,6 @@ top_table.setTabMode(TabLayout.MODE_FIXED);不在起作用。</code><br>效果�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/Android应用通知是否开启状态的检测/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content>
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/30/Android应用通知是否开启状态的检测/" itemprop="url">
-                  Android应用通知是否开启状态的检测
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-30T14:45:17+08:00">
-                2017-08-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/08/30/Android应用通知是否开启状态的检测/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/30/Android应用通知是否开启状态的检测/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Android应用通知是否开启状态的检测"><a href="#Android应用通知是否开启状态的检测" class="headerlink" title="Android应用通知是否开启状态的检测"></a>Android应用通知是否开启状态的检测</h2><p>APP大部分都会集成推送功能,随着Android系统的不断优化升级 用户体验不断的提供。大家经常会收到很多自己不想收到的通知,此时我们可能会在设置里面把APP 设置页面把通知栏功能给关掉。此后APP就无法正常发送通知消息了。</p>
-<p>但作为一名开发者,我们有必要在合适的时候知道自己的功能缺失 并善意的提醒用户如何开启。</p>
-<p>下面是从stackoverflow.找到的解决方法：<br>Now you can check it, as said in this Google I/O 2016 video.</p>
-<p>Use NotificationManagerCompat.areNotificationsEnabled(), from support library, to check if notifications are blocked on API 19+. The versions below API 19 will return true (notifications are enabled).</p>
-<p>链接:<a href="https://stackoverflow.com/questions/11649151/android-4-1-how-to-check-notifications-are-disabled-for-the-application" target="_blank" rel="noopener">https://stackoverflow.com/questions/11649151/android-4-1-how-to-check-notifications-are-disabled-for-the-application</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1607,7 +1619,7 @@ top_table.setTabMode(TabLayout.MODE_FIXED);不在起作用。</code><br>效果�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1657,7 +1669,7 @@ top_table.setTabMode(TabLayout.MODE_FIXED);不在起作用。</code><br>效果�
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

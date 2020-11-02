@@ -250,6 +250,136 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/基于Fetch简单封装工具类/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DavikChen">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/images/davikchen_pic.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="带刀大哥">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/24/基于Fetch简单封装工具类/" itemprop="url">
+                  基于Fetch简单封装工具类
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-24T17:55:48+08:00">
+                2017-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/24/基于Fetch简单封装工具类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/24/基于Fetch简单封装工具类/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="基于Fetch简单封装工具类"><a href="#基于Fetch简单封装工具类" class="headerlink" title="基于Fetch简单封装工具类"></a>基于Fetch简单封装工具类</h2><p>在开始写APP时 往往会设计到网络请求 ，下面是RN中简单基于Fetch 封装的request工具类<br>通过简单封装了一个，避免代码里到处都是fetch方法。<br>好了，完整代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">var HTTPUtil = &#123;&#125;;  </span><br><span class="line">  </span><br><span class="line">/** </span><br><span class="line"> * 基于 fetch 封装的 GET请求 </span><br><span class="line"> * @param url </span><br><span class="line"> * @param params &#123;&#125; </span><br><span class="line"> * @param headers </span><br><span class="line"> * @returns &#123;Promise&#125; </span><br><span class="line"> */  </span><br><span class="line">HTTPUtil.get = function(url, params, headers) &#123;  </span><br><span class="line">    if (params) &#123;  </span><br><span class="line">        let paramsArray = [];  </span><br><span class="line">        //encodeURIComponent  </span><br><span class="line">        Object.keys(params).forEach(key =&gt; paramsArray.push(key + &apos;=&apos; + params[key]))  </span><br><span class="line">        if (url.search(/\?/) === -1) &#123;  </span><br><span class="line">            url += &apos;?&apos; + paramsArray.join(&apos;&amp;&apos;)  </span><br><span class="line">        &#125; else &#123;  </span><br><span class="line">            url += &apos;&amp;&apos; + paramsArray.join(&apos;&amp;&apos;)  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    return new Promise(function (resolve, reject) &#123;  </span><br><span class="line">      fetch(url, &#123;  </span><br><span class="line">            method: &apos;GET&apos;,  </span><br><span class="line">            headers: headers,  </span><br><span class="line">          &#125;)  </span><br><span class="line">          .then((response) =&gt; &#123;  </span><br><span class="line">              if (response.ok) &#123;  </span><br><span class="line">                  return response.json();  </span><br><span class="line">              &#125; else &#123;  </span><br><span class="line">                  reject(&#123;status:response.status&#125;)  </span><br><span class="line">              &#125;  </span><br><span class="line">          &#125;)  </span><br><span class="line">          .then((response) =&gt; &#123;  </span><br><span class="line">              resolve(response);  </span><br><span class="line">          &#125;)  </span><br><span class="line">          .catch((err)=&gt; &#123;  </span><br><span class="line">            reject(&#123;status:-1&#125;);  </span><br><span class="line">          &#125;)  </span><br><span class="line">    &#125;)  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">/** </span><br><span class="line"> * 基于 fetch 封装的 POST请求  FormData 表单数据 </span><br><span class="line"> * @param url </span><br><span class="line"> * @param formData   </span><br><span class="line"> * @param headers </span><br><span class="line"> * @returns &#123;Promise&#125; </span><br><span class="line"> */  </span><br><span class="line">HTTPUtil.post = function(url, formData, headers) &#123;  </span><br><span class="line">    return new Promise(function (resolve, reject) &#123;  </span><br><span class="line">      fetch(url, &#123;  </span><br><span class="line">            method: &apos;POST&apos;,  </span><br><span class="line">            headers: headers,  </span><br><span class="line">            body:formData,  </span><br><span class="line">          &#125;)  </span><br><span class="line">          .then((response) =&gt; &#123;  </span><br><span class="line">              if (response.ok) &#123;  </span><br><span class="line">                  return response.json();  </span><br><span class="line">              &#125; else &#123;  </span><br><span class="line">                  reject(&#123;status:response.status&#125;)  </span><br><span class="line">              &#125;  </span><br><span class="line">          &#125;)  </span><br><span class="line">          .then((response) =&gt; &#123;  </span><br><span class="line">              resolve(response);  </span><br><span class="line">          &#125;)  </span><br><span class="line">          .catch((err)=&gt; &#123;  </span><br><span class="line">            reject(&#123;status:-1&#125;);  </span><br><span class="line">          &#125;)  </span><br><span class="line">    &#125;)  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">export default HTTPUtil;</span><br></pre></td></tr></table></figure>
+
+<p>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">let formData = new FormData();  </span><br><span class="line">formData.append(&quot;id&quot;,1060);  </span><br><span class="line">        </span><br><span class="line">HTTPUtil.post(url,formData,headers).then((json) =&gt; &#123;  </span><br><span class="line">    //处理 请求success  </span><br><span class="line">    if(json.code === 0 )&#123;  </span><br><span class="line">            //我们假设业务定义code为0时，数据正常  </span><br><span class="line">        &#125;else&#123;  </span><br><span class="line">             //处理自定义异常  </span><br><span class="line">            this.doException(json);  </span><br><span class="line">        &#125;  </span><br><span class="line">   &#125;,(json)=&gt;&#123;  </span><br><span class="line">     //TODO 处理请求fail  </span><br><span class="line">        </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>继续封装：<br>一般APP会存在很多业务接口，这里还需要封装一个ApiUtils 工具类，在这里面进行默认公共参数的组织 接口地址的拼接 header的设置。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/Fetch发送POST请求body参数内容的不同情况/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1514,145 +1644,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/RN与native交互之Callback、Promise/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DavikChen">
-    <meta itemprop="description" content>
-    <meta itemprop="image" content="/images/davikchen_pic.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="带刀大哥">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="带刀大哥" src>
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/22/RN与native交互之Callback、Promise/" itemprop="url">
-                  RN与native交互之Callback、Promise
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T14:56:34+08:00">
-                2017-03-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/22/RN与native交互之Callback、Promise/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/RN与native交互之Callback、Promise/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="RN与native交互之Callback、Promise"><a href="#RN与native交互之Callback、Promise" class="headerlink" title="RN与native交互之Callback、Promise"></a>RN与native交互之Callback、Promise</h2><p>一、Callback机制<br>首先Calllback是异步的，RN端调用Native端，Native会callback，但是时机是不确定的，如果多次调用的话，会存在问题。<br>Naive端是无法主动通过回调函数向RN端发送消息的。<br>具体实现代码如下：<br>Native端暴露好接口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@ReactMethod  </span><br><span class="line">public void measureLayout(Callback errorCallback,Callback successCallback)&#123;  </span><br><span class="line">    try &#123;  </span><br><span class="line">        successCallback.invoke(100, 100, 200, 200);//调用回调函数，返回结果  </span><br><span class="line">    &#125; catch (IllegalViewOperationException e) &#123;  </span><br><span class="line">        errorCallback.invoke(e.getMessage());  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在RN端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;Text style=&#123;&#123; fontSize: 25 &#125;&#125; onPress=&#123;this.CallAndroid_callback&#125; &gt;调用原生方法_使用_回调函数</span><br><span class="line">&lt;/Text&gt;  </span><br><span class="line">  CallAndroid_callback = () =&gt; &#123;  </span><br><span class="line">    NativeModules.MyNativeModule.measureLayout((msg) =&gt; &#123;  </span><br><span class="line">        console.log(msg);  </span><br><span class="line">      &#125;,(x, y, width, height) =&gt; &#123;  </span><br><span class="line">        console.log(x + &apos;坐标,&apos; + y + &apos;坐标,&apos; + width + &apos;宽,&apos; + height + &apos;高&apos;);  </span><br><span class="line">      &#125;  </span><br><span class="line">    );  </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>二、promise机制<br>Promise 的状态<br>一个 Promise 的当前状态必须为以下三种状态中的一种：等待态（Pending）、完成态（Fulfilled）和拒绝态（Rejected）。<br>等待态（Pending）<br>处于等待态时，promise 需满足以下条件：</p>
-<p>可以迁移至完成态或拒绝态</p>
-<p>完成态（Fulfilled）<br>处于完成态时，promise 需满足以下条件：<br>不能迁移至其他任何状态<br>必须拥有一个不可变的终值<br>拒绝态（Rejected）<br>处于拒绝态时，promise 需满足以下条件：</p>
-<p>不能迁移至其他任何状态<br>必须拥有一个不可变的据因</p>
-<p>在Native侧，暴露接口：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@ReactMethod  </span><br><span class="line">public void rnCallNative_promise(String msg, Promise promise) &#123;  </span><br><span class="line">  </span><br><span class="line">    try &#123;  </span><br><span class="line">        //业务逻辑处理  </span><br><span class="line">        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();  </span><br><span class="line">        String componentName = getCurrentActivity().getComponentName().toString();  </span><br><span class="line">        promise.resolve(componentName);  </span><br><span class="line">    &#125;catch (Exception e)&#123;  </span><br><span class="line">        promise.reject(&quot;100&quot;,e.getMessage());//promise 失败  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在RN侧：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;Text style=&#123;&#123; fontSize: 25 &#125;&#125; onPress=&#123;this.CallAndroid_promise&#125; &gt;调用原生方法_使用_Promise</span><br><span class="line">&lt;/Text&gt;  </span><br><span class="line">  </span><br><span class="line">  CallAndroid_promise = () =&gt; &#123;  </span><br><span class="line">    NativeModules.MyNativeModule.rnCallNative_promise(&apos;参数1&apos;,&apos;参数2&apos;).then(  </span><br><span class="line">      (msg) =&gt; &#123;  </span><br><span class="line">        console.log(&apos;promise成功：&apos;+msg);  </span><br><span class="line">      &#125;  </span><br><span class="line">    ).catch(  </span><br><span class="line">      (err) =&gt; &#123;  </span><br><span class="line">        console.log(err);  </span><br><span class="line">      &#125;  </span><br><span class="line">      );  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1696,7 +1687,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">106</span>
+              <span class="site-state-item-count">107</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
